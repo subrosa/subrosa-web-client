@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-ng-app="subrosa" data-ng-controller="GameInitController">
+<head>
+    <meta charset="utf-8">
+    <title data-ng-bind-template="{{title}}">Loading Subrosa...</title>
+    <style>
+        [data-ng-cloak] {
+            display: none;
+        }
+    </style>
+    <script src="js/lib/angular/angular-loader.min.js"></script>
+    <script src="js/lib/script.min.js"></script>
+    <script src="js/subrosa-loader.js"></script>
+    <!--[if lt IE 9]>
+        <script src="js/lib/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="css/lib/bootstrap.css">
+    <link rel="stylesheet" href="css/lib/bootstrap-responsive.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body data-ng-cloak>
+    <header id="header">
+        <a href="/">
+            <img src="img/logo/subrosa-154x36.png" alt="Subrosa Logo" class="logo logo-small"/>
+        </a>
+    </header>
+    <ul class="menu">
+        <li><a href="#/feed">Game Feed</a></li>
+        <li><a href="#/rules">Rules</a></li>
+    </ul>
+    <div data-ng-view></div>
+    <footer id="footer">
+        <div class="copyright">
+            <a href="/about/copyright">Copyright</a> &copy;2007-2012 Sub Rosa Games, Inc. All Rights Reserved
+        </div>
+    </footer>
+</body>
+</html>
