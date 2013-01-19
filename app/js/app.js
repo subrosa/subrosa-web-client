@@ -9,7 +9,7 @@ angular.module('subrosa', ['subrosa.filters', 'subrosa.services', 'subrosa.direc
         $routeProvider.when('/rules', {templateUrl: 'partials/rules.html', controller: RulesController});
 
         // If nothing else matches lookup the game by name.
-        $routeProvider.otherwise({redirectTo: '/init'});
+        $routeProvider.when('/:gameName', {templateUrl: 'partials/game.html', controller: GameInitController});
 
         // configure html5 to get links working
         // If you don't do this, you URLs will be base.com/#/home rather than base.com/home

@@ -7,11 +7,13 @@
 function GameInitController($scope, $routeParams, Game) {
     // This must be done when the route changes.
     $scope.$on('$routeChangeSuccess', function (event, routeData) {
-        // Get the game, set the page title, and redirect to the game feed.
-        Game.get({gameId: $routeParams.gameId}, function (game) {
-            $scope.game = game;
-            $scope.title = game.name;
-        });
+        if ($routeParams.gameId) {
+            // Look up game by ID if we have it.
+            $scope.game = Game.get({gameId: $routeParams.gameId});
+        } else {
+            // Otherwise look up the game by name.
+            $scope.game = Game.getByName({gameName: $routeParams.gameName});
+        }
     });
 }
 GameInitController.$inject = ['$scope', '$routeParams', 'Game'];

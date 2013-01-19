@@ -2,9 +2,8 @@
 'use strict';
 
 /* Services */
-angular.module('subrosa.services', ['ngResource']).
-    factory('Game', function ($resource) {
-        return $resource('/api/game/:gameId', {}, {
-            get: {method: 'GET'}
-        });
-    });
+var services = angular.module('subrosa.services', ['ngResource']);
+
+services.factory('Game', function ($resource) {
+    return $resource('/api/game/:gameId', {gameId: '@id'});
+});
