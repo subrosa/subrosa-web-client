@@ -1,17 +1,15 @@
 /*globals angular*/
 'use strict';
 
-// Declare app level module which depends on filters, and services
-angular.module('subrosa', ['subrosa.filters', 'subrosa.services', 'subrosa.directives'],
-    function ($routeProvider, $locationProvider) {
-        $routeProvider.when('/game/:gameId', {templateUrl: 'partials/game.html', controller: GameInitController});
-        $routeProvider.when('/feed', {templateUrl: 'partials/feed.html', controller: FeedController});
-        $routeProvider.when('/rules', {templateUrl: 'partials/rules.html', controller: RulesController});
+var subrosa = angular.module('subrosa', ['subrosa.directives', 'subrosa.filters', 'subrosa.services']);
 
-        // If nothing else matches lookup the game by name.
-        $routeProvider.when('/:gameName', {templateUrl: 'partials/game.html', controller: GameInitController});
+// Configure the application routing
+subrosa.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+    $routeProvider.when('/:gameId', {templateUrl: '/partials/game.html', controller: GameInitController});
+    $routeProvider.when('/:gameId/feed', {templateUrl: '/partials/feed.html', controller: FeedController});
+    $routeProvider.when('/:gameId/rules', {templateUrl: '/partials/rules.html', controller: RulesController});
 
-        // configure html5 to get links working
-        // If you don't do this, you URLs will be base.com/#/home rather than base.com/home
-        //$locationProvider.html5Mode(true);
-    });
+    // Configure html5 mode, otherwise URLs will be base.com/#/home rather than base.com/home.
+    // The hashPrefix and the <meta name="fragment" content="!" /> in the index allows google to crawl correctly.
+    $locationProvider.html5Mode(true).hashPrefix('!');
+}]);

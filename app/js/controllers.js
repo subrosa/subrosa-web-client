@@ -9,21 +9,24 @@ function GameInitController($scope, $routeParams, Game) {
     $scope.$on('$routeChangeSuccess', function (event, routeData) {
         if ($routeParams.gameId) {
             // Look up game by ID if we have it.
-            $scope.game = Game.get({gameId: $routeParams.gameId});
+            Game.get({gameId: $routeParams.gameId}, function (game) {
+                $scope.game = game;
+                $scope.title = game.name;
+            });
         } else {
             // Otherwise look up the game by name.
             $scope.game = Game.getByName({gameName: $routeParams.gameName});
         }
     });
 }
-GameInitController.$inject = ['$scope', '$routeParams', 'Game'];
 
 /*
  * Display the game rules.
  */
 function RulesController($scope) {
-    $scope.title = "Rules for " + $scope.game.name;
-    $scope.rules = $scope.game.rules;
+    var blah = $scope.$parent;
+    $scope.$parent.title = "Rules for " + $scope.game.name;
+    $scope.rules = $scope.$parent.game.rules;
 }
 RulesController.$inject = ['$scope'];
 
