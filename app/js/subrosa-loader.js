@@ -2,8 +2,8 @@
 
 // load all of the dependencies asynchronously.
 $script([
-    '/js/lib/angular/angular.min.js',
-    '/js/lib/angular/angular-resource.min.js',
+    '/js/lib/angular/angular.js',
+    '/js/lib/angular/angular-resource.js',
     '/js/app.js',
     '/js/services.js',
     '/js/controllers.js',

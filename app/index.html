@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ng-app="subrosa" data-ng-controller="GameInitController">
+<html lang="en" data-ng-controller="GameInitController">
 <head>
     <meta charset="utf-8">
     <meta name="fragment" content="!" />
@@ -21,15 +21,15 @@
     <link rel="stylesheet" href="/css/app.css">
 </head>
 
-<body data-ng-cloak data-ng-controller="GameInitController">
+<body data-ng-cloak>
     <header id="header">
         <a href="/">
             <img src="/img/logo/subrosa-154x36.png" alt="Subrosa Logo" class="logo logo-small"/>
         </a>
     </header>
     <ul class="menu">
-        <li><a href="#!/feed">Game Feed</a></li>
-        <li><a href="/raleigh-wars/rules">Rules</a></li>
+        <li><a data-ng-href="/{{game.url}}/feed">Game Feed</a></li>
+        <li><a data-ng-href="/{{game.url}}/rules">Rules</a></li>
     </ul>
     <div data-ng-view></div>
     <footer id="footer">
