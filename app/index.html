@@ -4,11 +4,6 @@
     <meta charset="utf-8">
     <meta name="fragment" content="!" />
     <title data-ng-bind-template="{{title}}">Loading Subrosa...</title>
-    <style>
-        [data-ng-cloak] {
-            display: none;
-        }
-    </style>
     <script src="/js/lib/angular/angular-loader.min.js"></script>
     <script src="/js/lib/script.min.js"></script>
     <script src="/js/subrosa-loader.js"></script>
@@ -28,10 +23,19 @@
         </a>
     </header>
     <ul class="menu">
+        <li><a data-ng-href="/{{game.url}}/">Dashboard</a></li>
         <li><a data-ng-href="/{{game.url}}/feed">Game Feed</a></li>
         <li><a data-ng-href="/{{game.url}}/rules">Rules</a></li>
     </ul>
+
+    <section id="gameHeader">
+        <h3>{{game.name}}</h3>
+        <h4>{{game.description}}</h4>
+    </section>
+
     <div data-ng-view></div>
+    <div data-spinner></div>
+
     <footer id="footer">
         <div class="copyright">
             <a href="/about/copyright">Copyright</a> &copy;2007-2012 Sub Rosa Games, Inc. All Rights Reserved

@@ -28,3 +28,7 @@
   content: "";
   padding: 0;
 }
+
+[data-ng-cloak] .cloak {
+    display: none;
+}

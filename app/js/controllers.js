@@ -10,8 +10,8 @@ function GameInitController($rootScope, $routeParams, Game) {
      * @param callback a function to call once the game has been retrieved.
      */
     $rootScope.getGame = function (callback) {
-        if ($routeParams.gameId && !$rootScope.game) {
-            Game.get({gameId: $routeParams.gameId}, function (game) {
+        if ($routeParams.gameUrl && !$rootScope.game) {
+            Game.get({gameUrl: $routeParams.gameUrl}, function (game) {
                 $rootScope.game = game;
                 $rootScope.title = game.name;
             });
@@ -53,10 +53,13 @@ RulesController.$inject = ['$scope'];
 /*
  * Display the game feed.
  */
-function FeedController($scope) {
+function FeedController($scope, Posts) {
     $scope.getGame(function (game) {
         $scope.setTitle("Game Feed for " + game.name);
+        Posts.get({gameUrl: $scope.game.url}, function (posts) {
+            $scope.posts = posts;
+        });
     });
 }
-FeedController.$inject = ['$scope'];
+FeedController.$inject = ['$scope', 'Posts'];
 

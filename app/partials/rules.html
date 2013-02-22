@@ -1,6 +1,18 @@
-{{game.rules}}
-<ul id="gameRules">
-    <li data-ng-repeat="rule in game.rules">
-        {{rule}}
-    </li>
-</ul>
+<section id="gameRules">
+    <div class="ruleset">
+        <h2>Rules for all Games</h2>
+        <ul class="rules">
+            <li data-ng-repeat="rule in game.rules.ALL_GAMES">
+                {{rule}}
+            </li>
+        </ul>
+    </div>
+
+    <div class="ruleset" data-ng-show="game.rules.GAME_SPECIFIC">
+        <ul class="rules">
+            <li data-ng-repeat="rule in game.rules.GAME_SPECIFIC">
+                {{rule}}
+            </li>
+        </ul>
+    </div>
+</section>
