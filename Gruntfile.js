@@ -66,8 +66,8 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            build: ['.tmp', '<%= subrosa.build %>'],
-            server: '.tmp'
+            build: '<%= subrosa.build %>',
+            tmp: '.tmp'
         },
         jshint: {
             options: {
@@ -193,7 +193,7 @@ module.exports = function (grunt) {
     grunt.renameTask('mincss', 'cssmin');
 
     grunt.registerTask('server', [
-        'clean:server',
+        'clean:tmp',
         'livereload-start',
         'connect:livereload',
         'open',
@@ -201,7 +201,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
-        'clean:server',
+        'clean:tmp',
         'connect:test',
         'karma'
     ]);
@@ -221,7 +221,8 @@ module.exports = function (grunt) {
 //        'cdnify',
         'usemin',
         'ngmin',
-        'uglify'
+        'uglify',
+        'clean:tmp'
     ]);
 
     grunt.registerTask('default', ['build']);
