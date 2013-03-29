@@ -1,13 +1,13 @@
-/*globals angular */
+/*global angular */
 'use strict';
 
-var module = angular.module('subrosa.controllers.game', []);
+var gameControllerModule = angular.module('subrosa.controllers.game', []);
 
 /*
  * Initializing controller for all Game related controllers.
  * Set up the $scope to be used across controllers.
  */
-module.controller('GameInitController', function ($rootScope, $routeParams, Game) {
+gameControllerModule.controller('GameInitController', function ($rootScope, $routeParams, Game) {
     /*
      * Gets the Game from either the $rootScope (if present) or the API.
      * @param callback a function to call once the game has been retrieved.
@@ -45,7 +45,7 @@ module.controller('GameInitController', function ($rootScope, $routeParams, Game
 /*
  * Display the game rules.
  */
-module.controller('RulesController', function ($scope) {
+gameControllerModule.controller('RulesController', function ($scope) {
     $scope.getGame(function (game) {
         $scope.setTitle("Rules for " + game.name);
     });
@@ -54,7 +54,7 @@ module.controller('RulesController', function ($scope) {
 /*
  * Display the game feed.
  */
-module.controller('FeedController', function ($scope, Posts) {
+gameControllerModule.controller('FeedController', function ($scope, Posts) {
     $scope.getGame(function (game) {
         $scope.setTitle("Game Feed for " + game.name);
         Posts.get({gameUrl: $scope.game.url}, function (posts) {

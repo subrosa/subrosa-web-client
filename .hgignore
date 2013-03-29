@@ -2,3 +2,6 @@ node_modules
 build
 .DS_Store
 .idea
+.tmp
+.sass-cache
+app/components
