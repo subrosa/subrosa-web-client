@@ -5,10 +5,11 @@
 
 var gameServiceModule = angular.module('subrosa.services.game', ['ngResource']);
 
+// TODO make api version a configuration value
 gameServiceModule.factory('Game', function ($resource) {
-    return $resource('/api/game/:gameUrl', {gameUrl: '@gameUrl'});
+    return $resource('/subrosa-api/v1/game/:gameUrl', {gameUrl: '@gameUrl'});
 });
 
 gameServiceModule.factory('Posts', function ($resource) {
-    return $resource('/api/game/:gameUrl/post', {gameUrl: '@gameUrl', offset: 0, limit: 20});
+    return $resource('/subrosa-api/v1/game/:gameUrl/post', {gameUrl: '@gameUrl', offset: 0, limit: 20});
 });

@@ -10,6 +10,11 @@ module.exports = function (grunt) {
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
+    // proxy and modrewrite to support standalone server
+    var modRewrite = require('connect-modrewrite');
+    grunt.loadNpmTasks('grunt-connect-proxy');
+    var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+
     // configurable paths
     var subrosaConfig = {
         app: 'app',
@@ -34,6 +39,13 @@ module.exports = function (grunt) {
             }
         },
         connect: {
+            proxies: [
+                {
+                    context: '/subrosa-api',
+                    host: 'localhost',
+                    port: 8080
+                }
+            ],
             livereload: {
                 options: {
                     port: 9000,
@@ -41,6 +53,10 @@ module.exports = function (grunt) {
                     hostname: 'localhost',
                     middleware: function (connect) {
                         return [
+                            modRewrite([
+                                '!^/(css|js|img|components|views|subrosa-api).+$ /index.html'
+                            ]),
+                            proxySnippet,
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, subrosaConfig.app)
@@ -50,7 +66,7 @@ module.exports = function (grunt) {
             },
             test: {
                 options: {
-                    port: 9000,
+                    port: 9001,
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
@@ -194,6 +210,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('server', [
         'clean:tmp',
+        'configureProxies',
         'livereload-start',
         'connect:livereload',
         'open',

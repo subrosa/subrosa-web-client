@@ -25,7 +25,9 @@
         "grunt-regarde": "~0.1.1",
         "grunt-usemin": "~0.1.7",
         "matchdep": "~0.1.1",
-        "request": "2.16.6"
+        "request": "2.16.6",
+        "connect-modrewrite": "0.2.1",
+        "grunt-connect-proxy": "0.1.0"
     },
     "engines": {
         "node": ">=0.8.0"
