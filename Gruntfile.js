@@ -12,7 +12,6 @@ module.exports = function (grunt) {
 
     // proxy and modrewrite to support standalone server
     var modRewrite = require('connect-modrewrite');
-    grunt.loadNpmTasks('grunt-connect-proxy');
     var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
 
     // configurable paths
@@ -84,6 +83,9 @@ module.exports = function (grunt) {
         clean: {
             build: '<%= subrosa.build %>',
             tmp: '.tmp'
+        },
+        csslint: {
+            src: ['<%= subrosa.app %>/css/{,*/}*.css', '!<%= subrosa.app %>/css/lib/{,*/}*']
         },
         jshint: {
             options: {
@@ -225,6 +227,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:build',
+        'csslint',
         'jshint',
         'test',
         'useminPrepare',
