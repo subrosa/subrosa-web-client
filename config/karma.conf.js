@@ -9,7 +9,6 @@ files = [
   JASMINE_ADAPTER,
   '../app/components/angular/angular.js',
   '../app/components/angular-mocks/angular-mocks.js',
-  '../app/js/*.js',
   '../app/js/**/*.js',
   '../test/unit/**/*.js'
 ];
@@ -19,13 +18,14 @@ exclude = [];
 
 // test results reporter to use
 // possible values: dots || progress || growl
-reporters = ['progress'];
+reporters = ['coverage', 'progress'];
+//reporters = ['progress'];
 
 // web server port
-port = 8080;
+port = 9001;
 
 // cli runner port
-runnerPort = 9100;
+runnerPort = 9101;
 
 // enable / disable colors in the output (reporters and logs)
 colors = true;
@@ -59,8 +59,6 @@ singleRun = false;
 preprocessors = {
     '**/app/js/**/*.js': 'coverage'
 };
-
-reporters = ['coverage'];
 
 coverageReporter = {
     type : 'html',

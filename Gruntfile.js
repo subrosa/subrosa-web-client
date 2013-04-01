@@ -29,11 +29,11 @@ module.exports = function (grunt) {
         watch: {
             livereload: {
                 files: [
-                    '<%= subrosa.app %>/{,*/}*.html',
-                    '<%= subrosa.app %>/views/{,*/}*.html',
-                    '{.tmp,<%= subrosa.app %>}/css/{,*/}*.css',
-                    '{.tmp,<%= subrosa.app %>}/js/{,*/}*.js',
-                    '<%= subrosa.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp}'
+                    '<%= subrosa.app %>/**/*.html',
+                    '<%= subrosa.app %>/views/**/*.html',
+                    '{.tmp,<%= subrosa.app %>}/css/**/*.css',
+                    '{.tmp,<%= subrosa.app %>}/js/**/*.js',
+                    '<%= subrosa.app %>/img/**/*.{png,jpg,jpeg,gif,webp}'
                 ],
                 tasks: ['livereload']
             }
@@ -66,7 +66,6 @@ module.exports = function (grunt) {
             },
             test: {
                 options: {
-                    port: 9001,
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
@@ -86,7 +85,7 @@ module.exports = function (grunt) {
             tmp: '.tmp'
         },
         csslint: {
-            src: ['<%= subrosa.app %>/css/{,*/}*.css', '!<%= subrosa.app %>/css/lib/{,*/}*']
+            src: ['<%= subrosa.app %>/css/**/*.css', '!<%= subrosa.app %>/css/lib/**/*.css']
         },
         jshint: {
             options: {
@@ -94,12 +93,26 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= subrosa.app %>/js/{,*/}*.js'
+                '<%= subrosa.app %>/js/**/*.js'
             ]
         },
         karma: {
             unit: {
                 configFile: 'config/karma.conf.js',
+                autoWatch: true
+            },
+            e2e: {
+                configFile: 'config/karma-e2e.conf.js'
+            },
+            //continuous integration modes: run tests once in PhantomJS browser.
+            singleRunUnit: {
+                browsers: ['PhantomJS'],
+                configFile: 'config/karma.conf.js',
+                singleRun: true
+            },
+            singleRunE2E: {
+                browsers: ['PhantomJS'],
+                configFile: 'config/karma-e2e.conf.js',
                 singleRun: true
             }
         },
@@ -110,8 +123,8 @@ module.exports = function (grunt) {
             }
         },
         usemin: {
-            html: ['<%= subrosa.build %>/{,*/}*.html'],
-            css: ['<%= subrosa.build %>/css/{,*/}*.css'],
+            html: ['<%= subrosa.build %>/**/*.html'],
+            css: ['<%= subrosa.build %>/css/**/*.css'],
             options: {
                 dirs: ['<%= subrosa.build %>']
             }
@@ -121,7 +134,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= subrosa.app %>/img',
-                    src: '{,*/}*.{png,jpg,jpeg}',
+                    src: '**/*.{png,jpg,jpeg}',
                     dest: '<%= subrosa.build %>/img'
                 }]
             }
@@ -130,8 +143,8 @@ module.exports = function (grunt) {
             build: {
                 files: {
                     '<%= subrosa.build %>/css/app.css': [
-                        '.tmp/css/{,*/}*.css',
-                        '<%= subrosa.app %>/css/{,*/}*.css'
+                        '.tmp/css/**/*.css',
+                        '<%= subrosa.app %>/css/**/*.css'
                     ]
                 }
             }
@@ -167,7 +180,7 @@ module.exports = function (grunt) {
                     base: '<%= subrosa.app %>/views',        // $templateCache ID will be relative to this folder
                     prepend: '/views/'                       // Prepend path to $templateCache ID
                 },
-                src: [ '<%= subrosa.app %>/views/{,*/}*.html' ],
+                src: [ '<%= subrosa.app %>/views/**/*.html' ],
                 dest: '.tmp/js/templates.js'
             }
         },
@@ -200,7 +213,7 @@ module.exports = function (grunt) {
                     dest: '<%= subrosa.build %>',
                     src: [
                         '*.{ico,txt,png}',
-                        'img/{,*/}*.{gif,webp}'
+                        'img/**/*.{gif,webp}'
                     ]
                 }]
             }
@@ -216,6 +229,7 @@ module.exports = function (grunt) {
         'configureProxies',
         'livereload-start',
         'connect:livereload',
+//        'karma:unit',
         'open',
         'watch'
     ]);
@@ -223,7 +237,8 @@ module.exports = function (grunt) {
     grunt.registerTask('test', [
         'clean:tmp',
         'connect:test',
-        'karma'
+        'karma:singleRunUnit',
+        'karma:singleRunE2E'
     ]);
 
     grunt.registerTask('build', [

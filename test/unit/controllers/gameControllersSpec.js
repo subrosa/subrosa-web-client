@@ -2,7 +2,7 @@
 'use strict';
 
 describe('GameInitController', function(){
-    //@TODO
+    //TODO
 });
 
 
