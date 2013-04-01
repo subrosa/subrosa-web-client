@@ -11,7 +11,7 @@ files = [
   '../app/components/angular-mocks/angular-mocks.js',
   '../app/js/*.js',
   '../app/js/**/*.js',
-  '../test/unit/**/*.js',
+  '../test/unit/**/*.js'
 ];
 
 // list of files to exclude
@@ -45,6 +45,7 @@ autoWatch = false;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
+//browsers = ['Chrome', 'Firefox', 'Safari'];
 browsers = ['Chrome'];
 
 // If browser does not capture in given timeout [ms], kill it
@@ -53,3 +54,15 @@ captureTimeout = 5000;
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
 singleRun = false;
+
+// Test coverage
+preprocessors = {
+    '**/app/js/**/*.js': 'coverage'
+};
+
+reporters = ['coverage'];
+
+coverageReporter = {
+    type : 'html',
+    dir : '../test/coverage'
+}
