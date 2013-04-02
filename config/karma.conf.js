@@ -63,6 +63,6 @@ preprocessors = {
 };
 
 coverageReporter = {
-    type : 'html',
+    type : 'cobertura',
     dir : '../test/coverage'
 }
