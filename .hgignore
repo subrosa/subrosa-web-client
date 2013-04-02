@@ -6,3 +6,4 @@ build
 .sass-cache
 app/components
 test/coverage
+test/results
