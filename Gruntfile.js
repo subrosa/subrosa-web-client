@@ -231,7 +231,6 @@ module.exports = function (grunt) {
         'configureProxies',
         'livereload-start',
         'connect:livereload',
-//        'karma:unit',
         'open',
         'watch'
     ]);
