@@ -93,7 +93,9 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= subrosa.app %>/js/**/*.js'
+                '<%= subrosa.app %>/js/**/*.js',
+                //TODO replace me with component version when it becomes available.
+                '!<%= subrosa.app %>/js/lib/**'
             ]
         },
         karma: {

@@ -10,7 +10,8 @@ files = [
     '../app/components/angular/angular.js',
     '../app/components/angular-resource/angular-resource.js',
     '../app/components/angular-sanitize/angular-sanitize.js',
-    '../app/components/angular-ui-states/angular-ui-states.js',
+    //TODO replace me with component version when it becomes available.
+    '../app/js/lib/angular-ui-states.js',
     '../app/components/angular-mocks/angular-mocks.js',
     '../app/js/app.js',
     '../app/js/**/*.js',
