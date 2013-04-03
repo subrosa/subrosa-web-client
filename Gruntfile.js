@@ -159,7 +159,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= subrosa.app %>',
-                    src: ['*.html', 'views/*.html'],
+                    src: ['*.html', 'views/**/*.html'],
                     dest: '<%= subrosa.build %>'
                 }]
             }
