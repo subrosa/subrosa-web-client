@@ -17,4 +17,3 @@ angular.module('subrosa.game').factory('Game', function ($resource, $location, $
         }
     };
 });
-

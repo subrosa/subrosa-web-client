@@ -23,7 +23,6 @@ describe('GameInitController', function() {
     }));
 
     it('sets the game on the $rootScope by calling the Game Service.', function() {
-
         expect(MockGameService.get).toHaveBeenCalled();
         expect(rootScope.game.name).toBe(MockGameService.get().name);
         expect(rootScope.game.url).toBe(MockGameService.get().url);

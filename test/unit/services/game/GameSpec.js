@@ -4,22 +4,19 @@ describe('Game service', function() {
     var gameService, $httpBackend, $location, game;
 
     beforeEach(function() {
+        game = {name: "Raleigh Wars", url: "raleigh-wars"};
+
         module(function($provide) {
             $location = {
-                path: function () { return "/raleigh-wars/feed"; }
+                path: function () { return "/raleigh-wars/rules"; }
             };
             $provide.value('$location', $location);
         });
 
         inject(function($injector) {
-            game = {name: "Raleigh Wars", url: "raleigh-wars"};
             $httpBackend = $injector.get('$httpBackend');
-            $httpBackend.when('GET', '/subrosa-api/v1/game/raleigh-wars').respond(game);
-
             gameService = $injector.get('Game');
         });
-
-        spyOn(gameService, "get").andCallThrough();
     });
 
     afterEach(function() {
@@ -28,9 +25,20 @@ describe('Game service', function() {
     });
 
     it('make a request to get the game from the API.', function() {
-        $httpBackend.expectGET('/subrosa-api/v1/game/raleigh-wars');
+        $httpBackend.expectGET('/subrosa-api/v1/game/raleigh-wars').respond(game);
+        gameService.get(function (response) {
+            expect(response.name).toBe(game.name);
+            expect(response.url).toBe(game.url);
+        });
+        $httpBackend.flush();
+    });
+
+    it('maintains a cache of requests.', function() {
+        $httpBackend.expectGET('/subrosa-api/v1/game/raleigh-wars').respond("");
         gameService.get();
         $httpBackend.flush();
+        gameService.get();
+        $httpBackend.verifyNoOutstandingRequest();
     });
 
 });

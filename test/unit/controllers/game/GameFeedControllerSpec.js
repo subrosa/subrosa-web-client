@@ -8,7 +8,8 @@ describe('GameFeedController', function() {
         MockPostService = {
             get: function () {
                 return {
-                    name: "Raleigh Wars",
+                    offset: 0,
+                    limit: 10,
                     results: [
                         {postId: 123, content: "Why hello there!"},
                         {postId: 456, content: "HERRO!"}
