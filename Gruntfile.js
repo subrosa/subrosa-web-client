@@ -95,7 +95,7 @@ module.exports = function (grunt) {
                 'Gruntfile.js',
                 '<%= subrosa.app %>/js/**/*.js',
                 //TODO replace me with component version when it becomes available.
-                '!<%= subrosa.app %>/js/lib/**'
+                '!<%= subrosa.app %>/remove-me/angular-ui-states.js'
             ]
         },
         karma: {
