@@ -54,7 +54,10 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             modRewrite([
-                                '!^/(css|js|img|components|views|subrosa-api).+$ /index.html'
+                                //TODO replace me with commented out line once ui-router becomes available via bower
+                                //'!^/(css|js|img|components|views|subrosa-api).+$ /index.html'
+                                '!^/(css|js|remove-me|img|components|views|subrosa-api).+$ /index.html'
+
                             ]),
                             proxySnippet,
                             lrSnippet,
