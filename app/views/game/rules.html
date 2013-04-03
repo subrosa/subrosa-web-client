@@ -1,7 +1,8 @@
+{{setTitle("Rules for " + game.name)}}
 <section id="gameRules">
     <div class="ruleset">
         <h2>Rules for all Games</h2>
-        <ul class="rules">
+        <ul>
             <li data-ng-repeat="rule in game.rules.ALL_GAMES">
                 {{rule}}
             </li>
@@ -9,7 +10,7 @@
     </div>
 
     <div class="ruleset" data-ng-show="game.rules.GAME_SPECIFIC">
-        <ul class="rules">
+        <ul>
             <li data-ng-repeat="rule in game.rules.GAME_SPECIFIC">
                 {{rule}}
             </li>
