@@ -34,12 +34,16 @@
             <a href="/">
                 <img src="/img/logo/subrosa-154x36.png" alt="Subrosa Logo" class="logo logo-small"/>
             </a>
+            <span class="account-actions">
+                <img height="30" width="30" data-ng-src="{{account.images.AVATAR}}" data-ng-show="account.images.AVATAR"/>
+                <svg height="30" width="30" data-icon="anonymous" data-ng-hide="account.images.AVATAR"></svg>
+            </span>
         </header>
 
         <div data-ui-view="menu"></div>
         <div data-ui-view="sub-header"></div>
-        <div data-ui-view></div>
         <div data-spinner></div>
+        <div data-ui-view></div>
 
         <footer id="footer">
             <div class="copyright">
@@ -61,6 +65,7 @@
         <script type="text/javascript" src="/js/controllers/game/GameDashboardController.js"></script>
         <script type="text/javascript" src="/js/controllers/game/GameFeedController.js"></script>
         <script type="text/javascript" src="/js/controllers/game/GameRulesController.js"></script>
+        <script type="text/javascript" src="/js/directives/icon.js"></script>
         <script type="text/javascript" src="/js/services/game/Game.js"></script>
         <script type="text/javascript" src="/js/services/game/Posts.js"></script>
         <script type="text/javascript" src="/js/widgets/spinner.js"></script>
