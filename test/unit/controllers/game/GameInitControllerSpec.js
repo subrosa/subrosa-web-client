@@ -1,9 +1,11 @@
 'use strict'
 
-describe('GameInitController', function() {
-    var rootScope;
+beforeEach(module('views/game/game-menu.html'));
+beforeEach(module('views/game/game-summary.html'));
 
-    var MockGameService;
+describe('GameInitController', function() {
+    var rootScope, MockGameService;
+
     beforeEach(module(function($provide) {
         MockGameService = {
             get: function () {
@@ -18,7 +20,7 @@ describe('GameInitController', function() {
     }));
 
     beforeEach(inject(function($controller, $rootScope) {
-        rootScope = $rootScope.$new();
+        rootScope = $rootScope;
         $controller('GameInitController', {$rootScope: rootScope});
     }));
 

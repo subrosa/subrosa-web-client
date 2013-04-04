@@ -2,8 +2,9 @@
 'use strict';
 
 // Modules
-var subrosaApp = angular.module('subrosa', ['subrosa.game', 'spinner', 'ui.compat']);
+var subrosaApp = angular.module('subrosa', ['subrosa.directives', 'subrosa.game', 'spinner', 'ui.compat']);
 angular.module('subrosa.game', ['ngResource']);
+angular.module('subrosa.directives', []);
 
 subrosaApp.config(function ($routeProvider, $stateProvider, $locationProvider) {
     // Configure the application routing/state machine.
@@ -13,11 +14,11 @@ subrosaApp.config(function ($routeProvider, $stateProvider, $locationProvider) {
         views: {
             'menu': {
                 controller: 'GameInitController',
-                templateUrl: '/views/game/game-menu.html'
+                templateUrl: 'views/game/game-menu.html'
             },
             'sub-header': {
                 controller: 'GameInitController',
-                templateUrl: '/views/game/game-summary.html'
+                templateUrl: 'views/game/game-summary.html'
             }
         }
     });
@@ -27,7 +28,7 @@ subrosaApp.config(function ($routeProvider, $stateProvider, $locationProvider) {
         views: {
             '@': {
                 controller: 'GameDashboardController',
-                templateUrl: '/views/game/dashboard.html'
+                templateUrl: 'views/game/dashboard.html'
             }
         }
     });
@@ -37,7 +38,7 @@ subrosaApp.config(function ($routeProvider, $stateProvider, $locationProvider) {
         views: {
             '@': {
                 controller: 'GameFeedController',
-                templateUrl: '/views/game/feed.html'
+                templateUrl: 'views/game/feed.html'
             }
         }
     });
@@ -47,7 +48,7 @@ subrosaApp.config(function ($routeProvider, $stateProvider, $locationProvider) {
         views: {
             '@': {
                 controller: 'GameRulesController',
-                templateUrl: '/views/game/rules.html'
+                templateUrl: 'views/game/rules.html'
             }
         }
     });

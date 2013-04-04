@@ -1,21 +1,23 @@
 // Karma configuration
 
 // base path, that will be used to resolve files and exclude
-basePath = '';
+//basePath = '/Users/walden/code/subrosa-web-client/app';
+basePath = '../app/';
 
 // list of files / patterns to load in the browser
 files = [
     JASMINE,
     JASMINE_ADAPTER,
-    '../app/components/angular/angular.js',
-    '../app/components/angular-resource/angular-resource.js',
-    '../app/components/angular-sanitize/angular-sanitize.js',
+    'components/angular/angular.js',
+    'components/angular-resource/angular-resource.js',
+    'components/angular-sanitize/angular-sanitize.js',
     //TODO replace me with component version when it becomes available.
-    '../app/remove-me/angular-ui-states.js',
-    '../app/components/angular-mocks/angular-mocks.js',
-    '../app/js/app.js',
-    '../app/js/**/*.js',
-    '../test/unit/**/*.js'
+    'remove-me/angular-ui-states.js',
+    'components/angular-mocks/angular-mocks.js',
+    'js/app.js',
+    'js/**/*.js',
+    'views/**/*.html',
+    '../test/unit/**/*.js',
 ];
 
 // list of files to exclude
@@ -26,6 +28,11 @@ exclude = [];
 reporters = ['coverage', 'junit', 'progress'];
 junitReporter = {
     outputFile: '../test/results/test-results.xml'
+};
+
+coverageReporter = {
+    type : 'cobertura',
+    dir : '../test/coverage'
 };
 
 // web server port
@@ -62,12 +69,7 @@ captureTimeout = 5000;
 // if true, it capture browsers, run tests and exit
 singleRun = false;
 
-// Test coverage
 preprocessors = {
-    '../app/js/**/*.js': 'coverage'
+    'js/**/*.js': 'coverage',
+    'views/**/*.html': 'html2js'
 };
-
-coverageReporter = {
-    type : 'cobertura',
-    dir : '../test/coverage'
-}

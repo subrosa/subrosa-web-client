@@ -183,7 +183,7 @@ module.exports = function (grunt) {
             subrosa: {
                 options:    {
                     base: '<%= subrosa.app %>/views',        // $templateCache ID will be relative to this folder
-                    prepend: '/views/'                       // Prepend path to $templateCache ID
+                    prepend: 'views/'                       // Prepend path to $templateCache ID
                 },
                 src: [ '<%= subrosa.app %>/views/**/*.html' ],
                 dest: '.tmp/js/templates.js'
