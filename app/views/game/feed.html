@@ -1,6 +1,13 @@
 {{setTitle("Game Feed for " + game.name)}}
 <ul id="gameFeed">
-    <li data-ng-repeat="post in posts.results">
-        {{post}}
+    <li class="post" data-ng-repeat="post in posts.results">
+        <img data-ng-src="{{post.image.uri}}" alt="Image for post"/>
+        <div class="post-content">
+            <h4>{{post.account.username}}</h4>
+            <div class="post-date">
+                {{post.created | date:'medium'}}
+            </div>
+            <p>{{post.content}}</p>
+        </div>
     </li>
 </ul>
