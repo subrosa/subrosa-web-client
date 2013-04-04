@@ -4,7 +4,7 @@ describe('BaseController', function() {
     var rootScope;
 
     beforeEach(inject(function($controller, $rootScope) {
-        rootScope = $rootScope.$new();
+        rootScope = $rootScope;
         $controller('BaseController', {$scope: rootScope});
     }));
 
