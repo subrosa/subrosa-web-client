@@ -1,7 +1,6 @@
 describe('icon', function() {
     // load the module and view.
-    beforeEach(module('subrosa.directives'));
-    beforeEach(module('views/partials/icon.html'));
+    beforeEach(module('subrosa.directives', 'views/partials/icon.html'));
 
     it('should create an svg icon if it exists in the icons object.', inject(function($rootScope, $compile) {
         var svg = $compile('<svg data-icon="skull"></svg>')($rootScope);

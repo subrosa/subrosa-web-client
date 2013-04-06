@@ -16,12 +16,12 @@ module.exports = function (grunt) {
 
     // configurable paths
     var subrosaConfig = {
-        app: 'app',
-        build: 'build'
+        src: 'src',
+        dist: 'dist'
     };
 
     try {
-        subrosaConfig.app = require('./component.json').appPath || subrosaConfig.app;
+        subrosaConfig.src = require('./component.json').appPath || subrosaConfig.src;
     } catch (e) {}
 
     grunt.initConfig({
@@ -29,11 +29,11 @@ module.exports = function (grunt) {
         watch: {
             livereload: {
                 files: [
-                    '<%= subrosa.app %>/**/*.html',
-                    '<%= subrosa.app %>/views/**/*.html',
-                    '{.tmp,<%= subrosa.app %>}/css/**/*.css',
-                    '{.tmp,<%= subrosa.app %>}/js/**/*.js',
-                    '<%= subrosa.app %>/img/**/*.{png,jpg,jpeg,gif,webp}'
+                    '<%= subrosa.src %>/**/*.html',
+                    '<%= subrosa.src %>/views/**/*.html',
+                    '{.tmp,<%= subrosa.src %>}/css/**/*.css',
+                    '{.tmp,<%= subrosa.src %>}/js/**/*.js',
+                    '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
                 ],
                 tasks: ['livereload']
             }
@@ -44,6 +44,12 @@ module.exports = function (grunt) {
                     context: '/subrosa-api',
                     host: 'localhost',
                     port: 8080
+                },
+
+                {
+                    context: '/photos',
+                    host: 'localhost',
+                    port: 80
                 }
             ],
             livereload: {
@@ -54,15 +60,15 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             modRewrite([
-                                //TODO replace me with commented out line once ui-router becomes available via bower
-                                //'!^/(css|js|img|components|views|subrosa-api).+$ /index.html'
-                                '!^/(css|js|remove-me|img|components|views|subrosa-api).+$ /index.html'
+                                //TODO replace me with commented out line once components becomes available via bower
+                                //'!^/(css|js|img|photos|components|views|subrosa-api).+$ /index.html'
+                                '!^/(css|js|non-bower-components|img|photos|components|views|subrosa-api).+$ /index.html'
 
                             ]),
                             proxySnippet,
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, subrosaConfig.app)
+                            mountFolder(connect, subrosaConfig.src)
                         ];
                     }
                 }
@@ -84,11 +90,11 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            build: '<%= subrosa.build %>',
+            build: '<%= subrosa.dist %>',
             tmp: '.tmp'
         },
         csslint: {
-            src: ['<%= subrosa.app %>/css/**/*.css', '!<%= subrosa.app %>/css/lib/**/*.css']
+            src: ['<%= subrosa.src %>/css/**/*.css', '!<%= subrosa.src %>/css/lib/**/*.css']
         },
         jshint: {
             options: {
@@ -96,60 +102,60 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= subrosa.app %>/js/**/*.js',
-                //TODO replace me with component version when it becomes available.
-                '!<%= subrosa.app %>/remove-me/angular-ui-states.js'
+                '<%= subrosa.src %>/js/**/*.js',
+                //TODO replace me with component version when they become available in bower.
+                '!<%= subrosa.src %>/non-bower-components/**/*.js'
             ]
         },
         karma: {
             unit: {
-                configFile: 'config/karma.conf.js',
+                configFile: 'test/config/karma.conf.js',
                 autoWatch: true
             },
             e2e: {
-                configFile: 'config/karma-e2e.conf.js'
+                configFile: 'test/config/karma-e2e.conf.js'
             },
             //continuous integration modes: run tests once in PhantomJS browser.
             singleRunUnit: {
                 browsers: ['PhantomJS'],
-                configFile: 'config/karma.conf.js',
+                configFile: 'test/config/karma.conf.js',
                 singleRun: true
             },
             singleRunE2E: {
                 browsers: ['PhantomJS'],
-                configFile: 'config/karma-e2e.conf.js',
+                configFile: 'test/config/karma-e2e.conf.js',
                 singleRun: true
             }
         },
         useminPrepare: {
-            html: '<%= subrosa.app %>/index.html',
+            html: '<%= subrosa.src %>/index.html',
             options: {
-                dest: '<%= subrosa.build %>'
+                dest: '<%= subrosa.dist %>'
             }
         },
         usemin: {
-            html: ['<%= subrosa.build %>/**/*.html'],
-            css: ['<%= subrosa.build %>/css/**/*.css'],
+            html: ['<%= subrosa.dist %>/**/*.html'],
+            css: ['<%= subrosa.dist %>/css/**/*.css'],
             options: {
-                dirs: ['<%= subrosa.build %>']
+                dirs: ['<%= subrosa.dist %>']
             }
         },
         imagemin: {
             build: {
                 files: [{
                     expand: true,
-                    cwd: '<%= subrosa.app %>/img',
+                    cwd: '<%= subrosa.src %>/img',
                     src: '**/*.{png,jpg,jpeg}',
-                    dest: '<%= subrosa.build %>/img'
+                    dest: '<%= subrosa.dist %>/img'
                 }]
             }
         },
         cssmin: {
             build: {
                 files: {
-                    '<%= subrosa.build %>/css/app.css': [
+                    '<%= subrosa.dist %>/css/styles.css': [
                         '.tmp/css/**/*.css',
-                        '<%= subrosa.app %>/css/**/*.css'
+                        '<%= subrosa.src %>/css/**/*.css'
                     ]
                 }
             }
@@ -158,34 +164,34 @@ module.exports = function (grunt) {
             build: {
                 files: [{
                     expand: true,
-                    cwd: '<%= subrosa.app %>',
+                    cwd: '<%= subrosa.src %>',
                     src: ['*.html', 'views/**/*.html'],
-                    dest: '<%= subrosa.build %>'
+                    dest: '<%= subrosa.dist %>'
                 }]
             }
         },
         cdnify: {
             build: {
-                html: ['<%= subrosa.build %>/*.html']
+                html: ['<%= subrosa.dist %>/*.html']
             }
         },
         ngmin: {
             build: {
                 files: [{
                     expand: true,
-                    cwd: '<%= subrosa.build %>/js',
+                    cwd: '<%= subrosa.dist %>/js',
                     src: '*.js',
-                    dest: '<%= subrosa.build %>/js'
+                    dest: '<%= subrosa.dist %>/js'
                 }]
             }
         },
         ngtemplates: {
             subrosa: {
                 options:    {
-                    base: '<%= subrosa.app %>/views',        // $templateCache ID will be relative to this folder
+                    base: '<%= subrosa.src %>/views',        // $templateCache ID will be relative to this folder
                     prepend: 'views/'                       // Prepend path to $templateCache ID
                 },
-                src: [ '<%= subrosa.app %>/views/**/*.html' ],
+                src: [ '<%= subrosa.src %>/views/**/*.html' ],
                 dest: '.tmp/js/templates.js'
             }
         },
@@ -193,8 +199,8 @@ module.exports = function (grunt) {
         concat: {
             templates: {
                 files: {
-                    '<%= subrosa.build %>/js/scripts.js': [
-                        '<%= subrosa.build %>/js/scripts.js',
+                    '<%= subrosa.dist %>/js/scripts.js': [
+                        '<%= subrosa.dist %>/js/scripts.js',
                         '<%= ngtemplates.subrosa.dest %>'
                     ]
                 }
@@ -203,8 +209,8 @@ module.exports = function (grunt) {
         uglify: {
             build: {
                 files: {
-                    '<%= subrosa.build %>/js/scripts.js': [
-                        '<%= subrosa.build %>/js/scripts.js'
+                    '<%= subrosa.dist %>/js/scripts.js': [
+                        '<%= subrosa.dist %>/js/scripts.js'
                     ]
                 }
             }
@@ -214,8 +220,8 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     dot: true,
-                    cwd: '<%= subrosa.app %>',
-                    dest: '<%= subrosa.build %>',
+                    cwd: '<%= subrosa.src %>',
+                    dest: '<%= subrosa.dist %>',
                     src: [
                         '*.{ico,txt,png}',
                         'img/**/*.{gif,webp}'

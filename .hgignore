@@ -1,9 +1,9 @@
 node_modules
-build
+dist
 .DS_Store
 .idea
 .tmp
 .sass-cache
-app/components
+src/components
 test/coverage
 test/results
