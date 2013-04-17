@@ -34,7 +34,7 @@ describe('Game Feed Factory', function() {
     });
 
     it('make a request to get the posts from the API.', function() {
-        $httpBackend.expectGET('/subrosa-api/v1/game/raleigh-wars/post?limit=20&offset=0').respond(posts);
+        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/post?limit=20&offset=0').respond(posts);
         gameFeedFactory.get(function (response) {
             expect(response).toBe(posts);
         });
@@ -43,7 +43,7 @@ describe('Game Feed Factory', function() {
 
     it('accepts limit and offset query string parameters.', function() {
         var limit = 100, offset = 1000;
-        $httpBackend.expectGET('/subrosa-api/v1/game/raleigh-wars/post?limit='+limit+'&offset='+offset).respond("");
+        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/post?limit='+limit+'&offset='+offset).respond("");
         gameFeedFactory.get({limit: limit, offset:offset});
         $httpBackend.flush();
         gameFeedFactory.get({});
@@ -51,7 +51,7 @@ describe('Game Feed Factory', function() {
     });
 
     it('maintains a cache of requests.', function() {
-        $httpBackend.expectGET('/subrosa-api/v1/game/raleigh-wars/post?limit=20&offset=0').respond("");
+        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/post?limit=20&offset=0').respond("");
         gameFeedFactory.get({});
         $httpBackend.flush();
         gameFeedFactory.get({});

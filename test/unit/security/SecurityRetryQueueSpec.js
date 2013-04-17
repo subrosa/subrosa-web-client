@@ -10,7 +10,7 @@ describe('Security Retry Queue', function() {
     beforeEach(inject(function($injector) {
         queue = $injector.get('SecurityRetryQueue');
         $httpBackend = $injector.get('$httpBackend');
-        $httpBackend.expectGET('/subrosa-api/v1/user').respond("");
+        $httpBackend.expectGET('/subrosa/v1/user').respond("");
     }));
 
     describe('hasMore', function() {

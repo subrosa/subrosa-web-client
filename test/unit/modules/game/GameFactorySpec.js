@@ -27,7 +27,7 @@ describe('Game Factory', function() {
     });
 
     it('make a request to get the game from the API.', function () {
-        $httpBackend.expectGET('/subrosa-api/v1/game/raleigh-wars').respond(game);
+        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars').respond(game);
         gameFactory.get(function (response) {
             expect(response.name).toBe(game.name);
             expect(response.url).toBe(game.url);
@@ -36,7 +36,7 @@ describe('Game Factory', function() {
     });
 
     it('maintains a cache of requests.', function () {
-        $httpBackend.expectGET('/subrosa-api/v1/game/raleigh-wars').respond("");
+        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars').respond("");
         gameFactory.get();
         $httpBackend.flush();
         gameFactory.get();

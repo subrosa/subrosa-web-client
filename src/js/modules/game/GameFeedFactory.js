@@ -4,7 +4,7 @@
 angular.module('subrosa.game').factory('GameFeed', function ($resource, $location, $cacheFactory) {
     var cache = $cacheFactory('posts');
     var gameUrl = $location.path().split('/')[1];
-    var Posts = $resource('/subrosa-api/v1/game/:gameUrl/post', {gameUrl: '@gameUrl', offset: 0, limit: 20});
+    var Posts = $resource('/subrosa/v1/game/:gameUrl/post', {gameUrl: '@gameUrl', offset: 0, limit: 20});
 
     return {
         get: function (params, callback) {

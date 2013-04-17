@@ -68,7 +68,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
         login: function (email, password) {
             var postData = "email=" + email + "&password=" + password;
             var config = {headers: {"Content-Type": "application/x-www-form-urlencoded"}};
-            var request = $http.post('/subrosa-api/v1/authenticate', postData, config);
+            var request = $http.post('/subrosa/v1/authenticate', postData, config);
 
             var success = function () {
                 service.currentUser = service.getCurrentUser();
@@ -93,7 +93,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
 
         // Logout the current user and redirect
         logout: function (redirectTo) {
-            $http.post('/subrosa-api/v1/logout').then(function () {
+            $http.post('/subrosa/v1/logout').then(function () {
                 service.currentUser = null;
                 redirect(redirectTo);
             });
@@ -113,7 +113,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
                         service.currentUser = null;
                     }
                 };
-                return $http.get('/subrosa-api/v1/user').then(success, error);
+                return $http.get('/subrosa/v1/user').then(success, error);
             }
         },
 

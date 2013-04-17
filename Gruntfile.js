@@ -41,7 +41,7 @@ module.exports = function (grunt) {
         connect: {
             proxies: [
                 {
-                    context: '/subrosa-api',
+                    context: '/subrosa',
                     host: 'localhost',
                     port: 8080
                 },
@@ -61,8 +61,8 @@ module.exports = function (grunt) {
                         return [
                             modRewrite([
                                 //TODO replace me with commented out line once components becomes available via bower
-                                //'!^/(css|js|img|photos|components|views|subrosa-api).+$ /index.html'
-                                '!^/(css|js|non-bower-components|img|photos|components|views|subrosa-api).+$ /index.html'
+                                //'!^/(css|js|img|photos|components|views|subrosa).+$ /index.html'
+                                '!^/(css|js|non-bower-components|img|photos|components|views|subrosa).+$ /index.html'
 
                             ]),
                             proxySnippet,

@@ -8,7 +8,7 @@ describe('Authentication Service', function () {
         $httpBackend = _$httpBackend_;
         $http = _$http_;
         userData = { email: 'jo@bloggs.com', images: {AVATAR: {uri:"/photos/blah.jpg"}}};
-        $httpBackend.when('GET', '/subrosa-api/v1/user').respond(userData);
+        $httpBackend.when('GET', '/subrosa/v1/user').respond(userData);
     }));
 
     afterEach(function () {
@@ -31,14 +31,14 @@ describe('Authentication Service', function () {
 
     describe('login', function () {
         it('sends a http request to login the specified user', function () {
-            $httpBackend.expectPOST('/subrosa-api/v1/authenticate').respond(200);
+            $httpBackend.expectPOST('/subrosa/v1/authenticate').respond(200);
             service.login('email', 'password');
             $httpBackend.flush();
             expect(service.currentUser).toBe(userData);
             expect(service.isDialogOpen()).toBe(false);
         });
         it('calls queue.retry on a successful login', function () {
-            $httpBackend.expectPOST('/subrosa-api/v1/authenticate').respond(200);
+            $httpBackend.expectPOST('/subrosa/v1/authenticate').respond(200);
             spyOn(queue, 'retryAll');
             service.showLogin();
             service.login('email', 'password');
@@ -48,7 +48,7 @@ describe('Authentication Service', function () {
             expect(service.currentUser).toBe(userData);
         });
         it('does not call queue.retryAll after a login failure', function () {
-            $httpBackend.expectPOST('/subrosa-api/v1/authenticate').respond(200);
+            $httpBackend.expectPOST('/subrosa/v1/authenticate').respond(200);
             spyOn(queue, 'retryAll');
             expect(queue.retryAll).not.toHaveBeenCalled();
             service.login('email', 'password');
@@ -59,11 +59,11 @@ describe('Authentication Service', function () {
 
     describe('logout', function () {
         beforeEach(function () {
-            $httpBackend.when('POST', '/subrosa-api/v1/logout').respond(200, {});
+            $httpBackend.when('POST', '/subrosa/v1/logout').respond(200, {});
         });
 
         it('sends a http post to clear the current logged in user', function () {
-            $httpBackend.expect('POST', '/subrosa-api/v1/logout');
+            $httpBackend.expect('POST', '/subrosa/v1/logout');
             service.logout();
             $httpBackend.flush();
         });

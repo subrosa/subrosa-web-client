@@ -23,7 +23,7 @@ describe('Security Interceptor', function() {
         var httpResponse = {
             status: 400,
             config: {
-                url: '/subrosa-api/v1/targets'
+                url: '/subrosa/v1/targets'
             }
         };
         interceptor(promise);
@@ -35,7 +35,7 @@ describe('Security Interceptor', function() {
         var httpResponse = {
             status: 401,
             config: {
-                url: '/subrosa-api/v1/authenticate'
+                url: '/subrosa/v1/authenticate'
             }
         };
         interceptor(promise);
@@ -47,7 +47,7 @@ describe('Security Interceptor', function() {
         var notAuthResponse = {
             status: 401,
             config: {
-                url: '/subrosa-api/v1/targets'
+                url: '/subrosa/v1/targets'
             }
         };
         interceptor(promise);
