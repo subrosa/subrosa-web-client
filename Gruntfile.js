@@ -94,6 +94,9 @@ module.exports = function (grunt) {
             tmp: '.tmp'
         },
         csslint: {
+            options: {
+                csslintrc: '.csslintrc'
+            },
             src: ['<%= subrosa.src %>/css/**/*.css', '!<%= subrosa.src %>/css/lib/**/*.css']
         },
         jshint: {
