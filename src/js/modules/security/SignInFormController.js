@@ -6,25 +6,19 @@ angular.module('security.form', []);
 /*
  * Used to handle authentication..
  */
-angular.module('security.form').controller('SignInFormController', function ($scope, AuthenticationService) {
+angular.module('security.form').controller('SignInFormController', function ($scope, AuthenticationService, Account) {
     // The model for this form
     $scope.user = {};
+
+    // Default to login form
+    $scope.showRegister = false;
 
     // Any error message from failing to login
     $scope.authError = null;
 
-//    // The reason that we are being asked to login - for instance because we tried to access something to which we are not authorized
-//    // We could do something different for each reason here but to keep it simple...
-//    $scope.authReason = null;
-//    if ( security.getLoginReason() ) {
-//        $scope.authReason = ( security.isAuthenticated() ) ?
-//            localizedMessages.get('login.reason.notAuthorized') :
-//            localizedMessages.get('login.reason.notAuthenticated');
-//    }
-
     $scope.login = function () {
         AuthenticationService.login($scope.user.email, $scope.user.password).then(function () {
-
+            // Successful login
         }, function (exception) {
             // Clear any previous security errors
             $scope.authError = null;
@@ -38,11 +32,16 @@ angular.module('security.form').controller('SignInFormController', function ($sc
         });
     };
 
-    $scope.clearForm = function () {
-        $scope.user = {};
+    $scope.register = function () {
+        var account = new Account();
+        account.account = {
+            email: $scope.user.email
+        };
+        account.password = $scope.user.password;
+        account.$save($scope.login);
     };
 
-    $scope.cancelLogin = function () {
+    $scope.cancelSignIn = function () {
         AuthenticationService.cancelLogin();
     };
 });

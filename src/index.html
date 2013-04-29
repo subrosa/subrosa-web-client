@@ -19,6 +19,7 @@
 
         <!-- build:css /css/styles.css -->
         <link rel="stylesheet" href="/css/layout.css">
+        <link rel="stylesheet" href="/css/form.css">
         <link rel="stylesheet" href="/css/lib/bootstrap.css">
         <link rel="stylesheet" href="/css/lib/bootstrap-responsive.css">
         <!-- endbuild -->
@@ -34,9 +35,8 @@
             <a href="/">
                 <img src="/img/logo/subrosa-154x36.png" alt="Subrosa Logo" class="logo logo-small"/>
             </a>
-            <span data-user-actions></span>
+            <span data-user-menu></span>
         </header>
-
         <div data-ui-view="menu"></div>
         <div data-ui-view="sub-header"></div>
         <div data-spinner></div>
@@ -53,6 +53,7 @@
         <script type="text/javascript" src="/components/angular-bootstrap/ui-bootstrap.js"></script>
         <script type="text/javascript" src="/components/angular-resource/angular-resource.js"></script>
         <script type="text/javascript" src="/components/angular-sanitize/angular-sanitize.js"></script>
+
         <!--TODO: replace the following with component versiona when they becomes available in bower -->
         <script type="text/javascript" src="/non-bower-components/angular-ui-states.js"></script>
         <script type="text/javascript" src="/components/raphael/raphael.js"></script>
@@ -61,6 +62,9 @@
 
         <script type="text/javascript" src="/js/directives/directives-module.js"></script>
         <script type="text/javascript" src="/js/directives/icon.js"></script>
+
+        <script type="text/javascript" src="/js/modules/account/account-module.js"></script>
+        <script type="text/javascript" src="/js/modules/account/AccountFactory.js"></script>
 
         <script type="text/javascript" src="/js/modules/game/game-module.js"></script>
         <script type="text/javascript" src="/js/modules/game/GameDashboardController.js"></script>
@@ -72,10 +76,11 @@
 
         <script type="text/javascript" src="/js/modules/security/security-module.js"></script>
         <script type="text/javascript" src="/js/modules/security/AuthenticationService.js"></script>
+        <script type="text/javascript" src="/js/modules/security/passwordValidator.js"></script>
         <script type="text/javascript" src="/js/modules/security/SecurityInterceptor.js"></script>
         <script type="text/javascript" src="/js/modules/security/SecurityRetryQueue.js"></script>
         <script type="text/javascript" src="/js/modules/security/SignInFormController.js"></script>
-        <script type="text/javascript" src="/js/modules/security/UserActions.js"></script>
+        <script type="text/javascript" src="/js/modules/security/UserMenu.js"></script>
 
         <script type="text/javascript" src="/js/modules/widgets/spinner.js"></script>
         <!-- endbuild -->

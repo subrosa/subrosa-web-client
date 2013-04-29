@@ -1,10 +1,10 @@
-<span class="user-actions">
-    <span class="user-avatar" data-ng-show="isAuthenticated()">
+<ul class="user-menu" role="navigation">
+    <li class="user-avatar" data-ng-show="isAuthenticated()">
         <img height="30" width="30" data-ng-src="{{currentUser.images.AVATAR.uri}}" data-ng-show="currentUser.images.AVATAR"/>
         <svg height="30" width="30" data-icon="anonymous" data-ng-hide="currentUser.images.AVATAR"></svg>
         <button class="btn logout" data-ng-click="logout()">Log out</button>
-    </span>
-    <span class="sign-in-link" data-ng-hide="isAuthenticated()">
+    </li>
+    <li class="sign-in-link" data-ng-hide="isAuthenticated()">
         <button class="btn login" data-ng-click="login()">Sign in</button>
-    </span>
-</span>
+    </li>
+</ul>

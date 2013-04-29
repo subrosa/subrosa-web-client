@@ -1,13 +1,12 @@
 /*global angular*/
 'use strict';
 
-// The loginToolbar directive is a reusable widget that can show login or logout buttons
+// The User Menu directive is a reusable widget that can show login or logout buttons
 // and information the current authenticated user
-angular.module('security').directive('userActions', function (AuthenticationService) {
-    var directive = {
-        templateUrl: 'views/security/user-actions.html',
+angular.module('security.directives').directive('userMenu', function (AuthenticationService) {
+    return {
+        templateUrl: 'views/security/user-menu.html',
         replace: true,
-        scope: true,
         link: function ($scope) {
             $scope.isAuthenticated = AuthenticationService.isAuthenticated;
             $scope.login = AuthenticationService.showLogin;
@@ -19,5 +18,4 @@ angular.module('security').directive('userActions', function (AuthenticationServ
             });
         }
     };
-    return directive;
 });

@@ -26,7 +26,7 @@ describe('Game Factory', function() {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('make a request to get the game from the API.', function () {
+    it('makes a request to get the game from the API.', function () {
         $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars').respond(game);
         gameFactory.get(function (response) {
             expect(response.name).toBe(game.name);

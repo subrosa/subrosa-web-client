@@ -3,9 +3,10 @@
 
 // Subrosa Dependencies
 var subrosaApp = angular.module('subrosa', [
-    'subrosa.directives',
+    'subrosa.account',
     'subrosa.game',
     'security',
+    'subrosa.directives',
     'widgets.spinner',
     'ui.compat'
 ]);

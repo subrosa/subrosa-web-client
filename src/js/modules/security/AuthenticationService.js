@@ -21,6 +21,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
             loginDialog = null;
         }
     }
+
     function onLoginDialogClose(success) {
         if (success) {
             SecurityRetryQueue.retryAll();

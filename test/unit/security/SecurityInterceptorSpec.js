@@ -1,4 +1,4 @@
-describe('Security Interceptor', function() {
+describe('Security Interceptor', function () {
     var queue, interceptor, promise, wrappedPromise;
 
     beforeEach(module('security.interceptor', 'security.queue'));
@@ -12,14 +12,14 @@ describe('Security Interceptor', function() {
         };
     }));
 
-    it('accepts and returns a promise.', function() {
+    it('accepts and returns a promise.', function () {
         var newPromise = interceptor(promise);
         expect(promise.then).toHaveBeenCalled();
         expect(promise.then.mostRecentCall.args[0]).toBe(null);
         expect(newPromise).toBe(wrappedPromise);
     });
 
-    it('does not intercept non-401 error responses.', function() {
+    it('does not intercept non-401 error responses.', function () {
         var httpResponse = {
             status: 400,
             config: {
@@ -31,7 +31,7 @@ describe('Security Interceptor', function() {
         expect(errorHandler(httpResponse)).toBe(promise);
     });
 
-    it('does not intercept 401 responses from the authenticate call.', function() {
+    it('does not intercept 401 responses from the authenticate call.', function () {
         var httpResponse = {
             status: 401,
             config: {
@@ -43,7 +43,7 @@ describe('Security Interceptor', function() {
         expect(errorHandler(httpResponse)).toBe(promise);
     });
 
-    it('intercepts 401 error responses and adds it to the retry queue.', function() {
+    it('intercepts 401 error responses and adds it to the retry queue.', function () {
         var notAuthResponse = {
             status: 401,
             config: {
