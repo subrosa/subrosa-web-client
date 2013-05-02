@@ -43,7 +43,7 @@
             </ul>
         </span>
         <label for="registerTerms">I agree to the <a href="/terms">terms and conditions</a>.</label>
-        <input id="registerTerms" type="checkbox" data-ng-required="value.length==0">
+        <input id="registerTerms" type="checkbox" data-ng-model="user.acceptedTerms" required>
         <input type="submit" data-ng-disabled='registerForm.$invalid' value="Register">
     </form>
 </div>
