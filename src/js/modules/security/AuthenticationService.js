@@ -26,7 +26,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
             SecurityRetryQueue.retryAll();
         } else {
             SecurityRetryQueue.cancelAll();
-            redirect();
+            redirect($location.url());
         }
         loginDialog = null;
     }
@@ -38,7 +38,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
     // Redirect to the given url (defaults to '/')
     function redirect(url) {
         url = url || '/';
-        $location.path(url);
+        $location.url(url);
     }
 
     // Register a handler for when an item is added to the retry queue
@@ -89,14 +89,13 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
         // Give up trying to login and clear the retry queue
         cancelLogin: function () {
             closeLoginDialog(false);
-            redirect();
         },
 
         // Logout the current user and redirect
         logout: function (redirectTo) {
             $http.post('/subrosa/v1/logout').then(function () {
                 service.currentUser = null;
-                redirect(redirectTo);
+                redirect(redirectTo || $location.path());
             });
         },
 
