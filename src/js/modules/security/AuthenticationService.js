@@ -18,7 +18,6 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
     function closeLoginDialog(success) {
         if (loginDialog) {
             loginDialog.close(success);
-            loginDialog = null;
         }
     }
 
@@ -29,6 +28,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
             SecurityRetryQueue.cancelAll();
             redirect();
         }
+        loginDialog = null;
     }
 
     function isDialogOpen() {
