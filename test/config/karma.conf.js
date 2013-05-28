@@ -11,8 +11,7 @@ files = [
     'components/angular-resource/angular-resource.js',
     'components/angular-sanitize/angular-sanitize.js',
     'components/angular-bootstrap/ui-bootstrap.js',
-    //TODO replace me with component version when it becomes available.
-    'non-bower-components/angular-ui-states.js',
+    'components/angular-ui-router/release/angular-ui-router.js',
     'components/angular-mocks/angular-mocks.js',
     'js/modules/**/*-module.js',
     'js/**/*.js',
