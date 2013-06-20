@@ -11,7 +11,7 @@ var subrosaApp = angular.module('subrosa', [
     'ui.compat'
 ]);
 
-subrosaApp.config(function ($routeProvider, $stateProvider, $locationProvider) {
+subrosaApp.config(function ($stateProvider, $locationProvider) {
     // Configure the application routing/state machine.
 
     $stateProvider.state('sign-in', {
