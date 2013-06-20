@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     };
 
     try {
-        subrosaConfig.src = require('./component.json').appPath || subrosaConfig.src;
+        subrosaConfig.src = require('./bower.json').appPath || subrosaConfig.src;
     } catch (e) {}
 
     grunt.initConfig({
