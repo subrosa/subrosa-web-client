@@ -12,7 +12,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
     function openLoginDialog() {
         if (!loginDialog) {
             loginDialog = $dialog.dialog();
-            loginDialog.open('views/security/sign-in-form.html', 'SignInFormController').then(onLoginDialogClose);
+            loginDialog.open('js/security/views/sign-in-form.html', 'SignInFormController').then(onLoginDialogClose);
         }
     }
     function closeLoginDialog(success) {

@@ -30,7 +30,7 @@ module.exports = function (grunt) {
             livereload: {
                 files: [
                     '<%= subrosa.src %>/**/*.html',
-                    '<%= subrosa.src %>/views/**/*.html',
+                    '<%= subrosa.src %>/**/views/**/*.html',
                     '{.tmp,<%= subrosa.src %>}/css/**/*.css',
                     '{.tmp,<%= subrosa.src %>}/js/**/*.js',
                     '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'

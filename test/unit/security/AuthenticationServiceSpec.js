@@ -1,7 +1,7 @@
 describe('Authentication Service', function () {
     var $rootScope, $http, $httpBackend, status, userData;
 
-    beforeEach(module('security.auth', 'security.queue', 'subrosa.account', 'views/security/sign-in-form.html'));
+    beforeEach(module('security.auth', 'security.queue', 'subrosa.account', 'js/security/views/sign-in-form.html'));
 
     beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$http_) {
         $rootScope = _$rootScope_;

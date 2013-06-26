@@ -13,9 +13,9 @@ files = [
     'components/angular-bootstrap/ui-bootstrap.js',
     'components/angular-ui-router/release/angular-ui-router.js',
     'components/angular-mocks/angular-mocks.js',
-    'js/modules/**/*-module.js',
+    'js/**/*-module.js',
     'js/**/*.js',
-    'views/**/*.html',
+    'js/**/*.html',
     '../test/unit/**/*.js'
 ];
 
@@ -69,6 +69,6 @@ captureTimeout = 5000;
 singleRun = false;
 
 preprocessors = {
-    'js/**/*.js': 'coverage',
-    'views/**/*.html': 'html2js'
+    '**/*.js': 'coverage',
+    '**/*.html': 'html2js'
 };

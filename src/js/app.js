@@ -4,9 +4,9 @@
 // Subrosa Dependencies
 var subrosaApp = angular.module('subrosa', [
     'subrosa.account',
+    'subrosa.common',
     'subrosa.game',
     'security',
-    'subrosa.directives',
     'widgets.spinner',
     'ui.compat'
 ]);
@@ -18,7 +18,7 @@ subrosaApp.config(function ($stateProvider, $locationProvider) {
         views: {
             '@': {
                 controller: 'SignInFormController',
-                templateUrl: 'views/security/sign-in-form.html'
+                templateUrl: 'js/security/views/sign-in-form.html'
             }
         }
     });
@@ -29,11 +29,11 @@ subrosaApp.config(function ($stateProvider, $locationProvider) {
         views: {
             'menu': {
                 controller: 'GameInitController',
-                templateUrl: 'views/game/game-menu.html'
+                templateUrl: 'js/game/views/game-menu.html'
             },
             'sub-header': {
                 controller: 'GameInitController',
-                templateUrl: 'views/game/game-summary.html'
+                templateUrl: 'js/game/views/game-summary.html'
             }
         }
     });
@@ -43,7 +43,7 @@ subrosaApp.config(function ($stateProvider, $locationProvider) {
         views: {
             '@': {
                 controller: 'GameDashboardController',
-                templateUrl: 'views/game/dashboard.html'
+                templateUrl: 'js/game/views/dashboard.html'
             }
         }
     });
@@ -53,7 +53,7 @@ subrosaApp.config(function ($stateProvider, $locationProvider) {
         views: {
             '@': {
                 controller: 'GameFeedController',
-                templateUrl: 'views/game/feed.html'
+                templateUrl: 'js/game/views/feed.html'
             }
         }
     });
@@ -63,7 +63,7 @@ subrosaApp.config(function ($stateProvider, $locationProvider) {
         views: {
             '@': {
                 controller: 'GameRulesController',
-                templateUrl: 'views/game/rules.html'
+                templateUrl: 'js/game/views/rules.html'
             }
         }
     });

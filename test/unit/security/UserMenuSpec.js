@@ -9,8 +9,8 @@ describe('UserMenu', function() {
         'security.directives',
         'security.auth',
         'security.queue',
-        'views/security/user-menu.html',
-        'views/security/sign-in-form.html'
+        'js/security/views/user-menu.html',
+        'js/security/views/sign-in-form.html'
     ));
 
     beforeEach(inject(function(_$rootScope_, $compile, _AuthenticationService_) {

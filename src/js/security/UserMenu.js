@@ -5,7 +5,7 @@
 // and information the current authenticated user
 angular.module('security.directives').directive('userMenu', function (AuthenticationService) {
     return {
-        templateUrl: 'views/security/user-menu.html',
+        templateUrl: 'js/security/views/user-menu.html',
         replace: true,
         link: function ($scope) {
             $scope.isAuthenticated = AuthenticationService.isAuthenticated;

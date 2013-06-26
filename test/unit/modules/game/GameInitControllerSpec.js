@@ -3,7 +3,7 @@
 describe('GameInitController', function() {
     var rootScope, MockGameFactory;
 
-    beforeEach(module('subrosa.game', 'views/game/game-menu.html', 'views/game/game-summary.html'));
+    beforeEach(module('subrosa.game', 'js/game/views/game-menu.html', 'js/game/views/game-summary.html'));
 
     beforeEach(module(function($provide) {
         MockGameFactory = {
