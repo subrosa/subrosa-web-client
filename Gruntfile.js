@@ -111,6 +111,11 @@ module.exports = function (grunt) {
             ]
         },
         karma: {
+            server: {
+                browsers: ['PhantomJS'],
+                configFile: 'test/config/karma.conf.js',
+                autoWatch: true
+            },
             unit: {
                 configFile: 'test/config/karma.conf.js',
                 autoWatch: true
@@ -255,7 +260,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test:server', [
         'connect:test',
-        'karma:unit'
+        'karma:server'
     ]);
 
     grunt.registerTask('build', [
