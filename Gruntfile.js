@@ -248,10 +248,14 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
-        'clean:tmp',
         'connect:test',
         'karma:singleRunUnit',
         'karma:singleRunE2E'
+    ]);
+
+    grunt.registerTask('test:server', [
+        'connect:test',
+        'karma:unit'
     ]);
 
     grunt.registerTask('build', [
