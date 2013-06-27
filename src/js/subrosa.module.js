@@ -18,7 +18,7 @@ subrosaApp.config(function ($stateProvider, $locationProvider) {
         views: {
             '@': {
                 controller: 'SignInFormController',
-                templateUrl: 'js/security/views/sign-in-form.html'
+                templateUrl: 'js/security/sign-in-form.html'
             }
         }
     });

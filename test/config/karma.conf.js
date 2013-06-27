@@ -13,7 +13,8 @@ files = [
     'components/angular-bootstrap/ui-bootstrap.js',
     'components/angular-ui-router/release/angular-ui-router.js',
     'components/angular-mocks/angular-mocks.js',
-    'js/**/*-module.js',
+    // Must load modules first
+    'js/**/*.module.js',
     'js/**/*.js',
     'js/**/*.html',
     '../test/unit/**/*.js'
