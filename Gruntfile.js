@@ -30,7 +30,6 @@ module.exports = function (grunt) {
             livereload: {
                 files: [
                     '<%= subrosa.src %>/**/*.html',
-                    '<%= subrosa.src %>/**/views/**/*.html',
                     '{.tmp,<%= subrosa.src %>}/css/**/*.css',
                     '{.tmp,<%= subrosa.src %>}/js/**/*.js',
                     '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
@@ -60,9 +59,7 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             modRewrite([
-                                //TODO replace me with commented out line once components becomes available via bower
-                                //'!^/(css|js|img|photos|components|views|subrosa).+$ /index.html'
-                                '!^/(css|js|non-bower-components|img|photos|components|views|subrosa).+$ /index.html'
+                                '!^/(css|js|img|photos|components|views|subrosa).+$ /index.html'
 
                             ]),
                             proxySnippet,
@@ -106,8 +103,7 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 '<%= subrosa.src %>/js/**/*.js',
-                //TODO replace me with component version when they become available in bower.
-                '!<%= subrosa.src %>/non-bower-components/**/*.js'
+                '!<%= subrosa.src %>/components/**/*.js'
             ]
         },
         karma: {
@@ -196,10 +192,9 @@ module.exports = function (grunt) {
         ngtemplates: {
             subrosa: {
                 options:    {
-                    base: '<%= subrosa.src %>/views',        // $templateCache ID will be relative to this folder
-                    prepend: 'views/'                       // Prepend path to $templateCache ID
+                    base: '<%= subrosa.src %>'       // $templateCache ID will be relative to this folder
                 },
-                src: [ '<%= subrosa.src %>/views/**/*.html' ],
+                src: [ '<%= subrosa.src %>/js/**/*.html' ],
                 dest: '.tmp/js/templates.js'
             }
         },
