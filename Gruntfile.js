@@ -1,6 +1,10 @@
 /*global module*/
-//TODO add i18n and static page generation for search engines.
 'use strict';
+
+//TODO add i18n and static page generation for search engines.
+//TODO get cdnify working with CDN
+//TODO add ngdocs:  https://github.com/m7r/grunt-ngdocs
+
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
@@ -17,7 +21,9 @@ module.exports = function (grunt) {
     // configurable paths
     var subrosaConfig = {
         src: 'src',
-        dist: 'dist'
+        dist: 'dist',
+        tmp: '.tmp',
+        test: 'test'
     };
 
     try {
@@ -30,8 +36,8 @@ module.exports = function (grunt) {
             livereload: {
                 files: [
                     '<%= subrosa.src %>/**/*.html',
-                    '{.tmp,<%= subrosa.src %>}/css/**/*.css',
-                    '{.tmp,<%= subrosa.src %>}/js/**/*.js',
+                    '<%= subrosa.src %>/css/**/*.css',
+                    '<%= subrosa.src %>/js/**/*.js',
                     '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
                 ],
                 tasks: ['livereload']
@@ -60,11 +66,9 @@ module.exports = function (grunt) {
                         return [
                             modRewrite([
                                 '!^/(css|js|img|photos|components|views|subrosa).+$ /index.html'
-
                             ]),
                             proxySnippet,
                             lrSnippet,
-                            mountFolder(connect, '.tmp'),
                             mountFolder(connect, subrosaConfig.src)
                         ];
                     }
@@ -74,8 +78,7 @@ module.exports = function (grunt) {
                 options: {
                     middleware: function (connect) {
                         return [
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test')
+                            mountFolder(connect, subrosaConfig.test)
                         ];
                     }
                 }
@@ -87,8 +90,8 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            build: '<%= subrosa.dist %>',
-            tmp: '.tmp'
+            dist: subrosaConfig.dist,
+            tmp: subrosaConfig.tmp
         },
         csslint: {
             options: {
@@ -158,7 +161,6 @@ module.exports = function (grunt) {
             build: {
                 files: {
                     '<%= subrosa.dist %>/css/styles.css': [
-                        '.tmp/css/**/*.css',
                         '<%= subrosa.src %>/css/**/*.css'
                     ]
                 }
@@ -192,10 +194,10 @@ module.exports = function (grunt) {
         ngtemplates: {
             subrosa: {
                 options:    {
-                    base: '<%= subrosa.src %>'       // $templateCache ID will be relative to this folder
+                    base: '<%= subrosa.src %>'       // $templateCache ID will be relative to this directory
                 },
                 src: [ '<%= subrosa.src %>/js/**/*.html' ],
-                dest: '.tmp/js/templates.js'
+                dest: '<%= subrosa.tmp %>/templates/js/templates.js'
             }
         },
         // Concatenate the resultant template cache to the scripts file.
@@ -219,24 +221,22 @@ module.exports = function (grunt) {
             }
         },
         copy: {
-            build: {
+            assets: {
                 files: [{
                     expand: true,
                     dot: true,
                     cwd: '<%= subrosa.src %>',
-                    dest: '<%= subrosa.dist %>',
                     src: [
                         '*.{ico,txt,png}',
                         'img/**/*.{gif,webp}'
-                    ]
+                    ],
+                    dest: '<%= subrosa.dist %>'
                 }]
             }
         }
     });
 
     grunt.renameTask('regarde', 'watch');
-    // remove when mincss task is renamed
-    grunt.renameTask('mincss', 'cssmin');
 
     grunt.registerTask('server', [
         'clean:tmp',
@@ -245,6 +245,11 @@ module.exports = function (grunt) {
         'connect:livereload',
         'open',
         'watch'
+    ]);
+
+    grunt.registerTask('lint', [
+        'csslint',
+        'jshint'
     ]);
 
     grunt.registerTask('test', [
@@ -258,23 +263,26 @@ module.exports = function (grunt) {
         'karma:server'
     ]);
 
-    grunt.registerTask('build', [
-        'clean:build',
-        'csslint',
-        'jshint',
-        'test',
+    grunt.registerTask('build:generate', [
         'useminPrepare',
         'imagemin',
         'cssmin',
         'htmlmin',
+//        'cdnify',
         'ngtemplates',
         'concat',
         'concat:templates',
-        'copy',
-//        'cdnify',
         'usemin',
+        'copy:assets',
         'ngmin',
-        'uglify',
+        'uglify'
+    ]);
+
+    grunt.registerTask('build', [
+        'clean:dist',
+        'lint',
+        'test',
+        'build:generate',
         'clean:tmp'
     ]);
 
