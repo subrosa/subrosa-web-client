@@ -11,7 +11,7 @@ var subrosaApp = angular.module('subrosa', [
     'ui.compat'
 ]);
 
-subrosaApp.config(function ($stateProvider, $locationProvider) {
+subrosaApp.config(function($stateProvider, $locationProvider) {
     // Configure the application routing/state machine.
 
     $stateProvider.state('sign-in', {
@@ -74,18 +74,18 @@ subrosaApp.config(function ($stateProvider, $locationProvider) {
 });
 
 // Set the state and stateParams in the root scope
-subrosaApp.run(function ($rootScope, $state, $stateParams) {
+subrosaApp.run(function($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 });
 
 // Set up common functionality on the root scope
-subrosaApp.run(function ($rootScope) {
+subrosaApp.run(function($rootScope) {
     /*
      * Provide a method to set the title of the page.
      * @param title the text to set.
      */
-    $rootScope.setTitle = function (title) {
+    $rootScope.setTitle = function(title) {
         $rootScope.title = title;
     };
 });

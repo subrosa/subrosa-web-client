@@ -10,12 +10,12 @@ var icons = {
 /**
  * Get the icon for the icon type.
  */
-angular.module('subrosa.common').directive("icon", function () {
+angular.module('subrosa.common').directive("icon", function() {
     return {
         replace: true,
         templateUrl: "js/common/views/icon.html",
-        link: function (scope, element, attributes) {
-            attributes.$observe('icon', function (iconType) {
+        link: function(scope, element, attributes) {
+            attributes.$observe('icon', function(iconType) {
                 var icon;
                 if (iconType) {
                     iconType = iconType.toLowerCase().replace(/\s/, '');

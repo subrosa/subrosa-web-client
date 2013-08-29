@@ -1,7 +1,7 @@
 /*global angular,Raphael */
 'use strict';
 var SpinnerController, spinner,
-    __bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; };
+    __bind = function(fn, me) { return function() { return fn.apply(me, arguments); }; };
 
 function raphaelSpinner(holderid, R1, R2, count, strokeWidth, spinnerColor) {
     var sectorsCount = count || 12,
@@ -41,7 +41,7 @@ function raphaelSpinner(holderid, R1, R2, count, strokeWidth, spinnerColor) {
         r.safari();
         tick = setTimeout(ticker, 1000 / sectorsCount);
     })();
-    return function () {
+    return function() {
         clearTimeout(tick);
         r.remove();
     };
@@ -51,29 +51,29 @@ spinner = angular.module("widgets.spinner", []);
 
 spinner.value("pendingRequests", {
     counter: 0,
-    increment: function () {
+    increment: function() {
         return this.counter += 1;
     },
-    decrement: function () {
+    decrement: function() {
         if (this.isPending()) {
             return this.counter -= 1;
         }
     },
-    isPending: function () {
+    isPending: function() {
         return this.counter > 0;
     }
 });
 
 spinner.factory("pendingRequestsInterceptor", [
-    "$injector", "$q", "pendingRequests", function ($injector, $q, pendingRequests) {
-        return function (promise) {
+    "$injector", "$q", "pendingRequests", function($injector, $q, pendingRequests) {
+        return function(promise) {
             var $http, onError, onSuccess;
             $http = $injector.get("$http");
-            onSuccess = function (response) {
+            onSuccess = function(response) {
                 pendingRequests.decrement();
                 return response;
             };
-            onError = function (response) {
+            onError = function(response) {
                 pendingRequests.decrement();
                 return $q.reject(response);
             };
@@ -83,10 +83,10 @@ spinner.factory("pendingRequestsInterceptor", [
 ]);
 
 spinner.config([
-    "$httpProvider", "pendingRequestsProvider", function ($httpProvider, pendingRequestsProvider) {
+    "$httpProvider", "pendingRequestsProvider", function($httpProvider, pendingRequestsProvider) {
         var pendingRequests;
         pendingRequests = pendingRequestsProvider.$get();
-        $httpProvider.defaults.transformRequest.push(function (data) {
+        $httpProvider.defaults.transformRequest.push(function(data) {
             pendingRequests.increment();
             return data;
         });
@@ -94,7 +94,7 @@ spinner.config([
     }
 ]);
 
-SpinnerController = (function () {
+SpinnerController = (function() {
     function SpinnerControllerClosure($scope, pendingRequests) {
         this.$scope = $scope;
         this.pendingRequests = pendingRequests;
@@ -103,7 +103,7 @@ SpinnerController = (function () {
         this.$scope.showSpinner = this.showSpinner;
     }
 
-    SpinnerControllerClosure.prototype.showSpinner = function () {
+    SpinnerControllerClosure.prototype.showSpinner = function() {
         return this.pendingRequests.isPending();
     };
 
@@ -114,12 +114,12 @@ SpinnerController = (function () {
 
 spinner.controller("spinner", SpinnerController);
 
-spinner.directive("spinner", function () {
+spinner.directive("spinner", function() {
     return {
         replace: true,
         template: '<div id="spinner" ng-show="showSpinner()" alt="Loading..."></div>',
         controller: "spinner",
-        link: function () {
+        link: function() {
             raphaelSpinner("spinner", 20, 20, 8, 12, "#8c050c");
         }
     };

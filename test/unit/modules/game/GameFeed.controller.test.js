@@ -7,7 +7,7 @@ describe('GameFeedController', function() {
 
     beforeEach(module(function($provide) {
         MockGameFeedFactory = {
-            get: function () {
+            get: function() {
                 return {
                     offset: 0,
                     limit: 10,

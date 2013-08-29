@@ -26,14 +26,14 @@ describe('UserMenu', function() {
         userMenu.remove();
     });
 
-    it('should attach stuff to the scope', inject(function ($compile, $rootScope) {
+    it('should attach stuff to the scope', inject(function($compile, $rootScope) {
         expect(scope.currentUser).toBeDefined();
         expect(scope.isAuthenticated).toBe(AuthenticationService.isAuthenticated);
         expect(scope.login).toBe(AuthenticationService.showLogin);
         expect(scope.logout).toBe(AuthenticationService.logout);
     }));
 
-    it('should display an avatar when authenticated', function () {
+    it('should display an avatar when authenticated', function() {
         AuthenticationService.currentUser = { firstName: 'Jo', lastName: 'Bloggs'};
         $rootScope.$digest();
         var avatar = angular.element(userMenu.find('li'));
@@ -42,7 +42,7 @@ describe('UserMenu', function() {
         expect(signInLink.attr('style')).toMatch('display: none;');
     });
 
-    it('should display sign in button when not authenticated', function () {
+    it('should display sign in button when not authenticated', function() {
         AuthenticationService.currentUser = null;
         $rootScope.$digest();
         var avatar = angular.element(userMenu.find('li'));
@@ -69,7 +69,7 @@ describe('UserMenu', function() {
         expect(avatar.find('svg').attr('style')).toMatch('display: none;');
     });
 
-    it('should call logout when the logout button is clicked', function () {
+    it('should call logout when the logout button is clicked', function() {
         spyOn(scope, 'logout');
         AuthenticationService.currentUser = { firstName: 'Jo', lastName: 'Bloggs'};
         $rootScope.$digest();
@@ -78,7 +78,7 @@ describe('UserMenu', function() {
         expect(scope.logout).toHaveBeenCalled();
     });
 
-    it('should call login when the login button is clicked', function () {
+    it('should call login when the login button is clicked', function() {
         spyOn(scope, 'login');
         AuthenticationService.currentUser = null;
         $rootScope.$digest();

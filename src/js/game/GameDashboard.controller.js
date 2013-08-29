@@ -4,4 +4,4 @@
 /*
  * Display the game dashboard.
  */
-angular.module('subrosa.game').controller('GameDashboardController', function () {});
+angular.module('subrosa.game').controller('GameDashboardController', function() {});

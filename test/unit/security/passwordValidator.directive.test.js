@@ -1,11 +1,11 @@
 'use strict'
 
-describe('passwordChecker', function () {
+describe('passwordChecker', function() {
     var $scope, form;
 
     beforeEach(module('security.directives'));
 
-    beforeEach(inject(function ($rootScope, $compile) {
+    beforeEach(inject(function($rootScope, $compile) {
         $scope = $rootScope;
         var element = angular.element('<form name="form"><input type="password" data-ng-model="user.password" name="password" data-password-validator/></form>');
         $scope.user = { password: null };
@@ -14,8 +14,8 @@ describe('passwordChecker', function () {
         form = $scope.form;
     }));
 
-    describe('requires passwords to', function () {
-        it('be at least 8 characters long.', function () {
+    describe('requires passwords to', function() {
+        it('be at least 8 characters long.', function() {
             form.password.$setViewValue('abcde');
             expect(form.password.$valid).toBe(false);
             expect($scope.pwdValidLength).toBe(undefined);
@@ -25,7 +25,7 @@ describe('passwordChecker', function () {
             expect($scope.pwdValidLength).toBe('valid');
         });
 
-        it('contain at least one letter.', function () {
+        it('contain at least one letter.', function() {
             form.password.$setViewValue('123456789!');
             expect(form.password.$valid).toBe(false);
             expect($scope.pwdHasLetter).toBe(undefined);
@@ -35,7 +35,7 @@ describe('passwordChecker', function () {
             expect($scope.pwdHasLetter).toBe('valid');
         });
 
-        it('contain at least one number.', function () {
+        it('contain at least one number.', function() {
             form.password.$setViewValue('abcdefg!');
             expect(form.password.$valid).toBe(false);
             expect($scope.pwdHasNumber).toBe(undefined);
@@ -45,7 +45,7 @@ describe('passwordChecker', function () {
             expect($scope.pwdHasNumber).toBe('valid');
         });
 
-        it('contain at least one special character.', function () {
+        it('contain at least one special character.', function() {
             form.password.$setViewValue('ab1455fgh');
             expect(form.password.$valid).toBe(false);
             expect($scope.pwdHasSpecialChar).toBe(undefined);
@@ -56,7 +56,7 @@ describe('passwordChecker', function () {
         });
     });
 
-    it('passwords are valid if they contain all of the above.', function () {
+    it('passwords are valid if they contain all of the above.', function() {
         form.password.$setViewValue('bitcheye1!');
         expect(form.password.$valid).toBe(true);
         expect($scope.pwdValidLength).toBe('valid');

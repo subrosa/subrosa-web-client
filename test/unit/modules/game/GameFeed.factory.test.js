@@ -17,7 +17,7 @@ describe('Game Feed Factory', function() {
 
         module(function($provide) {
             $location = {
-                path: function () { return "/raleigh-wars/feed"; }
+                path: function() { return "/raleigh-wars/feed"; }
             };
             $provide.value('$location', $location);
         });
@@ -35,7 +35,7 @@ describe('Game Feed Factory', function() {
 
     it('make a request to get the posts from the API.', function() {
         $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/post?limit=20&offset=0').respond(posts);
-        gameFeedFactory.get(function (response) {
+        gameFeedFactory.get(function(response) {
             expect(response).toBe(posts);
         });
         $httpBackend.flush();

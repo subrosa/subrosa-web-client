@@ -7,7 +7,7 @@ describe('GameInitController', function() {
 
     beforeEach(module(function($provide) {
         MockGameFactory = {
-            get: function () {
+            get: function() {
                 return {
                     name: "Raleigh Wars",
                     url: "raleigh-wars"

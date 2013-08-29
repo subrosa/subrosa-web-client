@@ -6,7 +6,7 @@ angular.module('security.form', []);
 /*
  * Used to handle authentication..
  */
-angular.module('security.form').controller('SignInFormController', function ($scope, AuthenticationService, Account) {
+angular.module('security.form').controller('SignInFormController', function($scope, AuthenticationService, Account) {
     // The model for this form
     $scope.user = {};
 
@@ -16,10 +16,10 @@ angular.module('security.form').controller('SignInFormController', function ($sc
     // Any error message from failing to login
     $scope.authError = null;
 
-    $scope.login = function () {
-        AuthenticationService.login($scope.user.email, $scope.user.password).then(function () {
+    $scope.login = function() {
+        AuthenticationService.login($scope.user.email, $scope.user.password).then(function() {
             // Successful login
-        }, function (exception) {
+        }, function(exception) {
             // Clear any previous security errors
             $scope.authError = null;
             if (exception.status === 401) {
@@ -32,7 +32,7 @@ angular.module('security.form').controller('SignInFormController', function ($sc
         });
     };
 
-    $scope.register = function () {
+    $scope.register = function() {
         var account = new Account();
         account.account = {
             email: $scope.user.email
@@ -41,7 +41,7 @@ angular.module('security.form').controller('SignInFormController', function ($sc
         account.$save($scope.login);
     };
 
-    $scope.cancelSignIn = function () {
+    $scope.cancelSignIn = function() {
         AuthenticationService.cancelLogin();
     };
 });

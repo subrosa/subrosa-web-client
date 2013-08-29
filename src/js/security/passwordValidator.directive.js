@@ -2,11 +2,11 @@
 
 'use strict';
 
-angular.module('security.directives').directive('passwordValidator', function () {
+angular.module('security.directives').directive('passwordValidator', function() {
     return {
         require: 'ngModel',
-        link: function (scope, elm, attrs, ctrl) {
-            ctrl.$parsers.push(function (viewValue) {
+        link: function(scope, elm, attrs, ctrl) {
+            ctrl.$parsers.push(function(viewValue) {
                 scope.pwdValidLength = (viewValue && viewValue.length >= 8 ? 'valid' : undefined);
                 scope.pwdHasLetter = (viewValue && /[A-z]/.test(viewValue)) ? 'valid' : undefined;
                 scope.pwdHasNumber = (viewValue && /\d/.test(viewValue)) ? 'valid' : undefined;

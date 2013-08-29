@@ -6,11 +6,11 @@
 //TODO add ngdocs:  https://github.com/m7r/grunt-ngdocs
 
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-var mountFolder = function (connect, dir) {
+var mountFolder = function(connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -62,7 +62,7 @@ module.exports = function (grunt) {
                     port: 9000,
                     // Change this to '0.0.0.0' to access the server from outside.
                     hostname: 'localhost',
-                    middleware: function (connect) {
+                    middleware: function(connect) {
                         return [
                             modRewrite([
                                 '!^/(css|js|img|photos|components|views|subrosa).+$ /index.html'
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
             },
             test: {
                 options: {
-                    middleware: function (connect) {
+                    middleware: function(connect) {
                         return [
                             mountFolder(connect, subrosaConfig.test)
                         ];
@@ -261,6 +261,11 @@ module.exports = function (grunt) {
     grunt.registerTask('test:server', [
         'connect:test',
         'karma:server'
+    ]);
+
+    grunt.registerTask('check', [
+        'lint',
+        'test'
     ]);
 
     grunt.registerTask('build:generate', [

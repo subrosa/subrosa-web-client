@@ -4,4 +4,4 @@
 /*
  * Display the game rules.
  */
-angular.module('subrosa.game').controller('GameRulesController', function () {});
+angular.module('subrosa.game').controller('GameRulesController', function() {});

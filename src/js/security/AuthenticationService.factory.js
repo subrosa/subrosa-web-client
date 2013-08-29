@@ -4,7 +4,7 @@
 angular.module('security.auth', ['security.form', 'ui.bootstrap.dialog']);
 
 // Based loosely around work by Witold Szczerba - https://github.com/witoldsz/angular-http-auth
-angular.module('security.auth').factory('AuthenticationService', function ($http, $q, $location, SecurityRetryQueue, $dialog) {
+angular.module('security.auth').factory('AuthenticationService', function($http, $q, $location, SecurityRetryQueue, $dialog) {
 
     // Login form dialog stuff
     // TODO move this elsewhere?
@@ -42,7 +42,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
     }
 
     // Register a handler for when an item is added to the retry queue
-    SecurityRetryQueue.onItemAddedCallbacks.push(function () {
+    SecurityRetryQueue.onItemAddedCallbacks.push(function() {
         if (SecurityRetryQueue.hasMore()) {
             service.showLogin();
         }
@@ -52,33 +52,33 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
     var service = {
 
         // Get the first reason for needing a login
-        getLoginReason: function () {
+        getLoginReason: function() {
             return SecurityRetryQueue.retryReason();
         },
 
-        isDialogOpen: function () {
+        isDialogOpen: function() {
             return isDialogOpen();
         },
 
         // Show the modal login dialog
-        showLogin: function () {
+        showLogin: function() {
             openLoginDialog();
         },
 
         // Attempt to authenticate a user by the given email and password
-        login: function (email, password) {
+        login: function(email, password) {
             var postData = "email=" + email + "&password=" + password;
             var config = {headers: {"Content-Type": "application/x-www-form-urlencoded"}};
             var request = $http.post('/subrosa/v1/authenticate', postData, config);
 
-            var success = function () {
+            var success = function() {
                 service.currentUser = service.getCurrentUser();
                 if (service.isAuthenticated()) {
                     closeLoginDialog(true);
                 }
             };
 
-            var error = function (exception) {
+            var error = function(exception) {
                 // TODO log exception somewhere
                 throw exception;
             };
@@ -87,28 +87,28 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
         },
 
         // Give up trying to login and clear the retry queue
-        cancelLogin: function () {
+        cancelLogin: function() {
             closeLoginDialog(false);
         },
 
         // Logout the current user and redirect
-        logout: function (redirectTo) {
-            $http.post('/subrosa/v1/logout').then(function () {
+        logout: function(redirectTo) {
+            $http.post('/subrosa/v1/logout').then(function() {
                 service.currentUser = null;
                 redirect(redirectTo || $location.path());
             });
         },
 
         // Ask the backend to see if a user is already authenticated - this may be from a previous session.
-        getCurrentUser: function () {
+        getCurrentUser: function() {
             if (service.isAuthenticated()) {
                 return $q.when(service.currentUser);
             } else {
-                var success = function (response) {
+                var success = function(response) {
                     service.currentUser = response.data;
                     return service.currentUser;
                 };
-                var error = function (response) {
+                var error = function(response) {
                     if (response.status === 403) {
                         service.currentUser = null;
                     }
@@ -121,7 +121,7 @@ angular.module('security.auth').factory('AuthenticationService', function ($http
         currentUser: null,
 
         // Is the current user authenticated?
-        isAuthenticated: function () {
+        isAuthenticated: function() {
             return !!service.currentUser;
         }
     };

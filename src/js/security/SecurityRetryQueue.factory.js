@@ -4,19 +4,19 @@
 angular.module('security.queue', []);
 
 // Teneric retry queue for security failures.  Each item is expected to expose two functions: retry and cancel.
-angular.module('security.queue').factory('SecurityRetryQueue', function ($q, $log) {
+angular.module('security.queue').factory('SecurityRetryQueue', function($q, $log) {
     var retryQueue = [];
     var service = {
         // The security service puts its own handler in here!
         onItemAddedCallbacks: [],
 
-        hasMore: function () {
+        hasMore: function() {
             return retryQueue.length > 0;
         },
-        push: function (retryItem) {
+        push: function(retryItem) {
             retryQueue.push(retryItem);
             // Call all the onItemAdded callbacks
-            angular.forEach(service.onItemAddedCallbacks, function (cb) {
+            angular.forEach(service.onItemAddedCallbacks, function(cb) {
                 try {
                     cb(retryItem);
                 } catch (e) {
@@ -24,7 +24,7 @@ angular.module('security.queue').factory('SecurityRetryQueue', function ($q, $lo
                 }
             });
         },
-        pushRetryFn: function (reason, retryFn) {
+        pushRetryFn: function(reason, retryFn) {
             // The reason parameter is optional
             if (arguments.length === 1) {
                 retryFn = reason;
@@ -35,17 +35,17 @@ angular.module('security.queue').factory('SecurityRetryQueue', function ($q, $lo
             var deferred = $q.defer();
             var retryItem = {
                 reason: reason,
-                retry: function () {
+                retry: function() {
                     // Wrap the result of the retryFn into a promise if it is not already
-                    $q.when(retryFn()).then(function (value) {
+                    $q.when(retryFn()).then(function(value) {
                         // If it was successful then resolve our deferred
                         deferred.resolve(value);
-                    }, function (value) {
+                    }, function(value) {
                         // Othewise reject it
                         deferred.reject(value);
                     });
                 },
-                cancel: function () {
+                cancel: function() {
                     // Give up on retrying and reject our deferred
                     deferred.reject();
                 }
@@ -53,15 +53,15 @@ angular.module('security.queue').factory('SecurityRetryQueue', function ($q, $lo
             service.push(retryItem);
             return deferred.promise;
         },
-        retryReason: function () {
+        retryReason: function() {
             return service.hasMore() && retryQueue[0].reason;
         },
-        cancelAll: function () {
+        cancelAll: function() {
             while (service.hasMore()) {
                 retryQueue.shift().cancel();
             }
         },
-        retryAll: function () {
+        retryAll: function() {
             while (service.hasMore()) {
                 retryQueue.shift().retry();
             }

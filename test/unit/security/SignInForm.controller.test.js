@@ -6,18 +6,18 @@ describe('SignInFormController', function() {
     beforeEach(module('security.form'));
 
     beforeEach(module(function($provide) {
-        MockAccount = function () {
-            this.$save = function () {};
+        MockAccount = function() {
+            this.$save = function() {};
             return mockAccount;
         };
         mockAccount = new MockAccount();
 
         MockAuthenticationService = {
-            login: function () {
+            login: function() {
                 deferred = q.defer();
                 return deferred.promise;
             },
-            cancelLogin: function () {}
+            cancelLogin: function() {}
         };
         $provide.value('Account', MockAccount);
         $provide.value('AuthenticationService', MockAuthenticationService);
@@ -29,13 +29,13 @@ describe('SignInFormController', function() {
         $controller('SignInFormController', {$scope: scope});
     }));
 
-    it("provides a method for users to login via the AuthenticationService", function () {
+    it("provides a method for users to login via the AuthenticationService", function() {
         spyOn(MockAuthenticationService, "login").andCallThrough();
         scope.login();
         expect(MockAuthenticationService.login).toHaveBeenCalled();
     });
 
-    it("provides a method for users to register", function () {
+    it("provides a method for users to register", function() {
         scope.user = {email: 'yo@yo.com', password: 'bitcheye'};
         spyOn(mockAccount, "$save");
         scope.register();
@@ -44,7 +44,7 @@ describe('SignInFormController', function() {
     });
 
     // @TODO: the controller should probably do this instead of the AuthenticationService
-    it("provides a way to cancel login via the AuthenticationService", function () {
+    it("provides a way to cancel login via the AuthenticationService", function() {
         spyOn(MockAuthenticationService, "cancelLogin").andCallThrough();
         scope.cancelSignIn();
         expect(MockAuthenticationService.cancelLogin).toHaveBeenCalled();
