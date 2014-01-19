@@ -4,6 +4,6 @@ dist
 .idea
 .tmp
 .sass-cache
-src/components
+lib
 test/coverage
 test/results

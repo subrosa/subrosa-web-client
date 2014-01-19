@@ -1,16 +1,15 @@
-/*global module*/
-'use strict';
+/*global module,require*/
 
 //TODO add i18n and static page generation for search engines.
 //TODO get cdnify working with CDN
 //TODO add ngdocs:  https://github.com/m7r/grunt-ngdocs
 
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-var mountFolder = function(connect, dir) {
+var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -35,9 +34,10 @@ module.exports = function(grunt) {
         watch: {
             livereload: {
                 files: [
+                    'lib/**/*',
                     '<%= subrosa.src %>/**/*.html',
                     '<%= subrosa.src %>/css/**/*.css',
-                    '<%= subrosa.src %>/js/**/*.js',
+                    '<%= subrosa.src %>/app/**/*.js',
                     '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
                 ],
                 tasks: ['livereload']
@@ -62,21 +62,22 @@ module.exports = function(grunt) {
                     port: 9000,
                     // Change this to '0.0.0.0' to access the server from outside.
                     hostname: 'localhost',
-                    middleware: function(connect) {
+                    middleware: function (connect) {
                         return [
                             modRewrite([
-                                '!^/(css|js|img|photos|components|views|subrosa).+$ /index.html'
+                                '!^/(css|app|img|photos|lib|views|subrosa).+$ /index.html'
                             ]),
                             proxySnippet,
                             lrSnippet,
-                            mountFolder(connect, subrosaConfig.src)
+                            mountFolder(connect, subrosaConfig.src),
+                            mountFolder(connect, subrosaConfig.lib)
                         ];
                     }
                 }
             },
             test: {
                 options: {
-                    middleware: function(connect) {
+                    middleware: function (connect) {
                         return [
                             mountFolder(connect, subrosaConfig.test)
                         ];
@@ -105,8 +106,8 @@ module.exports = function(grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= subrosa.src %>/js/**/*.js',
-                '!<%= subrosa.src %>/components/**/*.js'
+                '<%= subrosa.src %>/app/**/*.js',
+                '!lib/**/*.js'
             ]
         },
         karma: {
@@ -185,9 +186,9 @@ module.exports = function(grunt) {
             build: {
                 files: [{
                     expand: true,
-                    cwd: '<%= subrosa.dist %>/js',
+                    cwd: '<%= subrosa.dist %>/app',
                     src: '*.js',
-                    dest: '<%= subrosa.dist %>/js'
+                    dest: '<%= subrosa.dist %>/app'
                 }]
             }
         },
@@ -196,16 +197,16 @@ module.exports = function(grunt) {
                 options:    {
                     base: '<%= subrosa.src %>'       // $templateCache ID will be relative to this directory
                 },
-                src: [ '<%= subrosa.src %>/js/**/*.html' ],
-                dest: '<%= subrosa.tmp %>/templates/js/templates.js'
+                src: [ '<%= subrosa.src %>/app/**/*.html' ],
+                dest: '<%= subrosa.tmp %>/templates/app/templates.js'
             }
         },
         // Concatenate the resultant template cache to the scripts file.
         concat: {
             templates: {
                 files: {
-                    '<%= subrosa.dist %>/js/scripts.js': [
-                        '<%= subrosa.dist %>/js/scripts.js',
+                    '<%= subrosa.dist %>/app/scripts.js': [
+                        '<%= subrosa.dist %>/app/scripts.js',
                         '<%= ngtemplates.subrosa.dest %>'
                     ]
                 }
@@ -214,8 +215,8 @@ module.exports = function(grunt) {
         uglify: {
             build: {
                 files: {
-                    '<%= subrosa.dist %>/js/scripts.js': [
-                        '<%= subrosa.dist %>/js/scripts.js'
+                    '<%= subrosa.dist %>/app/scripts.js': [
+                        '<%= subrosa.dist %>/app/scripts.js'
                     ]
                 }
             }

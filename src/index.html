@@ -18,28 +18,24 @@
         <meta name="viewport" content="width=device-width">
 
         <!-- build:css /css/styles.css -->
-        <link rel="stylesheet" href="/css/layout.css">
-        <link rel="stylesheet" href="/css/form.css">
-        <link rel="stylesheet" href="/css/lib/bootstrap.css">
-        <link rel="stylesheet" href="/css/lib/bootstrap-responsive.css">
+        <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
         <!-- endbuild -->
     </head>
 
     <body data-ng-cloak>
         <!--[if lt IE 9]>
-            <script src="/components/es5-shim/es5-shim.js"></script>
-            <script src="/components/json3/lib/json3.min.js"></script>
+            <script src="/lib/es5-shim/es5-shim.js"></script>
+            <script src="/lib/json3/lib/json3.min.js"></script>
         <![endif]-->
 
         <header id="header">
             <a href="/">
                 <img src="/img/logo/subrosa-154x36.png" alt="Subrosa Logo" class="logo logo-small"/>
             </a>
-            <span data-user-menu></span>
         </header>
+
         <div data-ui-view="menu"></div>
         <div data-ui-view="sub-header"></div>
-        <div data-spinner></div>
         <div data-ui-view></div>
 
         <footer id="footer">
@@ -48,45 +44,32 @@
             </div>
         </footer>
 
-        <!-- build:js /js/scripts.js -->
-        <script type="text/javascript" src="/components/angular/angular.js"></script>
-        <script type="text/javascript" src="/components/angular-bootstrap/ui-bootstrap.js"></script>
-        <script type="text/javascript" src="/components/angular-resource/angular-resource.js"></script>
-        <script type="text/javascript" src="/components/angular-sanitize/angular-sanitize.js"></script>
-        <script type="text/javascript" src="/components/angular-ui-router/release/angular-ui-router.js"></script>
-        <script type="text/javascript" src="/components/raphael/raphael.js"></script>
+        <!-- build:js /app/scripts.js -->
+        <script type="text/javascript" src="/lib/angular/angular.js"></script>
+        <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
+        <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
+        <script type="text/javascript" src="/lib/angular-sanitize/angular-sanitize.js"></script>
+        <script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
 
-        <script type="text/javascript" src="/js/subrosa.module.js"></script>
+        <script type="text/javascript" src="/app/subrosa.module.js"></script>
 
-        <script type="text/javascript" src="/js/common/common.module.js"></script>
-        <script type="text/javascript" src="/js/common/icon.directive.js"></script>
+        <script type="text/javascript" src="/app/account/account.module.js"></script>
+        <script type="text/javascript" src="/app/account/Account.factory.js"></script>
+        <script type="text/javascript" src="/app/account/Account.controller.js"></script>
 
-        <script type="text/javascript" src="/js/account/account.module.js"></script>
-        <script type="text/javascript" src="/js/account/Account.factory.js"></script>
-
-        <script type="text/javascript" src="/js/game/game.module.js"></script>
-        <script type="text/javascript" src="/js/game/GameDashboard.controller.js"></script>
-        <script type="text/javascript" src="/js/game/Game.factory.js"></script>
-        <script type="text/javascript" src="/js/game/GameFeed.controller.js"></script>
-        <script type="text/javascript" src="/js/game/GameFeed.factory.js"></script>
-        <script type="text/javascript" src="/js/game/GameInit.controller.js"></script>
-        <script type="text/javascript" src="/js/game/GameRules.controller.js"></script>
-
-        <script type="text/javascript" src="/js/security/security.module.js"></script>
-        <script type="text/javascript" src="/js/security/AuthenticationService.factory.js"></script>
-        <script type="text/javascript" src="/js/security/passwordValidator.directive.js"></script>
-        <script type="text/javascript" src="/js/security/SecurityInterceptor.factory.js"></script>
-        <script type="text/javascript" src="/js/security/SecurityRetryQueue.factory.js"></script>
-        <script type="text/javascript" src="/js/security/SignInForm.controller.js"></script>
-        <script type="text/javascript" src="/js/security/UserMenu.directive.js"></script>
-
-        <script type="text/javascript" src="/js/widgets/spinner.js"></script>
+        <script type="text/javascript" src="/app/game/game.module.js"></script>
+        <script type="text/javascript" src="/app/game/GameDashboard.controller.js"></script>
+        <script type="text/javascript" src="/app/game/Game.factory.js"></script>
+        <script type="text/javascript" src="/app/game/GameFeed.controller.js"></script>
+        <script type="text/javascript" src="/app/game/GameFeed.factory.js"></script>
+        <script type="text/javascript" src="/app/game/Game.controller.js"></script>
+        <script type="text/javascript" src="/app/game/GameRules.controller.js"></script>
         <!-- endbuild -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            (function (d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
                 g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
                 s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>

@@ -7,16 +7,16 @@ basePath = '../../src/';
 files = [
     JASMINE,
     JASMINE_ADAPTER,
-    'components/angular/angular.js',
-    'components/angular-resource/angular-resource.js',
-    'components/angular-sanitize/angular-sanitize.js',
-    'components/angular-bootstrap/ui-bootstrap.js',
-    'components/angular-ui-router/release/angular-ui-router.js',
-    'components/angular-mocks/angular-mocks.js',
+    '../lib/angular/angular.js',
+    '../lib/angular-resource/angular-resource.js',
+    '../lib/angular-sanitize/angular-sanitize.js',
+    '../lib/angular-bootstrap/ui-bootstrap.js',
+    '../lib/angular-ui-router/release/angular-ui-router.js',
+    '../lib/angular-mocks/angular-mocks.js',
     // Must load modules first
-    'js/**/*.module.js',
-    'js/**/*.js',
-    'js/**/*.html',
+    'app/**/*.module.js',
+    'app/**/*.js',
+    'app/**/*.html',
     '../test/unit/**/*.js'
 ];
 
