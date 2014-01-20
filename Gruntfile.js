@@ -25,24 +25,23 @@ module.exports = function (grunt) {
         test: 'test'
     };
 
-    try {
-        subrosaConfig.src = require('./bower.json').appPath || subrosaConfig.src;
-    } catch (e) {}
-
     grunt.initConfig({
         subrosa: subrosaConfig,
+
+        // Dev server
         watch: {
-            livereload: {
+            all: {
+                options: { livereload: true },
                 files: [
-                    'lib/**/*',
+                    '<%= subrosa.src %>/lib/**/*',
                     '<%= subrosa.src %>/**/*.html',
                     '<%= subrosa.src %>/css/**/*.css',
                     '<%= subrosa.src %>/app/**/*.js',
                     '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
-                ],
-                tasks: ['livereload']
+                ]
             }
         },
+
         connect: {
             proxies: [
                 {
@@ -69,8 +68,7 @@ module.exports = function (grunt) {
                             ]),
                             proxySnippet,
                             lrSnippet,
-                            mountFolder(connect, subrosaConfig.src),
-                            mountFolder(connect, subrosaConfig.lib)
+                            mountFolder(connect, subrosaConfig.src)
                         ];
                     }
                 }
@@ -85,31 +83,32 @@ module.exports = function (grunt) {
                 }
             }
         },
+
         open: {
             server: {
                 url: 'http://localhost:<%= connect.livereload.options.port %>'
             }
         },
-        clean: {
-            dist: subrosaConfig.dist,
-            tmp: subrosaConfig.tmp
-        },
+
+        // Linting
         csslint: {
             options: {
                 csslintrc: '.csslintrc'
             },
-            src: ['<%= subrosa.src %>/css/**/*.css', '!<%= subrosa.src %>/css/lib/**/*.css']
+            src: '<%= subrosa.src %>/css/**/*.css'
         },
+
         jshint: {
             options: {
                 jshintrc: '.jshintrc'
             },
-            all: [
+            src: [
                 'Gruntfile.js',
-                '<%= subrosa.src %>/app/**/*.js',
-                '!lib/**/*.js'
+                '<%= subrosa.src %>/app/**/*.js'
             ]
         },
+
+        // Testing
         karma: {
             server: {
                 browsers: ['PhantomJS'],
@@ -135,92 +134,47 @@ module.exports = function (grunt) {
                 singleRun: true
             }
         },
+
+        // Build
+        clean: {
+            dist: subrosaConfig.dist,
+            tmp: subrosaConfig.tmp
+        },
+
         useminPrepare: {
             html: '<%= subrosa.src %>/index.html',
             options: {
-                dest: '<%= subrosa.dist %>'
+                dest: 'dist'
             }
         },
-        usemin: {
-            html: ['<%= subrosa.dist %>/**/*.html'],
-            css: ['<%= subrosa.dist %>/css/**/*.css'],
-            options: {
-                dirs: ['<%= subrosa.dist %>']
-            }
-        },
+
         imagemin: {
             build: {
                 files: [{
+                    options: {
+                        optimizationLevel: 3
+                    },
                     expand: true,
                     cwd: '<%= subrosa.src %>/img',
-                    src: '**/*.{png,jpg,jpeg}',
+                    src: ['**/*.{jpg,jpeg,gif,png,webp}'],
                     dest: '<%= subrosa.dist %>/img'
                 }]
             }
         },
-        cssmin: {
-            build: {
-                files: {
-                    '<%= subrosa.dist %>/css/styles.css': [
-                        '<%= subrosa.src %>/css/**/*.css'
-                    ]
-                }
-            }
-        },
-        htmlmin: {
-            build: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= subrosa.src %>',
-                    src: ['*.html', 'views/**/*.html'],
-                    dest: '<%= subrosa.dist %>'
-                }]
-            }
-        },
-        cdnify: {
-            build: {
-                html: ['<%= subrosa.dist %>/*.html']
-            }
-        },
-        ngmin: {
-            build: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= subrosa.dist %>/app',
-                    src: '*.js',
-                    dest: '<%= subrosa.dist %>/app'
-                }]
-            }
-        },
+
         ngtemplates: {
             subrosa: {
-                options:    {
-                    base: '<%= subrosa.src %>'       // $templateCache ID will be relative to this directory
+                options: {
+                    concat: 'generated',
+                    htmlmin: '<%= htmlmin.options %>',
+                    prefix: '/'
                 },
-                src: [ '<%= subrosa.src %>/app/**/*.html' ],
-                dest: '<%= subrosa.tmp %>/templates/app/templates.js'
+                cwd: '<%= subrosa.src %>',
+                src: [ 'app/**/*.html' ],
+                dest: '<%= subrosa.tmp %>/templates/templates.js'
             }
         },
-        // Concatenate the resultant template cache to the scripts file.
-        concat: {
-            templates: {
-                files: {
-                    '<%= subrosa.dist %>/app/scripts.js': [
-                        '<%= subrosa.dist %>/app/scripts.js',
-                        '<%= ngtemplates.subrosa.dest %>'
-                    ]
-                }
-            }
-        },
-        uglify: {
-            build: {
-                files: {
-                    '<%= subrosa.dist %>/app/scripts.js': [
-                        '<%= subrosa.dist %>/app/scripts.js'
-                    ]
-                }
-            }
-        },
+
         copy: {
             assets: {
                 files: [{
@@ -228,21 +182,69 @@ module.exports = function (grunt) {
                     dot: true,
                     cwd: '<%= subrosa.src %>',
                     src: [
-                        '*.{ico,txt,png}',
-                        'img/**/*.{gif,webp}'
+                        '*.{ico,text,png,html}'
                     ],
+                    dest: '<%= subrosa.dist %>'
+                }]
+            }
+        },
+
+        ngmin: {
+            build: {
+                src: '<%= subrosa.tmp %>/concat/js/scripts.js',
+                dest: '<%= subrosa.tmp %>/concat/js/scripts.js'
+            }
+        },
+
+        filerev: {
+            options: {
+                encoding: 'utf8',
+                algorithm: 'md5',
+                length: 8
+            },
+            css: {
+                src: '<%= subrosa.dist %>/css/styles.css'
+            },
+            js: {
+                src: '<%= subrosa.dist %>/js/scripts.js'
+            },
+            img: {
+                src: ['<%= subrosa.dist %>/img/**/*.{jpg,jpeg,gif,png,webp}']
+            }
+        },
+
+        usemin: {
+            html: ['<%= subrosa.dist %>/**/*.html'],
+            options: {
+                revmap: '<%= filerev.summary %>'
+            }
+        },
+
+        htmlmin: {
+            options: {
+                collapseBooleanAttributes:      true,
+                collapseWhitespace:             true,
+                removeAttributeQuotes:          true,
+                removeComments:                 false,
+                removeEmptyAttributes:          true,
+                removeRedundantAttributes:      true,
+                removeScriptTypeAttributes:     true,
+                removeStyleLinkTypeAttributes:  true
+            },
+            build: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= subrosa.dist %>',
+                    src: ['*.html'],
                     dest: '<%= subrosa.dist %>'
                 }]
             }
         }
     });
 
-    grunt.renameTask('regarde', 'watch');
-
     grunt.registerTask('server', [
         'clean:tmp',
         'configureProxies',
-        'livereload-start',
         'connect:livereload',
         'open',
         'watch'
@@ -269,26 +271,21 @@ module.exports = function (grunt) {
         'test'
     ]);
 
-    grunt.registerTask('build:generate', [
-        'useminPrepare',
-        'imagemin',
-        'cssmin',
-        'htmlmin',
-//        'cdnify',
-        'ngtemplates',
-        'concat',
-        'concat:templates',
-        'usemin',
-        'copy:assets',
-        'ngmin',
-        'uglify'
-    ]);
-
     grunt.registerTask('build', [
-        'clean:dist',
         'lint',
         'test',
-        'build:generate',
+        'clean:dist',
+        'useminPrepare',
+        'imagemin',
+        'ngtemplates',
+        'copy:assets',
+        'concat:generated',
+        'ngmin',
+        'cssmin:generated',
+        'uglify:generated',
+        'filerev',
+        'usemin',
+        'htmlmin',
         'clean:tmp'
     ]);
 

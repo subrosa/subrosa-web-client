@@ -1,77 +1,68 @@
 <!doctype html>
 <html lang="en" data-ng-app="subrosa">
-    <!--[if lt IE 7]>
-        <html class="no-js lt-ie9 lt-ie8 lt-ie7">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="fragment" content="!" />
+    <title data-ng-bind="title">Loading Subrosa...</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- build:css /css/styles.css -->
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
+    <!-- endbuild -->
+  </head>
+
+  <body data-ng-cloak>
+    <!--[if lt IE 9]>
+      <script src="/lib/es5-shim/es5-shim.js"></script>
+      <script src="/lib/json3/lib/json3.min.js"></script>
     <![endif]-->
-    <!--[if IE 7]>
-        <html class="no-js lt-ie9 lt-ie8">
-    <![endif]-->
-    <!--[if IE 8]>
-        <html class="no-js lt-ie9">
-    <![endif]-->
-    <head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-        <meta name="fragment" content="!" />
-        <title data-ng-bind="title">Loading Subrosa...</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
 
-        <!-- build:css /css/styles.css -->
-        <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
-        <!-- endbuild -->
-    </head>
+    <header id="header">
+      <a href="/">
+        <img src="/img/logo/subrosa-154x36.png" alt="Subrosa Logo" class="logo logo-small"/>
+      </a>
+    </header>
 
-    <body data-ng-cloak>
-        <!--[if lt IE 9]>
-            <script src="/lib/es5-shim/es5-shim.js"></script>
-            <script src="/lib/json3/lib/json3.min.js"></script>
-        <![endif]-->
+    <div data-ui-view="menu"></div>
+    <div data-ui-view="sub-header"></div>
+    <div data-ui-view></div>
 
-        <header id="header">
-            <a href="/">
-                <img src="/img/logo/subrosa-154x36.png" alt="Subrosa Logo" class="logo logo-small"/>
-            </a>
-        </header>
+    <footer id="footer">
+      <div class="copyright">
+        <a href="/about/copyright">Copyright</a> &copy;2007-2012 Sub Rosa Games, Inc. All Rights Reserved.
+      </div>
+    </footer>
 
-        <div data-ui-view="menu"></div>
-        <div data-ui-view="sub-header"></div>
-        <div data-ui-view></div>
+    <!-- build:js /js/scripts.js -->
+    <script type="text/javascript" src="/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
+    <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="/lib/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
 
-        <footer id="footer">
-            <div class="copyright">
-                <a href="/about/copyright">Copyright</a> &copy;2007-2012 Sub Rosa Games, Inc. All Rights Reserved.
-            </div>
-        </footer>
+    <script type="text/javascript" src="/app/subrosa.module.js"></script>
 
-        <!-- build:js /app/scripts.js -->
-        <script type="text/javascript" src="/lib/angular/angular.js"></script>
-        <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
-        <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
-        <script type="text/javascript" src="/lib/angular-sanitize/angular-sanitize.js"></script>
-        <script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/app/account/account.module.js"></script>
+    <script type="text/javascript" src="/app/account/Account.factory.js"></script>
+    <script type="text/javascript" src="/app/account/Account.controller.js"></script>
 
-        <script type="text/javascript" src="/app/subrosa.module.js"></script>
+    <script type="text/javascript" src="/app/game/game.module.js"></script>
+    <script type="text/javascript" src="/app/game/GameDashboard.controller.js"></script>
+    <script type="text/javascript" src="/app/game/Game.factory.js"></script>
+    <script type="text/javascript" src="/app/game/GameFeed.controller.js"></script>
+    <script type="text/javascript" src="/app/game/GameFeed.factory.js"></script>
+    <script type="text/javascript" src="/app/game/Game.controller.js"></script>
+    <script type="text/javascript" src="/app/game/GameRules.controller.js"></script>
+    <!-- endbuild -->
 
-        <script type="text/javascript" src="/app/account/account.module.js"></script>
-        <script type="text/javascript" src="/app/account/Account.factory.js"></script>
-        <script type="text/javascript" src="/app/account/Account.controller.js"></script>
-
-        <script type="text/javascript" src="/app/game/game.module.js"></script>
-        <script type="text/javascript" src="/app/game/GameDashboard.controller.js"></script>
-        <script type="text/javascript" src="/app/game/Game.factory.js"></script>
-        <script type="text/javascript" src="/app/game/GameFeed.controller.js"></script>
-        <script type="text/javascript" src="/app/game/GameFeed.factory.js"></script>
-        <script type="text/javascript" src="/app/game/Game.controller.js"></script>
-        <script type="text/javascript" src="/app/game/GameRules.controller.js"></script>
-        <!-- endbuild -->
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function (d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-                g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-                s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function (d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  </body>
 </html>
