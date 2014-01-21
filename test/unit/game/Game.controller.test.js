@@ -3,7 +3,7 @@ describe('GameController', function () {
 
     beforeEach(module('subrosa.game'));
 
-    beforeEach(module(function($provide) {
+    beforeEach(module(function ($provide) {
         MockGameFactory = {
             get: function () {
                 return {
