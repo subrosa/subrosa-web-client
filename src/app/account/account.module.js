@@ -27,7 +27,7 @@ angular.module('subrosa.account').config(function ($stateProvider) {
         views: {
             '@': {
                 controller: 'AccountController',
-                templateUrl: '/app/account/views/account.html'
+                templateUrl: '/app/account/views/account-layout.html'
             }
         }
     });
