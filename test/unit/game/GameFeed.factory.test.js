@@ -1,5 +1,5 @@
-describe('Game Feed Factory', function () {
-    var gameFeedFactory, $httpBackend, $location, posts;
+describe('Factory: GameFeed', function () {
+    var gameFeedFactory, $httpBackend, posts;
 
     beforeEach(module('subrosa.game'));
 
@@ -36,8 +36,8 @@ describe('Game Feed Factory', function () {
 
     it('accepts limit and offset query string parameters.', function () {
         var limit = 100, offset = 1000;
-        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/post?limit='+limit+'&offset='+offset).respond("");
-        gameFeedFactory.get({gameUrl: 'raleigh-wars', limit: limit, offset:offset});
+        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/post?limit=' + limit + '&offset=' + offset).respond("");
+        gameFeedFactory.get({gameUrl: 'raleigh-wars', limit: limit, offset: offset});
     });
 });
 

@@ -1,0 +1,25 @@
+<div>
+  <div data-ng-show="showRegister">
+    <div class="alert alert-info">Create an account</div>
+  </div>
+
+  <form name="registerForm" data-ng-submit="register()" novalidate class="sign-in-form" data-ng-show="showRegister">
+    <label for="registerEmail">E-mail</label>
+    <input id="registerEmail" name="login" type="email" data-ng-model="user.email" placeholder="Email" required autofocus/>
+    <span class="input-feedback">Invalid Email</span>
+    <label for="registerPassword">Password</label>
+    <input id="registerPassword" class="immediate-help" name="pass" type="password" data-ng-model="user.password" data-password-validator placeholder="Password" required/>
+        <span class="input-feedback">
+            <p>A good password</p>
+            <ul>
+              <li data-ng-class="pwdHasLetter">Contains a letter</li>
+              <li data-ng-class="pwdHasNumber">Contains a number</li>
+              <li data-ng-class="pwdHasSpecialChar">Contains a non-alphanumeric character</li>
+              <li data-ng-class="pwdValidLength">Is at least 8 characters long</li>
+            </ul>
+        </span>
+    <label for="registerTerms">I agree to the <a href="/terms">terms and conditions</a>.</label>
+    <input id="registerTerms" type="checkbox" data-ng-model="user.acceptedTerms" required/>
+    <input type="submit" data-ng-disabled='registerForm.$invalid' value="Register"/>
+  </form>
+</div>

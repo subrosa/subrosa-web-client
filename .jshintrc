@@ -7,7 +7,17 @@
     "esnext": true,
     "forin": true,
     "globals": {
-        "angular": true
+        "afterEach": true,
+        "angular": true,
+        "beforeEach": true,
+        "describe": true,
+        "expect": true,
+        "inject": true,
+        "it": true,
+        "jasmine": true,
+        "module": true,
+        "spyOn": true
+
     },
     "immed": true,
     "indent": 4,

@@ -1,0 +1,10 @@
+<ul class="user-menu" role="navigation">
+  <li data-ng-hide="isAuthenticated()">
+    <button class="btn btn-primary" data-ng-click="openModal()" data-translate>Sign in</button>
+    <div data-modal="/app/account/views/login-form.html" data-modal-action="login()"></div>
+  </li>
+  <li data-ng-show="isAuthenticated()">
+    <span translate>Welcome back {{currentUser.username || currentUser.email}}</span>
+    <button class="btn btn-default" data-ng-click="logout()" data-translate>Log out</button>
+  </li>
+</ul>

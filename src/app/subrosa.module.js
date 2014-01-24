@@ -6,7 +6,9 @@
  *  Base module that defines the subrosa namespace and includes modules used by the application.
  */
 angular.module('subrosa', [
+    'security',
     'subrosa.account',
+    'subrosa.components',
     'subrosa.game',
     'ui.router'
 ]);

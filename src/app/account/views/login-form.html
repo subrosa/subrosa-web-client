@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <i class="glyphicon glyphicon-remove pull-right" ng-click="cancel()"></i>
+  <h3 data-translate>Login</h3>
+</div>
+
+<form name="loginForm" data-ng-controller="LoginFormController" novalidate>
+  <div class="modal-body">
+    <div class="alert alert-info" data-translate>Enter your login details.</div>
+
+    <label for="loginEmail" data-translate>E-mail</label>
+    <input id="loginEmail" name="login" type="email" data-ng-model="user.email" placeholder="Email" required autofocus/>
+
+    <label for="loginPassword" data-translate>Password</label>
+    <input id="loginPassword" name="pass" type="password" data-ng-model="user.password" placeholder="Password" required/>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" data-ng-click="login().then(ok())" ng-disabled="!loginForm.$valid" data-translate>Login</button>
+    <button class="btn btn-default" data-ng-click="cancel()" data-translate>Cancel</button>
+  </div>
+</form>

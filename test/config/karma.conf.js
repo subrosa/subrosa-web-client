@@ -8,10 +8,13 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'lib/jquery/jquery.min.js',
             'lib/angular/angular.js',
+            'lib/angular-gettext/dist/angular-gettext.js',
             'lib/angular-resource/angular-resource.js',
             'lib/angular-sanitize/angular-sanitize.js',
             'lib/angular-bootstrap/ui-bootstrap.js',
+            'lib/angular-bootstrap/ui-bootstrap-tpls.js',
             'lib/angular-ui-router/release/angular-ui-router.js',
             'lib/angular-mocks/angular-mocks.js',
 
@@ -72,7 +75,11 @@ module.exports = function (config) {
 
         preprocessors: {
             '**/*.js': 'coverage',
-            '**/*.html': 'html2js'
+            '**/*.html': 'ng-html2js'
+        },
+
+        ngHtml2JsPreprocessor: {
+            prependPrefix: '/'
         }
     });
 };

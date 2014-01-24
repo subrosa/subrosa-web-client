@@ -1,10 +1,10 @@
-describe('Account Factory', function () {
+describe('Factory: Account', function () {
     var accountFactory, $httpBackend, account;
 
     beforeEach(module('subrosa.account'));
 
     beforeEach(function () {
-        account = {id: "1234", username: "yo", email:"yoyo@yo.com"};
+        account = {id: "1234", username: "yo", email: "yoyo@yo.com"};
 
         inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');

@@ -2,7 +2,6 @@
 <html lang="en" data-ng-app="subrosa">
   <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="fragment" content="!" />
     <title data-ng-bind="title" data-translate>Loading Subrosa...</title>
     <meta name="description" content="">
@@ -23,6 +22,7 @@
       <a href="/">
         <img src="/img/logo/subrosa-154x36.png" alt="Subrosa Logo" class="logo logo-small"/>
       </a>
+      <div data-user-menu></div>
     </header>
 
     <div data-ui-view="menu"></div>
@@ -38,15 +38,22 @@
     <!-- build:js /js/scripts.js -->
     <script type="text/javascript" src="/lib/angular/angular.js"></script>
     <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
+    <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="/lib/angular-gettext/dist/angular-gettext.js"></script>
     <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="/lib/angular-sanitize/angular-sanitize.js"></script>
     <script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
+
 
     <script type="text/javascript" src="/app/subrosa.module.js"></script>
 
     <script type="text/javascript" src="/app/account/account.module.js"></script>
     <script type="text/javascript" src="/app/account/Account.factory.js"></script>
     <script type="text/javascript" src="/app/account/Account.controller.js"></script>
+    <script type="text/javascript" src="/app/account/LoginForm.controller.js"></script>
+
+    <script type="text/javascript" src="/app/components/components.module.js"></script>
+    <script type="text/javascript" src="/app/components/modal.directive.js"></script>
 
     <script type="text/javascript" src="/app/game/game.module.js"></script>
     <script type="text/javascript" src="/app/game/GameDashboard.controller.js"></script>
@@ -56,6 +63,13 @@
     <script type="text/javascript" src="/app/game/GameFeed.factory.js"></script>
     <script type="text/javascript" src="/app/game/Game.controller.js"></script>
     <script type="text/javascript" src="/app/game/GameRules.controller.js"></script>
+
+    <script type="text/javascript" src="/app/security/security.module.js"></script>
+    <script type="text/javascript" src="/app/security/AuthInterceptor.factory.js"></script>
+    <script type="text/javascript" src="/app/security/AuthService.factory.js"></script>
+    <script type="text/javascript" src="/app/security/AuthRetryQueue.factory.js"></script>
+    <script type="text/javascript" src="/app/security/userMenu.directive.js"></script>
+
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

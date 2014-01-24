@@ -64,7 +64,7 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             modRewrite([
-                                '!^/(css|app|img|photos|lib|views|subrosa).+$ /index.html'
+                                '!^/(css|app|img|photos|lib|subrosa|template).+$ /index.html'
                             ]),
                             proxySnippet,
                             lrSnippet,
@@ -104,8 +104,27 @@ module.exports = function (grunt) {
             },
             src: [
                 'Gruntfile.js',
-                '<%= subrosa.src %>/app/**/*.js'
+                '<%= subrosa.src %>/app/**/*.js',
+                '<%= subrosa.test %>/**/*.js'
             ]
+        },
+
+        htmlhint: {
+            html: {
+                src: ['<%= subrosa.src %>/app/**/*.html'],
+                options: {
+                    'tagname-lowercase': true,
+                    'attr-lowercase': true,
+                    'attr-value-doublequotes': true,
+                    'tag-pair': true,
+                    'tag-self-close': true,
+                    'id-unique': true,
+                    'src-not-empty': true,
+                    'style-disabled': true,
+                    'img-alt-require': true,
+                    'spec-char-escape': true
+                }
+            }
         },
 
         // Testing
@@ -252,7 +271,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('lint', [
         'csslint',
-        'jshint'
+        'jshint',
+        'htmlhint'
     ]);
 
     grunt.registerTask('test', [

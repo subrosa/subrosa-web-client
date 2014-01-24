@@ -1,6 +1,6 @@
 <ul id="gameFeed">
   <li class="post" data-ng-repeat="post in posts.results">
-    <img data-ng-src="{{post.image.uri}}" alt="Image for post"/>
+    <img data-ng-src="{{post.image.uri}}" alt="{{ 'Image for post' | translate }}"/>
     <div class="post-content">
       <h4>{{post.account.username}}</h4>
       <div class="post-date">

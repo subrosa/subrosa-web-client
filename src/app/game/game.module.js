@@ -6,6 +6,7 @@
  *  Module for game related functionality.
  */
 angular.module('subrosa.game', [
+    'gettext',
     'ngResource',
     'ui.router'
 ]);

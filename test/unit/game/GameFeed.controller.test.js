@@ -1,4 +1,4 @@
-describe('GameFeedController', function () {
+describe('Controller: GameFeedController', function () {
     var $scope, MockGameFeedFactory;
 
     beforeEach(module('subrosa.game'));
