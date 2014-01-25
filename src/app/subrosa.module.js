@@ -6,11 +6,13 @@
  *  Base module that defines the subrosa namespace and includes modules used by the application.
  */
 angular.module('subrosa', [
-    'security',
     'subrosa.account',
     'subrosa.components',
     'subrosa.game',
-    'ui.router'
+    'subrosa.security',
+    'ui.router',
+    'ui.bootstrap.dropdownToggle',
+    'ui.bootstrap.tpls'
 ]);
 
 /**
@@ -40,15 +42,14 @@ angular.module('subrosa').config(function ($locationProvider) {
  *  Set common items on the $rootScope such as $state related information.
  */
 angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
-    /**
-     * Provide a way to set the title on the page
-     *
-     * @param title
-     */
-    $rootScope.setTitle = function (title) {
-        $rootScope.title = title;
-    };
-
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+    $rootScope.transitionTo = $state.transitionTo;
+
+    $rootScope.isState = function (stateName) {
+        return $state.is(stateName);
+    };
+
+    $rootScope.stateIncludes = $state.includes;
+
 });

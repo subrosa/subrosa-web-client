@@ -8,6 +8,5 @@
  */
 angular.module('subrosa.components', [
     'gettext',
-    'ui.bootstrap.modal',
-    'ui.bootstrap.tpls'
+    'ui.bootstrap.modal'
 ]);

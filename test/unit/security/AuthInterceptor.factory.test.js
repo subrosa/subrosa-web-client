@@ -1,7 +1,7 @@
 describe('Factory: AuthInterceptor', function () {
     var $q, $rootScope, $window, AuthRetryQueue, AuthInterceptor;
 
-    beforeEach(module('security'));
+    beforeEach(module('subrosa.security'));
 
     beforeEach(module(function ($provide) {
         $q = {

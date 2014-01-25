@@ -1,6 +1,6 @@
 /**
  * @ngdoc factory
- * @name security.AuthService
+ * @name subrosa.security.AuthService
  *
  * @requires $rootScope
  * @requires $window
@@ -12,7 +12,7 @@
  *  Handles Authentication related functionality such as providing the current user and
  *  managing sessions via login and logout commands.
  */
-angular.module('security').factory('AuthService', function ($rootScope, $window, $http, $q, AuthRetryQueue) {
+angular.module('subrosa.security').factory('AuthService', function ($rootScope, $window, $http, $q, AuthRetryQueue) {
     var service = {
         currentUser: null,
 

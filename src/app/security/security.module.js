@@ -1,35 +1,35 @@
 /**
  * @ngdoc module
- * @name security
+ * @name subrosa.security
  *
  * @desription
  *  Module for security related functionality.
  */
-angular.module('security', ['gettext']);
+angular.module('subrosa.security', ['gettext']);
 
 /**
  * @ngdoc config
- * @name security.config
+ * @name subrosa.security.config
  *
  * @requires $httpProvider
  *
  * @description
  *  Add authInterceptor to $httpProvider interceptors.
  */
-angular.module('security').config(function ($httpProvider) {
+angular.module('subrosa.security').config(function ($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
 });
 
 /**
  * @ngdoc run
- * @name security.run
+ * @name subrosa.security.run
  *
  * @requires AuthService
  *
  * @description
  *  Get the current user on application load if they are authenticated.
  */
-angular.module('security').run(function (AuthService) {
+angular.module('subrosa.security').run(function (AuthService) {
     if (AuthService.isAuthenticated()) {
         AuthService.getCurrentUser();
     }

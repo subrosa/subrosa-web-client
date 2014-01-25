@@ -2,7 +2,7 @@ describe('userMenu', function () {
     var $scope, userMenu, AuthService;
 
     beforeEach(module(
-        'security',
+        'subrosa.security',
         '/app/security/views/user-menu.html'
     ));
 
@@ -30,9 +30,9 @@ describe('userMenu', function () {
     });
 
     it('should consist of two li elements containing buttons', function () {
-        var listItems = angular.element(userMenu.find('li'));
+        var listItems = angular.element(userMenu.find('>li'));
         expect(listItems.length).toBe(2);
-        expect(listItems.find('button').length).toBe(2);
+        expect(listItems.find('>a').length).toBe(2);
     });
 
     it('should open a login modal when the login button is clicked', function () {

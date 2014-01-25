@@ -1,7 +1,7 @@
 describe('Factory: AuthRetryQueue', function () {
     var $http, deferred, AuthRetryQueue;
 
-    beforeEach(module('security'));
+    beforeEach(module('subrosa.security'));
 
     beforeEach(function () {
         deferred = {

@@ -1,7 +1,7 @@
 describe('Factory: AuthService', function () {
     var $rootScope, $window, $httpBackend, AuthRetryQueue, AuthService;
 
-    beforeEach(module('security'));
+    beforeEach(module('subrosa.security'));
 
     beforeEach(module(function ($provide) {
         $window = {sessionStorage: {}};

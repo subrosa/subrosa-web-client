@@ -1,7 +1,6 @@
 /**
  * @ngdoc directive
  * @name security:userMenu
- * @restrict A
  *
  * @requires AuthService
  *
@@ -9,7 +8,7 @@
  *   A reusable widget that can show login or logout buttons
  *   and information the current authenticated user.
  */
-angular.module('security').directive('userMenu', function (AuthService) {
+angular.module('subrosa.security').directive('userMenu', function (AuthService) {
     return {
         templateUrl: '/app/security/views/user-menu.html',
         replace: true,

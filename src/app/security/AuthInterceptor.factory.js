@@ -1,6 +1,6 @@
 /**
  * @ngdoc factory
- * @name security.AuthInterceptor
+ * @name subrosa.security.AuthInterceptor
  *
  * @requires $rootScope
  * @requires $q
@@ -13,7 +13,7 @@
  *   - Checks for 401 on responses, adds the response to the AuthRetryQueue,
  *     and then broadcasts auth-loginRequired event
  */
-angular.module('security').factory('AuthInterceptor', function ($rootScope, $q, $window, AuthRetryQueue) {
+angular.module('subrosa.security').factory('AuthInterceptor', function ($rootScope, $q, $window, AuthRetryQueue) {
     return {
         request: function (config) {
             config.headers = config.headers || {};

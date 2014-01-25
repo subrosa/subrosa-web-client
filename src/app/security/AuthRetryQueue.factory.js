@@ -1,6 +1,6 @@
 /**
  * @ngdoc factory
- * @name security.AuthRetryQueue
+ * @name subrosa.security.AuthRetryQueue
  *
  * @requires $injector
  *
@@ -8,7 +8,7 @@
  *  A container to hold all unauthorized http requests so they can be
  *  retried in the future.
  */
-angular.module('security').factory('AuthRetryQueue', function ($injector) {
+angular.module('subrosa.security').factory('AuthRetryQueue', function ($injector) {
     // TODO $http service initialized later because of circular dependency problem.
     var $http, retryQueue = [];
 
