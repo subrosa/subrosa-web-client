@@ -5,23 +5,23 @@
     <li><a data-ui-sref="game.rules" data-translate>Rules</a></li>
   </ul>
 
-  <h3>{{game.name}}</h3>
-  <h4>{{game.description}}</h4>
+  <h3>{{ game.name }}</h3>
+  <h4>{{ game.description }}</h4>
   <div data-ng-show="game.startTime && game.endTime">
     <span class="information-label" data-translate>Duration</span>
-    <span class="information-value">{{game.startTime | date:'medium'}} - {{game.endTime | date:'medium'}}</span>
+    <span class="information-value">{{ game.startTime | date:'medium' }} - {{ game.endTime | date:'medium' }}</span>
   </div>
   <div data-ng-show="game.ordnance">
     <span class="information-label" data-translate>Ordnance</span>
-    <span class="information-value">{{game.ordnance}}</span>
+    <span class="information-value">{{ game.ordnance }}</span>
   </div>
   <div data-ng-show="game.gameType">
     <span class="information-label" data-translate>Game Type</span>
-    <span class="information-value">{{game.gameType}}</span>
+    <span class="information-value">{{ game.gameType }}</span>
   </div>
   <div data-ng-show="game.assignmentType">
     <span class="information-label" data-translate>Assignment Type</span>
-    <span class="information-value">{{game.assignmentType}}</span>
+    <span class="information-value">{{ game.assignmentType }}</span>
   </div>
 
   <div data-ui-view></div>
