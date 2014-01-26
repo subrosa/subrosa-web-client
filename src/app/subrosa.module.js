@@ -35,7 +35,7 @@ angular.module('subrosa').config(function ($locationProvider) {
  * @name subrosa.run
  *
  * @requires $rootScope
- * @required $state
+ * @requires $state
  * @requires $stateParams
  *
  * @description
