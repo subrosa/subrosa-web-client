@@ -17,6 +17,7 @@ module.exports = function (config) {
             'lib/angular-bootstrap/ui-bootstrap-tpls.js',
             'lib/angular-ui-router/release/angular-ui-router.js',
             'lib/angular-mocks/angular-mocks.js',
+            'lib/angularjs-geolocation/src/geolocation.js',
 
             // Must load modules first
             'app/**/*.module.js',
