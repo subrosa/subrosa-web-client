@@ -12,7 +12,6 @@
 angular.module('subrosa.account').controller('SessionController', function ($scope, $http, $log, AuthService) {
 
     $scope.user = {};
-    $scope.isAuthenticated = AuthService.isAuthenticated;
     $scope.getCurrentUser = AuthService.getCurrentUser;
 
     $scope.login = function () {
