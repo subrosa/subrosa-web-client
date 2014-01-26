@@ -1,15 +1,9 @@
 <section>
-  <ul class="game-menu menu" role="navigation">
-    <li><a data-ui-sref="game.dashboard" data-translate>Dashboard</a></li>
-    <li><a data-ui-sref="game.feed" data-translate>Game Feed</a></li>
-    <li><a data-ui-sref="game.rules" data-translate>Rules</a></li>
-  </ul>
-
-  <h3>{{ game.name }}</h3>
-  <h4>{{ game.description }}</h4>
-  <div data-ng-show="game.startTime && game.endTime">
+  <h2>{{ game.name }}</h2>
+  <h3>{{ game.description }}</h3>
+  <div data-ng-show="game.gameStart && game.gameEnd">
     <span class="information-label" data-translate>Duration</span>
-    <span class="information-value">{{ game.startTime | date:'medium' }} - {{ game.endTime | date:'medium' }}</span>
+    <span class="information-value">{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</span>
   </div>
   <div data-ng-show="game.ordnance">
     <span class="information-label" data-translate>Ordnance</span>
@@ -19,10 +13,12 @@
     <span class="information-label" data-translate>Game Type</span>
     <span class="information-value">{{ game.gameType }}</span>
   </div>
-  <div data-ng-show="game.assignmentType">
-    <span class="information-label" data-translate>Assignment Type</span>
-    <span class="information-value">{{ game.assignmentType }}</span>
-  </div>
+
+  <ul class="game-menu menu" role="navigation">
+    <li><a data-ui-sref="game.dashboard" data-translate>Dashboard</a></li>
+    <li><a data-ui-sref="game.feed" data-translate>Game Feed</a></li>
+    <li><a data-ui-sref="game.rules" data-translate>Rules</a></li>
+  </ul>
 
   <div data-ui-view></div>
 </section>
