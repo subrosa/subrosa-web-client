@@ -3,15 +3,26 @@
   <h3 data-translate>Login</h3>
 </div>
 
-<form name="loginForm" novalidate>
+<form name="loginForm" class="form-horizontal" role="form" novalidate>
   <div class="modal-body">
-    <div class="alert alert-info" data-translate>Enter your login details.</div>
+    <p class="alert alert-info" data-translate>
+      Login below with your Subrosa account or <a href="" data-ng-click="">create an account</a>.
+    </p>
 
-    <label for="loginEmail" data-focus-on="modalOpened" data-translate>E-mail</label>
-    <input id="loginEmail" name="login" type="email" data-ng-model="user.email" placeholder="Email" required autofocus/>
+    <div class="form-group">
+      <label for="loginEmail" class="col-sm-2 control-label" data-translate>E-mail</label>
+      <div class="col-sm-10">
+        <input id="loginEmail" name="login" type="email" class="form-control" data-ng-model="user.email" placeholder="Email" required autofocus/>
+      </div>
+    </div>
 
-    <label for="loginPassword" data-translate>Password</label>
-    <input id="loginPassword" name="pass" type="password" data-ng-model="user.password" placeholder="Password" required/>
+    <div class="form-group">
+      <label for="loginPassword" class="col-sm-2 control-label" data-translate>Password</label>
+      <div class="col-sm-10">
+        <input id="loginPassword" name="pass" type="password" class="form-control" data-ng-model="user.password" placeholder="Password" required/>
+      </div>
+    </div>
+
   </div>
 
   <div class="modal-footer">

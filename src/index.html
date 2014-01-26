@@ -34,16 +34,16 @@
             <a data-ui-sref="games" data-translate>Find Games</a>
           </li>
 
-          <li ng-if="!isAuthenticated()">
+          <li data-ng-if="!isAuthenticated()">
             <a href="" data-ng-click="openModal()" data-translate>Sign in</a>
             <div data-modal="/app/account/views/login-form.html" data-modal-action="login()" data-model="user"></div>
           </li>
 
-          <li class="dropdown" ng-if="isAuthenticated()">
+          <li class="dropdown" data-ng-if="isAuthenticated()">
             <a href="" class="dropdown-toggle" data-translate>Account<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li>
-                <a ui-sref="account" data-translate>Profile</a>
+                <a data-ui-sref="account" data-translate>Profile</a>
               </li>
               <li>
                 <a href="" data-ng-click="logout()" data-translate>Log out</a>
