@@ -10,7 +10,5 @@
  *  Loads the game and sets up common game related functionality.
  */
 angular.module('subrosa.game').controller('GameController', function ($scope, Game) {
-    $scope.game = Game.get({gameUrl: $scope.$stateParams.gameUrl}, function (game) {
-        $scope.setTitle(game.name);
-    });
+    $scope.game = Game.get({gameUrl: $scope.$stateParams.gameUrl});
 });

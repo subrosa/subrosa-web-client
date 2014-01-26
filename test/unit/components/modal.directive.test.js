@@ -1,13 +1,9 @@
 describe('Directive: modal', function () {
-    var $scope, $compile, $q, $modal, $modalInstance, item, element, elementScope;
+    var $scope, $compile, $q, $modal, $modalInstance, controller, element, elementScope;
 
     beforeEach(module('subrosa'));
 
     beforeEach(module(function ($provide) {
-        item = {
-            'delete': function () {}
-        };
-
         $modal = {
             $get: function () {
                 return this;
@@ -25,13 +21,7 @@ describe('Directive: modal', function () {
             $get: function () {
                 return this;
             },
-            close: function () {
-                var deferred = $q.defer();
-                deferred.resolve({});
-                return {
-                    result: deferred.promise
-                };
-            },
+            close: function () {},
             dismiss: function () {}
         };
 
@@ -39,19 +29,24 @@ describe('Directive: modal', function () {
         $provide.provider('$modalInstance', $modalInstance);
     }));
 
-    beforeEach(inject(function (_$compile_, _$rootScope_, _$q_) {
+    beforeEach(inject(function (_$compile_, _$rootScope_, $controller, _$q_) {
         $compile = _$compile_;
         $scope = _$rootScope_;
+        controller = $controller('ModalController', {$scope: $scope,
+            modelName: name, model: {}});
         $q = _$q_;
     }));
 
     beforeEach(function () {
         element = angular.element(
-            '<span modal="someUrl.html" modal-action="item.delete(item)">' +
-                '<p>Hello!</p></span>');
+            '<span modal="someUrl.html" modal-action="delete()">' +
+                '<p>Hello!</p>' +
+            '</span>');
 
         $compile(element)($scope);
         $scope.$digest();
+
+        $scope.delete = function () {};
 
         elementScope = element.scope();
     });
@@ -59,41 +54,36 @@ describe('Directive: modal', function () {
     it("can open a modal dialog", function () {
         spyOn($modal, 'open').andCallThrough();
         elementScope.openModal();
-        expect($modal.open).toHaveBeenCalledWith({templateUrl: 'someUrl.html', controller: 'ModalController'});
+        expect($modal.open).toHaveBeenCalledWith({templateUrl: 'someUrl.html',
+            controller: 'ModalController', resolve: jasmine.any(Object)});
+    });
+
+    it("executes the provided function when closed.", function () {
+        spyOn($scope, 'delete');
+        elementScope.openModal();
+
+        $scope.ok();
+        $scope.$digest();
+
+        expect($scope.delete).toHaveBeenCalled();
     });
 
     describe("Controller: ModalController", function () {
-        var controller;
-
-        beforeEach(inject(function (_$rootScope_, $controller) {
-            $scope = _$rootScope_;
-            controller = $controller('ModalController', {$scope: $scope, $modalInstance: $modalInstance});
-        }));
-
         describe("can close the modal dialog", function () {
             beforeEach(function () {
                 elementScope.openModal();
             });
 
-            // TODO get this working or remove
-//            it("by clicking okay and executing the provided action", function () {
-//                spyOn(item, 'delete');
-//                spyOn($modalInstance, 'close').andCallThrough();
-//
-//                $scope.ok();
-//
-//                expect($modalInstance.close).toHaveBeenCalled();
-//                expect(item.delete).toHaveBeenCalled();
-//            });
+            it("by clicking okay and executing the provided action", function () {
+                spyOn($modalInstance, 'close');
+                $scope.ok();
+                expect($modalInstance.close).toHaveBeenCalled();
+            });
 
             it("by clicking cancel and not executing the provided action", function () {
-                spyOn(item, 'delete');
-                spyOn($modalInstance, 'dismiss');
-
+                spyOn($modalInstance, 'dismiss').andCallThrough();
                 $scope.cancel();
-
                 expect($modalInstance.dismiss).toHaveBeenCalledWith('cancel');
-                expect(item.delete).not.toHaveBeenCalled();
             });
         });
     });

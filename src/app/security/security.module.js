@@ -19,18 +19,3 @@ angular.module('subrosa.security', ['gettext']);
 angular.module('subrosa.security').config(function ($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
 });
-
-/**
- * @ngdoc run
- * @name subrosa.security.run
- *
- * @requires AuthService
- *
- * @description
- *  Get the current user on application load if they are authenticated.
- */
-angular.module('subrosa.security').run(function (AuthService) {
-    if (AuthService.isAuthenticated()) {
-        AuthService.getCurrentUser();
-    }
-});

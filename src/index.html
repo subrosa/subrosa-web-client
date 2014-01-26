@@ -5,10 +5,12 @@
     <meta name="fragment" content="!" />
     <title data-ng-bind="title" data-translate>Loading Subrosa...</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- build:css /css/styles.css -->
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/overrides.css">
+    <link rel="stylesheet" href="/css/layout.css">
     <!-- endbuild -->
   </head>
 
@@ -22,15 +24,31 @@
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">
-            <img src="/img/logo/subrosa-154x36.png" alt="Subrosa Logo" />
+            <img class="img-responsive" src="/img/logo/subrosa-horizontal-93x25.png"
+                 alt="Subrosa {{ 'Logo' | translate }}" />
           </a>
         </div>
 
-        <ul data-user-menu class="nav navbar-nav navbar-right"></ul>  
-
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" data-ng-controller="SessionController">
           <li data-ng-class="{active: isState('games')}">
             <a data-ui-sref="games" data-translate>Find Games</a>
+          </li>
+
+          <li ng-if="!isAuthenticated()">
+            <a href="" data-ng-click="openModal()" data-translate>Sign in</a>
+            <div data-modal="/app/account/views/login-form.html" data-modal-action="login()" data-model="user"></div>
+          </li>
+
+          <li class="dropdown" ng-if="isAuthenticated()">
+            <a href="" class="dropdown-toggle" data-translate>Account<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li>
+                <a ui-sref="account" data-translate>Profile</a>
+              </li>
+              <li>
+                <a href="" data-ng-click="logout()" data-translate>Log out</a>
+              </li>
+            </ul>
           </li>
         </ul>
 
@@ -62,7 +80,7 @@
     <script type="text/javascript" src="/app/account/account.module.js"></script>
     <script type="text/javascript" src="/app/account/Account.factory.js"></script>
     <script type="text/javascript" src="/app/account/Account.controller.js"></script>
-    <script type="text/javascript" src="/app/account/LoginForm.controller.js"></script>
+    <script type="text/javascript" src="/app/account/Session.controller.js"></script>
 
     <script type="text/javascript" src="/app/components/components.module.js"></script>
     <script type="text/javascript" src="/app/components/modal.directive.js"></script>
@@ -80,7 +98,6 @@
     <script type="text/javascript" src="/app/security/AuthInterceptor.factory.js"></script>
     <script type="text/javascript" src="/app/security/AuthService.factory.js"></script>
     <script type="text/javascript" src="/app/security/AuthRetryQueue.factory.js"></script>
-    <script type="text/javascript" src="/app/security/userMenu.directive.js"></script>
 
     <!-- endbuild -->
 

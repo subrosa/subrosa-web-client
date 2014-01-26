@@ -51,5 +51,4 @@ angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
     };
 
     $rootScope.stateIncludes = $state.includes;
-
 });

@@ -23,7 +23,7 @@ describe('Controller: Game', function () {
     }));
 
     it('sets the game on the $scope by calling the Game Service.', function () {
-        expect(MockGameFactory.get).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'}, jasmine.any(Function));
+        expect(MockGameFactory.get).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'});
         expect($scope.game.name).toBe(MockGameFactory.get().name);
         expect($scope.game.url).toBe(MockGameFactory.get().url);
     });

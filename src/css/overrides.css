@@ -1,0 +1,8 @@
+/* Bootstrap 3 overrides */
+.navbar-brand {
+    padding: 12px;
+}
+
+html .navbar-nav.navbar-right:last-child {
+    margin-right: 0;
+}

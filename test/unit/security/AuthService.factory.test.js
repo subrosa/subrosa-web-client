@@ -44,14 +44,14 @@ describe('Factory: AuthService', function () {
             expect(AuthService.currentUser.name).toBe(user.name);
         });
 
-        it('and call logout on failure', function () {
+        it('and call destroySession on failure', function () {
             $httpBackend.expectGET('/subrosa/v1/user').respond(400, '');
-            spyOn(AuthService, 'logout');
+            spyOn(AuthService, 'destroySession');
 
             AuthService.getCurrentUser();
             $httpBackend.flush();
 
-            expect(AuthService.logout).toHaveBeenCalled();
+            expect(AuthService.destroySession).toHaveBeenCalled();
 
         });
     });
@@ -80,13 +80,12 @@ describe('Factory: AuthService', function () {
         expect($rootScope.$broadcast).toHaveBeenCalledWith('auth-loginCancelled', {});
     });
 
-    it('can logout', function () {
+    it('can destroy the user session', function () {
         $window.sessionStorage.token = 'lalala';
-        $httpBackend.expectPOST('/subrosa/v1/logout').respond(200);
 
-        AuthService.logout();
-        $httpBackend.flush();
+        AuthService.destroySession();
 
+        expect(AuthService.currentUser).toBe(null);
         expect($window.sessionStorage.token).toBe(undefined);
     });
 

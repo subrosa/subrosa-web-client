@@ -36,7 +36,7 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
                 return service.currentUser;
             };
             var error = function () {
-                service.logout();
+                service.destroySession();
             };
             return $http.get('/subrosa/v1/user').then(success, error);
         },
@@ -68,13 +68,11 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
         },
 
         /**
-         * Log the user out by calling the APU and then deleting the sessionStorage token.
+         * Log the user out by deleting the sessionStorage token.
          */
-        logout: function () {
-            $http.post('/subrosa/v1/logout').then(function () {
-                service.currentUser = null;
-                delete $window.sessionStorage.token;
-            });
+        destroySession: function () {
+            service.currentUser = null;
+            delete $window.sessionStorage.token;
         },
 
         /**

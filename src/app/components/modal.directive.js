@@ -4,12 +4,17 @@
  * @restrict A
  *
  * @requires $modal
+ * @requires $modalInstance
+ * @requires modelName
+ * @requires model
  *
  * @description
  *   Provides a wrapper around angular-ui's modal dialog service.
  */
 angular.module('subrosa.components')
-    .controller('ModalController', function ($scope, $modalInstance) {
+    .controller('ModalController', function ($scope, $modalInstance, modelName, model) {
+        $scope[modelName] = model;
+
         $scope.ok = function () {
             $modalInstance.close();
         };
@@ -23,7 +28,9 @@ angular.module('subrosa.components')
             replace: true,
             scope: {
                 template: '@modal',
-                action: '&modalAction'
+                action: '&modalAction',
+                modelName: '@model',
+                model: '='
             },
             link: function (scope) {
                 var modalInstance;
@@ -31,13 +38,20 @@ angular.module('subrosa.components')
                 scope.openModal = function () {
                     modalInstance = $modal.open({
                         controller: 'ModalController',
-                        templateUrl: scope.template
+                        templateUrl: scope.template,
+                        resolve: {
+                            modelName: function () {
+                                return scope.modelName;
+                            },
+                            model: function () {
+                                return scope.model;
+                            }
+                        }
                     });
 
-                    // TODO get this working or remove
-//                    modalInstance.result.then(function () {
-//                        scope.action();
-//                    });
+                    modalInstance.result.then(function () {
+                        scope.action();
+                    });
                 };
 
                 scope.$parent.openModal = scope.openModal;

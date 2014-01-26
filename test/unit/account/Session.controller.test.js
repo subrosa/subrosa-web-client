@@ -1,4 +1,4 @@
-describe('Controller: LoginFormController', function () {
+describe('Controller: SessionController', function () {
     var $scope, $httpBackend, AuthService;
 
     beforeEach(module('subrosa.account'));
@@ -7,7 +7,7 @@ describe('Controller: LoginFormController', function () {
         AuthService = {
             currentUser: null,
             isAuthenticated: function () {},
-            logout: function () {},
+            destroySession: function () {},
             loginConfirmed: function () {}
         };
     });
@@ -16,7 +16,7 @@ describe('Controller: LoginFormController', function () {
         $scope = $rootScope.$new();
         $httpBackend = _$httpBackend_;
 
-        $controller('LoginFormController', {
+        $controller('SessionController', {
             $scope: $scope,
             AuthService: AuthService
         });
@@ -42,12 +42,22 @@ describe('Controller: LoginFormController', function () {
 
         it("by rejecting logins without the correct credentials", function () {
             $httpBackend.expectPOST('/subrosa/v1/session').respond(401, '');
-            spyOn(AuthService, 'logout');
+            spyOn(AuthService, 'destroySession');
 
             $scope.login();
             $httpBackend.flush();
 
-            expect(AuthService.logout).toHaveBeenCalled();
+            expect(AuthService.destroySession).toHaveBeenCalled();
         });
+    });
+
+    it("can call the logout API", function () {
+        $httpBackend.expectPOST('/subrosa/v1/logout').respond(200, '');
+        spyOn(AuthService, 'destroySession');
+
+        $scope.logout();
+        $httpBackend.flush();
+
+        expect(AuthService.destroySession).toHaveBeenCalled();
     });
 });
