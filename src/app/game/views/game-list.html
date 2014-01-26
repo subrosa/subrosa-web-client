@@ -1,4 +1,5 @@
 <h2>Find Games</h2>
+{{ coords }}
 <ul>
   <li data-ng-repeat="game in games.results">
     <a data-ui-sref="game.dashboard({gameUrl: '{{ game.url }}'})">{{ game.name }}</a>
