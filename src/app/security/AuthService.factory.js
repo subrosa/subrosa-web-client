@@ -5,14 +5,13 @@
  * @requires $rootScope
  * @requires $window
  * @requires $http
- * @requires $q
  * @requires AuthRetryQueue
  *
  * @description
  *  Handles Authentication related functionality such as providing the current user and
  *  managing sessions via login and logout commands.
  */
-angular.module('subrosa.security').factory('AuthService', function ($rootScope, $window, $http, $q, AuthRetryQueue) {
+angular.module('subrosa.security').factory('AuthService', function ($rootScope, $window, $http, AuthRetryQueue) {
     var service = {
         currentUser: null,
 
