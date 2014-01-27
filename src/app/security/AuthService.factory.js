@@ -3,15 +3,15 @@
  * @name subrosa.security.AuthService
  *
  * @requires $rootScope
- * @requires $window
  * @requires $http
+ * @requires Session
  * @requires AuthRetryQueue
  *
  * @description
  *  Handles Authentication related functionality such as providing the current user and
  *  managing sessions via login and logout commands.
  */
-angular.module('subrosa.security').factory('AuthService', function ($rootScope, $window, $http, AuthRetryQueue) {
+angular.module('subrosa.security').factory('AuthService', function ($rootScope, $http, Session, AuthRetryQueue) {
     var service = {
         currentUser: null,
 
@@ -21,13 +21,13 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
          * @returns boolean whether or not the user is authenticated
          */
         isAuthenticated: function () {
-            return $window.sessionStorage.token;
+            return Boolean(Session.getToken());
         },
 
         /**
          * Get the current user.
          *
-         * @returns object the current user.
+         * @returns object $http $promise.
          */
         getCurrentUser: function () {
             var success = function (response) {
@@ -35,9 +35,36 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
                 return service.currentUser;
             };
             var error = function () {
-                service.destroySession();
+                Session.removeToken();
             };
             return $http.get('/subrosa/v1/user').then(success, error);
+        },
+
+        /**
+         * Log the user in using the subrosa API.
+         *
+         * @param user the user object to login.
+         * @returns object $http $promise.
+         */
+        login: function (user) {
+            return $http.post('/subrosa/v1/session', user)
+                .success(function (data) {
+                    service.loginConfirmed(data);
+                })
+                .error(function () {
+                    // Ensure the user does not have a session
+                    Session.removeToken();
+                });
+        },
+
+        /**
+         * Log the user out by calling the API and deleting the sessionStorage token.
+         */
+        logout: function () {
+            $http.post('/subrosa/v1/logout').then(function () {
+                Session.removeToken();
+                service.currentUser = null;
+            });
         },
 
         /**
@@ -49,7 +76,7 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
          */
         loginConfirmed: function (data, configUpdater) {
             service.currentUser = service.getCurrentUser();
-            $window.sessionStorage.token = data.token;
+            Session.setToken(data.token);
             $rootScope.$broadcast('auth-loginConfirmed', data);
             AuthRetryQueue.retryAll(configUpdater);
         },
@@ -64,14 +91,6 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
         loginCancelled: function (data, reason) {
             AuthRetryQueue.rejectAll(reason);
             $rootScope.$broadcast('auth-loginCancelled', data);
-        },
-
-        /**
-         * Log the user out by deleting the sessionStorage token.
-         */
-        destroySession: function () {
-            service.currentUser = null;
-            delete $window.sessionStorage.token;
         },
 
         /**

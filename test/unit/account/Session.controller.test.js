@@ -1,20 +1,31 @@
 describe('Controller: SessionController', function () {
-    var $scope, $httpBackend, AuthService;
+    var $scope, AuthService;
 
     beforeEach(module('subrosa.account'));
 
     beforeEach(function () {
         AuthService = {
+            errorStatus: null,
             currentUser: null,
+            
             isAuthenticated: function () {},
-            destroySession: function () {},
+            logout: function () {},
+            login: function () {
+                var errorStatus = this.errorStatus;
+                return {
+                    error: function (callback) {
+                        callback({}, errorStatus);
+                    }
+                };
+            },
             loginConfirmed: function () {}
         };
     });
 
-    beforeEach(inject(function ($controller, $rootScope, _$httpBackend_) {
+    beforeEach(inject(function ($controller, $rootScope) {
         $scope = $rootScope.$new();
-        $httpBackend = _$httpBackend_;
+
+        $scope.user = {email: 'valid@valid.com', password: 'bitcheye'};
 
         $controller('SessionController', {
             $scope: $scope,
@@ -22,42 +33,45 @@ describe('Controller: SessionController', function () {
         });
     }));
 
-    afterEach(function () {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
-    });
-
     describe("handles login functionality", function () {
         it("by logging in with the correct credentials", function () {
-            var response = {token: 'lalalala'};
-            $httpBackend.expectPOST('/subrosa/v1/session').respond(200, response);
-            spyOn(AuthService, 'loginConfirmed');
+            spyOn(AuthService, 'login').andCallThrough();
 
-            $scope.user = {email: 'valid@valid.com', password: 'bitcheye'};
             $scope.login();
-            $httpBackend.flush();
 
-            expect(AuthService.loginConfirmed).toHaveBeenCalledWith(response);
+            expect(AuthService.login).toHaveBeenCalledWith($scope.user);
         });
 
-        it("by rejecting logins without the correct credentials", function () {
-            $httpBackend.expectPOST('/subrosa/v1/session').respond(401, '');
-            spyOn(AuthService, 'destroySession');
+        describe("by dealing with login failures", function () {
+            it("by setting $scope.authError on 401", function () {
+                AuthService.errorStatus = 401;
+                spyOn(AuthService, 'login').andCallThrough();
 
-            $scope.login();
-            $httpBackend.flush();
+                $scope.login();
 
-            expect(AuthService.destroySession).toHaveBeenCalled();
+                expect(AuthService.login).toHaveBeenCalled();
+                expect($scope.errors.authError).toBe(true);
+                expect($scope.errors.unknownError).toBe(false);
+            });
+
+            it("by setting $scope.unknownError on other errors", function () {
+                AuthService.errorStatus = 500;
+                spyOn(AuthService, 'login').andCallThrough();
+
+                $scope.login();
+
+                expect(AuthService.login).toHaveBeenCalled();
+                expect($scope.errors.authError).toBe(false);
+                expect($scope.errors.unknownError).toBe(true);
+            });
         });
     });
 
     it("can call the logout API", function () {
-        $httpBackend.expectPOST('/subrosa/v1/logout').respond(200, '');
-        spyOn(AuthService, 'destroySession');
+        spyOn(AuthService, 'logout');
 
         $scope.logout();
-        $httpBackend.flush();
 
-        expect(AuthService.destroySession).toHaveBeenCalled();
+        expect(AuthService.logout).toHaveBeenCalled();
     });
 });

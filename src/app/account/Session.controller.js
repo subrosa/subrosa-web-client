@@ -3,37 +3,30 @@
  * @name subrosa.account.SessionController
  *
  * @requires $scope
- * @requires $http
  * @requires AuthService
  *
  * @description
  *  Handle submission of the login form.
  */
-angular.module('subrosa.account').controller('SessionController', function ($scope, $http, $log, AuthService) {
+angular.module('subrosa.account').controller('SessionController', function ($scope, AuthService) {
 
     $scope.user = {};
-    $scope.getCurrentUser = AuthService.getCurrentUser;
+    $scope.errors = {
+        authError: false,
+        unknownError: false
+    };
 
     $scope.login = function () {
-        return $http.post('/subrosa/v1/session', $scope.user)
-            .success(function (data) {
-                AuthService.loginConfirmed(data);
-            })
-            .error(function (data, status) {
-                if (status === '401') {
-                    $scope.authError = true;
-                } else {
-                    $scope.unknownError = true;
-                    $log.error(data);
-                }
-                // Ensure the user does not have a session
-                AuthService.destroySession();
-            });
+        AuthService.login($scope.user).error(function (data, status) {
+            if (status === 401) {
+                $scope.errors.authError = true;
+            } else {
+                $scope.errors.unknownError = true;
+            }
+        });
     };
 
     $scope.logout = function () {
-        $http.post('/subrosa/v1/logout').then(function () {
-            AuthService.destroySession();
-        });
+        AuthService.logout();
     };
 });
