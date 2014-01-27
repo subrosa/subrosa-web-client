@@ -8,7 +8,7 @@
  * @description
  *  Handle submission of the login form.
  */
-angular.module('subrosa.account').controller('SessionController', function ($scope, AuthService) {
+angular.module('subrosa.account').controller('LoginFormController', function ($scope, AuthService) {
 
     $scope.user = {};
     $scope.errors = {
@@ -24,9 +24,5 @@ angular.module('subrosa.account').controller('SessionController', function ($sco
                 $scope.errors.unknownError = true;
             }
         });
-    };
-
-    $scope.logout = function () {
-        AuthService.logout();
     };
 });

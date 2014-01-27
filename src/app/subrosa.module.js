@@ -19,12 +19,18 @@ angular.module('subrosa', [
  * @ngdoc config
  * @name subrosa.config
  *
+ * @requires $stateProvider
  * @requires $locationProvider
  *
  * @description
  *  Used for establishing application wide configuration.
  */
-angular.module('subrosa').config(function ($locationProvider) {
+angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
+
+    $stateProvider.state('home', {
+        url: '/'
+    });
+
     // Configure html5 mode, otherwise URLs will be base.com/#/home rather than base.com/home.
     // The hashPrefix and the <meta name="fragment" content="!" /> in the index allows google to crawl correctly.
     $locationProvider.html5Mode(true).hashPrefix('!');
@@ -44,11 +50,9 @@ angular.module('subrosa').config(function ($locationProvider) {
 angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-    $rootScope.transitionTo = $state.transitionTo;
+    $rootScope.stateIncludes = $state.includes;
 
     $rootScope.isState = function (stateName) {
         return $state.is(stateName);
     };
-
-    $rootScope.stateIncludes = $state.includes;
 });

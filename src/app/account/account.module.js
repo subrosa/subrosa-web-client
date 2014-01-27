@@ -32,4 +32,10 @@ angular.module('subrosa.account').config(function ($stateProvider) {
             }
         }
     });
+
+    $stateProvider.state('register', {
+        url: '/register',
+        controller: 'RegisterFormController',
+        templateUrl: '/app/account/views/register-form.html'
+    });
 });

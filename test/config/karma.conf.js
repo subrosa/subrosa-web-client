@@ -23,7 +23,7 @@ module.exports = function (config) {
             'app/**/*.module.js',
             'app/**/*.js',
             'app/**/*.html',
-            '../test/unit/**/*.js'
+            '../test/unit/**/*.test.js'
         ],
 
         // list of files to exclude

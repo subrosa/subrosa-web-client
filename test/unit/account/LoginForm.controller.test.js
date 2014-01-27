@@ -1,4 +1,4 @@
-describe('Controller: SessionController', function () {
+describe('Controller: LoginFormController', function () {
     var $scope, AuthService;
 
     beforeEach(module('subrosa.account'));
@@ -27,7 +27,7 @@ describe('Controller: SessionController', function () {
 
         $scope.user = {email: 'valid@valid.com', password: 'bitcheye'};
 
-        $controller('SessionController', {
+        $controller('LoginFormController', {
             $scope: $scope,
             AuthService: AuthService
         });
@@ -65,13 +65,5 @@ describe('Controller: SessionController', function () {
                 expect($scope.errors.unknownError).toBe(true);
             });
         });
-    });
-
-    it("can call the logout API", function () {
-        spyOn(AuthService, 'logout');
-
-        $scope.logout();
-
-        expect(AuthService.logout).toHaveBeenCalled();
     });
 });

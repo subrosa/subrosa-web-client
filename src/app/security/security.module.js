@@ -28,8 +28,9 @@ angular.module('subrosa.security').config(function ($httpProvider) {
  * @requires AuthService
  *
  * @description
- *  Set AuthService.isAuthenticated() function on the $rootScope.
+ *  Set some AuthService functionality on the $rootScope.
  */
 angular.module('subrosa.security').run(function ($rootScope, AuthService) {
     $rootScope.isAuthenticated = AuthService.isAuthenticated;
+    $rootScope.logout = AuthService.logout;
 });
