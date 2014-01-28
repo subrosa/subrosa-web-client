@@ -1,30 +1,57 @@
-<p class="alert alert-info" data-translate>
-  Use the form below to create an account.  Already have an account?  <a data-ui-sref="login">Sign in</a> now.
-</p>
-
-<form name="registerForm" class="form-horizontal" role="form" novalidate>
-  <div class="form-group">
-    <label for="registerEmail" class="col-sm-2 control-label" data-translate>E-mail</label>
-    <div class="col-sm-10">
-      <input id="registerEmail" name="login" type="email" class="form-control"
-             data-ng-model="user.email" placeholder="Email" required autofocus/>
-    </div>
+<div class="row">
+  <div class="col-md-5 col-md-offset-1">
+    <h1 data-translate>We Play AFK</h1>
+    <p data-translate>It’s a big, beautiful world out there, Subrosa takes the fun outside.</p>
+    <p data-translate>Create an account and join thousands of other real life gamers.</p>
   </div>
+  <div class="col-md-5">
+    <h3>
+      <span data-translate> Join the Fun</span>
+      <i class="glyphicon glyphicon-lock"></i>
+    </h3>
 
-  <div class="form-group">
-    <label for="registerPassword" class="col-sm-2 control-label" data-translate>Password</label>
-    <div class="col-sm-10">
-      <input id="registerPassword" name="pass" type="password" class="form-control"
-             data-ng-model="user.password" data-password-validator placeholder="Password" required/>
-    </div>
+    <form name="registerForm" class="form-horizontal" role="form" novalidate>
+      <p class="alert alert-info" data-translate>
+        Do you have what it takes?  Use the form below to create an account.
+      </p>
+      <p data-ng-show="registerError" class="alert alert-danger" data-translate>
+        {{ registerError }}
+      </p>
+      <div class="form-group">
+        <label for="registerEmail" class="col-sm-2 control-label" data-translate>E-mail</label>
+        <div class="col-sm-10">
+          <input id="registerEmail" name="login" type="email" class="form-control"
+                 data-ng-model="user.email" placeholder="Email" required autofocus/>
+          <p class="help-block" data-translate>No spam.  You will only receive emails that you actually opt-in to rather than the other way around.</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="registerPassword" class="col-sm-2 control-label" data-translate>Password</label>
+        <div class="col-sm-10">
+          <input id="registerPassword" name="pass" type="password" class="form-control"
+                 data-ng-model="user.password" data-password-validator placeholder="Password" required/>
+          <p class="help-block" data-translate>Tip: use at least one number and at least seven characters.</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label for="registerTerms">
+              <input id="registerTerms" type="checkbox" data-ng-model="user.acceptedTerms" required/>
+                I agree to the <a data-ui-sref="terms">terms and conditions</a>.
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" data-ng-click="register()" ng-disabled="!registerForm.$valid" data-translate>Register</button>
+        </div>
+      </div>
+      <a href="" class="pull-right" data-ng-click="goToLogin()" data-translate>I already have an account</a>
+    </form>
   </div>
-
-  <div class="checkbox">
-    <label for="registerTerms" data-translate>
-      I agree to the <a href="/terms">terms and conditions</a>.
-    </label>
-    <input id="registerTerms" type="checkbox" data-ng-model="user.acceptedTerms" required/>
-  </div>
-
-  <button class="btn btn-primary" data-ng-click="ok()" ng-disabled="!registerForm.$valid" data-translate>Register</button>
-</form>
+</div>

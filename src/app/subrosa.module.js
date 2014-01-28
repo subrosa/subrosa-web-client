@@ -7,7 +7,6 @@
  */
 angular.module('subrosa', [
     'subrosa.account',
-    'subrosa.components',
     'subrosa.game',
     'subrosa.security',
     'ui.router',
@@ -47,12 +46,20 @@ angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
  * @description
  *  Set common items on the $rootScope such as $state related information.
  */
-angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
-    $rootScope.$state = $state;
-    $rootScope.$stateParams = $stateParams;
+angular.module('subrosa').run(function ($rootScope, $state) {
     $rootScope.stateIncludes = $state.includes;
 
     $rootScope.isState = function (stateName) {
         return $state.is(stateName);
     };
+
+    $rootScope.$on('$stateChangeSuccess',
+        function (event, toState, toParams, fromState, fromParams) {
+            //Record our from state, so we can transition back there
+            if (!fromState.abstract) {
+                $rootScope.fromState = fromState;
+                $rootScope.fromParams = fromParams;
+            }
+        }
+    );
 });

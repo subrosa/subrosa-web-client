@@ -20,50 +20,52 @@
       <script src="/lib/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <header>
-      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-          <a data-ui-sref="home" class="navbar-brand">
-            <img class="img-responsive" src="/img/logo/subrosa-horizontal-93x25.png"
-                 alt="Subrosa {{ 'Logo' | translate }}" />
-          </a>
-        </div>
+    <div class="subrosa-container">
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="navbar-header">
+            <a data-ui-sref="home" class="navbar-brand">
+              <img class="img-responsive" src="/img/logo/subrosa-horizontal-93x25.png"
+                   alt="Subrosa {{ 'Logo' | translate }}" />
+            </a>
+          </div>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li data-ng-class="{active: isState('games')}">
-            <a data-ui-sref="games" data-translate>Find Games</a>
-          </li>
+          <ul class="nav navbar-nav navbar-right">
+            <li data-ng-class="{active: isState('games')}">
+              <a data-ui-sref="games" data-translate>Find Games</a>
+            </li>
 
-          <li data-ng-if="!isAuthenticated()" data-ng-controller="LoginFormController">
-            <a href="" data-ng-click="openModal()" data-translate>Login</a>
-            <div data-modal="/app/account/views/login-modal.html" data-modal-action="login()" data-model="user"></div>
-          </li>
+            <li data-ng-if="!isAuthenticated()">
+              <a href="" data-ng-click="openModal()" data-translate>Login</a>
+              <div login-modal></div>
+            </li>
 
-          <li class="dropdown" data-ng-if="isAuthenticated()">
-            <a href="" class="dropdown-toggle" data-translate>Account<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a data-ui-sref="account" data-translate>Profile</a>
-              </li>
-              <li>
-                <a href="" data-ng-click="logout()" data-translate>Log out</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+            <li class="dropdown" data-ng-if="isAuthenticated()">
+              <a href="" class="dropdown-toggle" data-translate>Account<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a data-ui-sref="account" data-translate>Profile</a>
+                </li>
+                <li>
+                  <a href="" data-ng-click="logout()" data-translate>Log out</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
 
-      </nav>
-    </header>
+        </nav>
+      </header>
 
-    <div data-ui-view="menu"></div>
-    <div data-ui-view="sub-header"></div>
-    <div data-ui-view></div>
+      <div data-ui-view="menu"></div>
+      <div data-ui-view="sub-header"></div>
+      <div data-ui-view></div>
 
-    <footer id="footer">
-      <p class="copyright" data-translate>
-        <a href="/about/copyright">Copyright</a> &copy;2007-2014 Sub Rosa Games, Inc. All Rights Reserved.
-      </p>
-    </footer>
+      <footer>
+        <p data-translate>
+          <a href="/about/copyright">Copyright</a> &copy;2007-2014 Sub Rosa Games, Inc. All Rights Reserved.
+        </p>
+      </footer>
+    </div>
 
     <!-- build:js /js/scripts.js -->
     <script type="text/javascript" src="/lib/angular/angular.js"></script>
@@ -80,11 +82,8 @@
     <script type="text/javascript" src="/app/account/account.module.js"></script>
     <script type="text/javascript" src="/app/account/Account.factory.js"></script>
     <script type="text/javascript" src="/app/account/Account.controller.js"></script>
-    <script type="text/javascript" src="/app/account/LoginForm.controller.js"></script>
+    <script type="text/javascript" src="/app/account/loginModal.directive.js"></script>
     <script type="text/javascript" src="/app/account/RegisterForm.controller.js"></script>
-
-    <script type="text/javascript" src="/app/components/components.module.js"></script>
-    <script type="text/javascript" src="/app/components/modal.directive.js"></script>
 
     <script type="text/javascript" src="/app/game/game.module.js"></script>
     <script type="text/javascript" src="/app/game/GameDashboard.controller.js"></script>

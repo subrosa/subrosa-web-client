@@ -1,12 +1,21 @@
 <div class="modal-header">
-  <i class="glyphicon glyphicon-remove pull-right" ng-click="cancel()"></i>
+  <i class="glyphicon glyphicon-remove pull-right" data-ng-click="cancel()"></i>
   <h3 data-translate>Login</h3>
 </div>
 
 <form name="loginForm" class="form-horizontal" role="form" novalidate>
   <div class="modal-body">
+
     <p class="alert alert-info" data-translate>
-      Login below with your Subrosa account or <a href="" data-ng-click="cancel()">create an account</a>.
+      Welcome back player.  Login below with your Subrosa account.
+    </p>
+
+    <p data-ng-show="errors.authError" class="alert alert-danger" data-translate>
+      Sorry, we couldn't log you in with those credentials. Want to give it another shot?
+    </p>
+
+    <p data-ng-show="errors.unknownError" class="alert alert-danger" data-translate>
+      Something went wrong with login, please try again later.
     </p>
 
     <div class="form-group">
@@ -20,13 +29,17 @@
       <label for="loginPassword" class="col-sm-2 control-label" data-translate>Password</label>
       <div class="col-sm-10">
         <input id="loginPassword" name="pass" type="password" class="form-control" data-ng-model="user.password" placeholder="Password" required/>
+        <p class="help-block">
+          <a data-ng-click="" data-translate>I forgot my password</a>
+        </p>
       </div>
     </div>
 
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-primary" data-ng-click="ok()" ng-disabled="!loginForm.$valid" data-translate>Login</button>
+    <a href="" class="pull-left" data-ng-click="goToRegister()" data-translate>I need to register</a>
+    <button class="btn btn-primary" data-ng-click="login()" ng-disabled="!loginForm.$valid" data-translate>Login</button>
     <button class="btn btn-default" data-ng-click="cancel()" data-translate>Cancel</button>
   </div>
 </form>

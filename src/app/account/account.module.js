@@ -8,6 +8,7 @@
 angular.module('subrosa.account', [
     'gettext',
     'ngResource',
+    'ui.bootstrap.modal',
     'ui.router'
 ]);
 
@@ -38,4 +39,19 @@ angular.module('subrosa.account').config(function ($stateProvider) {
         controller: 'RegisterFormController',
         templateUrl: '/app/account/views/register-form.html'
     });
+});
+
+/**
+ * @ngdoc run
+ * @name subrosa.account.run
+ *
+ * @requires $rootScope
+ *
+ * @description
+ *  Allow the opening of the login dialog.
+ */
+angular.module('subrosa.account').run(function ($rootScope) {
+    $rootScope.openLogin = function () {
+        $rootScope.$broadcast('auth-loginRequired');
+    };
 });

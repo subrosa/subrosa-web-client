@@ -1,5 +1,5 @@
 /* Bootstrap 3 overrides */
-.navbar-brand {
+html .navbar-brand {
     padding: 12px;
 }
 
