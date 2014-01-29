@@ -1,11 +1,26 @@
-<ul id="gameFeed">
-  <li class="post" data-ng-repeat="post in posts.results">
-    <img data-ng-src="{{ post.image.uri }}" alt="{{ 'Image for post' | translate }}"/>
-    <div class="post-content">
-      <h4>{{ post.account.username }}</h4>
-      <div class="post-date">
-        {{ post.created | date:'medium' }}
-      </div>
+<form name="newPostForm" class="form-horizontal col-md-offset-1" role="form">
+  <label class="sr-only" for="newPostContent" data-translate>Create a new post in the game feed</label>
+  <div class="form-group">
+    <textarea id="newPostContent" class="form-control" rows="{{rows}}"
+              data-ng-focus="rows=6" data-ng-blur="rows=2"
+              placeholder="{{ 'Speak your mind' | translate}}"></textarea>
+  </div>
+  <div class="form-group">
+    <button type="submit" data-ng-click="createPost()" class="btn btn-default pull-right" data-translate>Submit</button>
+  </div>
+</form>
+
+<ul class="media-list">
+  <li class="media" data-ng-repeat="post in posts.results">
+    <div class="pull-left">
+      <i class="media-object glyphicon glyphicon-user" data-ng-hide="post.image.uri"></i>
+      <img class="media-object" data-ng-show="post.image.uri"
+           data-ng-src="{{ post.image.uri }}"
+           alt="{{ 'Image for post' | translate }}"/>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{ post.account.username }}</h4>
+      {{ post.created | date:'medium' }}
       <p>{{ post.content }}</p>
     </div>
   </li>

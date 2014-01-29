@@ -46,7 +46,9 @@ angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
  * @description
  *  Set common items on the $rootScope such as $state related information.
  */
-angular.module('subrosa').run(function ($rootScope, $state) {
+angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
     $rootScope.stateIncludes = $state.includes;
 
     $rootScope.isState = function (stateName) {

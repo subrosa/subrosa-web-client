@@ -31,26 +31,43 @@ angular.module('subrosa.game').config(function ($stateProvider) {
 
     $stateProvider.state('game', {
         abstract: true,
-        url: '/game/{gameUrl}',
         controller: 'GameController',
         templateUrl: '/app/game/views/game-layout.html'
     });
 
     $stateProvider.state('game.dashboard', {
-        url: '',
-        controller: 'GameDashboardController',
-        templateUrl: '/app/game/views/game-dashboard.html'
+        url: '/game/{gameUrl}',
+        views: {
+            "@game": {
+                templateUrl: '/app/game/views/game-dashboard.html'
+            },
+            "left@game.dashboard": {
+                controller: 'GameFeedController',
+                templateUrl: '/app/game/views/game-feed.html'
+            },
+            "right@game.dashboard": {
+                controller: 'GameStatsController',
+                templateUrl: '/app/game/views/game-stats.html'
+            }
+        }
     });
 
-    $stateProvider.state('game.feed', {
-        url: '/feed',
-        controller: 'GameFeedController',
-        templateUrl: '/app/game/views/game-feed.html'
-    });
-
-    $stateProvider.state('game.rules', {
+    $stateProvider.state('game.dashboard.rules', {
         url: '/rules',
-        controller: 'GameRulesController',
-        templateUrl: '/app/game/views/game-rules.html'
+        views: {
+            'right@game.dashboard': {
+                controller: 'GameRulesController',
+                templateUrl: '/app/game/views/game-rules.html'
+            }
+        }
+    });
+    $stateProvider.state('game.dashboard.stats', {
+        url: '/stats',
+        views: {
+            'right@game.dashboard': {
+                controller: 'GameStatsController',
+                templateUrl: '/app/game/views/game-stats.html'
+            }
+        }
     });
 });
