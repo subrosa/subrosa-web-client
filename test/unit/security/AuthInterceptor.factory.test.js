@@ -45,13 +45,6 @@ describe('Factory: AuthInterceptor', function () {
         });
     });
 
-    it('allows successfull responses to pass through', function () {
-        var response = { status: 200, config: { url: '/subrosa/v1/targets'}};
-        spyOn(AuthRetryQueue, 'append');
-        expect(AuthInterceptor.response(response)).toBe(response);
-        expect(AuthRetryQueue.append).not.toHaveBeenCalled();
-    });
-
     describe('intercepts unsuccessful responses', function () {
         var unauthorized;
 
