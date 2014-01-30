@@ -1,0 +1,14 @@
+<div class="col-md-5">
+  <div data-ui-view="left"></div>
+</div>
+<div class="col-md-5 col-md-offset-1">
+  <ul class="nav nav-tabs" role="navigation">
+    <li data-ng-class="{active: isState('game.dashboard.stats') || isState('game.dashboard')}">
+      <a data-ui-sref="game.dashboard.stats" data-translate>Statistics</a>
+    </li>
+    <li data-ng-class="{active: isState('game.dashboard.rules')}">
+      <a data-ui-sref="game.dashboard.rules" data-translate>Rules</a>
+    </li>
+  </ul>
+  <div data-ui-view="right"></div>
+</div>
