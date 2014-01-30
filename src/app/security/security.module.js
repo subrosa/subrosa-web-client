@@ -14,7 +14,7 @@ angular.module('subrosa.security', ['gettext']);
  * @requires $httpProvider
  *
  * @description
- *  Add authInterceptor to $httpProvider interceptors.
+ *  Add AuthInterceptor to $httpProvider interceptors.
  */
 angular.module('subrosa.security').config(function ($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');

@@ -22,9 +22,6 @@ angular.module('subrosa.security').factory('AuthInterceptor', function ($rootSco
             }
             return config;
         },
-        response: function (response) {
-            return response || $q.when(response);
-        },
         responseError: function (rejection) {
             if (rejection.status === 401 && rejection.config.url !== '/subrosa/v1/session') {
                 var deferred = $q.defer();
