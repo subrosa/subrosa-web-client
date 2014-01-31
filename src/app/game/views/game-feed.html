@@ -1,8 +1,11 @@
 <form name="newPostForm" class="form-horizontal col-md-offset-1" role="form">
   <label class="sr-only" for="newPostContent" data-translate>Create a new post in the game feed</label>
+
+  <div data-form-feedback="notifications"></div>
+
   <div class="form-group">
-    <textarea id="newPostContent" class="form-control" rows="{{rows}}"
-              data-ng-focus="rows=6" data-ng-blur="rows=2"
+    <textarea id="newPostContent" class="form-control" data-ng-model="postContent"
+              rows="{{rows}}" data-ng-focus="rows=6"
               placeholder="{{ 'Speak your mind' | translate}}"></textarea>
   </div>
   <div class="form-group">

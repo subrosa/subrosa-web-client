@@ -62,7 +62,6 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         }
     });
     $stateProvider.state('game.dashboard.stats', {
-        url: '/stats',
         views: {
             'right@game.dashboard': {
                 controller: 'GameStatsController',

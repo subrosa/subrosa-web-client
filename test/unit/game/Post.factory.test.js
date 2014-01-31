@@ -1,5 +1,5 @@
-describe('Factory: GameFeed', function () {
-    var gameFeedFactory, $httpBackend, posts;
+describe('Factory: Post', function () {
+    var postFactory, $httpBackend, posts;
 
     beforeEach(module('subrosa.game'));
 
@@ -15,7 +15,7 @@ describe('Factory: GameFeed', function () {
 
         inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');
-            gameFeedFactory = $injector.get('GameFeed');
+            postFactory = $injector.get('Post');
         });
     });
 
@@ -25,9 +25,9 @@ describe('Factory: GameFeed', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('make a request to get the posts from the API.', function () {
+    it('has default limit and offset query string parameters.', function () {
         $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/post?limit=20&offset=0').respond(posts);
-        gameFeedFactory.get({gameUrl: 'raleigh-wars'}, function (response) {
+        postFactory.query({gameUrl: 'raleigh-wars'}, function (response) {
             expect(response.offset).toBe(posts.offset);
             expect(response.limit).toBe(posts.limit);
             expect(response.results.length).toBe(posts.results.length);
@@ -37,7 +37,7 @@ describe('Factory: GameFeed', function () {
     it('accepts limit and offset query string parameters.', function () {
         var limit = 100, offset = 1000;
         $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/post?limit=' + limit + '&offset=' + offset).respond("");
-        gameFeedFactory.get({gameUrl: 'raleigh-wars', limit: limit, offset: offset});
+        postFactory.query({gameUrl: 'raleigh-wars', limit: limit, offset: offset});
     });
 });
 

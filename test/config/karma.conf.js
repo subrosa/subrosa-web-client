@@ -19,6 +19,8 @@ module.exports = function (config) {
             'lib/angular-mocks/angular-mocks.js',
             'lib/angularjs-geolocation/src/geolocation.js',
 
+            '../test/unit/mocks.module.js',
+
             // Must load modules first
             'app/**/*.module.js',
             'app/**/*.js',

@@ -38,7 +38,7 @@
 
             <li data-ng-if="!isAuthenticated()">
               <a href="" data-ng-click="openModal()" data-translate>Login</a>
-              <div login-modal></div>
+              <dialog login-modal></dialog>
             </li>
 
             <li class="dropdown" data-ng-if="isAuthenticated()">
@@ -94,9 +94,9 @@
     <script type="text/javascript" src="/app/game/Game.factory.js"></script>
     <script type="text/javascript" src="/app/game/Game.controller.js"></script>
     <script type="text/javascript" src="/app/game/GameFeed.controller.js"></script>
-    <script type="text/javascript" src="/app/game/GameFeed.factory.js"></script>
     <script type="text/javascript" src="/app/game/GameRules.controller.js"></script>
     <script type="text/javascript" src="/app/game/GameStats.controller.js"></script>
+    <script type="text/javascript" src="/app/game/Post.factory.js"></script>
 
     <script type="text/javascript" src="/app/security/security.module.js"></script>
     <script type="text/javascript" src="/app/security/AuthInterceptor.factory.js"></script>
