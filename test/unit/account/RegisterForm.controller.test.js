@@ -1,7 +1,7 @@
 describe('Controller: RegisterFormController', function () {
-    var $scope, $state, $httpBackend, Account, AuthService, postData;
+    var $scope, $state, Account, AuthService, postData;
 
-    beforeEach(module('subrosa.account'));
+    beforeEach(module('subrosa.account', 'mocks'));
 
     beforeEach(function () {
         $state = {
@@ -13,12 +13,11 @@ describe('Controller: RegisterFormController', function () {
         };
     });
 
-    beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _Account_) {
+    beforeEach(inject(function ($controller, $rootScope, _MockResource_) {
         $scope = $rootScope.$new();
         $scope.transitionTo = function () {};
 
-        $httpBackend = _$httpBackend_;
-        Account = _Account_;
+        Account = _MockResource_.$new();
 
         $controller('RegisterFormController', {
             $scope: $scope,
@@ -32,21 +31,11 @@ describe('Controller: RegisterFormController', function () {
     }));
 
     describe("handles registrations", function () {
-        afterEach(function () {
-            $httpBackend.verifyNoOutstandingExpectation();
-            $httpBackend.verifyNoOutstandingRequest();
-        });
-
         describe("by calling the API and successfully creating an account", function () {
-            beforeEach(function () {
-                $httpBackend.expectPOST('/subrosa/v1/account', postData).respond(200);
-            });
-
             it("and logs the user in", function () {
                 spyOn(AuthService, 'login');
 
                 $scope.register();
-                $httpBackend.flush();
 
                 expect(AuthService.login).toHaveBeenCalledWith($scope.user);
             });
@@ -61,7 +50,6 @@ describe('Controller: RegisterFormController', function () {
                     $scope.fromParams = {};
 
                     $scope.register();
-                    $httpBackend.flush();
 
                     expect($state.transitionTo).toHaveBeenCalledWith($scope.fromState,
                         $scope.fromParams);
@@ -69,7 +57,6 @@ describe('Controller: RegisterFormController', function () {
 
                 it("by transitioning home otherwise", function () {
                     $scope.register();
-                    $httpBackend.flush();
 
                     expect($state.transitionTo).toHaveBeenCalledWith('home');
                 });
@@ -77,20 +64,15 @@ describe('Controller: RegisterFormController', function () {
             });
         });
 
-        describe("by calling the API and encountering an error", function () {
-            var error = {};
-            beforeEach(function () {
-                error.notifications = [{severity: "ERROR", "code": 10000010008}];
-                $httpBackend.expectPOST('/subrosa/v1/account', postData).respond(400, error);
-            });
+        it("by calling the API and encountering an error", function () {
+            var error = {data: {notifications: [{severity: "ERROR", "code": 10000010008}]}};
+            Account.setErrorResponse(error);
 
-            it("sets the error on the $scope", function () {
-                $scope.register();
-                $httpBackend.flush();
-                expect($scope.notifications.length).toBe(1);
-                expect($scope.notifications[0].severity).toBe(error.notifications[0].severity);
-                expect($scope.notifications[0].code).toBe(error.notifications[0].code);
-            });
+            Account.failed = true;
+            $scope.register();
+
+            expect($scope.notifications.length).toBe(1);
+            expect($scope.notifications).toBe(error.data.notifications);
         });
 
         describe("can transition to the login dialog", function () {

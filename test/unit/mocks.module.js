@@ -74,9 +74,17 @@ angular.module('mocks').factory('MockResource', function () {
             return mockResources;
         };
 
-        Resource.save = function (params, success) {
-            success(params);
+        Resource.save = function (params, success, error) {
+            if (!this.failed) {
+                success(this);
+            } else {
+                error(errorResponse);
+            }
             return new Resource(params);
+        };
+
+        Resource.setErrorResponse = function (response) {
+            errorResponse = response;
         };
 
         return Resource;
