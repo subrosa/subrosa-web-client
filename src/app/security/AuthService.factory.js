@@ -1,4 +1,15 @@
 /**
+ * This file incorporates work covered by the following copyright and
+ * permission notice:
+ *
+ *  HTTP Auth Interceptor Module for AngularJS
+ *  (c) 2012 Witold Szczerba
+ *  License: MIT
+ *
+ *  https://github.com/witoldsz/angular-http-auth/
+ */
+
+/**
  * @ngdoc factory
  * @name subrosa.security.AuthService
  *
