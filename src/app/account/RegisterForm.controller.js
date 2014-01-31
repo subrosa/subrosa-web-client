@@ -28,12 +28,15 @@ angular.module('subrosa.account').controller('RegisterFormController', function 
     };
 
     error = function (response) {
-        $scope.registerError = response.data;
+        $scope.notifications = response.data.notifications;
     };
 
     $scope.register = function () {
-        var account = new Account($scope.user);
-        account.$save(success, error);
+        var data = {
+            account: {email: $scope.user.email},
+            password: $scope.user.password
+        };
+        Account.save(data, success, error);
     };
 
     $scope.goToLogin = function () {

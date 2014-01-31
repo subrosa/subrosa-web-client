@@ -1,5 +1,5 @@
 describe('Controller: RegisterFormController', function () {
-    var $scope, $state, $httpBackend, Account, AuthService;
+    var $scope, $state, $httpBackend, Account, AuthService, postData;
 
     beforeEach(module('subrosa.account'));
 
@@ -15,7 +15,6 @@ describe('Controller: RegisterFormController', function () {
 
     beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _Account_) {
         $scope = $rootScope.$new();
-        $scope.user = {email: 'valid@valid.com', password: 'bitcheye'};
         $scope.transitionTo = function () {};
 
         $httpBackend = _$httpBackend_;
@@ -27,6 +26,9 @@ describe('Controller: RegisterFormController', function () {
             Account: Account,
             AuthService: AuthService
         });
+
+        $scope.user = {email: 'valid@valid.com', password: 'bitcheye'};
+        postData = {account: {email: $scope.user.email}, password: $scope.user.password};
     }));
 
     describe("handles registrations", function () {
@@ -37,7 +39,7 @@ describe('Controller: RegisterFormController', function () {
 
         describe("by calling the API and successfully creating an account", function () {
             beforeEach(function () {
-                $httpBackend.expectPOST('/subrosa/v1/account', $scope.user).respond(200);
+                $httpBackend.expectPOST('/subrosa/v1/account', postData).respond(200);
             });
 
             it("and logs the user in", function () {
@@ -76,14 +78,18 @@ describe('Controller: RegisterFormController', function () {
         });
 
         describe("by calling the API and encountering an error", function () {
+            var error = {};
             beforeEach(function () {
-                $httpBackend.expectPOST('/subrosa/v1/account', $scope.user).respond(400, "someError");
+                error.notifications = [{severity: "ERROR", "code": 10000010008}];
+                $httpBackend.expectPOST('/subrosa/v1/account', postData).respond(400, error);
             });
 
             it("sets the error on the $scope", function () {
                 $scope.register();
                 $httpBackend.flush();
-                expect($scope.registerError).toBe("someError");
+                expect($scope.notifications.length).toBe(1);
+                expect($scope.notifications[0].severity).toBe(error.notifications[0].severity);
+                expect($scope.notifications[0].code).toBe(error.notifications[0].code);
             });
         });
 
