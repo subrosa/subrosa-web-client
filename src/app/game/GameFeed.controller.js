@@ -6,7 +6,7 @@
  * @requires Post
  *
  * @description
- *  Controller for game dashboard related functionality.
+ *  Controller for game feed related functionality.
  */
 angular.module('subrosa.game').controller('GameFeedController', function ($scope, Post) {
     var success, error;
