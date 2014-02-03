@@ -1,4 +1,4 @@
-<section class="row page-header">
+<header class="row page-header">
   <div class="col-sm-5">
     <h1>{{ game.name }}</h1>
     <h4>{{ game.description }}</h4>
@@ -17,7 +17,7 @@
       <span class="information-value">{{ game.gameType }}</span>
     </div>
   </div>
-</section>
+</header>
 
 <section class="row">
   <div class="col-md-5">
@@ -25,8 +25,8 @@
   </div>
   <div class="col-md-5 col-md-offset-1">
     <ul class="nav nav-tabs" role="navigation">
-      <li data-ng-class="{active: isState('game.stats') || isState('game')}">
-        <a data-ui-sref="game.stats" data-translate>Statistics</a>
+      <li data-ng-class="{active: isState('game')}">
+        <a data-ui-sref="game" data-translate>Statistics</a>
       </li>
       <li data-ng-class="{active: isState('game.rules')}">
         <a data-ui-sref="game.rules" data-translate>Rules</a>

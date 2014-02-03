@@ -57,12 +57,4 @@ angular.module('subrosa.game').config(function ($stateProvider) {
             }
         }
     });
-    $stateProvider.state('game.stats', {
-        views: {
-            'right@game': {
-                controller: 'GameStatsController',
-                templateUrl: '/app/game/views/game-stats.html'
-            }
-        }
-    });
 });
