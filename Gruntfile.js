@@ -33,8 +33,8 @@ module.exports = function (grunt) {
             all: {
                 options: { livereload: true },
                 files: [
-                    '<%= subrosa.src %>/lib/**/*',
-                    '<%= subrosa.src %>/**/*.html',
+                    '<%= subrosa.src %>/app/index.html',
+                    '<%= subrosa.src %>/app/*.html',
                     '<%= subrosa.src %>/css/**/*.css',
                     '<%= subrosa.src %>/app/**/*.js',
                     '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
@@ -130,7 +130,6 @@ module.exports = function (grunt) {
         // Testing
         karma: {
             server: {
-                browsers: ['PhantomJS'],
                 configFile: 'test/config/karma.conf.js',
                 autoWatch: true
             },
@@ -141,14 +140,11 @@ module.exports = function (grunt) {
             e2e: {
                 configFile: 'test/config/karma-e2e.conf.js'
             },
-            //continuous integration modes: run tests once in PhantomJS browser.
             singleRunUnit: {
-                browsers: ['PhantomJS'],
                 configFile: 'test/config/karma.conf.js',
                 singleRun: true
             },
             singleRunE2E: {
-                browsers: ['PhantomJS'],
                 configFile: 'test/config/karma-e2e.conf.js',
                 singleRun: true
             }
