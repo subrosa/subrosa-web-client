@@ -13,11 +13,11 @@ describe('Controller: RegisterFormController', function () {
         };
     });
 
-    beforeEach(inject(function ($controller, $rootScope, _MockResource_) {
+    beforeEach(inject(function ($controller, $rootScope, MockResource) {
         $scope = $rootScope.$new();
         $scope.transitionTo = function () {};
 
-        Account = _MockResource_.$new();
+        Account = MockResource.$new();
 
         $controller('RegisterFormController', {
             $scope: $scope,

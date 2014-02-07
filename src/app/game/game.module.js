@@ -9,7 +9,9 @@ angular.module('subrosa.game', [
     'geolocation',
     'gettext',
     'ngResource',
-    'ui.router'
+    'ui.router',
+    'ui.bootstrap.datepicker',
+    'ui.bootstrap.timepicker'
 ]);
 
 /**
@@ -37,6 +39,12 @@ angular.module('subrosa.game').config(function ($stateProvider) {
                 controller: 'GameController',
                 templateUrl: '/app/game/views/game-layout.html'
             },
+            'header@game': {
+                templateUrl: '/app/game/views/game-header.html'
+            },
+            'menu@game': {
+                templateUrl: '/app/game/views/game-menu.html'
+            },
             'left@game': {
                 controller: 'GameFeedController',
                 templateUrl: '/app/game/views/game-feed.html'
@@ -50,6 +58,38 @@ angular.module('subrosa.game').config(function ($stateProvider) {
 
     $stateProvider.state('game.rules', {
         url: '/rules',
+        views: {
+            'right@game': {
+                controller: 'GameRulesController',
+                templateUrl: '/app/game/views/game-rules.html'
+            }
+        }
+    });
+
+    $stateProvider.state('game.edit', {
+        url: '/edit',
+
+        views: {
+            'header@game': {
+                controller: 'EditGameController',
+                templateUrl: '/app/game/edit/views/edit-game-header.html'
+            },
+            'menu@game': {
+                templateUrl: '/app/game/edit/views/edit-game-menu.html'
+            },
+            'left@game': {
+                controller: 'GameFeedController',
+                templateUrl: '/app/game/views/game-feed.html'
+            },
+            'right@game': {
+                controller: 'EditGameOptionsController',
+                templateUrl: '/app/game/edit/views/edit-game-options.html'
+            }
+        }
+    });
+    $stateProvider.state('game.edit.rules', {
+        url: '/rules',
+
         views: {
             'right@game': {
                 controller: 'GameRulesController',

@@ -52,6 +52,8 @@ angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     $rootScope.stateIncludes = $state.includes;
+    $rootScope.transitionTo = $state.transitionTo;
+    $rootScope.go = $state.go;
 
     $rootScope.isState = function (stateName) {
         return $state.is(stateName);

@@ -1,0 +1,8 @@
+.information-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.information-label:after {
+    content: ':';
+}

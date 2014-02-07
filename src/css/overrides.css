@@ -6,3 +6,12 @@ html .navbar-brand {
 html .navbar-nav.navbar-right:last-child {
     margin-right: 0;
 }
+
+html .page-header {
+    margin-top: 20px;
+}
+
+table[data-timepicker] tr:first-of-type,
+table[data-timepicker] tr:last-of-type {
+    display: none;
+}

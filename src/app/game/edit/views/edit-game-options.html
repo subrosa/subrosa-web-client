@@ -1,0 +1,51 @@
+<section>
+  <h2 data-translate>Options for {{ game.name }}</h2>
+
+  <form name="gameOptionsForm" role="form" class="form-horizontal">
+    <div data-form-feedback="notifications"></div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" data-ng-model="teamGame"/>Team Game
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div data-ng-show="teamGame" class="form-group">
+      <label for="maximumTeamSize" class="col-sm-3 control-label" data-translate>Maximum Team Size</label>
+      <div class="col-sm-2">
+        <input id="maximumTeamSize" type="number" min="1" class="form-control" data-ng-model="game.maximumTeamSize"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="price" class="col-sm-3 control-label" data-translate>Price (USD)</label>
+      <div class="col-sm-2">
+        <input id="price" type="number" min="1" class="form-control" data-ng-model="game.price"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="price" class="col-sm-3 control-label" data-translate>Minimum Age</label>
+      <div class="col-sm-2">
+        <input id="minimumAge" type="number" min="13" class="form-control" data-ng-model="game.minimumAge"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="gamePassword" class="col-sm-3 control-label" data-translate>Password to Join</label>
+      <div class="col-sm-4">
+        <input id="gamePassword" type="password" class="form-control" data-ng-model="game.password"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <button type="submit" data-ng-click="saveGame()" class="btn btn-default">Save</button>
+      </div>
+    </div>
+  </form>
+</section>

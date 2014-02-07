@@ -23,21 +23,33 @@ angular.module('mocks').factory('MockResource', function () {
         errorResponse = {
             data: {
                 notifications: {
+                    code: 1000,
                     name: 'Invalid name'
                 }
             }
         };
 
         mockResource = {
+            id: 1,
             $delete: function (callback) {
                 callback();
             },
             $get: function () {},
             $save: function (data, success, error) {
-                if (!this.failed) {
-                    success(this);
+                var successFn, errorFn;
+
+                if (typeof(data) === "function") {
+                    successFn = data;
+                    errorFn = success;
                 } else {
-                    error(errorResponse);
+                    successFn = success;
+                    errorFn = error;
+                }
+
+                if (this.failed) {
+                    errorFn(errorResponse);
+                } else {
+                    successFn(this);
                 }
             },
             $update: function (success, error) {
@@ -53,7 +65,6 @@ angular.module('mocks').factory('MockResource', function () {
             results: [mockResource]
         };
 
-
         Resource = function (parameters) {
             var copy = angular.copy(mockResource);
             if (parameters) {
@@ -62,7 +73,20 @@ angular.module('mocks').factory('MockResource', function () {
             return copy;
         };
 
-        Resource.get = function () {};
+        Resource.get = function (params, callback) {
+            var item;
+            angular.forEach(mockResources.results, function (value) {
+                if (value.id.toString() === params.id.toString()) {
+                    item = value;
+                }
+            });
+
+            if (callback) {
+                callback(item);
+            }
+
+            return item;
+        };
 
         Resource.query = function (params, callback) {
 

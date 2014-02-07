@@ -1,37 +1,11 @@
-<header class="row page-header">
-  <div class="col-sm-5">
-    <h1>{{ game.name }}</h1>
-    <h4>{{ game.description }}</h4>
-  </div>
-  <div class="col-sm-5">
-    <div data-ng-show="game.gameStart && game.gameEnd">
-      <span class="information-label" data-translate>Duration</span>
-      <span class="information-value">{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</span>
-    </div>
-    <div data-ng-show="game.ordnance">
-      <span class="information-label" data-translate>Ordnance</span>
-      <span class="information-value">{{ game.ordnance }}</span>
-    </div>
-    <div data-ng-show="game.gameType">
-      <span class="information-label" data-translate>Game Type</span>
-      <span class="information-value">{{ game.gameType }}</span>
-    </div>
-  </div>
-</header>
+<header class="row page-header" data-ui-view="header"></header>
 
 <section class="row">
   <div class="col-md-5">
     <div data-ui-view="left"></div>
   </div>
   <div class="col-md-5 col-md-offset-1">
-    <ul class="nav nav-tabs" role="navigation">
-      <li data-ng-class="{active: isState('game')}">
-        <a data-ui-sref="game" data-translate>Statistics</a>
-      </li>
-      <li data-ng-class="{active: isState('game.rules')}">
-        <a data-ui-sref="game.rules" data-translate>Rules</a>
-      </li>
-    </ul>
+    <nav data-ui-view="menu"></nav>
     <div data-ui-view="right"></div>
   </div>
 </section>
