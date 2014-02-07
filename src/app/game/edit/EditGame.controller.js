@@ -27,9 +27,7 @@ angular.module('subrosa.game').controller('EditGameController', function ($scope
     };
 
     $scope.saveGame = function () {
-        if ($scope.gameForm.$valid && !$scope.saving) {
-            $scope.saving = true;
-            $scope.game.$save(success, error);
-        }
+        $scope.saving = true;
+        $scope.game.$save(success, error);
     };
 });

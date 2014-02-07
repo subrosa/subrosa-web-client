@@ -82,7 +82,7 @@ angular.module('subrosa.game').config(function ($stateProvider) {
                 templateUrl: '/app/game/views/game-feed.html'
             },
             'right@game': {
-                controller: 'EditGameOptionsController',
+                controller: 'EditGameController',
                 templateUrl: '/app/game/edit/views/edit-game-options.html'
             }
         }
