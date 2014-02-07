@@ -104,7 +104,7 @@ describe('Controller: RegisterFormController', function () {
 
         it("can set the user via an event", function () {
             var user = {email: 'why@yes.com', password: 'lalala'};
-            $rootScope.$broadcast('toRegisterFromLogin', user)
+            $rootScope.$broadcast('toRegisterFromLogin', user);
             expect($scope.user).toBe(user);
         });
     });
