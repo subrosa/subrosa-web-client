@@ -151,6 +151,18 @@ describe('Directive: loginModal', function () {
             expect($modalInstance.dismiss).toHaveBeenCalledWith('cancel');
         });
 
+        it("can show or hide the forgot password page", function () {
+            expect($scope.forgotPassword).not.toBeDefined();
+            $scope.showForgotPassword(true);
+            expect($scope.forgotPassword).toBe(true);
+            $scope.showForgotPassword(false);
+            expect($scope.forgotPassword).toBe(false);
+        });
+
+        xdescribe("can call the API to request a password reset link", function () {
+            // TODO add test once API is defined and this is implemented
+        });
+
         it("can transition to the register page", function () {
             spyOn($modalInstance, 'dismiss');
             spyOn($state, 'transitionTo').andCallThrough();

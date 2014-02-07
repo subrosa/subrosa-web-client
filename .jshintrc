@@ -16,8 +16,9 @@
         "it": true,
         "jasmine": true,
         "module": true,
-        "spyOn": true
-
+        "spyOn": true,
+        "xdescribe": true,
+        "xit": true
     },
     "immed": true,
     "indent": 4,

@@ -43,6 +43,14 @@ function ($rootScope, $scope, $state, $modalInstance, AuthService, user) {
         $modalInstance.dismiss('cancel');
     };
 
+    $scope.showForgotPassword = function (show) {
+        $scope.forgotPassword = show;
+    };
+
+    $scope.submitForgotPassword = function () {
+        // TODO call an API once it's defined.
+    };
+
     $scope.goToRegister = function () {
         $modalInstance.dismiss('cancel');
         $state.transitionTo('register').then(function () {
