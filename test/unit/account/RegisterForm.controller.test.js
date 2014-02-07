@@ -1,5 +1,5 @@
 describe('Controller: RegisterFormController', function () {
-    var $scope, $state, Account, AuthService, postData;
+    var $rootScope, $scope, $state, Account, AuthService, postData;
 
     beforeEach(module('subrosa.account', 'mocks'));
 
@@ -13,7 +13,8 @@ describe('Controller: RegisterFormController', function () {
         };
     });
 
-    beforeEach(inject(function ($controller, $rootScope, MockResource) {
+    beforeEach(inject(function ($controller, _$rootScope_, MockResource) {
+        $rootScope = _$rootScope_;
         $scope = $rootScope.$new();
         $scope.transitionTo = function () {};
 
@@ -99,6 +100,12 @@ describe('Controller: RegisterFormController', function () {
                 $scope.goToLogin();
                 expect($state.transitionTo).toHaveBeenCalledWith('home');
             });
+        });
+
+        it("can set the user via an event", function () {
+            var user = {email: 'why@yes.com', password: 'lalala'};
+            $rootScope.$broadcast('toRegisterFromLogin', user)
+            expect($scope.user).toBe(user);
         });
     });
 });

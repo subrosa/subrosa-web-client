@@ -51,11 +51,15 @@ describe('Directive: loginModal', function () {
     });
 
     describe("Controller: LoginModalController", function () {
-        var $state, $modalInstance, AuthService;
+        var $controller, $rootScope, $state, $modalInstance, AuthService, user;
 
         beforeEach(function () {
             $state = {
-                transitionTo: function () {}
+                transitionTo: function () {
+                    return {then: function (callback) {
+                        callback();
+                    }};
+                }
             };
 
             $modalInstance = {
@@ -78,14 +82,21 @@ describe('Directive: loginModal', function () {
                     return deferred.promise;
                 }
             };
+
+            user = undefined;
         });
 
-        beforeEach(inject(function ($controller) {
+        beforeEach(inject(function (_$controller_, _$rootScope_) {
+            $controller = _$controller_;
+            $rootScope = _$rootScope_;
+
             $controller('LoginModalController', {
+                $rootScope: $rootScope,
                 $scope: $scope,
                 $state: $state,
                 $modalInstance: $modalInstance,
-                AuthService: AuthService
+                AuthService: AuthService,
+                user: user
             });
         }));
 
@@ -142,12 +153,29 @@ describe('Directive: loginModal', function () {
 
         it("can transition to the register page", function () {
             spyOn($modalInstance, 'dismiss');
-            spyOn($state, 'transitionTo');
+            spyOn($state, 'transitionTo').andCallThrough();
+            spyOn($rootScope, '$broadcast');
 
+            $scope.user = {email: 'why@hello.com'};
             $scope.goToRegister();
 
+            expect($rootScope.$broadcast).toHaveBeenCalledWith('toRegisterFromLogin', $scope.user);
             expect($modalInstance.dismiss).toHaveBeenCalledWith('cancel');
             expect($state.transitionTo).toHaveBeenCalledWith('register');
+        });
+
+        it("can pre-populate the current user if it was provided", function () {
+            user = {email: 'yes@sir.com', password: 'lalala'};
+
+            $controller('LoginModalController', {
+                $scope: $scope,
+                $state: $state,
+                $modalInstance: $modalInstance,
+                AuthService: AuthService,
+                user: user
+            });
+
+            expect($scope.user).toBe(user);
         });
     });
 });

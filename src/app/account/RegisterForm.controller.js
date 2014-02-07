@@ -2,6 +2,7 @@
  * @ngdoc controller
  * @name subrosa.account:RegisterFormController
  *
+ * @requires $rootScope
  * @requires $scope
  * @requires $state
  * @requires Account
@@ -10,7 +11,7 @@
  * @description
  *   Provide a controller for the Register Form.
  */
-angular.module('subrosa.account').controller('RegisterFormController', function ($scope, $state, Account, AuthService) {
+angular.module('subrosa.account').controller('RegisterFormController', function ($rootScope, $scope, $state, Account, AuthService) {
     var redirect, success, error;
     $scope.user = {};
 
@@ -41,6 +42,10 @@ angular.module('subrosa.account').controller('RegisterFormController', function 
 
     $scope.goToLogin = function () {
         redirect();
-        $scope.openLogin();
+        $scope.openLogin($scope.user);
     };
+
+    $rootScope.$on('toRegisterFromLogin', function (event, user) {
+        $scope.user = user;
+    });
 });

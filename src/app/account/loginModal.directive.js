@@ -2,18 +2,22 @@
  * @ngdoc controller
  * @name subrosa.account.LoginModalController
  *
+ * @requires $rootScope
  * @requires $scope
  * @requires $state
  * @requires $modalInstance
  * @requires AuthService
+ * @requires user (resolved user if provided to modal)
  *
  * @description
  *  Handle submission of the login form.
  */
-angular.module('subrosa.account').controller('LoginModalController', function ($scope, $state, $modalInstance, AuthService) {
+angular.module('subrosa.account').controller('LoginModalController',
+function ($rootScope, $scope, $state, $modalInstance, AuthService, user) {
     var success, error;
 
-    $scope.user = {};
+    $scope.user = user || {};
+
     $scope.errors = {
         authError: false,
         unknownError: false
@@ -41,8 +45,11 @@ angular.module('subrosa.account').controller('LoginModalController', function ($
 
     $scope.goToRegister = function () {
         $modalInstance.dismiss('cancel');
-        $state.transitionTo('register');
+        $state.transitionTo('register').then(function () {
+            $rootScope.$broadcast('toRegisterFromLogin', $scope.user);
+        });
     };
+
 });
 
 /**
@@ -58,16 +65,21 @@ angular.module('subrosa.account').directive('loginModal', function ($modal) {
     return {
         replace: true,
         link: function (scope) {
-            scope.openModal = function () {
-                $modal.open({
+            scope.openModal = function (user) {
+                return $modal.open({
                     controller: 'LoginModalController',
-                    templateUrl: '/app/account/views/login-modal.html'
+                    templateUrl: '/app/account/views/login-modal.html',
+                    resolve: {
+                        user: function () {
+                            return user;
+                        }
+                    }
                 });
             };
 
             // Open the modal when login is required
-            scope.$on('auth-loginRequired', function () {
-                scope.openModal();
+            scope.$on('auth-loginRequired', function (event, user) {
+                scope.openModal(user);
             });
         }
     };
