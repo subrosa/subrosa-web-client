@@ -201,6 +201,18 @@ module.exports = function (grunt) {
                     ],
                     dest: '<%= subrosa.dist %>'
                 }]
+            },
+            fonts: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= subrosa.src %>/lib/bootstrap/dist/',
+                    src: [
+                        '*.{ico,text,png,html}',
+                        'fonts/*'
+                    ],
+                    dest: '<%= subrosa.dist %>'
+                }]
             }
         },
 
@@ -295,6 +307,7 @@ module.exports = function (grunt) {
         'imagemin',
         'ngtemplates',
         'copy:assets',
+        'copy:fonts',
         'concat:generated',
         'ngmin',
         'cssmin:generated',
