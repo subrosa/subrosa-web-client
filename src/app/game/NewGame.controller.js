@@ -16,7 +16,6 @@ angular.module('subrosa.game').controller('NewGameController', function ($scope,
     };
 
     error = function (response) {
-        $scope.saving = false;
         $scope.notifications = response.data.notifications;
     };
 
