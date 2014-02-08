@@ -22,7 +22,7 @@
         <label for="registerEmail" class="col-sm-2 control-label" data-translate>E-mail</label>
         <div class="col-sm-10">
           <input id="registerEmail" name="login" type="email" class="form-control"
-                 data-ng-model="user.email" placeholder="Email" required autofocus/>
+                 data-ng-model="user.email" placeholder="{{ 'Email' | translate }}" required autofocus/>
           <p class="help-block" data-translate>No spam.  You will only receive emails that you actually opt-in to rather than the other way around.</p>
         </div>
       </div>
@@ -31,7 +31,7 @@
         <label for="registerPassword" class="col-sm-2 control-label" data-translate>Password</label>
         <div class="col-sm-10">
           <input id="registerPassword" name="pass" type="password" class="form-control"
-                 data-ng-model="user.password" data-password-validator placeholder="Password" required/>
+                 data-ng-model="user.password" data-password-validator placeholder="{{ 'Password' | translate }}" required/>
           <p class="help-block" data-translate>Tip: use at least one number and at least seven characters.</p>
         </div>
       </div>
