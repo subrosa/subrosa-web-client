@@ -3,12 +3,12 @@
     <div data-form-feedback="notifications"></div>
 
     <div class="col-sm-5">
-      <div class="pull-left">
-        <div class="thumbnail game-badge">
-          <img data-ng-src="{{ game.image.uri }}" alt="{{ 'Game Badge for' | translate }} {{game.name}}"/>
-          <div class="caption">
-            <button class="btn btn-default center-block" data-translate>Edit Image</button>
-          </div>
+      <div class="thumbnail game-badge pull-left">
+        <img data-ng-src="{{ game.image.uri }}" data-ng-show="game.image.uri"
+             alt="{{ 'Game Badge for' | translate }} {{ game.name }}"/>
+        <i class="avatar-lg glyphicon glyphicon-camera center-block" data-ng-hide="game.image.uri"></i>
+        <div class="caption">
+          <button class="btn btn-default center-block" data-translate>Edit Image</button>
         </div>
       </div>
 
