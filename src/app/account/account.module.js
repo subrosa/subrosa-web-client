@@ -72,7 +72,7 @@ angular.module('subrosa.account').config(function ($stateProvider) {
  *  Allow the opening of the login dialog.
  */
 angular.module('subrosa.account').run(function ($rootScope) {
-    $rootScope.openLogin = function () {
-        $rootScope.$broadcast('auth-loginRequired');
+    $rootScope.openLogin = function (user) {
+        $rootScope.$broadcast('auth-loginRequired', user);
     };
 });
