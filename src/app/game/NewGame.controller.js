@@ -11,8 +11,8 @@
 angular.module('subrosa.game').controller('NewGameController', function ($scope, Game) {
     var success, error;
 
-    success = function (response) {
-        $scope.transitionTo('game.edit', {gameUrl: response.data.url});
+    success = function (game) {
+        $scope.transitionTo('game.edit', {gameUrl: game.url});
     };
 
     error = function (response) {
@@ -20,6 +20,8 @@ angular.module('subrosa.game').controller('NewGameController', function ($scope,
     };
 
     $scope.game = new Game();
+    // Hardcoded to ASSASSIN for now because that's all we have
+    $scope.game.gameType = 'ASSASSIN';
 
     $scope.createGame = function () {
         $scope.game.$save(success, error);

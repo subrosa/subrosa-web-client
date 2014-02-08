@@ -18,10 +18,14 @@ describe('Controller: NewGame', function () {
         expect($scope.game).toBeDefined();
     });
 
+    it('defaults the gameType to "ASSASSIN" for now', function () {
+        expect($scope.game.gameType).toBe('ASSASSIN');
+    });
+
     describe('can create a new Game', function () {
         it('and can be successful', function () {
             spyOn($scope.game, '$save').andCallFake(function (success) {
-                success({data: {url: 'abcd'}});
+                success({url: 'abcd'});
             });
             spyOn($scope, 'transitionTo');
             $scope.createGame();

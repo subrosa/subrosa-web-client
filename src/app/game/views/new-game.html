@@ -5,7 +5,20 @@
     <div class="jumbotron">
       <h1 data-translate>Be the Master of your own Game</h1>
       <p data-translate>Create your own game and invite others to join in on the fun.  You call all the shots.  It's FREE.</p>
-      <button class="btn btn-primary btn-lg" data-ng-click="createGame()" data-translate>Let's do this thing</button>
+      <form name="createGameForm" role="form" novalidate>
+        <div data-form-feedback="notifications"></div>
+
+        <div class="form-group">
+          <label for="gameName" data-translate>Enter the name of your Game Below</label>
+          <input id="gameName" name="gameName" type="text" class="form-control" placeholder="{{ 'Game Name' | translate }}"
+                 data-ng-model="game.name" required autofocus/>
+          <p class="help-block" data-translate>Stumped?  Don't worry you can change this later.</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" data-ng-click="createGame()"
+                data-ng-disabled="!createGameForm.$valid" data-translate>Let's do this thing</button>
+
+      </form>
     </div>
   </div>
 
