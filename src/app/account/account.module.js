@@ -32,14 +32,17 @@ angular.module('subrosa.account').config(function ($stateProvider) {
             },
             'right@account': {
                 templateUrl: '/app/account/views/account-profile.html'
+            },
+            'profile@account': {
+                templateUrl: '/app/account/views/account-profile-display.html'
             }
         }
     });
     $stateProvider.state('account.edit', {
-        url: '/account/edit',
+        url: '/edit',
         views: {
-            'right@account': {
-                templateUrl: '/app/account/views/edit-account-profile.html'
+            'profile@account': {
+                templateUrl: '/app/account/views/account-profile-edit.html'
             }
         }
     });

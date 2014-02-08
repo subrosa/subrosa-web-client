@@ -1,5 +1,5 @@
 <header class="row page-header">
-  <h1>{{ account.username || account.name }}</h1>
+  <h1>{{ account.username || account.name || account.email}}</h1>
 </header>
 
 <section class="row">
@@ -20,6 +20,6 @@
     </ul>
   </div>
   <div class="col-md-9 col-md-offset-1">
-    <div data-ui-view="right"></div>
+    <section data-ui-view="right"></section>
   </div>
 </section>

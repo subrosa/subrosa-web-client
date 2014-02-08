@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-sm-4">
+    <span class="information-label" data-translate>Username</span>
+  </div>
+  <div class="col-sm-6">
+    <span class="information-value">{{ account.username }}</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+    <span class="information-label" data-translate>Real Name</span>
+  </div>
+  <div class="col-sm-6">
+    <span class="information-value">{{ account.name }}</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+    <span class="information-label" data-translate>Email</span>
+  </div>
+  <div class="col-sm-6">
+    <span class="information-value">{{ account.email }}</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+    <span class="information-label" data-translate>Cell Phone Number</span>
+  </div>
+  <div class="col-sm-6">
+    <span class="information-value">{{ account.cellPhone }}</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+    <span class="information-label" data-translate>Date of Birth</span>
+  </div>
+  <div class="col-sm-6">
+    <span class="information-value">{{ account.dateOfBirth | date:'longDate' }}</span>
+  </div>
+</div>
+
+<div class="row" data-ng-repeat="address in account.addresses">
+  <div class="col-sm-4">
+      <span class="information-label" data-ng-show="address.addressType == 'HOME'" data-translate>
+        Home Address
+      </span>
+      <span class="information-label" data-ng-show="address.addressType == 'WORK'" data-translate>
+        Work Address
+      </span>
+      <span class="information-label" data-ng-show="address.addressType == 'SCHOOL'" data-translate>
+        School Address
+      </span>
+      <span class="information-label" data-ng-show="address.addressType == 'OTHER'" data-translate>
+        Other Address
+      </span>
+  </div>
+  <address class="col-sm-6">
+    {{ address.streetAddress }}<br/>
+    {{ address.streetContinued }}<br data-ng-show="address.streetContinued"/>
+    {{ address.city }}, {{ address.state }} {{ address.postalCode }}<br/>
+  </address>
+</div>
+<button class="btn btn-primary" data-ng-click="go('account.edit')" data-translate>Edit</button>
