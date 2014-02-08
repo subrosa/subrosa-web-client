@@ -16,7 +16,7 @@
       <dd>{{ game.ordnance }}</dd>
 
       <dt data-translate>Game Type</dt>
-      <dd>{{ game.gameType }}</dd>
+      <dd>{{ game.gameType | gameType }}</dd>
     </dl>
   </div>
   <button class="btn btn-primary" data-ng-click="go('game.edit')" data-translate>Edit Game</button>
