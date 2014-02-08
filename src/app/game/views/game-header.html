@@ -9,11 +9,18 @@
     <p>{{ game.description }}</p>
   </div>
   <div class="col-sm-6">
-    <h4>{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</h4>
-
     <dl class="dl-horizontal">
+      <dt data-translate>Duration</dt>
+      <dd>
+        <p data-ng-show="game.gameStart && game.gameEnd">{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</p>
+        <p class="text-danger" data-ng-hide="game.gameStart && game.gameEnd" data-translate>Duration has not been selected</p>
+      </dd>
+
       <dt data-translate>Ordnance</dt>
-      <dd>{{ game.ordnance }}</dd>
+      <dd>
+        <p data-ng-show="game.ordnance">{{ game.ordnance }}</p>
+        <p class="text-danger" data-ng-hide="game.ordnance">Ordnance hat not been selected</p>
+      </dd>
 
       <dt data-translate>Game Type</dt>
       <dd>{{ game.gameType | gameType }}</dd>
