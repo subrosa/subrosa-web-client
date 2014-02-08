@@ -25,11 +25,29 @@ angular.module('subrosa.account', [
 angular.module('subrosa.account').config(function ($stateProvider) {
     $stateProvider.state('account', {
         url: '/account',
-
         views: {
             '@': {
                 controller: 'AccountController',
                 templateUrl: '/app/account/views/account-layout.html'
+            },
+            'right@account': {
+                templateUrl: '/app/account/views/account-profile.html'
+            }
+        }
+    });
+    $stateProvider.state('account.edit', {
+        url: '/account/edit',
+        views: {
+            'right@account': {
+                templateUrl: '/app/account/views/edit-account-profile.html'
+            }
+        }
+    });
+    $stateProvider.state('account.images', {
+        url: '/account/images',
+        views: {
+            'right@account': {
+                templateUrl: '/app/account/views/account-images.html'
             }
         }
     });
@@ -51,7 +69,7 @@ angular.module('subrosa.account').config(function ($stateProvider) {
  *  Allow the opening of the login dialog.
  */
 angular.module('subrosa.account').run(function ($rootScope) {
-    $rootScope.openLogin = function (user) {
-        $rootScope.$broadcast('auth-loginRequired', user);
+    $rootScope.openLogin = function () {
+        $rootScope.$broadcast('auth-loginRequired');
     };
 });

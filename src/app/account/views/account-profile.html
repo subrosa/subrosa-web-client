@@ -1,0 +1,101 @@
+<section>
+
+  <h2 data-translate>Profile</h2>
+  <div class="alert alert-warning" data-ng-hide="account.activated">
+    <p data-translate>
+      Activate your account in order to create and join games.  Check your email.
+    </p>
+    <p>
+      <a data-ng-click="resendActivation()" data-translate>Resend activation email.</a>
+    </p>
+  </div>
+
+  <div class="col-md-7">
+      <p class="lead" data-translate>Your information is safe with us.</p>
+      <p>The following is only displayed to other users if a game you are enrolled in requires this information.  For example, a game of Assassins may require name, email, and home address but not work address.</p>
+
+
+    <button class="btn btn-default pull-right" data-ng-click="go('account.edit')" data-translate>Edit</button>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="information-label" data-translate>Username</span>
+      </div>
+      <div class="col-sm-6">
+        <span class="information-value">{{ account.username }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="information-label" data-translate>Real Name</span>
+      </div>
+      <div class="col-sm-6">
+        <span class="information-value">{{ account.name }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="information-label" data-translate>Email</span>
+      </div>
+      <div class="col-sm-6">
+        <span class="information-value">{{ account.email }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="information-label" data-translate>Cell Phone Number</span>
+      </div>
+      <div class="col-sm-6">
+        <span class="information-value">{{ account.cellPhone }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="information-label" data-translate>Date of Birth</span>
+      </div>
+      <div class="col-sm-6">
+        <span class="information-value">{{ account.dateOfBirth | date:'longDate' }}</span>
+      </div>
+    </div>
+
+    <div class="row" data-ng-repeat="address in account.addresses">
+      <div class="col-sm-4">
+        <span class="information-label" data-ng-show="address.addressType == 'HOME'" data-translate>
+          Home Address
+        </span>
+        <span class="information-label" data-ng-show="address.addressType == 'WORK'" data-translate>
+          Work Address
+        </span>
+        <span class="information-label" data-ng-show="address.addressType == 'SCHOOL'" data-translate>
+          School Address
+        </span>
+        <span class="information-label" data-ng-show="address.addressType == 'OTHER'" data-translate>
+          Other Address
+        </span>
+      </div>
+      <address class="col-sm-6">
+        {{ address.streetAddress }}<br/>
+        {{ address.streetContinued }}<br data-ng-show="address.streetContinued"/>
+        {{ address.city }}, {{ address.state }} {{ address.postalCode }}<br/>
+      </address>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+
+    <div class="row">
+      <div class="thumbnail">
+        <img data-ng-src="{{ account.images.AVATAR.uri }}" alt="{{ 'Avatar Image for' | translate}} {{ account.username }}"/>
+        <div class="caption">
+          <h3 data-translate>Avatar</h3>
+          <p data-translate>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
+          <button class="btn btn-default center-block" data-translate>Edit Image</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
