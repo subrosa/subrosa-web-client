@@ -34,6 +34,10 @@
           </div>
 
           <ul class="nav navbar-nav navbar-right">
+            <li data-ng-class="{active: isState('new-game')}">
+              <a data-ui-sref="new-game" data-translate>Create Game</a>
+            </li>
+
             <li data-ng-class="{active: isState('games')}">
               <a data-ui-sref="games" data-translate>Find Games</a>
             </li>
@@ -97,6 +101,7 @@
     <script type="text/javascript" src="/app/game/GameFeed.controller.js"></script>
     <script type="text/javascript" src="/app/game/GameRules.controller.js"></script>
     <script type="text/javascript" src="/app/game/GameStats.controller.js"></script>
+    <script type="text/javascript" src="/app/game/NewGame.controller.js"></script>
     <script type="text/javascript" src="/app/game/Post.factory.js"></script>
     <script type="text/javascript" src="/app/game/edit/EditGame.controller.js"></script>
 

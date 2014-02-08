@@ -31,6 +31,12 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         templateUrl: '/app/game/views/game-list.html'
     });
 
+    $stateProvider.state('new-game', {
+        url: '/new-game',
+        controller: 'NewGameController',
+        templateUrl: '/app/game/views/new-game.html'
+    });
+
     $stateProvider.state('game', {
         url: '/game/{gameUrl}',
 
