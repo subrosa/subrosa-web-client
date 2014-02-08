@@ -38,16 +38,16 @@ describe('Controller: EditGame', function () {
         });
 
         it("and can be successful", function () {
-            spyOn($scope.game, '$save').andCallThrough();
+            spyOn($scope.game, '$update').andCallThrough();
             $scope.saveGame();
-            expect($scope.game.$save).toHaveBeenCalled();
+            expect($scope.game.$update).toHaveBeenCalled();
         });
 
         it("and can error", function () {
-            spyOn($scope.game, '$save').andCallThrough();
+            spyOn($scope.game, '$update').andCallThrough();
             $scope.game.failed = true;
             $scope.saveGame();
-            expect($scope.game.$save).toHaveBeenCalled();
+            expect($scope.game.$update).toHaveBeenCalled();
             expect($scope.notifications.code).toBe(1000);
         });
     });

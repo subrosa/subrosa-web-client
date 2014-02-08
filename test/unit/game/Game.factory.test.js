@@ -24,9 +24,9 @@ describe('Factory: Game', function () {
         gameFactory.query();
     });
 
-    it('makes a request to save a game.', function () {
+    it('makes a request to update a game.', function () {
         $httpBackend.expectPUT('/subrosa/v1/game/raleigh-wars').respond();
-        gameFactory.save({url: 'raleigh-wars'});
+        gameFactory.update({url: 'raleigh-wars'});
     });
 });
 

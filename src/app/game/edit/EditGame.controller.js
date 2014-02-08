@@ -28,6 +28,6 @@ angular.module('subrosa.game').controller('EditGameController', function ($scope
 
     $scope.saveGame = function () {
         $scope.saving = true;
-        $scope.game.$save(success, error);
+        $scope.game.$update(success, error);
     };
 });
