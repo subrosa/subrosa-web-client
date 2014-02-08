@@ -1,17 +1,19 @@
-<div class="col-sm-5">
-  <img data-ng-src="{{ game.image.uri }}" class="game-badge pull-left" alt="{{ 'Game Badge for' | translate }} {{game.name}}"/>
-  <h1>{{ game.name }}</h1>
-  <p>{{ game.description }}</p>
-</div>
-<div class="col-sm-5">
-  <h4>{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</h4>
-
-  <div data-ng-show="game.ordnance">
-    <span class="information-label" data-translate>Ordnance</span>
-    <span class="information-value">{{ game.ordnance }}</span>
+<div class="row">
+  <div class="col-sm-5">
+    <img data-ng-src="{{ game.image.uri }}" class="game-badge pull-left" alt="{{ 'Game Badge for' | translate }} {{game.name}}"/>
+    <h1>{{ game.name }}</h1>
+    <p>{{ game.description }}</p>
   </div>
+  <div class="col-sm-5">
+    <h4>{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</h4>
 
-  <span class="information-label" data-translate>Game Type</span>
-  <span class="information-value">{{ game.gameType }}</span>
+    <div data-ng-show="game.ordnance">
+      <span class="information-label" data-translate>Ordnance</span>
+      <span class="information-value">{{ game.ordnance }}</span>
+    </div>
+
+    <span class="information-label" data-translate>Game Type</span>
+    <span class="information-value">{{ game.gameType }}</span>
+  </div>
+  <button class="btn btn-primary" data-ng-click="go('game.edit')" data-translate>Edit Game</button>
 </div>
-<button class="btn btn-primary" data-ng-click="go('game.edit')" data-translate>Edit Game</button>
