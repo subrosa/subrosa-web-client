@@ -15,3 +15,16 @@ table[data-timepicker] tr:first-of-type,
 table[data-timepicker] tr:last-of-type {
     display: none;
 }
+
+html .dl-horizontal dt {
+    text-align: left;
+}
+
+html .dl-horizontal dt,
+html .dl-horizontal dt {
+    padding-bottom: 10px;
+}
+
+html address {
+    margin-bottom: 0;
+}

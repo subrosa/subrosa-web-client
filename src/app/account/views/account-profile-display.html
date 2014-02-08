@@ -1,67 +1,44 @@
-<div class="row">
-  <div class="col-sm-4">
-    <span class="information-label" data-translate>Username</span>
-  </div>
-  <div class="col-sm-6">
-    <span class="information-value">{{ account.username }}</span>
-  </div>
-</div>
+<dl class="dl-horizontal">
+  <dt data-translate>Username</dt>
+  <dd>{{ account.username }}</dd>
 
-<div class="row">
-  <div class="col-sm-4">
-    <span class="information-label" data-translate>Real Name</span>
-  </div>
-  <div class="col-sm-6">
-    <span class="information-value">{{ account.name }}</span>
-  </div>
-</div>
+  <dt data-translate>Real Name</dt>
+  <dd>{{ account.name }}</dd>
 
-<div class="row">
-  <div class="col-sm-4">
-    <span class="information-label" data-translate>Email</span>
-  </div>
-  <div class="col-sm-6">
-    <span class="information-value">{{ account.email }}</span>
-  </div>
-</div>
+  <dt data-translate>Email</dt>
+  <dd>{{ account.email }}</dd>
 
-<div class="row">
-  <div class="col-sm-4">
-    <span class="information-label" data-translate>Cell Phone Number</span>
-  </div>
-  <div class="col-sm-6">
-    <span class="information-value">{{ account.cellPhone }}</span>
-  </div>
-</div>
+  <dt data-translate>Cell Phone Number</dt>
+  <dd>{{ account.cellPhone }}</dd>
 
-<div class="row">
-  <div class="col-sm-4">
-    <span class="information-label" data-translate>Date of Birth</span>
-  </div>
-  <div class="col-sm-6">
-    <span class="information-value">{{ account.dateOfBirth | date:'longDate' }}</span>
-  </div>
-</div>
+  <dt data-translate>Date of Birth</dt>
+  <dd>{{ account.dateOfBirth | date:'longDate' }}</dd>
 
-<div class="row" data-ng-repeat="address in account.addresses">
-  <div class="col-sm-4">
-      <span class="information-label" data-ng-show="address.addressType == 'HOME'" data-translate>
-        Home Address
-      </span>
-      <span class="information-label" data-ng-show="address.addressType == 'WORK'" data-translate>
-        Work Address
-      </span>
-      <span class="information-label" data-ng-show="address.addressType == 'SCHOOL'" data-translate>
-        School Address
-      </span>
-      <span class="information-label" data-ng-show="address.addressType == 'OTHER'" data-translate>
-        Other Address
-      </span>
-  </div>
-  <address class="col-sm-6">
-    {{ address.streetAddress }}<br/>
-    {{ address.streetContinued }}<br data-ng-show="address.streetContinued"/>
-    {{ address.city }}, {{ address.state }} {{ address.postalCode }}<br/>
-  </address>
-</div>
+  <dt data-ng-show="account.addresses.HOME" data-translate>Home Address</dt>
+  <dd data-ng-show="account.addresses.HOME">
+    <address>
+      {{ account.addresses.HOME.streetAddress }}<br/>
+      {{ account.addresses.HOME.streetContinued }}<br data-ng-show="account.addresses.HOME.streetContinued"/>
+      {{ account.addresses.HOME.city }}, {{ account.addresses.HOME.state }} {{ account.addresses.HOME.postalCode }}<br/>
+    </address>
+  </dd>
+
+  <dt data-ng-show="account.addresses.WORK" data-translate>Work Address</dt>
+  <dd data-ng-show="account.addresses.WORK">
+    <address>
+      {{ account.addresses.WORK.streetAddress }}<br/>
+      {{ account.addresses.WORK.streetContinued }}<br data-ng-show="account.addresses.WORK.streetContinued"/>
+      {{ account.addresses.WORK.city }}, {{ account.addresses.WORK.state }} {{ account.addresses.WORK.postalCode }}<br/>
+    </address>
+  </dd>
+
+  <dt data-ng-show="account.addresses.SCHOOL" data-translate>School Address</dt>
+  <dd data-ng-show="account.addresses.SCHOOL">
+    <address>
+      {{ account.addresses.SCHOOL.streetAddress }}<br/>
+      {{ account.addresses.SCHOOL.streetContinued }}<br data-ng-show="account.addresses.SCHOOL.streetContinued"/>
+      {{ account.addresses.SCHOOL.city }}, {{ account.addresses.SCHOOL.state }} {{ account.addresses.SCHOOL.postalCode }}<br/>
+    </address>
+  </dd>
+</dl>
 <button class="btn btn-primary" data-ng-click="go('account.edit')" data-translate>Edit</button>
