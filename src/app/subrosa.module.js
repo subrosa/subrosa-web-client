@@ -10,7 +10,7 @@ angular.module('subrosa', [
     'subrosa.components',
     'subrosa.game',
     'subrosa.security',
-    'subrosa.util',
+    'subrosa.notifications',
     'ui.router',
     'ui.bootstrap.dropdownToggle',
     'ui.bootstrap.tpls'

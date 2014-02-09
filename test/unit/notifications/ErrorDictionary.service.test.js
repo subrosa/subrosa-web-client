@@ -1,7 +1,7 @@
 describe('Service: ErrorDictionary', function () {
     var gettext, ErrorDictionary;
 
-    beforeEach(module('subrosa.util'));
+    beforeEach(module('subrosa.notifications'));
 
     beforeEach(module(function ($provide) {
         gettext = function (string) { return string; };

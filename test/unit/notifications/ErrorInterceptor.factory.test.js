@@ -1,7 +1,7 @@
 describe('Factory: ErrorInterceptor', function () {
     var $q, ErrorDictionary, ErrorInterceptor, badRequest;
 
-    beforeEach(module('subrosa.util'));
+    beforeEach(module('subrosa.notifications'));
 
     beforeEach(module(function ($provide) {
         $q = {
