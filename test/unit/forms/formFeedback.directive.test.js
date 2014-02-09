@@ -1,7 +1,7 @@
 describe('Directive: formFeedback', function () {
     var $scope, $compile, element, elementScope;
 
-    beforeEach(module('subrosa.components', '/app/components/views/form-feedback.html'));
+    beforeEach(module('subrosa.forms', '/app/forms/views/form-feedback.html'));
 
     beforeEach(inject(function (_$compile_, $rootScope) {
         $compile = _$compile_;

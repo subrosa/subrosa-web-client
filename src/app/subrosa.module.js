@@ -7,7 +7,7 @@
  */
 angular.module('subrosa', [
     'subrosa.account',
-    'subrosa.components',
+    'subrosa.forms',
     'subrosa.game',
     'subrosa.security',
     'subrosa.notifications',
