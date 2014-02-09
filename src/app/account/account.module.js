@@ -46,6 +46,14 @@ angular.module('subrosa.account').config(function ($stateProvider) {
             }
         }
     });
+    $stateProvider.state('account.security', {
+        url: '/account/security',
+        views: {
+            'right@account': {
+                templateUrl: '/app/account/views/account-security.html'
+            }
+        }
+    });
     $stateProvider.state('account.images', {
         url: '/account/images',
         views: {
