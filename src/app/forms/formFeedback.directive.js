@@ -1,7 +1,7 @@
 /**
  * @ngdoc directive
  * @name subrosa.forms:formFeedback
- * *
+ *
  * @description
  *   Provides form feedback alerts.
  */

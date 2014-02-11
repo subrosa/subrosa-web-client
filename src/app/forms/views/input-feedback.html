@@ -1,0 +1,13 @@
+<div class="form-group has-feedback"
+     data-ng-class="{'has-error': field.$dirty && field.$invalid && !warn,
+                     'has-warning': field.$dirty && warn,
+                     'has-success': field.$dirty && field.$valid }"
+     data-ng-transclude>
+
+      <span class="glyphicon glyphicon-ok form-control-feedback"
+            data-ng-show="field.$dirty && field.$valid"></span>
+      <span class="glyphicon glyphicon-warning-sign form-control-feedback"
+            data-ng-show="field.$dirty && warn"></span>
+      <span class="glyphicon glyphicon-remove form-control-feedback"
+            data-ng-show="field.$dirty && field.$invalid && !warn"></span>
+</div>
