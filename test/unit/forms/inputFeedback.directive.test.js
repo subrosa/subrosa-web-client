@@ -10,8 +10,9 @@ describe('Directive: inputFeedback', function () {
 
     beforeEach(function () {
         $scope.field = {};
-        var html = '<div data-input-feedback="field">' +
+        var html = '<div input-feedback="field">' +
                      '<input type="text"/>' +
+                     '<p class="help-block" ng-show="hasError(field)">yo</p>' +
                    '</div>';
         element = angular.element(html);
 
@@ -99,4 +100,13 @@ describe('Directive: inputFeedback', function () {
         });
     });
 
+    it("compiles and includes .help-blocks so they can use the hasStatus() methods", function () {
+        var helpBlock = element.find('p');
+        expect(helpBlock.hasClass('ng-hide')).toBe(true);
+        spyOn(elementScope, 'hasError').andReturn(true);
+
+        $scope.$digest();
+
+        expect(helpBlock.hasClass('ng-hide')).toBe(false);
+    });
 });

@@ -26,8 +26,7 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
             warn: '=warn'
         },
         compile: function (element, attributes, tranclude) {
-            var icons = element.find('span'),
-                helpBlock = element.find('p');
+            var icons = element.find('span');
 
             return function (scope) {
                 scope.hasSuccess = function (field) {
@@ -43,11 +42,14 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
                 };
 
                 tranclude(scope, function () {
-                    var input = element.find('input');
+                    var input = element.find('input'),
+                        helpBlocks = element.find('p');
 
                     icons = $compile(angular.element(icons))(scope);
+                    helpBlocks = $compile(angular.element(helpBlocks))(scope);
+
                     input.after(icons);
-                    icons.after(helpBlock);
+                    icons.after(helpBlocks);
                 });
             };
         }
