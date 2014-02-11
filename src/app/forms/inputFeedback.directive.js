@@ -18,7 +18,8 @@
 angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
 
     return {
-        transclude: true,
+        replace: true,
+        transclude: 'element',
         templateUrl: '/app/forms/views/input-feedback.html',
         scope: {
             field: '=inputFeedback',
@@ -29,15 +30,15 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
                 helpBlock = element.find('p');
 
             return function (scope) {
-                scope.showSuccess = function (field) {
+                scope.hasSuccess = function (field) {
                     return Boolean(field && field.$dirty && field.$valid);
                 };
 
-                scope.showWarning = function (field) {
+                scope.hasWarning = function (field) {
                     return Boolean(field && field.$dirty && field.$invalid && scope.warn);
                 };
 
-                scope.showError = function (field) {
+                scope.hasError = function (field) {
                     return Boolean(field && field.$dirty && field.$invalid && !scope.warn);
                 };
 
@@ -45,8 +46,8 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
                     var input = element.find('input');
 
                     icons = $compile(angular.element(icons))(scope);
-                    input.after(helpBlock);
                     input.after(icons);
+                    icons.after(helpBlock);
                 });
             };
         }
