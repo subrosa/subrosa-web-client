@@ -25,12 +25,28 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
             warn: '=warn'
         },
         compile: function (element, attributes, tranclude) {
-            var icons = element.find('span');
+            var icons = element.find('span'),
+                helpBlock = element.find('p');
 
             return function (scope) {
+                scope.showSuccess = function (field) {
+                    return Boolean(field && field.$dirty && field.$valid);
+                };
+
+                scope.showWarning = function (field) {
+                    return Boolean(field && field.$dirty && field.$invalid && scope.warn);
+                };
+
+                scope.showError = function (field) {
+                    return Boolean(field && field.$dirty && field.$invalid && !scope.warn);
+                };
+
                 tranclude(scope, function () {
+                    var input = element.find('input');
+
                     icons = $compile(angular.element(icons))(scope);
-                    element.find('input').after(icons);
+                    input.after(helpBlock);
+                    input.after(icons);
                 });
             };
         }
