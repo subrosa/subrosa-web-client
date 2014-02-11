@@ -21,7 +21,7 @@ html .dl-horizontal dt {
 }
 
 html .dl-horizontal dt,
-html .dl-horizontal dt {
+html .dl-horizontal dd {
     padding-bottom: 10px;
 }
 
