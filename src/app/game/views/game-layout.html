@@ -1,11 +1,11 @@
-<header class="page-header" data-ui-view="header"></header>
-
-<section class="row">
-  <div class="col-md-5">
-    <div data-ui-view="left"></div>
+<div class=col-xs-10">
+  <div class="row">
+    <div class="col-md-5 col-md-push-6">
+      <nav data-ui-view="menu"></nav>
+      <div data-ui-view="right"></div>
+    </div>
+    <div class="col-md-5 col-md-pull-5">
+      <div data-ui-view="left"></div>
+    </div>
   </div>
-  <div class="col-md-5 col-md-offset-1">
-    <nav data-ui-view="menu"></nav>
-    <div data-ui-view="right"></div>
-  </div>
-</section>
+</div>

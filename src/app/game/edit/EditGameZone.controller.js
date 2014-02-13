@@ -49,9 +49,13 @@ angular.module('subrosa.game').controller('EditGameZoneController', function ($s
     };
 
     $scope.center = {
-        lat: 15,
+        lat: 30,
         lng: -15,
-        zoom: 2
+        zoom: 3
+    };
+
+    $scope.options = {
+        scrollWheelZoom: false
     };
 
     // Initialize the FeatureGroup to store editable layers

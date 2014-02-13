@@ -39,10 +39,14 @@ angular.module('subrosa.game').config(function ($stateProvider) {
 
     $stateProvider.state('game', {
         url: '/game/{gameUrl}',
+        controller: 'GameController',
 
         views: {
             '@': {
                 controller: 'GameController',
+                templateUrl: '/app/game/views/game.html'
+            },
+            'content@game': {
                 templateUrl: '/app/game/views/game-layout.html'
             },
             'header@game': {
@@ -76,18 +80,17 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         url: '/edit',
 
         views: {
+            'content@game': {
+                templateUrl: '/app/game/edit/views/edit-game-layout.html',
+            },
             'header@game': {
                 controller: 'EditGameController',
                 templateUrl: '/app/game/edit/views/edit-game-header.html'
             },
-            'menu@game': {
+            'menu@game.edit': {
                 templateUrl: '/app/game/edit/views/edit-game-menu.html'
             },
-            'left@game': {
-                controller: 'GameFeedController',
-                templateUrl: '/app/game/views/game-feed.html'
-            },
-            'right@game': {
+            'middle@game.edit': {
                 controller: 'EditGameController',
                 templateUrl: '/app/game/edit/views/edit-game-options.html'
             }
@@ -97,7 +100,7 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         url: '/rules',
 
         views: {
-            'right@game': {
+            'middle@game.edit': {
                 controller: 'GameRulesController',
                 templateUrl: '/app/game/views/game-rules.html'
             }
@@ -107,7 +110,7 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         url: '/zone',
 
         views: {
-            'right@game': {
+            'middle@game.edit': {
                 controller: 'EditGameZoneController',
                 templateUrl: '/app/game/edit/views/edit-game-zone.html'
             }
