@@ -9,3 +9,7 @@ img.media-object {
 .game-badge {
     margin: 0 20px;
 }
+
+.angular-leaflet-map {
+    height: 415px;
+}

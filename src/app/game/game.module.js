@@ -6,8 +6,8 @@
  *  Module for game related functionality.
  */
 angular.module('subrosa.game', [
-    'geolocation',
     'gettext',
+    'leaflet-directive',
     'ngResource',
     'ui.router',
     'ui.bootstrap.datepicker',
@@ -103,4 +103,24 @@ angular.module('subrosa.game').config(function ($stateProvider) {
             }
         }
     });
+    $stateProvider.state('game.edit.zone', {
+        url: '/zone',
+
+        views: {
+            'right@game': {
+                controller: 'EditGameZoneController',
+                templateUrl: '/app/game/edit/views/edit-game-zone.html'
+            }
+        }
+    });
 });
+
+/**
+ * @ngdoc constant
+ * @name subrosa.game.leaflet
+ *
+ * @description
+ *  Set leaflet global L as an angular constant.
+ */
+/* global window */
+angular.module('subrosa.game').constant('leaflet', window.L);

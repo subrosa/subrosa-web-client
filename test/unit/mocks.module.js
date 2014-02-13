@@ -18,7 +18,7 @@ angular.module('mocks', []);
 
 angular.module('mocks').factory('MockResource', function () {
     function resourceFactory() {
-        var Resource, mockResource, mockResources, errorResponse;
+        var Resource, mockResource, mockResources, successResponse, errorResponse;
 
         errorResponse = {
             data: {
@@ -98,13 +98,45 @@ angular.module('mocks').factory('MockResource', function () {
             return mockResources;
         };
 
-        Resource.save = function (params, success, error) {
-            if (!this.failed) {
-                success(this);
+        Resource.save = function (params, data, success, error) {
+            var successFn, errorFn;
+
+            if (typeof(data) === "function") {
+                successFn = data;
+                errorFn = success;
             } else {
-                error(errorResponse);
+                successFn = success;
+                errorFn = error;
+            }
+
+            if (this.failed) {
+                if (errorFn) {
+                    errorFn(errorResponse);
+                }
+            } else {
+                if (successFn) {
+                    successFn(successResponse || data);
+                }
             }
             return new Resource(params);
+        };
+
+        Resource.update = Resource.save;
+
+        Resource.remove = function (params, success, error) {
+            if (this.failed) {
+                if (error) {
+                    error();
+                }
+            } else {
+                if (success) {
+                    success();
+                }
+            }
+        };
+
+        Resource.setSuccessResponse = function (response) {
+            successResponse = response;
         };
 
         Resource.setErrorResponse = function (response) {

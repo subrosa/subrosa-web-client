@@ -11,6 +11,7 @@ module.exports = function (config) {
             'lib/jquery/jquery.min.js',
             'lib/angular/angular.js',
             'lib/angular-gettext/dist/angular-gettext.js',
+            'lib/angular-leaflet-directive/dist/angular-leaflet-directive.js',
             'lib/angular-resource/angular-resource.js',
             'lib/angular-sanitize/angular-sanitize.js',
             'lib/angular-bootstrap/ui-bootstrap.js',

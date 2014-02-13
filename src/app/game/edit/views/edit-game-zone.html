@@ -1,0 +1,9 @@
+<section>
+  <h2 data-translate>Game Zone for {{ game.name }}</h2>
+  <p data-translate>Use the map below to create the zone for your game.
+    This zone restricts enrollment in your game to players who reside inside the shapes you create.</p>
+  <p class="alert alert-warning" data-ng-show="rejectedGeolocation" data-translate>
+    You have elected not to share your current location, please manually move the map to where your game will take place.
+  </p>
+  <div data-leaflet data-center="center" data-controls="controls"></div>
+</section>
