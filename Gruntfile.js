@@ -213,6 +213,17 @@ module.exports = function (grunt) {
                     ],
                     dest: '<%= subrosa.dist %>'
                 }]
+            },
+            leafletImages: {
+                files: [{
+                    flatten: true,
+                    expand: true,
+                    src: [
+                        '<%= subrosa.src %>/lib/leaflet/dist/images/*',
+                        '<%= subrosa.src %>/lib/leaflet.draw/dist/images/*'
+                    ],
+                    dest: '<%= subrosa.dist %>/css/images/'
+                }]
             }
         },
 
@@ -308,6 +319,7 @@ module.exports = function (grunt) {
         'ngtemplates',
         'copy:assets',
         'copy:fonts',
+        'copy:leafletImages',
         'concat:generated',
         'ngmin',
         'cssmin:generated',
