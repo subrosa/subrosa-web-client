@@ -11,39 +11,10 @@
  *  Handles the editing of game zones.
  */
 angular.module('subrosa.game').controller('EditGameZoneController', function ($scope, leaflet, leafletData, GameZone) {
-    var map, getLayerData, locationFound, locationError, drawCreated, drawEdited, drawDeleted;
-
-    $scope.center = {
-        lat: 40.67,
-        lng: -73.94,
-        zoom: 6
-    };
-
-    // Initialize the FeatureGroup to store editable layers
-    $scope.drawnItems = new leaflet.FeatureGroup();
-
-    $scope.controls = {
-        draw: {
-            options: {
-                draw: {
-                    circle: false,
-                    marker: false,
-                    polyline: false
-                },
-                edit: {
-                    featureGroup: $scope.drawnItems
-                }
-            }
-        }
-    };
+    var map, getLayerData, locationError, drawCreated, drawEdited, drawDeleted;
 
     getLayerData = function (layer) {
         return {points: layer._latlngs};
-    };
-
-    locationFound = function (event) {
-        var radius = event.accuracy / 2;
-        leaflet.circle(event.latlng, radius).addTo(map);
     };
 
     locationError = function () {
@@ -77,18 +48,40 @@ angular.module('subrosa.game').controller('EditGameZoneController', function ($s
         });
     };
 
+    $scope.center = {
+        lat: 15,
+        lng: -15,
+        zoom: 2
+    };
+
+    // Initialize the FeatureGroup to store editable layers
+    $scope.drawnItems = new leaflet.FeatureGroup();
+
+    $scope.controls = {
+        draw: {
+            options: {
+                draw: {
+                    circle: false,
+                    marker: false,
+                    polyline: false
+                },
+                edit: {
+                    featureGroup: $scope.drawnItems
+                }
+            }
+        },
+        custom: [
+            leaflet.control.locate({onLocationError: locationError})
+        ]
+    };
+
     leafletData.getMap().then(function (mapElement) {
         map = mapElement;
-
-        // Attempt to find the user's current location
-        map.locate({setView: true, maxZoom: 16});
 
         // Add the drawn items layer
         map.addLayer($scope.drawnItems);
 
         // Handle events
-        map.on('locationfound', locationFound);
-        map.on('locationerror', locationError);
         map.on('draw:created', drawCreated);
         map.on('draw:edited', drawEdited);
         map.on('draw:deleted', drawDeleted);

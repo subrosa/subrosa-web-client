@@ -10,8 +10,12 @@ describe('Controller: EditGameZone', function () {
 
         leaflet = {
             'FeatureGroup': function () {},
-            'Control': {
-                'Draw': function () {}
+            control: {
+                Draw: function () {},
+                locate: function (config) {
+                    events.onLocationError = config.onLocationError;
+                    return {addTo: function () {}};
+                }
             },
             circle: function () {}
         };
@@ -26,7 +30,6 @@ describe('Controller: EditGameZone', function () {
         map = {
             addControl: function () {},
             addLayer: function () {},
-            locate: function () {},
             on: function (event, success) {
                 events[event] = success;
             }
@@ -64,26 +67,6 @@ describe('Controller: EditGameZone', function () {
     });
 
 
-    describe("after the map is initialized", function () {
-        beforeEach(function () {
-            $controller('EditGameZoneController', dependencies);
-        });
-
-        it("it attempts to locate the user's location", function () {
-            spyOn(map, 'locate');
-            deferred.resolve(map);
-            $scope.$digest();
-            expect(map.locate).toHaveBeenCalledWith({setView: true, maxZoom: 16});
-        });
-
-        it("it adds the drawn items layer to the map", function () {
-            spyOn(map, 'addLayer');
-            deferred.resolve(map);
-            $scope.$digest();
-            expect(map.addLayer).toHaveBeenCalledWith($scope.drawnItems);
-        });
-    });
-
     describe("handles map events", function () {
         var layer;
         beforeEach(function () {
@@ -94,16 +77,9 @@ describe('Controller: EditGameZone', function () {
             $scope.$digest();
         });
 
-        it("by drawing a circle on locationfound", function () {
+        it("by setting $scope.rejectedGeolocation onLocationError", function () {
             spyOn(leaflet, "circle").andReturn({addTo: function () {}});
-            events.locationfound({accuracy: 4, latlng: 'bitcheye'});
-            expect(leaflet.circle).toHaveBeenCalledWith('bitcheye', 2);
-
-        });
-
-        it("by setting $scope.rejectedGeolocation on locationerror", function () {
-            spyOn(leaflet, "circle").andReturn({addTo: function () {}});
-            events.locationerror();
+            events.onLocationError();
             expect($scope.rejectedGeolocation).toBe(true);
 
         });
