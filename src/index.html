@@ -39,40 +39,52 @@
 
 <div class="subrosa-container">
   <header>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="NavigationController">
       <div class="navbar-header">
+
+        <button class="navbar-toggle" type="button" data-ng-click="toggleCollapse()">
+          <span class="sr-only" data-translate>Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
         <a data-ui-sref="home" class="navbar-brand">
           <img class="img-responsive" src="/img/logo/subrosa-horizontal-93x25.png"
                alt="Subrosa {{ 'Logo' | translate }}" />
         </a>
       </div>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li data-ng-class="{active: isState('new-game')}">
-          <a data-ui-sref="new-game" data-translate>Create Game</a>
-        </li>
+      <div data-collapse="collapsed" class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li data-ng-class="{active: isState('new-game')}">
+            <a data-ui-sref="new-game" data-ng-click="toggleCollapse()" data-translate>Create Game</a>
+          </li>
 
-        <li data-ng-class="{active: isState('games')}">
-          <a data-ui-sref="games" data-translate>Find Games</a>
-        </li>
+          <li data-ng-class="{active: isState('games')}">
+            <a data-ui-sref="games" data-ng-click="toggleCollapse()" data-translate>Find Games</a>
+          </li>
 
-        <li data-ng-if="!isAuthenticated()">
-          <a href="" data-ng-click="openModal()" data-translate>Login</a>
-          <dialog login-modal></dialog>
-        </li>
+          <li data-ng-if="!isAuthenticated()">
+            <a href="" data-ng-click="toggleCollapse(); openModal()" data-translate>Login</a>
+            <dialog login-modal></dialog>
+          </li>
 
-        <li class="dropdown" data-ng-if="isAuthenticated()">
-          <a href="" class="dropdown-toggle" data-translate>Account<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li>
-              <a data-ui-sref="account" data-translate>Profile</a>
-            </li>
-            <li>
-              <a href="" data-ng-click="logout()" data-translate>Log out</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+          <li class="dropdown" data-ng-if="isAuthenticated()">
+            <a href="" class="dropdown-toggle" data-translate>
+              Account<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a data-ui-sref="account" data-ng-click="toggleCollapse()" data-translate>Profile</a>
+              </li>
+              <li>
+                <a href="" data-ng-click="toggleCollapse(); logout()" data-translate>Log out</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
 
     </nav>
   </header>
@@ -101,6 +113,8 @@
 <script type="text/javascript" src="/lib/leaflet-locatecontrol/src/L.Control.Locate.js"></script>
 
 <script type="text/javascript" src="/app/subrosa.module.js"></script>
+<script type="text/javascript" src="/app/Navigation.controller.js"></script>
+
 
 <script type="text/javascript" src="/app/account/account.module.js"></script>
 <script type="text/javascript" src="/app/account/Account.factory.js"></script>

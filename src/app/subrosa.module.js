@@ -12,6 +12,7 @@ angular.module('subrosa', [
     'subrosa.security',
     'subrosa.notifications',
     'ui.router',
+    'ui.bootstrap.collapse',
     'ui.bootstrap.dropdownToggle',
     'ui.bootstrap.tpls'
 ]);
@@ -69,3 +70,4 @@ angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
         }
     );
 });
+
