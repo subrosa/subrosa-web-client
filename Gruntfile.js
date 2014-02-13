@@ -241,10 +241,10 @@ module.exports = function (grunt) {
                 length: 8
             },
             css: {
-                src: '<%= subrosa.dist %>/css/styles.css'
+                src: '<%= subrosa.dist %>/css/*.css'
             },
             js: {
-                src: '<%= subrosa.dist %>/js/scripts.js'
+                src: '<%= subrosa.dist %>/js/*.js'
             },
             img: {
                 src: ['<%= subrosa.dist %>/img/**/*.{jpg,jpeg,gif,png,webp}']
