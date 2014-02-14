@@ -3,7 +3,7 @@
  * @name subrosa.notifications
  *
  * @desription
- *  Utility module.
+ *  Notifications module.
  */
 angular.module('subrosa.notifications', ['gettext']);
 
