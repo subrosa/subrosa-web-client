@@ -2,7 +2,7 @@
  * @ngdoc module
  * @name subrosa.notifications
  *
- * @desription
+ * @description
  *  Notifications module.
  */
 angular.module('subrosa.notifications', ['gettext']);
