@@ -216,14 +216,24 @@ module.exports = function (grunt) {
             },
             leafletImages: {
                 files: [{
-                    flatten: true,
                     expand: true,
+                    flatten: true,
                     src: [
                         '<%= subrosa.src %>/lib/leaflet/dist/images/*',
                         '<%= subrosa.src %>/lib/leaflet.draw/dist/images/*',
                         '<%= subrosa.src %>/lib/leaflet-locatecontrol/src/images/*'
                     ],
                     dest: '<%= subrosa.dist %>/css/images/'
+                }]
+            },
+            timelineImages: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= subrosa.src %>/lib/chap-links-timeline/img',
+                    src: [
+                        '**/*'
+                    ],
+                    dest: '<%= subrosa.dist %>/css/img/'
                 }]
             }
         },
@@ -321,6 +331,7 @@ module.exports = function (grunt) {
         'copy:assets',
         'copy:fonts',
         'copy:leafletImages',
+        'copy:timelineImages',
         'concat:generated',
         'ngmin',
         'cssmin:generated',

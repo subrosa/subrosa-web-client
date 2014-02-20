@@ -10,6 +10,7 @@
     "angular-sanitize": "1.2.12",
     "angular-ui-router": "0.2.7",
     "bootstrap": "3.1.0",
+    "chap-links-timeline": "2.6.1",
     "es5-shim": "2.0.5",
     "json3": "3.2.4",
     "leaflet": "0.7.2",

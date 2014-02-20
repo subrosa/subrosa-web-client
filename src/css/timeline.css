@@ -1,0 +1,8 @@
+.timeline-frame .readonly {
+    background-color: #eeeeee;
+    border-color: #000000;
+}
+
+.timeline-frame .timeline-event-content {
+    white-space: normal;
+}
