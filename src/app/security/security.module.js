@@ -2,7 +2,7 @@
  * @ngdoc module
  * @name subrosa.security
  *
- * @desription
+ * @description
  *  Module for security related functionality.
  */
 angular.module('subrosa.security', ['gettext']);

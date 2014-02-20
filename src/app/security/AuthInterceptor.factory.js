@@ -3,7 +3,7 @@
  * permission notice:
  *
  *  HTTP Auth Interceptor Module for AngularJS
- *  (c) 2012 Witold Szczerba
+ *  Copyright (c) 2012 Witold Szczerba
  *  License: MIT
  *
  *  https://github.com/witoldsz/angular-http-auth/
