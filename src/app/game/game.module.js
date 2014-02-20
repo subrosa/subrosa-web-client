@@ -7,8 +7,10 @@
  */
 angular.module('subrosa.game', [
     'gettext',
-    'leaflet-directive',
     'ngResource',
+    'subrosa.components.map',
+    'subrosa.components.modal',
+    'subrosa.components.timeline',
     'ui.router',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.timepicker'
@@ -117,13 +119,3 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         }
     });
 });
-
-/**
- * @ngdoc constant
- * @name subrosa.game.leaflet
- *
- * @description
- *  Set leaflet global L as an angular constant.
- */
-/* global window */
-angular.module('subrosa.game').constant('leaflet', window.L);
