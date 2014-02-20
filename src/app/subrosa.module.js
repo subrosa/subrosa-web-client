@@ -2,7 +2,7 @@
  * @ngdoc module
  * @name subrosa
  *
- * @desription
+ * @description
  *  Base module that defines the subrosa namespace and includes modules used by the application.
  */
 angular.module('subrosa', [
