@@ -8,17 +8,16 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'lib/jquery/jquery.min.js',
+            'lib/jquery/dist/jquery.min.js',
             'lib/angular/angular.js',
+            'lib/angular-bootstrap/ui-bootstrap.js',
+            'lib/angular-bootstrap/ui-bootstrap-tpls.js',
             'lib/angular-gettext/dist/angular-gettext.js',
+            'lib/angular-mocks/angular-mocks.js',
             'lib/angular-leaflet-directive/dist/angular-leaflet-directive.js',
             'lib/angular-resource/angular-resource.js',
             'lib/angular-sanitize/angular-sanitize.js',
-            'lib/angular-bootstrap/ui-bootstrap.js',
-            'lib/angular-bootstrap/ui-bootstrap-tpls.js',
             'lib/angular-ui-router/release/angular-ui-router.js',
-            'lib/angular-mocks/angular-mocks.js',
-            'lib/angularjs-geolocation/src/geolocation.js',
 
             '../test/unit/mocks.module.js',
 
