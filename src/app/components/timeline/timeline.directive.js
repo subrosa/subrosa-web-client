@@ -11,7 +11,7 @@
 
 /**
  * @ngdoc directive
- * @name subrosa.components:timeline
+ * @name subrosa.components.timeline:timeline
  *
  * @description
  *   Provides a timeline that incorporates Almende's Timeline

@@ -1,6 +1,6 @@
 /**
  * @ngdoc controller
- * @name subrosa.components.modal.ModalController
+ * @name subrosa.components.modal:ModalController
  *
  * @requires $scope
  * @requires $modalInstance
@@ -21,7 +21,7 @@ angular.module('subrosa.components.modal').controller('ModalController', functio
 
 /**
  * @ngdoc directive
- * @name subrosa.components.modal.directive:modal
+ * @name subrosa.components.modal:modal
  *
  * @requires $modal
  *
