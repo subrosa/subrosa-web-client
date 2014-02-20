@@ -9,7 +9,6 @@ describe('Controller: EditGameZone', function () {
         deferred = $q.defer();
 
         leaflet = {
-            'FeatureGroup': function () {},
             control: {
                 Draw: function () {},
                 locate: function (config) {
@@ -17,7 +16,18 @@ describe('Controller: EditGameZone', function () {
                     return {addTo: function () {}};
                 }
             },
-            circle: function () {}
+            circle: function () {},
+            'FeatureGroup': function () {
+                return {
+                    addLayer: function () {}
+                };
+            },
+            latLng: function () {},
+            polygon: function () {
+                return {
+                    getBounds: function () {}
+                };
+            }
         };
 
         leafletData = {
@@ -30,6 +40,7 @@ describe('Controller: EditGameZone', function () {
         map = {
             addControl: function () {},
             addLayer: function () {},
+            fitBounds: function () {},
             on: function (event, success) {
                 events[event] = success;
             }
@@ -65,7 +76,6 @@ describe('Controller: EditGameZone', function () {
         expect($scope.controls).toBeDefined();
         expect(typeof $scope.controls).toBe('object');
     });
-
 
     describe("handles map events", function () {
         var layer;

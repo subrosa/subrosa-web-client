@@ -9,7 +9,6 @@
  */
 angular.module('subrosa.game').factory('GameZone', function ($resource) {
     return $resource('/subrosa/v1/game/:gameUrl/zone/:id', {gameUrl: '@gameUrl', id: '@id'}, {
-        query: {method: 'GET', isArray: false},
         update: {method: 'PUT'}
     });
 });

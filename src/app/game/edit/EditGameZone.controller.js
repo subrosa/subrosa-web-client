@@ -11,6 +11,7 @@
  *  Handles the editing of game zones.
  */
 angular.module('subrosa.game').controller('EditGameZoneController', function ($scope, leaflet, leafletData, GameZone) {
+    var SHAPE_COLOR = '#E43E59';
     var map, getLayerData, locationError, drawCreated, drawEdited, drawDeleted;
 
     getLayerData = function (layer) {
@@ -84,6 +85,21 @@ angular.module('subrosa.game').controller('EditGameZoneController', function ($s
 
         // Add the drawn items layer
         map.addLayer($scope.drawnItems);
+
+        // Add the existing game zone(s) layer
+        GameZone.query({gameUrl: $scope.$stateParams.gameUrl}, function (zones) {
+            var latLngs = [];
+            angular.forEach(zones, function (zone) {
+                angular.forEach(zone.points, function (point) {
+                    latLngs.push(leaflet.latLng(point.latitude, point.longitude));
+                });
+                if (latLngs.length > 0) {
+                    $scope.gameZones = new leaflet.polygon(latLngs, {color: SHAPE_COLOR});
+                    $scope.drawnItems.addLayer($scope.gameZones);
+                    map.fitBounds($scope.gameZones.getBounds());
+                }
+            });
+        });
 
         // Handle events
         map.on('draw:created', drawCreated);
