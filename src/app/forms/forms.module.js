@@ -2,7 +2,7 @@
  * @ngdoc module
  * @name subrosa.forms
  *
- * @desription
+ * @description
  *  Module for reusable UI components.
  */
 angular.module('subrosa.forms', [
