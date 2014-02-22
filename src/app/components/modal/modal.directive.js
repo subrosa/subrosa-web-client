@@ -1,57 +1,21 @@
 /**
- * @ngdoc controller
- * @name subrosa.components.modal:ModalController
- *
- * @requires $scope
- * @requires $modalInstance
- * @requires ngModel
- *
- * @description
- *  Handle modal submission/dismissal
- */
-angular.module('subrosa.components.modal').controller('ModalController', function ($scope, $modalInstance) {
-    $scope.ok = function () {
-        $modalInstance.close();
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-});
-
-/**
  * @ngdoc directive
  * @name subrosa.components.modal:modal
  *
  * @requires $modal
  *
  * @description
- *   Provides a reusable wrapper around angular-ui's $modal service.
+ *   Registers a modal dialog with the modalCache so it can be opened later.
  */
-angular.module('subrosa.components.modal').directive('modal', function ($modal) {
+angular.module('subrosa.components.modal').directive('modal', function (modalCache) {
     return {
         replace: true,
         scope: {
-            template: '@modal',
-            action: '&modalAction'
+            id: '@modal',
+            template: '@templateUrl'
         },
         link: function (scope) {
-            var modalInstance;
-
-            scope.openModal = function (modalScope) {
-                modalInstance = $modal.open({
-                    controller: 'ModalController',
-                    scope: modalScope,
-                    templateUrl: scope.template
-                });
-
-                modalInstance.result.then(function () {
-                    scope.action();
-                });
-            };
-
-            // TODO figure out some other way, this is likely bad practice.
-            scope.$root.openModal = scope.openModal;
+            modalCache.put(scope.id, scope.template);
         }
     };
 });
