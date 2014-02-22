@@ -1,21 +1,11 @@
 describe('Service: modalCache', function () {
-    var $q, $modal, $cacheFactory, modalCache, modalCacheService;
+    var $modal, $cacheFactory, modalCache, modalCacheService;
 
     beforeEach(module('subrosa.components.modal'));
 
     beforeEach(module(function ($provide) {
         $modal = {
-            open: function () {
-                var deferred = $q.defer();
-                if (this.success) {
-                    deferred.resolve({});
-                } else {
-                    deferred.reject({});
-                }
-                return {
-                    result: deferred.promise
-                };
-            }
+            open: function () {}
         };
 
         modalCache = {
@@ -31,8 +21,7 @@ describe('Service: modalCache', function () {
         $provide.value('$cacheFactory', $cacheFactory);
     }));
 
-    beforeEach(inject(function (_$q_, _modalCache_) {
-        $q = _$q_;
+    beforeEach(inject(function (_modalCache_) {
         modalCacheService = _modalCache_;
     }));
 
