@@ -5,5 +5,13 @@
   <p class="alert alert-warning" data-ng-show="rejectedGeolocation" data-translate>
     You have elected not to share your current location, please manually move the map to where your game will take place.
   </p>
-  <div data-leaflet data-center="center" data-controls="controls" data-defaults="options"></div>
+  <div data-map
+       data-allow-current-location="true"
+       data-allow-edit="true"
+       data-on-created="onZoneCreated(event)"
+       data-on-deleted="onZoneDeleted(event)"
+       data-on-edited="onZoneEdited(event)"
+       data-on-location-error="onLocationError"
+       data-polygons="gameZones">
+  </div>
 </section>

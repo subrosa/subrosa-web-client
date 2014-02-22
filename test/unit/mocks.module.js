@@ -58,7 +58,10 @@ angular.module('mocks').factory('MockResource', function () {
                 } else {
                     success(this);
                 }
-            }
+            },
+            $promise: {then: function (callback) {
+                callback(mockResource);
+            }}
         };
 
         mockResources = {
@@ -89,13 +92,13 @@ angular.module('mocks').factory('MockResource', function () {
         };
 
         Resource.query = function (params, callback) {
-
+            var response = successResponse || mockResources;
             if (typeof(params) === "function") {
-                params.call(this, mockResources);
+                params.call(this, response);
             } else if (callback) {
-                callback.call(this, mockResources);
+                callback.call(this, response);
             }
-            return mockResources;
+            return response;
         };
 
         Resource.save = function (params, data, success, error) {
@@ -124,13 +127,23 @@ angular.module('mocks').factory('MockResource', function () {
         Resource.update = Resource.save;
 
         Resource.remove = function (params, success, error) {
+            var successFn, errorFn;
+
+            if (typeof(params) === "function") {
+                successFn = params;
+                errorFn = success;
+            } else {
+                successFn = success;
+                errorFn = error;
+            }
+
             if (this.failed) {
-                if (error) {
-                    error();
+                if (errorFn) {
+                    errorFn(errorResponse);
                 }
             } else {
-                if (success) {
-                    success();
+                if (successFn) {
+                    successFn(successResponse);
                 }
             }
         };

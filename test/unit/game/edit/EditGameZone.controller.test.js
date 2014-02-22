@@ -1,149 +1,155 @@
 describe('Controller: EditGameZone', function () {
-    var $controller, $scope, dependencies, deferred, leaflet, leafletData, GameZone, gameZone, events, map;
+    var $controller, $scope, dependencies, GameZone;
     beforeEach(module('subrosa.game', 'mocks'));
 
     beforeEach(inject(function ($q, _$controller_, $rootScope, MockResource) {
         $controller = _$controller_;
         $scope = $rootScope.$new();
 
-        deferred = $q.defer();
-
-        leaflet = {
-            control: {
-                Draw: function () {},
-                locate: function (config) {
-                    events.onLocationError = config.onLocationError;
-                    return {addTo: function () {}};
-                }
-            },
-            circle: function () {},
-            'FeatureGroup': function () {
-                return {
-                    addLayer: function () {}
-                };
-            },
-            latLng: function () {},
-            polygon: function () {
-                return {
-                    getBounds: function () {}
-                };
-            }
-        };
-
-        leafletData = {
-            getMap: function () {
-                return deferred.promise;
-            }
-        };
-
-        events = {};
-        map = {
-            addControl: function () {},
-            addLayer: function () {},
-            fitBounds: function () {},
-            on: function (event, success) {
-                events[event] = success;
-            }
-        };
+        $scope.$stateParams = {gameUrl: 'raleigh-wars'};
 
         GameZone = MockResource.$new();
-        gameZone = GameZone.get({id: 1});
-
         dependencies = {
             $scope: $scope,
-            leaflet: leaflet,
-            leafletData: leafletData,
             GameZone: GameZone
         };
     }));
 
-    it("sets a default center for the map on the $scope", function () {
+    it("sets the existing game layer on the scope", function () {
+        spyOn(GameZone, 'query').andCallThrough();
+
         $controller('EditGameZoneController', dependencies);
-        expect($scope.center.lat).toBeDefined();
-        expect($scope.center.lng).toBeDefined();
-        expect($scope.center.zoom).toBeDefined();
+
+        expect(GameZone.query).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'});
+        expect($scope.gameZones).toBe(GameZone.query());
     });
 
-    it("sets a leaflet FeatureGroup on the $scope", function () {
-        spyOn(leaflet, "FeatureGroup");
-        $controller('EditGameZoneController', dependencies);
-        expect(leaflet.FeatureGroup).toHaveBeenCalled();
-        expect($scope.drawnItems).toBeDefined();
-    });
+    describe("sets up map listeners", function () {
+        var error = {
+            data: {
+                notifications: 'lalala'
+            }
+        };
 
-    it("sets up the leaflet controls on the $scope", function () {
-        $controller('EditGameZoneController', dependencies);
-        expect($scope.controls).toBeDefined();
-        expect(typeof $scope.controls).toBe('object');
-    });
-
-    describe("handles map events", function () {
-        var layer;
         beforeEach(function () {
-            layer = {id: 1, _latlngs: 'latlng'};
             $controller('EditGameZoneController', dependencies);
-            $scope.$stateParams = {gameUrl: 'raleigh-wars'};
-            deferred.resolve(map);
-            $scope.$digest();
         });
 
-        it("by setting $scope.rejectedGeolocation onLocationError", function () {
-            spyOn(leaflet, "circle").andReturn({addTo: function () {}});
-            events.onLocationError();
+        it("for onLocationError", function () {
+            $scope.onLocationError();
             expect($scope.rejectedGeolocation).toBe(true);
-
         });
 
-        describe("by saving the GameZone on draw:created", function () {
+        describe("for onZoneCreated", function () {
+            var event;
+
             beforeEach(function () {
-                $scope.drawnItems.addLayer = function () {};
-            });
-
-            it("and succeeding", function () {
+                event = {
+                    layer: {
+                        _latlngs: []
+                    },
+                    layers: {
+                        getLayers: function () {
+                            return [];
+                        }
+                    }
+                };
                 spyOn(GameZone, 'save').andCallThrough();
-                spyOn($scope.drawnItems, 'addLayer');
-                GameZone.setSuccessResponse({id: 1});
-
-                events['draw:created']({layer: angular.copy(layer)});
-
-                expect(GameZone.save).toHaveBeenCalledWith({ gameUrl : 'raleigh-wars' }, { points : 'latlng' },
-                    jasmine.any(Function), jasmine.any(Function));
-                expect($scope.drawnItems.addLayer).toHaveBeenCalledWith(layer);
             });
 
-            it("and failing", function () {
-                var error = {data: {notifications: [{severity: "ERROR", "code": 10000010008}]}};
+            afterEach(function () {
+                expect(GameZone.save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'},
+                    {points: event.layer._latlngs}, jasmine.any(Function), jasmine.any(Function));
+            });
+
+            it("and be successful", function () {
+                $scope.onZoneCreated(event);
+            });
+
+            it("and error", function () {
                 GameZone.setErrorResponse(error);
-
                 GameZone.failed = true;
-                events['draw:created']({layer: layer});
 
-                expect($scope.notifications.length).toBe(1);
+                $scope.onZoneCreated(event);
+
                 expect($scope.notifications).toBe(error.data.notifications);
             });
         });
 
-        describe("", function () {
-            var layers;
+        describe("for onZoneEdited", function () {
+            var event;
 
             beforeEach(function () {
-                layers = {
-                    getLayers: function () {
-                        return [layer];
+                event = {
+                    layers: {
+                        getLayers: function () {
+                            return [
+                                {
+                                    id: 1,
+                                    _latlngs: []
+                                }
+                            ];
+                        }
                     }
                 };
-            });
-
-            it("by updating the GameZone on draw:edited", function () {
                 spyOn(GameZone, 'update').andCallThrough();
-                events['draw:edited']({layers: layers});
-                expect(GameZone.update).toHaveBeenCalledWith({id: layer.id, gameUrl : 'raleigh-wars' }, { points : 'latlng' });
             });
 
-            it("by deleting the GameZone on draw:deleted", function () {
+            afterEach(function () {
+                expect(GameZone.update).toHaveBeenCalledWith({id: 1, gameUrl: 'raleigh-wars'},
+                    {points: event.layers.getLayers()[0]._latlngs}, jasmine.any(Function),
+                    jasmine.any(Function));
+            });
+
+            it("and be successful", function () {
+                $scope.onZoneEdited(event);
+            });
+
+            it("and error", function () {
+                GameZone.setErrorResponse(error);
+                GameZone.failed = true;
+
+                $scope.onZoneEdited(event);
+
+                expect($scope.notifications).toBe(error.data.notifications);
+            });
+        });
+
+        describe("for onZoneDeleted", function () {
+            var event;
+
+            beforeEach(function () {
+                event = {
+                    layers: {
+                        getLayers: function () {
+                            return [
+                                {
+                                    id: 1,
+                                    _latlngs: []
+                                }
+                            ];
+                        }
+                    }
+                };
                 spyOn(GameZone, 'remove').andCallThrough();
-                events['draw:deleted']({layers: layers});
-                expect(GameZone.remove).toHaveBeenCalledWith({id: layer.id, gameUrl : 'raleigh-wars' });
+            });
+
+            afterEach(function () {
+                expect(GameZone.remove).toHaveBeenCalledWith({id: 1, gameUrl: 'raleigh-wars'},
+                    jasmine.any(Function), jasmine.any(Function));
+            });
+
+            it("and be successful", function () {
+                $scope.onZoneDeleted(event);
+            });
+
+            it("and error", function () {
+                GameZone.setErrorResponse(error);
+                GameZone.failed = true;
+
+                $scope.onZoneDeleted(event);
+
+                expect($scope.notifications).toBe(error.data.notifications);
             });
         });
     });

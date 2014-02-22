@@ -13,7 +13,6 @@ angular.module('subrosa.components.map', ['leaflet-directive']);
  *
  * @description
  *  Set leaflet global L as an angular constant.
- *  TODO make directive out of GameZoneController logic and add to module
  */
 /* global window */
 angular.module('subrosa.components.map').constant('leaflet', window.L);
