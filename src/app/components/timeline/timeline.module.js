@@ -15,4 +15,4 @@ angular.module('subrosa.components.timeline', []);
  *  Set global
  */
 /* global window */
-angular.module('subrosa.components.timeline').constant('links', window.links);
+angular.module('subrosa.components.timeline').constant('linksTimeline', window.links);

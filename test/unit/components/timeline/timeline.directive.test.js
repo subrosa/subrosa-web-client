@@ -1,5 +1,5 @@
 describe('Directive: modal', function () {
-    var $scope, $compile, links, timeline, element;
+    var $scope, $compile, linksTimeline, timelineCache, timeline, element;
 
     beforeEach(module('subrosa.components.timeline'));
 
@@ -10,8 +10,8 @@ describe('Directive: modal', function () {
             setSelection: function () {},
             setVisibleChartRangeAuto: function () {}
         };
-        
-        links = {
+
+        linksTimeline = {
             events: {
                 addListener: function () {}
             },
@@ -20,8 +20,12 @@ describe('Directive: modal', function () {
             }
         };
 
-        $provide.constant('links', links);
+        timelineCache = {
+            put: function () {}
+        };
 
+        $provide.constant('linksTimeline', linksTimeline);
+        $provide.value('timelineCache', timelineCache);
     }));
 
     beforeEach(inject(function (_$compile_, _$rootScope_) {
@@ -31,15 +35,26 @@ describe('Directive: modal', function () {
 
     beforeEach(function () {
         element = angular.element(
-            '<div timeline="data" timeline-options="options" ' +
+            '<div timeline="myTimeline" ' +
+                 'timeline-data="data"' +
+                 'timeline-options="options" ' +
                  'timeline-selection="selectedEvent" ' +
                  'timeline-on-add="added(selection)" ' +
-                  'timeline-on-select="selected(selection)" ' +
-                  'timeline-on-change="changed(selection)" ' +
-                  'timeline-on-delete="deleted(selection)" ' +
-                  'timeline-on-edit="edited(selection)">' +
+                 'timeline-on-select="selected(selection)" ' +
+                 'timeline-on-change="changed(selection)" ' +
+                 'timeline-on-delete="deleted(selection)" ' +
+                 'timeline-on-edit="edited(selection)">' +
             '</div>'
         );
+    });
+
+    it("puts the timeline in the timelineCache", function () {
+        spyOn(timelineCache, 'put');
+
+        $compile(element)($scope);
+        $scope.$digest();
+
+        expect(timelineCache.put).toHaveBeenCalledWith('myTimeline', timeline);
     });
 
     describe("sets up a listener", function () {
@@ -48,7 +63,7 @@ describe('Directive: modal', function () {
         beforeEach(function () {
             expectedSelection = {event: 'yoyoyo'};
 
-            links.events.addListener = function (timeline, event, success) {
+            linksTimeline.events.addListener = function (timeline, event, success) {
                 events[event] = success;
             };
 
@@ -56,7 +71,7 @@ describe('Directive: modal', function () {
                 return expectedSelection;
             };
 
-            spyOn(links.events, 'addListener').andCallThrough();
+            spyOn(linksTimeline.events, 'addListener').andCallThrough();
             spyOn(timeline, 'getSelection').andCallThrough();
 
             $compile(element)($scope);
@@ -69,7 +84,7 @@ describe('Directive: modal', function () {
         });
 
         it("for the add event and calls the onAdd listener", function () {
-            expect(links.events.addListener).toHaveBeenCalledWith(timeline, 'add', jasmine.any(Function));
+            expect(linksTimeline.events.addListener).toHaveBeenCalledWith(timeline, 'add', jasmine.any(Function));
             
             spyOn(elementScope, 'onAdd').andCallThrough();
             spyOn($scope, 'added');
@@ -81,13 +96,13 @@ describe('Directive: modal', function () {
             expect($scope.added).toHaveBeenCalledWith(expectedSelection);
         });
 
-        it("for the change event and calls the onChange listener.", function () {
-            expect(links.events.addListener).toHaveBeenCalledWith(timeline, 'change', jasmine.any(Function));
+        it("for the changed event and calls the onChange listener.", function () {
+            expect(linksTimeline.events.addListener).toHaveBeenCalledWith(timeline, 'changed', jasmine.any(Function));
 
             spyOn(elementScope, 'onChange').andCallThrough();
             spyOn($scope, 'changed');
 
-            events.change();
+            events.changed();
 
             expect(timeline.getSelection).toHaveBeenCalled();
             expect(elementScope.onChange).toHaveBeenCalledWith({selection: expectedSelection});
@@ -95,7 +110,7 @@ describe('Directive: modal', function () {
         });
 
         it("for the delete event and calls the onDelete listener.", function () {
-            expect(links.events.addListener).toHaveBeenCalledWith(timeline, 'delete', jasmine.any(Function));
+            expect(linksTimeline.events.addListener).toHaveBeenCalledWith(timeline, 'delete', jasmine.any(Function));
 
             spyOn(elementScope, 'onDelete').andCallThrough();
             spyOn($scope, 'deleted');
@@ -108,7 +123,7 @@ describe('Directive: modal', function () {
         });
 
         it("for the edit event and calls the onEdit listener.", function () {
-            expect(links.events.addListener).toHaveBeenCalledWith(timeline, 'edit', jasmine.any(Function));
+            expect(linksTimeline.events.addListener).toHaveBeenCalledWith(timeline, 'edit', jasmine.any(Function));
 
             spyOn(elementScope, 'onEdit').andCallThrough();
             spyOn($scope, 'edited');
@@ -121,7 +136,7 @@ describe('Directive: modal', function () {
         });
 
         it("for the select event and calls the onSelect listener.", function () {
-            expect(links.events.addListener).toHaveBeenCalledWith(timeline, 'select', jasmine.any(Function));
+            expect(linksTimeline.events.addListener).toHaveBeenCalledWith(timeline, 'select', jasmine.any(Function));
 
             spyOn(elementScope, 'onSelect').andCallThrough();
             spyOn($scope, 'selected');
@@ -161,27 +176,6 @@ describe('Directive: modal', function () {
             $scope.$digest();
 
             expect(timeline.draw).toHaveBeenCalledWith($scope.data, $scope.options);
-        });
-
-        describe("on the selection", function () {
-            beforeEach(function () {
-                $scope.data = ['umm', 'blah'];
-                $scope.selectedEvent = null;
-
-                spyOn(timeline, 'setSelection');
-            });
-
-            it("and sets the selection if it changes and is in the model", function () {
-                $scope.selectedEvent = 'blah';
-                $scope.$digest();
-                expect(timeline.setSelection).toHaveBeenCalledWith([{row: 1}]);
-            });
-
-            it("and does nothing if the changes are not in the model", function () {
-                $scope.selectedEvent = 'yooo';
-                $scope.$digest();
-                expect(timeline.setSelection).not.toHaveBeenCalled();
-            });
         });
     });
 

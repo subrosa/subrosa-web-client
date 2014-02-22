@@ -11,7 +11,10 @@
 
 /**
  * @ngdoc directive
- * @name subrosa.components.timeline:timeline
+ * @name subrosa.components:timeline:timeline
+ *
+ * @requires linksTimeline
+ * @requires timelineCache
  *
  * @description
  *   Provides a timeline that incorporates Almende's Timeline
@@ -19,23 +22,22 @@
  *
  *   TODO PR this to the existing project
  */
-angular.module('subrosa.components.timeline').directive('timeline', function (links) {
+angular.module('subrosa.components.timeline').directive('timeline', function (linksTimeline, timelineCache) {
 
         return {
             restrict: 'A',
             scope: {
-                model: '=timeline',
+                id: '@timeline',
+                model: '=timelineData',
                 options: '=timelineOptions',
                 onAdd: '&timelineOnAdd',
                 onChange: '&timelineOnChange',
                 onDelete: '&timelineOnDelete',
                 onEdit: '&timelineOnEdit',
-                onSelect: '&timelineOnSelect',
-                selection: '=timelineSelection'
-
+                onSelect: '&timelineOnSelect'
             },
             link: function ($scope, $element) {
-                var getSelection, timeline = new links.Timeline($element[0]);
+                var getSelection, timeline = new linksTimeline.Timeline($element[0]);
 
                 getSelection = function () {
                     var sel = timeline.getSelection();
@@ -45,23 +47,23 @@ angular.module('subrosa.components.timeline').directive('timeline', function (li
                     return sel;
                 };
 
-                links.events.addListener(timeline, 'add', function () {
+                linksTimeline.events.addListener(timeline, 'add', function () {
                     $scope.onAdd({selection: getSelection()});
                 });
 
-                links.events.addListener(timeline, 'change', function () {
+                linksTimeline.events.addListener(timeline, 'changed', function () {
                     $scope.onChange({selection: getSelection()});
                 });
 
-                links.events.addListener(timeline, 'delete', function () {
+                linksTimeline.events.addListener(timeline, 'delete', function () {
                     $scope.onDelete({selection: getSelection()});
                 });
 
-                links.events.addListener(timeline, 'edit', function () {
+                linksTimeline.events.addListener(timeline, 'edit', function () {
                     $scope.onEdit({selection: getSelection()});
                 });
                 
-                links.events.addListener(timeline, 'select', function () {
+                linksTimeline.events.addListener(timeline, 'select', function () {
                     $scope.onSelect({selection: getSelection()});
                 });
 
@@ -74,18 +76,7 @@ angular.module('subrosa.components.timeline').directive('timeline', function (li
                     timeline.draw($scope.model, $scope.options);
                 });
 
-                $scope.$watch('selection', function (newVal, oldVal) {
-                    if (!angular.equals(newVal, oldVal)) {
-                        for (var i = $scope.model.length - 1; i >= 0; i = i - 1) {
-                            if (angular.equals($scope.model[i], newVal)) {
-                                timeline.setSelection([{
-                                    row: i
-                                }]);
-                                break;
-                            }
-                        }
-                    }
-                });
+                timelineCache.put($scope.id, timeline);
             }
         };
     });
