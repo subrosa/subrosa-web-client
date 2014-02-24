@@ -48,6 +48,15 @@ describe('Directive: modal', function () {
         );
     });
 
+    it("sets up some default timeline options", function () {
+        $compile(element)($scope);
+        $scope.$digest();
+
+        expect($scope.options.showCurrentTime).toBe(true);
+        expect($scope.options.showCustomTime).toBe(true);
+        expect($scope.options.showNavigation).toBe(true);
+    });
+
     it("puts the timeline in the timelineCache", function () {
         spyOn(timelineCache, 'put');
 

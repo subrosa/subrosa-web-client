@@ -47,6 +47,12 @@ angular.module('subrosa.components.timeline').directive('timeline', function (li
                     return sel;
                 };
 
+                $scope.options = {
+                    showCurrentTime: true,
+                    showCustomTime: true,
+                    showNavigation: true
+                };
+
                 linksTimeline.events.addListener(timeline, 'add', function () {
                     $scope.onAdd({selection: getSelection()});
                 });
