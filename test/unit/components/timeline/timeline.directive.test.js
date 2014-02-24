@@ -37,6 +37,7 @@ describe('Directive: modal', function () {
         element = angular.element(
             '<div timeline="myTimeline" ' +
                  'timeline-data="data"' +
+                 'timeline-allow-edit="allowEdit"' +
                  'timeline-options="options" ' +
                  'timeline-selection="selectedEvent" ' +
                  'timeline-on-add="added(selection)" ' +
@@ -49,9 +50,12 @@ describe('Directive: modal', function () {
     });
 
     it("sets up some default timeline options", function () {
+        $scope.allowEdit = true;
+
         $compile(element)($scope);
         $scope.$digest();
 
+        expect($scope.options.editable).toBe(true);
         expect($scope.options.locale).toBe('en');
         expect($scope.options.showCurrentTime).toBe(true);
         expect($scope.options.showCustomTime).toBe(true);

@@ -30,6 +30,7 @@ angular.module('subrosa.components.timeline').directive('timeline', function ($l
             scope: {
                 id: '@timeline',
                 model: '=timelineData',
+                allowEdit: '=timelineAllowEdit',
                 options: '=timelineOptions',
                 onAdd: '&timelineOnAdd',
                 onChange: '&timelineOnChange',
@@ -49,6 +50,7 @@ angular.module('subrosa.components.timeline').directive('timeline', function ($l
                 };
 
                 $scope.options = {
+                    editable: $scope.allowEdit,
                     locale: $locale.id.split('-')[0],
                     showCurrentTime: true,
                     showCustomTime: true,
