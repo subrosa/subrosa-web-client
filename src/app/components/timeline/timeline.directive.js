@@ -13,6 +13,7 @@
  * @ngdoc directive
  * @name subrosa.components:timeline:timeline
  *
+ * @requires $locale
  * @requires linksTimeline
  * @requires timelineCache
  *
@@ -22,7 +23,7 @@
  *
  *   TODO PR this to the existing project
  */
-angular.module('subrosa.components.timeline').directive('timeline', function (linksTimeline, timelineCache) {
+angular.module('subrosa.components.timeline').directive('timeline', function ($locale, linksTimeline, timelineCache) {
 
         return {
             restrict: 'A',
@@ -48,6 +49,7 @@ angular.module('subrosa.components.timeline').directive('timeline', function (li
                 };
 
                 $scope.options = {
+                    locale: $locale.id.split('-')[0],
                     showCurrentTime: true,
                     showCustomTime: true,
                     showNavigation: true
