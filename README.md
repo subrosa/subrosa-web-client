@@ -1,3 +1,3 @@
 # subrosa web client
 
-TODO
+TODO complete this readme

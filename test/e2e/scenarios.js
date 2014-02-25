@@ -1,5 +1,5 @@
 describe('subrosa', function () {
-    // TODO
+    // TODO add some e2e tests
     it("needs to add some tests", function () {
 
     });
