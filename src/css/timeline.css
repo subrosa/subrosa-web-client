@@ -6,3 +6,8 @@
 .timeline-frame .timeline-event-content {
     white-space: normal;
 }
+
+.timeline-selectable .timeline-event.readonly,
+.timeline-selectable .timeline-event.readonly .timeline-event-content {
+    cursor: default;
+}
