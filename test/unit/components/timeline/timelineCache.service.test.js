@@ -5,7 +5,8 @@ describe('Service: timelineCache', function () {
 
     beforeEach(module(function ($provide) {
         timelineObject = {
-            data: ['hello', 'blah']
+            data: ['hello', 'blah'],
+            getSelection: function () {}
         };
 
         timelineCache = {
@@ -51,6 +52,32 @@ describe('Service: timelineCache', function () {
             expect(timelineObject.getIndex('lalala')).toBe(null);
         });
     });
+
+    it("adds a getModel convenience method to the timeline object", function () {
+        timelineCacheService.put('myTimeline', timelineObject);
+        expect(timelineObject.getModel).toBeDefined();
+        expect(typeof timelineObject.getModel).toBe('function');
+    });
+
+    describe("the getModel convenience method", function () {
+        var models = ['yoyo', 'blah'];
+
+        beforeEach(function () {
+            timelineCacheService.put('myTimeline', timelineObject);
+        });
+
+        it("will return the selected models if it exists", function () {
+            spyOn(timelineObject, 'getSelection').andReturn({0: {row: 1}});
+            expect(timelineObject.getModel(models)).toBe('blah');
+        });
+
+        it("returns null if the models does not exist", function () {
+            var notInModel = {};
+            spyOn(timelineObject, 'getSelection').andReturn(notInModel);
+            expect(timelineObject.getModel(models)).toBe(notInModel);
+        });
+    });
+
 
     it("can return cached timelines", function () {
         spyOn(timelineCache, 'get').andReturn(timelineObject);

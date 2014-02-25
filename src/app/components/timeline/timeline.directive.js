@@ -39,15 +39,8 @@ angular.module('subrosa.components.timeline').directive('timeline', function ($l
                 onSelect: '&timelineOnSelect'
             },
             link: function ($scope, $element) {
-                var getSelection, timeline = new linksTimeline.Timeline($element[0]);
+                var timeline = new linksTimeline.Timeline($element[0]);
 
-                getSelection = function () {
-                    var sel = timeline.getSelection();
-                    if (sel[0]) {
-                        sel = $scope.model[sel[0].row];
-                    }
-                    return sel;
-                };
 
                 $scope.options = {
                     editable: $scope.allowEdit,
@@ -58,23 +51,23 @@ angular.module('subrosa.components.timeline').directive('timeline', function ($l
                 };
 
                 linksTimeline.events.addListener(timeline, 'add', function () {
-                    $scope.onAdd({selection: getSelection()});
+                    $scope.onAdd({selection: timeline.getModel($scope.model)});
                 });
 
                 linksTimeline.events.addListener(timeline, 'changed', function () {
-                    $scope.onChange({selection: getSelection()});
+                    $scope.onChange({selection: timeline.getModel($scope.model)});
                 });
 
                 linksTimeline.events.addListener(timeline, 'delete', function () {
-                    $scope.onDelete({selection: getSelection()});
+                    $scope.onDelete({selection: timeline.getModel($scope.model)});
                 });
 
                 linksTimeline.events.addListener(timeline, 'edit', function () {
-                    $scope.onEdit({selection: getSelection()});
+                    $scope.onEdit({selection: timeline.getModel($scope.model)});
                 });
                 
                 linksTimeline.events.addListener(timeline, 'select', function () {
-                    $scope.onSelect({selection: getSelection()});
+                    $scope.onSelect({selection: timeline.getModel($scope.model)});
                 });
 
                 $scope.$watch('model', function (newVal) {

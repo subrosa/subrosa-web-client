@@ -49,7 +49,7 @@ angular.module('mocks').factory('MockResource', function () {
                 if (this.failed) {
                     errorFn(errorResponse);
                 } else {
-                    successFn(this);
+                    successFn(successResponse || this);
                 }
             },
             $update: function (success, error) {

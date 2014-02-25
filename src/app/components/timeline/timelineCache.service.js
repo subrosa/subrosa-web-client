@@ -12,7 +12,9 @@ angular.module('subrosa.components.timeline').service('timelineCache', function 
 
     /**
      * Put a timeline object into the timeline cache.
-     * Adds a convenience method for getting an item at a specified index.
+     * Adds two convenience methods:
+     *  1. a method for getting an item at a specified index.
+     *  2. a method to get the selected model object.
      *
      * @param timelineId the id to store in the cache.
      * @param timelineObject the object to store in the cache.
@@ -27,6 +29,14 @@ angular.module('subrosa.components.timeline').service('timelineCache', function 
             });
 
             return foundIndex;
+        };
+
+        timelineObject.getModel = function (models) {
+            var sel = timelineObject.getSelection();
+            if (sel[0]) {
+                sel = models[sel[0].row];
+            }
+            return sel;
         };
 
         timelineCache.put(timelineId, timelineObject);

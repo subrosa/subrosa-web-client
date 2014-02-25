@@ -1,0 +1,26 @@
+<h3 data-translate>Time Dependent Events</h3>
+
+<p data-translate>
+  These events will happen at the predetermined times shown below.
+</p>
+
+<ul>
+  <li data-translate>Add a new event by double clicking in the timeline.</li>
+  <li data-translate>Zoom in to fine tune event time down to the minute.</li>
+  <li data-translate>Single click an event to modify its start, end, duration, or to remove it.</li>
+  <li data-translate>Double click an event to edit its details.</li>
+</ul>
+
+<div data-modal="gameEventModal"
+     data-template-url="/app/game/edit/views/edit-game-event-modal.html">
+</div>
+
+<div data-timeline="editGameEvents"
+     data-timeline-allow-edit="true"
+     data-timeline-data="data"
+     data-timeline-options="options"
+     data-timeline-on-add="eventAdded(selection)"
+     data-timeline-on-change="eventChanged(selection)"
+     data-timeline-on-delete="eventDeleted(selection)"
+     data-timeline-on-edit="eventEdited(selection)">
+</div>

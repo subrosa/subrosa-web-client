@@ -81,12 +81,12 @@ describe('Directive: modal', function () {
                 events[event] = success;
             };
 
-            timeline.getSelection = function () {
+            timeline.getModel = function () {
                 return expectedSelection;
             };
 
             spyOn(linksTimeline.events, 'addListener').andCallThrough();
-            spyOn(timeline, 'getSelection').andCallThrough();
+            spyOn(timeline, 'getModel').andCallThrough();
 
             $compile(element)($scope);
             $scope.$digest();
@@ -105,7 +105,7 @@ describe('Directive: modal', function () {
 
             events.add();
 
-            expect(timeline.getSelection).toHaveBeenCalled();
+            expect(timeline.getModel).toHaveBeenCalled();
             expect(elementScope.onAdd).toHaveBeenCalledWith({selection: expectedSelection});
             expect($scope.added).toHaveBeenCalledWith(expectedSelection);
         });
@@ -118,7 +118,7 @@ describe('Directive: modal', function () {
 
             events.changed();
 
-            expect(timeline.getSelection).toHaveBeenCalled();
+            expect(timeline.getModel).toHaveBeenCalled();
             expect(elementScope.onChange).toHaveBeenCalledWith({selection: expectedSelection});
             expect($scope.changed).toHaveBeenCalledWith(expectedSelection);
         });
@@ -131,7 +131,7 @@ describe('Directive: modal', function () {
 
             events['delete']();
 
-            expect(timeline.getSelection).toHaveBeenCalled();
+            expect(timeline.getModel).toHaveBeenCalled();
             expect(elementScope.onDelete).toHaveBeenCalledWith({selection: expectedSelection});
             expect($scope.deleted).toHaveBeenCalledWith(expectedSelection);
         });
@@ -144,7 +144,7 @@ describe('Directive: modal', function () {
 
             events.edit();
 
-            expect(timeline.getSelection).toHaveBeenCalled();
+            expect(timeline.getModel).toHaveBeenCalled();
             expect(elementScope.onEdit).toHaveBeenCalledWith({selection: expectedSelection});
             expect($scope.edited).toHaveBeenCalledWith(expectedSelection);
         });
@@ -157,7 +157,7 @@ describe('Directive: modal', function () {
 
             events.select();
 
-            expect(timeline.getSelection).toHaveBeenCalled();
+            expect(timeline.getModel).toHaveBeenCalled();
             expect(elementScope.onSelect).toHaveBeenCalledWith({selection: expectedSelection});
             expect($scope.selected).toHaveBeenCalledWith(expectedSelection);
         });

@@ -118,4 +118,26 @@ angular.module('subrosa.game').config(function ($stateProvider) {
             }
         }
     });
+    $stateProvider.state('game.edit.events', {
+        url: '/events',
+
+        views: {
+            'middle@game.edit': {
+                controller: 'EditGameEventsController',
+                templateUrl: '/app/game/edit/views/edit-game-events.html'
+            },
+            'event-view@game.edit.events': {
+                templateUrl: '/app/game/edit/views/edit-game-events-scheduled.html'
+            }
+        }
+    });
+    $stateProvider.state('game.edit.events.triggered', {
+        url: '/events/triggered',
+
+        views: {
+            'event-view@game.edit.events': {
+                templateUrl: '/app/game/edit/views/edit-game-events-triggered.html'
+            }
+        }
+    });
 });
