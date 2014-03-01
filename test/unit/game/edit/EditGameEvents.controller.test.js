@@ -61,14 +61,13 @@ describe('Controller: EditGameEvents', function () {
         expect($scope.options.zoomMin).toBe(oneHour);
     });
 
-    // TODO: fix this test after figuring out how game events will be returned
-    xit("sets the existing game events on the scope by getting them from the API", function () {
+    it("sets the existing game events on the scope by getting them from the API", function () {
         spyOn(GameEvent, 'query').andCallThrough();
 
         $controller('EditGameEventsController', dependencies);
 
         expect(GameEvent.query).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'}, jasmine.any(Function));
-        expect($scope.data).toBe(GameEvent.query().results);
+        expect($scope.events).toBe(GameEvent.query().results);
     });
 
     describe("responds to timeline event", function () {

@@ -13,7 +13,7 @@
 angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, gettext, modalCache, timelineCache, GameEvent) {
     var saveEvent;
 
-    $scope.data = [];
+    $scope.events = [];
 
     $scope.game.$promise.then(function (game) {
         var oneDay = 86400000,
@@ -29,30 +29,8 @@ angular.module('subrosa.game').controller('EditGameEventsController', function (
             zoomMin: oneHour
         };
 
-        // TODO: should the API simply return these events as part of the GameEvents array?
-        $scope.data = [
-            {
-                start: game.registrationStart,
-                end: game.registrationEnd,
-                // TODO could be cool to use a template here
-                content: gettext("Player Registration"),
-                className: 'readonly',
-                // TODO could be cool to use a template here
-                group: gettext('Game Events'),
-                editable: false
-            },
-            {
-                start: game.gameStart,
-                end: game.gameEnd,
-                content: game.name,
-                className: 'readonly',
-                group: gettext('Game Events'),
-                editable: false
-            }
-        ];
-
         GameEvent.query({gameUrl: $scope.$stateParams.gameUrl}, function (response) {
-            $scope.data.concat(response.data);
+            $scope.events = response.results;
         });
     });
 
