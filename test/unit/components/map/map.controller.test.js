@@ -22,7 +22,8 @@ describe('Controller: MapController', function () {
     });
 
     it("sets default map options on the $scope", function () {
-        expect($.isEmptyObject($scope.options)).toBe(true);
+        expect(angular.isObject($scope.options)).toBe(true);
+        expect($scope.options.minZoom).toBe(3);
     });
 
     it("sets the map draw controls if allowEdit is true", function () {

@@ -29,7 +29,9 @@ angular.module('subrosa.components.map').controller('MapController', function ($
         }
     };
 
-    defaultOptions = {};
+    defaultOptions = {
+        minZoom: 3
+    };
 
     $scope.center = defaultCenter;
     $scope.controls = defaultControls;
