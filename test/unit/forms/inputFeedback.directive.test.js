@@ -23,9 +23,9 @@ describe('Directive: inputFeedback', function () {
     });
 
     it("appends feedback icons to element", function () {
-        expect(element.find('.glyphicon-ok').length).toBe(1);
-        expect(element.find('.glyphicon-warning-sign').length).toBe(1);
-        expect(element.find('.glyphicon-remove').length).toBe(1);
+        expect(element.find('.fa-thumbs-o-up').length).toBe(1);
+        expect(element.find('.fa-warning').length).toBe(1);
+        expect(element.find('.fa-thumbs-o-down').length).toBe(1);
     });
 
     it("can determine if field should be success", function () {
@@ -62,9 +62,9 @@ describe('Directive: inputFeedback', function () {
     describe("displays input feedback", function () {
         var successIcon, warningIcon, errorIcon;
         beforeEach(function () {
-            successIcon = element.find('.glyphicon-ok');
-            warningIcon = element.find('.glyphicon-warning-sign');
-            errorIcon = element.find('.glyphicon-remove');
+            successIcon = element.find('.fa-thumbs-o-up');
+            warningIcon = element.find('.fa-warning');
+            errorIcon = element.find('.fa-thumbs-o-down');
         });
 
         it("for success", function () {

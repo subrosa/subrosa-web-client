@@ -206,7 +206,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     dot: true,
-                    cwd: '<%= subrosa.src %>/lib/bootstrap/dist/',
+                    cwd: '<%= subrosa.src %>/lib/font-awesome/',
                     src: [
                         '*.{ico,text,png,html}',
                         'fonts/*'

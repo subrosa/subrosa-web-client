@@ -16,7 +16,7 @@
 <ul class="media-list">
   <li class="media" data-ng-show="posts.results.length > 0" data-ng-repeat="post in posts.results">
     <div class="pull-left">
-      <i class="media-object glyphicon glyphicon-user" data-ng-hide="post.image.uri"></i>
+      <i class="media-object fa fa-user" data-ng-hide="post.image.uri"></i>
       <img class="media-object" data-ng-show="post.image.uri"
            data-ng-src="{{ post.image.uri }}"
            alt="{{ 'Image for post' | translate }}"/>
@@ -30,7 +30,7 @@
 
   <li class="media" data-ng-show="posts.results.length == 0">
     <div class="pull-left">
-      <i class="media-object glyphicon glyphicon-user"></i>
+      <i class="media-object fa fa-user"></i>
     </div>
     <div class="media-body">
       <h4 class="media-heading" data-translate>Welcome to Subrosa</h4>

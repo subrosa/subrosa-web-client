@@ -1,13 +1,11 @@
-.media-object.glyphicon-user {
-    font-size: 6em;
-}
-
 img.media-object {
     width: 84px;
 }
 
 .game-badge {
+    height: 160px;
     margin: 0 20px;
+    width: 160px;
 }
 
 .angular-leaflet-map {

@@ -16,15 +16,13 @@
 </div>
 
 <div class="col-md-3">
-  <div class="row">
-    <div class="thumbnail">
-      <img data-ng-src="{{ account.images.AVATAR.uri }}" data-ng-show="account.images.AVATAR.uri" alt="{{ 'Avatar Image for' | translate}} {{ account.username }}"/>
-      <i class="avatar-lg glyphicon glyphicon-user center-block" data-ng-hide="account.images.AVATAR.uri"></i>
-      <div class="caption">
-        <h3 data-translate>Avatar</h3>
-        <p data-translate>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
-        <button class="btn btn-default center-block" data-translate>Edit Image</button>
-      </div>
+  <div class="thumbnail">
+    <img data-ng-src="{{ account.images.AVATAR.uri }}" data-ng-show="account.images.AVATAR.uri" alt="{{ 'Avatar Image for' | translate}} {{ account.username }}"/>
+    <i class="avatar-lg fa fa-user center-block" data-ng-hide="account.images.AVATAR.uri"></i>
+    <div class="caption">
+      <h3 data-translate>Avatar</h3>
+      <p data-translate>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
+      <button class="btn btn-default center-block" data-translate>Edit Image</button>
     </div>
   </div>
 </div>
