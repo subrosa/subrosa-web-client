@@ -6,6 +6,7 @@
  *  Module for game related functionality.
  */
 angular.module('subrosa.game', [
+    'geolocation',
     'gettext',
     'ngResource',
     'subrosa.components.map',
@@ -29,8 +30,24 @@ angular.module('subrosa.game').config(function ($stateProvider) {
 
     $stateProvider.state('games', {
         url: '/games',
-        controller: 'GameListController',
-        templateUrl: '/app/game/views/game-list.html'
+        views: {
+            '@': {
+                controller: 'GameListController',
+                templateUrl: '/app/game/views/game-list-layout.html'
+            },
+            'game-list@games': {
+                templateUrl: '/app/game/views/game-list.html'
+            }
+        }
+    });
+    $stateProvider.state('games.map', {
+        url: '/games/map',
+        views: {
+            'game-list': {
+                controller: 'GameListMapController',
+                templateUrl: '/app/game/views/game-list-map.html'
+            }
+        }
     });
 
     $stateProvider.state('new-game', {

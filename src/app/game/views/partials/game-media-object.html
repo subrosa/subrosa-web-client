@@ -1,0 +1,29 @@
+<div class="media">
+  <div class="pull-left">
+    <i class="media-object fa fa-puzzle-piece" data-ng-hide="game.image.uri"></i>
+    <img class="media-object" data-ng-show="game.image.uri"
+         data-ng-src="{{ game.image.uri }}"
+         alt="{{ 'Image for game' | translate }}"/>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <a data-ui-sref="game({gameUrl: '{{ game.url }}'})">{{ game.name }}</a>
+    </h4>
+    <p>{{ game.description }}</p>
+
+    <div data-ng-show="game.gameStart && game.gameEnd">
+      <i class="fa fa-calendar" title="{{ 'Duration' | translate }}"></i>
+      <span>{{ game.gameStart | date:'short' }} - {{ game.gameEnd | date:'short' }}</span>
+    </div>
+
+    <div data-ng-show="game.gameType">
+      <i class="fa fa-gamepad" title="{{ 'Game Type' | translate }}"></i>
+      <span>{{ game.gameType | gameType }}</span>
+    </div>
+
+    <div data-ng-show="game.ordnance">
+      <i class="fa fa-crosshairs" title="{{ 'Ordnance' | translate }}"></i>
+      <span>{{ game.ordnance }}</span>
+    </div>
+  </div>
+</div>

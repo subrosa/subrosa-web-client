@@ -1,0 +1,12 @@
+<h2 data-translate>Find Games</h2>
+
+<ul class="nav nav-pills" role="navigation">
+  <li data-ng-class="{active: isState('games')}">
+    <a data-ui-sref="games" data-translate>List View</a>
+  </li>
+  <li data-ng-class="{active: isState('games.map')}">
+    <a data-ui-sref="games.map" data-translate>Map View</a>
+  </li>
+</ul>
+
+<div data-ui-view="game-list"></div>

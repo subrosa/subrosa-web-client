@@ -1,5 +1,6 @@
 describe('Directive: map', function () {
-    var $q, $compile, $scope, MockResource, leaflet, featureGroupInstance, leafletData, mapElement, element;
+    var $q, $timeout, $httpBackend, $compile, $scope, MockResource, leaflet, featureGroupInstance, leafletData,
+        leafletMarkersHelpers, mapElement, element;
 
     beforeEach(module('subrosa.components', 'mocks', '/app/components/map/views/map.html'));
 
@@ -13,8 +14,13 @@ describe('Directive: map', function () {
     });
 
     beforeEach(module(function ($provide) {
+        $timeout = function (callback) {
+            callback();
+        };
+
         featureGroupInstance = {
             addLayer: function () {},
+            getBounds: function () {},
             removeLayer: function () {}
         };
 
@@ -26,7 +32,8 @@ describe('Directive: map', function () {
                 locate: function () {}
             },
             latLng: function () {},
-            polygon: function () {}
+            polygon: function () {},
+            marker: function () {}
         };
 
         mapElement = {
@@ -47,13 +54,20 @@ describe('Directive: map', function () {
             setMap: function () {}
         };
 
+        leafletMarkersHelpers = {
+            addMarkerToGroup: function () {}
+        };
+
+        $provide.value('$timeout', $timeout);
         $provide.constant('leaflet', leaflet);
         $provide.value('leafletData', leafletData);
+        $provide.value('leafletMarkersHelpers', leafletMarkersHelpers);
     }));
 
 
-    beforeEach(inject(function (_$q_, _$compile_, _$rootScope_, _MockResource_) {
+    beforeEach(inject(function (_$q_, _$httpBackend_, _$compile_, _$rootScope_, _MockResource_) {
         $q = _$q_;
+        $httpBackend = _$httpBackend_;
         $compile = _$compile_;
         $scope = _$rootScope_;
         MockResource = _MockResource_.$new();
@@ -250,15 +264,13 @@ describe('Directive: map', function () {
 
         it("by creating the polygons and adding them to the map.", function () {
             var polygon = {
-                latLngs: [],
-                getBounds: function () {
-                    return 'bounds';
-                }
+                latLngs: []
             }, mapId = jasmine.any(Number);
 
             spyOn(leaflet, 'latLng').andReturn('blah');
             spyOn(leaflet, 'polygon').andReturn(polygon);
             spyOn(featureGroupInstance, 'addLayer');
+            spyOn(featureGroupInstance, 'getBounds').andReturn('bounds');
             spyOn(mapElement, 'fitBounds');
             spyOn(leafletData, 'setMap');
 
@@ -279,4 +291,88 @@ describe('Directive: map', function () {
             expect(elementScope.controls.custom).not.toBeDefined();
         });
     });
+
+    describe("can display a map with markers", function () {
+        var points;
+
+        beforeEach(function () {
+            element = angular.element('<div map points="points"></div>');
+
+            points = [
+                {
+                    group: 'blah',
+                    latitude: 30,
+                    longitude: 31,
+                    model: {hi: 'ya'},
+                    modelName: 'hi'
+                },
+                {
+                    latitude: 32,
+                    longitude: 33,
+                    model: {hi: 'yo'},
+                    modelName: 'hi'
+                }
+            ];
+
+            MockResource.setSuccessResponse({
+                then: function (callback) {
+                    callback(points);
+                }
+            });
+        });
+
+        it("by adding the markers to the map", function () {
+            var expectedId;
+            spyOn(leaflet, 'marker').andReturn('marker');
+            spyOn(leafletMarkersHelpers, 'addMarkerToGroup');
+
+            $scope.points = MockResource.query();
+            $compile(element)($scope);
+            $scope.$digest();
+            expectedId = parseInt(angular.element(element.children()[0]).attr('id'), 10);
+
+            expect(leaflet.marker).toHaveBeenCalledWith([30, 31]);
+            expect(leafletMarkersHelpers.addMarkerToGroup).toHaveBeenCalledWith('marker',
+                'blah', mapElement);
+            expect(leaflet.marker).toHaveBeenCalledWith([32, 33]);
+            expect(leafletMarkersHelpers.addMarkerToGroup).toHaveBeenCalledWith('marker',
+                expectedId, mapElement);
+        });
+
+        describe("that have their own template popup", function () {
+            var marker, expectedHtml;
+
+            beforeEach(function () {
+                element = angular.element('<div map points="points" ' +
+                                               'popup-template-url="\'template.html\'">' +
+                                          '</div>');
+                marker = {
+                    bindPopup: function () {}
+                };
+
+                expectedHtml = "<!-- ngInclude: 'template.html' -->";
+                $httpBackend.expectGET('template.html').respond(expectedHtml);
+            });
+
+            afterEach(function () {
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("by adding the markers to the map", function () {
+                spyOn(leaflet, 'marker').andReturn(marker);
+                spyOn(leafletMarkersHelpers, 'addMarkerToGroup');
+                spyOn(marker, 'bindPopup');
+
+                $scope.points = MockResource.query();
+                $compile(element)($scope);
+                $scope.$digest();
+                $httpBackend.flush();
+
+                expect(marker.bindPopup).toHaveBeenCalledWith(expectedHtml);
+            });
+        });
+    });
+
+
 });

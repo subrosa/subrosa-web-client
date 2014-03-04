@@ -2,13 +2,16 @@
  * @ngdoc directive
  * @name subrosa.components.map:map
  *
+ * @requires $compile
  * @requires leaflet
  * @requires leafletData
+ * @requires leafletMarkersHelpers
  *
  * @description
  *  A wrapper around leaflet-directive.
  */
-angular.module('subrosa.components.map').directive('map', function (leaflet, leafletData) {
+angular.module('subrosa.components.map').directive('map',
+function ($compile, $timeout, leaflet, leafletData, leafletMarkersHelpers) {
     var SHAPE_COLOR = '#E43E59';
 
     return {
@@ -18,10 +21,13 @@ angular.module('subrosa.components.map').directive('map', function (leaflet, lea
             allowCurrentLocation: '=allowCurrentLocation',
             allowEdit: '=allowEdit',
             center: '=?center',
+            onLocationSuccess: '=onLocationSuccess',
             onLocationError: '=onLocationError',
             onCreated: '&onCreated',
             onDeleted: '&onDeleted',
             onEdited: '&onEdited',
+            points: '=points',
+            popupTemplateUrl: '=popupTemplateUrl',
             polygons: '=polygons'
         },
         compile: function (element) {
@@ -89,12 +95,40 @@ angular.module('subrosa.components.map').directive('map', function (leaflet, lea
                                     if (latLngs.length > 0) {
                                         polygon = new leaflet.polygon(latLngs, {color: SHAPE_COLOR});
                                         scope.shapes.addLayer(polygon);
-                                        mapElement.fitBounds(polygon.getBounds());
                                     }
                                 });
+                                mapElement.fitBounds(scope.shapes.getBounds());
                                 leafletData.setMap(mapElement, id);
                             });
                         }
+                    });
+                }
+
+                if (scope.points) {
+                    leafletData.getMap(id).then(function (mapElement) {
+                        // TODO this shouldn't require a $promise
+                        scope.points.then(function (points) {
+                            angular.forEach(points, function (point) {
+                                var marker = leaflet.marker([point.latitude, point.longitude]);
+
+                                if (scope.popupTemplateUrl) {
+                                    var template = angular.element('<div><div data-ng-include="\'' +
+                                            scope.popupTemplateUrl  + '\'"></div></div>'),
+                                        model = scope.$new();
+
+                                    model[point.modelName] = point.model;
+                                    template = $compile(template)(model);
+
+                                    // TODO figure out way to do this without $timeout
+                                    $timeout(function () {
+                                        marker.bindPopup(template.html());
+                                    }, 100);
+                                }
+
+                                point.group = point.group || id;
+                                leafletMarkersHelpers.addMarkerToGroup(marker, point.group, mapElement);
+                            });
+                        });
                     });
                 }
             };
