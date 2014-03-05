@@ -15,7 +15,7 @@
     "es5-shim": "2.0.5",
     "font-awesome": "4.0.3",
     "json3": "3.2.4",
-    "leaflet": "0.7.2",
+    "leaflet-dist": "0.7.2",
     "leaflet.draw": "0.2.2",
     "leaflet-locatecontrol": "0.21.0",
     "leaflet.markercluster": "0.4.0"
