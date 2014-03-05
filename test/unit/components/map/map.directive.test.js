@@ -244,11 +244,7 @@ describe('Directive: map', function () {
                 }
             ];
 
-            MockResource.setSuccessResponse({
-                $promise: {then: function (callback) {
-                    callback(polygons);
-                }}
-            });
+            MockResource.setSuccessResponse(polygons);
         });
 
         it("by adding the shapes layer to the map", function () {

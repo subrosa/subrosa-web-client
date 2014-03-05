@@ -98,6 +98,9 @@ angular.module('mocks').factory('MockResource', function () {
             } else if (callback) {
                 callback.call(this, response);
             }
+            response.$promise = {then: function (callback) {
+                callback(response);
+            }};
             return response;
         };
 
