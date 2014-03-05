@@ -1,10 +1,9 @@
 describe('Controller: GameFeedController', function () {
-    var $q, $scope, MockPostFactory;
+    var $scope, MockPostFactory;
 
     beforeEach(module('subrosa.game', 'mocks'));
 
     beforeEach(inject(function (_$q_, $controller, $rootScope, MockResource) {
-        $q = _$q_;
         $scope = $rootScope.$new();
         $scope.$stateParams = {gameUrl: 'raleigh-wars'};
         MockPostFactory = MockResource.$new();
