@@ -68,8 +68,9 @@
       <div class="form-group">
         <label for="gameType" class="col-sm-2 control-label" data-translate>Game Type</label>
         <div class="col-sm-10">
-          <input id="gameType" type="text" class="form-control" data-ng-value="game.gameType | gameType"
-                 data-ng-disabled="true"/>
+          <select id="gameType" type="text" class="form-control"data-ng-disabled="true">
+            <option value="game.gameType">{{ game.gameType | gameType }}</option>
+          </select>
           <p class="help-block" data-translate>In the future we will offer additional game types, stay tuned!</p>
         </div>
       </div>
