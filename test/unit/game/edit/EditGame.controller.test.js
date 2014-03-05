@@ -27,6 +27,18 @@ describe('Controller: EditGame', function () {
         });
     });
 
+    it("sets today on the $scope", function () {
+        var today = new Date();
+
+        $controller('EditGameController', {$scope: $scope, Game: Game});
+
+        expect($scope.today.getYear()).toBe(today.getYear());
+        expect($scope.today.getMonth()).toBe(today.getMonth());
+        expect($scope.today.getDay()).toBe(today.getDay());
+        expect($scope.today.getHours()).toBe(today.getHours());
+        expect($scope.today.getMinutes()).toBe(today.getMinutes());
+    });
+
     it("sets the date format", function () {
         $controller('EditGameController', {$scope: $scope, Game: Game});
         expect($scope.dateFormat).toBe('MMMM dd yyyy');

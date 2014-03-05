@@ -12,6 +12,7 @@ angular.module('subrosa.game').controller('EditGameController', function ($scope
     var success, error;
 
     $scope.saving = false;
+    $scope.today = new Date();
     $scope.game = $scope.game || new Game();
 
     // TODO this should be $locale dependent

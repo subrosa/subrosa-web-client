@@ -31,14 +31,18 @@
         <label for="gameStartDate" class="col-sm-2 control-label" data-translate>Start Date</label>
         <div class="col-sm-4">
           <input id="gameStartDate" type="text" class="form-control"
-                 data-datepicker-popup="{{ dateFormat }}" data-ng-model="game.gameStart"
+                 data-ng-model="game.gameStart"
+                 data-datepicker-popup="{{ dateFormat }}"
+                 data-min="today"
                  data-show-button-bar="false"/>
         </div>
 
         <label for="gameEndDate" class="col-sm-2 control-label" data-translate>End Date</label>
         <div class="col-sm-4">
           <input id="gameEndDate" type="text" class="form-control"
-                 data-datepicker-popup="{{ dateFormat }}" data-ng-model="game.gameEnd"
+                 data-ng-model="game.gameEnd"
+                 data-min="today"
+                 data-datepicker-popup="{{ dateFormat }}"
                  data-show-button-bar="false"/>
         </div>
       </div>
@@ -68,7 +72,7 @@
       <div class="form-group">
         <label for="gameType" class="col-sm-2 control-label" data-translate>Game Type</label>
         <div class="col-sm-10">
-          <select id="gameType" type="text" class="form-control"data-ng-disabled="true">
+          <select id="gameType" type="text" class="form-control" data-ng-disabled="true">
             <option value="game.gameType">{{ game.gameType | gameType }}</option>
           </select>
           <p class="help-block" data-translate>In the future we will offer additional game types, stay tuned!</p>
