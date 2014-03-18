@@ -16,3 +16,19 @@ angular.module('subrosa.components.map', ['leaflet-directive']);
  */
 /* global window */
 angular.module('subrosa.components.map').constant('leaflet', window.L);
+
+
+/**
+ * @ngdoc run
+ * @name subrosa.components.map.run
+ *
+ * @requires leaflet
+ *
+ * @description
+ *  Set the default image path if it's not already set (production mode).
+ */
+angular.module('subrosa.components.map').run(function (leaflet) {
+    if (leaflet && !leaflet.Icon.Default.imagePath) {
+        leaflet.Icon.Default.imagePath = '/css/images/';
+    }
+});

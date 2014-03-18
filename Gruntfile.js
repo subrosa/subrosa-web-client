@@ -219,7 +219,7 @@ module.exports = function (grunt) {
                     expand: true,
                     flatten: true,
                     src: [
-                        '<%= subrosa.src %>/lib/leaflet/dist/images/*',
+                        '<%= subrosa.src %>/lib/leaflet-dist/images/*',
                         '<%= subrosa.src %>/lib/leaflet.draw/dist/images/*',
                         '<%= subrosa.src %>/lib/leaflet-locatecontrol/src/images/*'
                     ],

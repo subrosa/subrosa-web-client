@@ -25,15 +25,16 @@ describe('Directive: map', function () {
         };
 
         leaflet = {
-            'FeatureGroup': function () {
-                return featureGroupInstance;
-            },
             control: {
                 locate: function () {}
             },
+            'FeatureGroup': function () {
+                return featureGroupInstance;
+            },
+            Icon: {Default: {imagePath: ''}},
             latLng: function () {},
-            polygon: function () {},
-            marker: function () {}
+            marker: function () {},
+            polygon: function () {}
         };
 
         mapElement = {
