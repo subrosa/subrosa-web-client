@@ -14,7 +14,7 @@
 
       <div class="form-group col-sm-8">
         <label for="name" class="sr-only" data-translate>Game Name</label>
-        <input id="name" type="text" class="form-control input-lg"
+        <input id="name" type="text" class="form-control input-lg" required
                placeholder="{{ 'Game Name' | translate }}" data-ng-model="game.name"/>
       </div>
 
@@ -82,7 +82,7 @@
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <button type="submit" class="btn btn-default"
-                  data-ng-disabled="!gameForm.$valid"
+                  data-ng-disabled="gameForm.$invalid"
                   data-translate>Save</button>
         </div>
       </div>
