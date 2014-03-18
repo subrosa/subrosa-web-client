@@ -205,13 +205,12 @@ module.exports = function (grunt) {
             fonts: {
                 files: [{
                     expand: true,
-                    dot: true,
-                    cwd: '<%= subrosa.src %>/lib/font-awesome/',
+                    flatten: true,
                     src: [
-                        '*.{ico,text,png,html}',
-                        'fonts/*'
+                        '<%= subrosa.src %>/lib/font-awesome/fonts/*',
+                        '<%= subrosa.src %>/lib//bootstrap/fonts/*'
                     ],
-                    dest: '<%= subrosa.dist %>'
+                    dest: '<%= subrosa.dist %>/fonts/'
                 }]
             },
             leafletImages: {
