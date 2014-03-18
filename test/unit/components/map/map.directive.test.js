@@ -21,6 +21,7 @@ describe('Directive: map', function () {
         featureGroupInstance = {
             addLayer: function () {},
             getBounds: function () {},
+            getLayers: function () {},
             removeLayer: function () {}
         };
 
@@ -259,28 +260,51 @@ describe('Directive: map', function () {
             expect(mapElement.addLayer).toHaveBeenCalledWith(featureGroupInstance);
         });
 
-        it("by creating the polygons and adding them to the map.", function () {
-            var polygon = {
-                latLngs: []
-            }, mapId = jasmine.any(Number);
+        describe("by creating the polygons and adding them to the map.", function () {
+            var mapId, polygon;
+            beforeEach(function () {
+                mapId = jasmine.any(Number);
 
-            spyOn(leaflet, 'latLng').andReturn('blah');
-            spyOn(leaflet, 'polygon').andReturn(polygon);
-            spyOn(featureGroupInstance, 'addLayer');
-            spyOn(featureGroupInstance, 'getBounds').andReturn('bounds');
-            spyOn(mapElement, 'fitBounds');
-            spyOn(leafletData, 'setMap');
+                polygon = {
+                    latLngs: []
+                };
 
-            $scope.polygons = MockResource.query();
-            $compile(element)($scope);
-            $scope.$digest();
-            elementScope = element.isolateScope();
+                spyOn(leaflet, 'latLng').andReturn('blah');
+                spyOn(leaflet, 'polygon').andReturn(polygon);
+                spyOn(featureGroupInstance, 'addLayer');
+                spyOn(featureGroupInstance, 'getBounds').andReturn('bounds');
+                spyOn(mapElement, 'fitBounds');
+                spyOn(leafletData, 'setMap');
+            });
 
-            expect(leaflet.latLng).toHaveBeenCalledWith(30, 31);
-            expect(leaflet.polygon).toHaveBeenCalledWith(['blah'], {color: '#E43E59'});
-            expect(featureGroupInstance.addLayer).toHaveBeenCalledWith(polygon);
-            expect(mapElement.fitBounds).toHaveBeenCalledWith('bounds');
-            expect(leafletData.setMap).toHaveBeenCalledWith(mapElement, mapId);
+            afterEach(function () {
+                expect(leaflet.latLng).toHaveBeenCalledWith(30, 31);
+                expect(leaflet.polygon).toHaveBeenCalledWith(['blah'], {color: '#E43E59'});
+                expect(featureGroupInstance.addLayer).toHaveBeenCalledWith(polygon);
+                expect(leafletData.setMap).toHaveBeenCalledWith(mapElement, mapId);
+            });
+
+            it("if any layers exist", function () {
+                spyOn(featureGroupInstance, 'getLayers').andReturn(['layer']);
+
+                $scope.polygons = MockResource.query();
+                $compile(element)($scope);
+                $scope.$digest();
+                elementScope = element.isolateScope();
+
+                expect(mapElement.fitBounds).toHaveBeenCalledWith('bounds');
+            });
+
+            it("but not if no layers exist", function () {
+                spyOn(featureGroupInstance, 'getLayers').andReturn([]);
+
+                $scope.polygons = MockResource.query();
+                $compile(element)($scope);
+                $scope.$digest();
+                elementScope = element.isolateScope();
+
+                expect(mapElement.fitBounds).not.toHaveBeenCalled();
+            });
         });
 
         it("does not display the current location or edit controls", function () {

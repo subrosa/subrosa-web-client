@@ -97,7 +97,10 @@ function ($compile, $timeout, leaflet, leafletData, leafletMarkersHelpers) {
                                         scope.shapes.addLayer(polygon);
                                     }
                                 });
-                                mapElement.fitBounds(scope.shapes.getBounds());
+
+                                if (scope.shapes.getLayers().length > 0) {
+                                    mapElement.fitBounds(scope.shapes.getBounds());
+                                }
                                 leafletData.setMap(mapElement, id);
                             });
                         }
