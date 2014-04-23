@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @name subrosa.components.modal:modal
  *
- * @requires $modal
+ * @requires modalCache
  *
  * @description
  *   Registers a modal dialog with the modalCache so it can be opened later.
