@@ -14,17 +14,54 @@ describe('Service: ErrorDictionary', function () {
     }));
 
     describe("provides a transform function", function () {
-        it("that transforms the notification if the code is in the dictionary", function () {
-            var notification = {code: 1000000001};
-            expect(ErrorDictionary.transform(notification)).toBeDefined();
+        it("that adds a translated message if the code is in the dictionary", function () {
+            var notification = {code: 'forbidden', severity: "ERROR"},
+                result = ErrorDictionary.transform(notification);
+            expect(result.message).toBe('Forbidden');
         });
 
-        it("throws an exception if the code is not found in the dictionary", function () {
-            var notification = {code: 'lalalala'},
-                expected = new Error('Unrecognized error code passed to ErrorDictionary');
-            expect(function () {
-                ErrorDictionary.transform(notification);
-            }).toThrow(expected);
+        it("which defaults to unknown error if the code is not in the dictionary", function () {
+            var notification = {code: 'lalalala', severity: "ERROR"},
+                result = ErrorDictionary.transform(notification);
+            expect(result.message).toBe(ErrorDictionary.unknownError);
+        });
+
+        it("that adds the field to the message if provided", function () {
+            var notification = {
+                    code: 'invalidValue',
+                    severity: "ERROR",
+                    details: {
+                        field: 'name'
+                    }
+                },
+                result = ErrorDictionary.transform(notification);
+            expect(result.message).toBe('Invalid value for field: name');
+        });
+
+        it("that adds a translated message to the details field if provided", function () {
+            var notification = {
+                    code: 'invalidValue',
+                    severity: "ERROR",
+                    details: {
+                        field: 'name',
+                        code: 'invalidValue'
+                    }
+                },
+                result = ErrorDictionary.transform(notification);
+            expect(result.details.message).toBe('This value is invalid');
+        });
+
+        it("which default to unknown field error if the code is not in the dictionary.", function () {
+            var notification = {
+                    code: 'invalidValue',
+                    severity: "ERROR",
+                    details: {
+                        field: 'name'
+                    }
+                },
+                result = ErrorDictionary.transform(notification);
+            expect(result.details.message).toBe('This field is in error');
+
         });
     });
 

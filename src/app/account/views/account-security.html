@@ -1,11 +1,11 @@
 <h2 data-translate>Security</h2>
 
-<form name="passwordForm" role="form" class="form-horizontal" data-ng-submit="saveAccount()">
+<form name="passwordForm" role="form" class="form-horizontal" novalidate
+      data-form-feedback="notifications" data-ng-submit="saveAccount()">
+
   <p data-translate>Use the form below to change your password.</p>
 
-  <div data-form-feedback="notifications"></div>
-
-  <div data-input-feedback="passwordForm.oldPassword">
+  <div class="form-group" data-input-feedback="passwordForm.oldPassword">
     <label for="password" class="col-sm-2 control-label" data-translate>Old Password</label>
     <div class="col-sm-5">
       <input id="password" name="oldPassword" type="password" class="form-control"
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div data-input-feedback="passwordForm.newPassword">
+  <div class="form-group" data-input-feedback="passwordForm.newPassword">
     <label for="newPassword" class="control-label col-sm-2" data-translate>New Password</label>
     <div class="col-sm-5">
       <input id="newPassword" name="newPassword" type="password" class="form-control"
@@ -21,12 +21,15 @@
     </div>
   </div>
 
-  <div data-input-feedback="passwordForm.newPasswordConfirm" data-warn="passwordForm.newPasswordConfirm.$error.fieldsMatch">
+  <div class="form-group" data-input-feedback="passwordForm.newPasswordConfirm" data-warn="passwordForm.newPasswordConfirm.$error.fieldsMatch">
     <label for="newPasswordConfirm" class="col-sm-2 control-label" data-translate>Confirm New Password</label>
     <div class="col-sm-5">
       <input id="newPasswordConfirm" name="newPasswordConfirm" type="password" class="form-control"
              data-ng-model="newPasswordConfirm" data-fields-match="account.password" required/>
-      <p class="help-block" data-ng-show="hasWarning(field)" data-translate>Your passwords do not match</p>
+      <p class="help-block"
+         data-ng-show="passwordForm.newPasswordConfirm.$error.fieldsMatch" data-translate>
+        Your passwords do not match
+      </p>
     </div>
   </div>
 

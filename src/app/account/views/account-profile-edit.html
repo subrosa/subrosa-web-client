@@ -1,38 +1,38 @@
-<form name="accountForm" role="form" class="form-horizontal">
-  <div data-form-feedback="notifications"></div>
+<form name="accountForm" role="form" class="form-horizontal" novalidate
+      data-form-feedback="notifications" data-ng-submit="saveAccount()">
 
-  <div class="form-group">
+  <div class="form-group" data-input-feedback="accountForm.username">
     <label for="username" class="col-sm-3 control-label" data-translate>Username</label>
     <div class="col-sm-7">
-      <input id="username" type="text" class="form-control" data-ng-model="account.username"/>
+      <input id="username" name="username" type="text" class="form-control" data-ng-model="account.username"/>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" data-input-feedback="accountForm.name">
     <label for="name" class="col-sm-3 control-label" data-translate>Real Name</label>
     <div class="col-sm-7">
-      <input id="name" type="text" class="form-control" data-ng-model="account.name"/>
+      <input id="name" name="name" type="text" class="form-control" data-ng-model="account.name"/>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" data-input-feedback="accountForm.email">
     <label for="email" class="col-sm-3 control-label" data-translate>Email</label>
     <div class="col-sm-7">
-      <input id="email" type="email" class="form-control" data-ng-model="account.email"/>
+      <input id="email" name="email" type="email" class="form-control" data-ng-model="account.email"/>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" data-input-feedback="accountForm.cellphone">
     <label for="cellphone" class="col-sm-3 control-label" data-translate>Cell Phone</label>
     <div class="col-sm-7">
-      <input id="cellphone" type="tel" class="form-control" data-ng-model="account.cellPhone"/>
+      <input id="cellphone" name="cellphone" type="tel" class="form-control" data-ng-model="account.cellPhone"/>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" data-input-feedback="accountForm.dateOfBirth">
     <label for="dateOfBirth" class="col-sm-3 control-label" data-translate>Date of Birth</label>
     <div class="col-sm-2">
-      <input id="dateOfBirth" type="text" class="form-control"
+      <input id="dateOfBirth" name="dateOfBirth" type="text" class="form-control"
              data-datepicker-popup="shortDate" data-ng-model="account.dateOfBirth"
              data-show-button-bar="false"/>
     </div>
@@ -42,8 +42,7 @@
 
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-10">
-      <button type="submit" class="btn btn-primary"
-              data-ng-click="saveAccount()" data-ng-disabled="!accountForm.$valid"
+      <button type="submit" class="btn btn-primary" data-ng-disabled="!accountForm.$valid"
               data-translate>Save</button>
       <button class="btn btn-default" data-ui-sref="account" data-translate>Cancel</button>
     </div>

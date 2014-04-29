@@ -1,7 +1,11 @@
 describe('Directive: inputFeedback', function () {
     var $scope, $compile, element, elementScope;
 
-    beforeEach(module('subrosa.forms', '/app/forms/views/input-feedback.html'));
+    beforeEach(module(
+        'subrosa.forms',
+        '/app/forms/views/form-feedback.html',
+        '/app/forms/views/input-feedback.html'
+    ));
 
     beforeEach(inject(function (_$compile_, $rootScope) {
         $compile = _$compile_;
@@ -11,8 +15,7 @@ describe('Directive: inputFeedback', function () {
     beforeEach(function () {
         $scope.field = {};
         var html = '<div input-feedback="field">' +
-                     '<input type="text"/>' +
-                     '<p class="help-block" ng-show="hasError(field)">yo</p>' +
+                     '<input name="name" type="text"/>' +
                    '</div>';
         element = angular.element(html);
 
@@ -100,13 +103,90 @@ describe('Directive: inputFeedback', function () {
         });
     });
 
-    it("compiles and includes .help-blocks so they can use the hasStatus() methods", function () {
-        var helpBlock = element.find('p');
-        expect(helpBlock.hasClass('ng-hide')).toBe(true);
-        spyOn(elementScope, 'hasError').andReturn(true);
+    describe("can use form-feedback's notification object", function () {
+        var notifications = [
+            {
+                severity: "ERROR",
+                details: {
+                    field: "password",
+                    message: "password error"
+                }
+            },
+            {
+                severity: "ERROR",
+                details: {
+                    field: "name",
+                    message: "name error"
+                }
+            }
+        ];
 
-        $scope.$digest();
+        beforeEach(function () {
+            var html = '<form form-feedback>' +
+                            '<div input-feedback="field">' +
+                              '<input name="name" type="text"/>' +
+                            '</div>' +
+                          '</form>"';
 
-        expect(helpBlock.hasClass('ng-hide')).toBe(false);
+            element = angular.element(html);
+
+            $scope.field = {$name: "name"};
+            $scope.notifications = notifications;
+
+            $compile(element)($scope);
+            $scope.$digest();
+
+            element = element.find('[input-feedback="field"]');
+            elementScope = element.isolateScope();
+        });
+
+        it("by setting the notifications on the proper field.", function () {
+            expect(elementScope.message).toBe(notifications[1].details.message);
+        });
+
+        describe("by displaying notification input feedback", function () {
+            var successIcon, warningIcon, errorIcon;
+            beforeEach(function () {
+                successIcon = element.find('.fa-thumbs-o-up');
+                warningIcon = element.find('.fa-warning');
+                errorIcon = element.find('.fa-thumbs-o-down');
+            });
+
+            it("for success", function () {
+                spyOn(elementScope, 'hasSuccess').andReturn(true);
+
+                $scope.notifications[1].severity = 'SUCCESS';
+                $scope.$digest();
+
+                expect(element.hasClass('has-success')).toBe(true);
+                expect(successIcon.hasClass('ng-hide')).toBe(false);
+                expect(warningIcon.hasClass('ng-hide')).toBe(true);
+                expect(errorIcon.hasClass('ng-hide')).toBe(true);
+            });
+
+            it("for warning", function () {
+                spyOn(elementScope, 'hasWarning').andReturn(true);
+
+                $scope.notifications[1].severity = 'WARNING';
+                $scope.$digest();
+
+                expect(element.hasClass('has-warning')).toBe(true);
+                expect(successIcon.hasClass('ng-hide')).toBe(true);
+                expect(warningIcon.hasClass('ng-hide')).toBe(false);
+                expect(errorIcon.hasClass('ng-hide')).toBe(true);
+            });
+
+            it("for error", function () {
+                spyOn(elementScope, 'hasError').andReturn(true);
+
+                $scope.notifications[1].severity = 'ERROR';
+                $scope.$digest();
+
+                expect(element.hasClass('has-error')).toBe(true);
+                expect(successIcon.hasClass('ng-hide')).toBe(true);
+                expect(warningIcon.hasClass('ng-hide')).toBe(true);
+                expect(errorIcon.hasClass('ng-hide')).toBe(false);
+            });
+        });
     });
 });

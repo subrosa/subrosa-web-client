@@ -22,8 +22,15 @@ angular.module('subrosa.notifications').factory('ErrorInterceptor', function ($q
                     });
                     rejection.data.notifications = notifications;
                 } else {
-                    // Hide tomcat 500 errors
-                    rejection.data = {notifications: [ErrorDictionary.unknownError]};
+                    // Mask tomcat 500 errors
+                    rejection.data = {
+                        notifications: [
+                            {
+                                message: ErrorDictionary.unknownError,
+                                severity: 'ERROR'
+                            }
+                        ]
+                    };
                 }
             }
             return $q.reject(rejection);

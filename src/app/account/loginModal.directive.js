@@ -57,7 +57,6 @@ function ($rootScope, $scope, $state, $modalInstance, AuthService, user) {
             $rootScope.$broadcast('toRegisterFromLogin', $scope.user);
         });
     };
-
 });
 
 /**

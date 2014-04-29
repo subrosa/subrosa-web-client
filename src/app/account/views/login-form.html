@@ -1,4 +1,4 @@
-<form name="loginForm" class="form-horizontal" role="form" novalidate>
+<form name="loginForm" class="form-horizontal" role="form" novalidate data-ng-submit="login()">
   <div class="modal-body">
 
     <p class="alert alert-info" data-translate>
@@ -34,7 +34,7 @@
 
   <div class="modal-footer">
     <a href="" class="pull-left" data-ng-click="goToRegister()" data-translate>I need to register</a>
-    <button class="btn btn-primary" data-ng-click="login()" ng-disabled="!loginForm.$valid" data-translate>Login</button>
+    <button class="btn btn-primary" data-ng-disabled="!loginForm.$valid" data-translate>Login</button>
     <button class="btn btn-default" data-ng-click="cancel()" data-translate>Cancel</button>
   </div>
 </form>

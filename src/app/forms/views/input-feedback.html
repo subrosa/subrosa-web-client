@@ -1,8 +1,8 @@
 <div class="form-group has-feedback"
+     data-ng-transclude
      data-ng-class="{'has-success': hasSuccess(field),
                      'has-warning': hasWarning(field),
-                     'has-error': hasError(field)}"
-     data-ng-transclude>
+                     'has-error': hasError(field)}">
 
   <span class="fa fa-thumbs-o-up form-control-feedback"
         data-ng-show="hasSuccess(field)"></span>
@@ -10,4 +10,7 @@
         data-ng-show="hasWarning(field)"></span>
   <span class="fa fa-thumbs-o-down form-control-feedback"
         data-ng-show="hasError(field)"></span>
+
+  <p class="help-block">{{ message }}</p>
+
 </div>

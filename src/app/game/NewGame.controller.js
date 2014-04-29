@@ -20,6 +20,7 @@ angular.module('subrosa.game').controller('NewGameController', function ($scope,
     };
 
     $scope.game = new Game();
+
     // Hardcoded to ASSASSIN for now because that's all we have
     $scope.game.gameType = 'ASSASSIN';
 
