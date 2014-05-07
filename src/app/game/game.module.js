@@ -100,7 +100,7 @@ angular.module('subrosa.game').config(function ($stateProvider) {
 
         views: {
             'content@game': {
-                templateUrl: '/app/game/edit/views/edit-game-layout.html',
+                templateUrl: '/app/game/edit/views/edit-game-layout.html'
             },
             'header@game': {
                 controller: 'EditGameController',
