@@ -19,7 +19,7 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
     return {
         require: '^?formFeedback',
         replace: true,
-        transclude: 'element',
+        transclude: true,
         templateUrl: '/app/forms/views/input-feedback.html',
         scope: {
             field: '=inputFeedback',
