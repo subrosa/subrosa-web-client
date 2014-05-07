@@ -17,6 +17,7 @@ describe('Directive: inputFeedback', function () {
         var html = '<div input-feedback="field">' +
                      '<input name="name" type="text"/>' +
                    '</div>';
+
         element = angular.element(html);
 
         $compile(element)($scope);

@@ -25,7 +25,7 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
             field: '=inputFeedback',
             warn: '=warn'
         },
-        compile: function (element, attributes, tranclude) {
+        compile: function (element) {
             var icons = element.find('span'),
                 feedback = element.find('p'),
                 notificationHasFieldDetails,
@@ -34,6 +34,16 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
                 };
 
             return function (scope, iElement, iAttributes, formFeedback) {
+                // Add back the icons and help-block that was removed during transclusion
+                // TODO: fix this to work for all input types (i.e. <select>, <textarea>, etc.)
+                var input = iElement.find('input');
+
+                icons = $compile(angular.element(icons))(scope);
+                feedback = $compile(angular.element(feedback))(scope);
+
+                input.after(icons);
+                icons.after(feedback);
+
                 notificationHasFieldDetails = function (notification) {
                     return notification.hasOwnProperty("details") && notification.details.hasOwnProperty("field");
                 };
@@ -69,28 +79,18 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
 
                 scope.hasSuccess = function (field) {
                     var fieldSuccess = Boolean(field && field.$dirty && field.$valid);
-                    return fieldSuccess || fieldHasNotificationOfType(field, "success");
+                    return (fieldSuccess || fieldHasNotificationOfType(field, "success")) && !scope.hasError(field);
                 };
 
                 scope.hasWarning = function (field) {
                     var fieldWarning = Boolean(field && field.$dirty && field.$invalid && scope.warn);
-                    return fieldWarning || fieldHasNotificationOfType(field, "warning");
+                    return (fieldWarning || fieldHasNotificationOfType(field, "warning")) && !scope.hasError(field);
                 };
 
                 scope.hasError = function (field) {
                     var fieldError = Boolean(field && field.$dirty && field.$invalid && !scope.warn);
                     return fieldError || fieldHasNotificationOfType(field, "error");
                 };
-
-                tranclude(scope, function () {
-                    var input = iElement.find('input');
-
-                    icons = $compile(angular.element(icons))(scope);
-                    feedback = $compile(angular.element(feedback))(scope);
-
-                    input.after(icons);
-                    icons.after(feedback);
-                });
             };
         }
     };
