@@ -1,2 +1,14 @@
+<div class="row row-centered" data-ng-show="game.isDraft()">
+  <div class="alert alert-info col-sm-8 col-centered">
+    <p class="text-center" data-translate>
+      This game is in draft mode and will not be displayed in the list of games or able to be joined until it is published.
+    </p>
+
+    <button class="btn btn-primary center-block"
+            data-ng-click="publishGame()"
+            data-translate>Publish Game</button>
+  </div>
+</div>
+
 <header class="page-header" data-ui-view="header"></header>
 <section class="row" data-ui-view="content"></section>
