@@ -14,31 +14,31 @@
       </div>
     </div>
 
-    <div data-ng-show="teamGame" class="form-group">
+    <div class="form-group" data-ng-show="teamGame" data-input-feedback="gameOptionsForm.maximumTeamSize">
       <label for="maximumTeamSize" class="col-sm-1 control-label" data-translate>Maximum Team Size</label>
       <div class="col-sm-2">
-        <input id="maximumTeamSize" type="number" min="1" class="form-control" data-ng-model="game.maximumTeamSize"/>
+        <input id="maximumTeamSize" name="maximumTeamSize" type="number" min="1" class="form-control" data-ng-model="game.maximumTeamSize"/>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" data-input-feedback="gameOptionsForm.price">
       <label for="price" class="col-sm-1 control-label" data-translate>Price (USD)</label>
       <div class="col-sm-2">
-        <input id="price" type="number" min="1" class="form-control" data-ng-model="game.price"/>
+        <input id="price" name="price" type="number" min="1" class="form-control" data-ng-model="game.price"/>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" data-input-feedback="gameOptionsForm.minimumAge">
       <label for="price" class="col-sm-1 control-label" data-translate>Minimum Age</label>
       <div class="col-sm-2">
-        <input id="minimumAge" type="number" min="13" class="form-control" data-ng-model="game.minimumAge"/>
+        <input id="minimumAge" name="minimumAge" type="number" min="13" class="form-control" data-ng-model="game.minimumAge"/>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" data-input-feedback="gameOptionsForm.password">
       <label for="gamePassword" class="col-sm-1 control-label" data-translate>Password to Join</label>
       <div class="col-sm-2">
-        <input id="gamePassword" type="password" class="form-control" data-ng-model="game.password"/>
+        <input id="gamePassword" name="password" type="password" class="form-control" data-ng-model="game.password"/>
       </div>
     </div>
 
