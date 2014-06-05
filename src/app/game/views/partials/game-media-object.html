@@ -11,6 +11,11 @@
     </h4>
     <p>{{ game.description }}</p>
 
+    <div data-ng-show="game.status">
+      <i class="fa fa-circle {{ game.status | lowercase}}" title="{{ 'Game Status' | translate }}"></i>
+      <span>{{ game.status | gameStatus }}</span>
+    </div>
+
     <div data-ng-show="game.gameStart && game.gameEnd">
       <i class="fa fa-calendar" title="{{ 'Duration' | translate }}"></i>
       <span>{{ game.gameStart | date:'short' }} - {{ game.gameEnd | date:'short' }}</span>
