@@ -15,6 +15,27 @@
  *   </div>
  */
 angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
+    var getInput = function (element) {
+        var input = element.find('input');
+
+        if (!input.length) {
+            input = element.find('select');
+        }
+
+        if (!input.length) {
+            input = element.find('textarea');
+        }
+
+        if (!input.length) {
+            input = element.find('checkbox');
+        }
+
+        if (!input.length) {
+            input = element.find('radio');
+        }
+
+        return input;
+    };
 
     return {
         require: '^?formFeedback',
@@ -35,8 +56,7 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
 
             return function (scope, iElement, iAttributes, formFeedback) {
                 // Add back the icons and help-block that was removed during transclusion
-                // TODO: fix this to work for all input types (i.e. <select>, <textarea>, etc.)
-                var input = iElement.find('input');
+                var input = getInput(iElement);
 
                 icons = $compile(angular.element(icons))(scope);
                 feedback = $compile(angular.element(feedback))(scope);
@@ -66,7 +86,7 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
                     };
 
                     scope.$watch('$parent.notifications', function (notifications) {
-                        var input = iElement.find('input');
+                        var input = getInput(iElement);
                         angular.forEach(notifications, function (notification) {
                             if (notificationHasFieldDetails(notification)) {
                                 if (input.attr('name') === notification.details.field) {
