@@ -1,5 +1,5 @@
 describe('Controller: EditGame', function () {
-    var $controller, $scope, Game, game;
+    var $controller, $scope;
 
     beforeEach(module('subrosa.game', 'mocks'));
 
@@ -9,28 +9,13 @@ describe('Controller: EditGame', function () {
         $scope.gameForm = {
             $valid: true
         };
-        Game = MockResource.$new();
-        game = Game.get({id: 1});
+        $scope.game = MockResource.$new().get({id: 1});
     }));
-
-    describe("sets the game on the $scope", function () {
-        it("to the existing game if present", function () {
-            $scope.game = game;
-            $controller('EditGameController', {$scope: $scope, Game: Game});
-            expect($scope.game).toBe(game);
-        });
-
-        it("to a new game object if not present", function () {
-            $scope.game = undefined;
-            $controller('EditGameController', {$scope: $scope, Game: Game});
-            expect($scope.game).toBeDefined();
-        });
-    });
 
     it("sets today on the $scope", function () {
         var today = new Date();
 
-        $controller('EditGameController', {$scope: $scope, Game: Game});
+        $controller('EditGameController', {$scope: $scope});
 
         expect($scope.today.getYear()).toBe(today.getYear());
         expect($scope.today.getMonth()).toBe(today.getMonth());
@@ -40,13 +25,13 @@ describe('Controller: EditGame', function () {
     });
 
     it("sets the date format", function () {
-        $controller('EditGameController', {$scope: $scope, Game: Game});
+        $controller('EditGameController', {$scope: $scope});
         expect($scope.dateFormat).toBe('MMMM dd yyyy');
     });
 
     describe("performs a save of the game", function () {
         beforeEach(function () {
-            $controller('EditGameController', {$scope: $scope, Game: Game});
+            $controller('EditGameController', {$scope: $scope});
         });
 
         it("and can be successful", function () {
