@@ -19,10 +19,14 @@ describe('Controller: GameFeedController', function () {
     });
 
     it("provides a way to create posts", function () {
-        $scope.postContent = 'lalala';
+        var postContent = 'lalala';
+        $scope.post.content = postContent;
+
         $scope.createPost();
+
         expect($scope.posts.results.length).toBe(2);
-        expect($scope.posts.results[0].content).toBe($scope.postContent);
+        expect($scope.posts.results[0].content).toBe(postContent);
+        expect($scope.post.content).toBe(undefined);
     });
 });
 

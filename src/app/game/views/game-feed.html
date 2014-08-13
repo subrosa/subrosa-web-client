@@ -2,10 +2,8 @@
       data-form-feedback="notifications" data-ng-submit="createPost()">
   <label class="sr-only" for="newPostContent" data-translate>Create a new post in the game feed</label>
 
-  <div data-form-feedback="notifications"></div>
-
   <div class="form-group">
-    <textarea id="newPostContent" class="form-control" data-ng-model="postContent"
+    <textarea id="newPostContent" class="form-control" data-ng-model="post.content"
               rows="{{rows}}" data-ng-focus="rows = 6"
               placeholder="{{ 'Speak your mind' | translate}}"></textarea>
   </div>
