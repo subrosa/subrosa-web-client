@@ -28,3 +28,7 @@ html .dl-horizontal dd {
 html address {
     margin-bottom: 0;
 }
+
+html .alert {
+    margin: 20px;
+}
