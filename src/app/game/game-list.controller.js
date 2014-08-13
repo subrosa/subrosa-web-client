@@ -50,7 +50,7 @@ angular.module('subrosa.game').controller('GameListController', function ($scope
         };
 
         notFound = function () {
-            var notification = {type: 'danger', message: gettext('Cannot find postal code: ' + postalCode)};
+            var notification = {type: 'error', message: gettext('Cannot find postal code: ' + postalCode)};
             $scope.notifications.push(notification);
         };
 

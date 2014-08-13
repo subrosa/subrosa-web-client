@@ -118,7 +118,7 @@ describe('Controller: GameListController', function () {
                 $scope.getCloseGamesViaPostalCode('abcde');
                 expect($scope.notifications.length).toBe(1);
                 expect($scope.notifications[0].message).toBe('Cannot find postal code: abcde');
-                expect($scope.notifications[0].type).toBe('danger');
+                expect($scope.notifications[0].type).toBe('error');
             });
 
 

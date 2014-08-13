@@ -1,9 +1,4 @@
-<div data-ng-repeat="notification in notifications"
-     data-alert
-     data-type="{{ notification.type }}"
-     data-close="closeNotification($index)">
-  {{ notification.message }}
-</div>
+<div data-notification-display="notifications"></div>
 <div data-ng-transclude></div>
 
 
