@@ -8,23 +8,24 @@
       <div class="col-md-offset-1 col-md-10">
         <div class="checkbox">
           <label>
-            <input type="checkbox" data-ng-model="teamGame"/>Team Game
+            <input type="checkbox" data-ng-model="game.teamGame"/>Team Game
           </label>
         </div>
       </div>
     </div>
 
-    <div class="form-group" data-ng-show="teamGame" data-input-feedback="gameOptionsForm.maximumTeamSize">
+    <div class="form-group" data-ng-show="game.teamGame" data-input-feedback="gameOptionsForm.maximumTeamSize">
       <label for="maximumTeamSize" class="col-md-1 control-label" data-translate>Maximum Team Size</label>
       <div class="col-md-2">
-        <input id="maximumTeamSize" name="maximumTeamSize" type="number" class="form-control" min="2" data-ng-model="game.maximumTeamSize"/>
+        <input id="maximumTeamSize" name="maximumTeamSize" type="number" class="form-control"
+               min="2" data-ng-model="game.maximumTeamSize" data-ng-required="game.teamGame"/>
       </div>
     </div>
 
     <div class="form-group" data-input-feedback="gameOptionsForm.price">
       <label for="price" class="col-md-1 control-label" data-translate>Price (USD)</label>
       <div class="col-md-2">
-        <input id="price" name="price" type="number" min="1" class="form-control" data-ng-model="game.price"/>
+        <input id="price" name="price" type="number" min="0" class="form-control" data-ng-model="game.price"/>
       </div>
     </div>
 

@@ -16,11 +16,6 @@ angular.module('subrosa.game').controller('EditGameController', function ($scope
     // TODO this should be $locale dependent
     $scope.dateFormat = 'MMMM dd yyyy';
 
-    $scope.teamGame = false;
-    $scope.game.$promise.then(function (game) {
-        $scope.teamGame = game.maximumTeamSize === 1;
-    });
-
     success = function () {
         $scope.saving = false;
     };
