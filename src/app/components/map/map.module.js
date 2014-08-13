@@ -17,6 +17,15 @@ angular.module('subrosa.components.map', ['leaflet-directive']);
 /* global window */
 angular.module('subrosa.components.map').constant('leaflet', window.L);
 
+/**
+ * @ngdoc constant
+ * @name subrosa.components.map.google
+ *
+ * @description
+ *   Provides a wrapper around the google global object.
+ */
+/* global window */
+angular.module('subrosa.components.map').constant('googleMaps', window.google);
 
 /**
  * @ngdoc run
