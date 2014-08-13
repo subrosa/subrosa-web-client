@@ -40,7 +40,9 @@ function ($compile, $timeout, leaflet, leafletData, leafletMarkersHelpers) {
                 scope.shapes = new leaflet.FeatureGroup();
 
                 if (scope.allowCurrentLocation === true) {
-                    var control = leaflet.control.locate({onLocationError: scope.onLocationError});
+                    var onLocationError =  scope.onLocationError || function () {},
+                        control = leaflet.control.locate({onLocationError: onLocationError});
+
                     if (!angular.isArray(scope.controls.custom)) {
                         scope.controls.custom = [];
                     }

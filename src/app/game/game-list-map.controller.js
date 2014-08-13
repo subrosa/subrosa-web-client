@@ -4,13 +4,15 @@
  *
  * @requires $scope
  * @requires $q
+ * @requires gettext
  *
  * @description
  *  Display the list of games on a map.
  */
-angular.module('subrosa.game').controller('GameListMapController', function ($scope, $q) {
+angular.module('subrosa.game').controller('GameListMapController', function ($scope, $q, gettext) {
     var deferred = $q.defer();
     $scope.markers = deferred.promise;
+    $scope.notifications = [];
 
     $scope.games.$promise.then(function () {
         var markers = {};
@@ -29,4 +31,9 @@ angular.module('subrosa.game').controller('GameListMapController', function ($sc
 
         deferred.resolve(markers);
     });
+
+    $scope.currentLocationDenied = function () {
+        $scope.notifications.push({type: 'error',
+            message: gettext('Allow this page to find your current location in order to use this feature.')});
+    };
 });
