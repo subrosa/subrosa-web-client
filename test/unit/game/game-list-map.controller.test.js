@@ -24,6 +24,16 @@ describe('Controller: GameListMapController', function () {
         MockResource = _MockResource_.$new();
     }));
 
+    it("provides a function for location errors", function () {
+        $scope.games = MockResource.query();
+        $controller('GameListMapController', {$scope: $scope, $q: $q});
+        expect($scope.rejectedGeolocation).toBe(undefined);
+
+        $scope.onLocationError();
+
+        expect($scope.rejectedGeolocation).toBe(true);
+    });
+
     it("sets the game marker promise on the $scope", function () {
         spyOn($q, 'defer').andCallThrough();
 
@@ -72,8 +82,6 @@ describe('Controller: GameListMapController', function () {
 
             expect($.isEmptyObject(deferred.resolve.calls[0].args[0])).toBe(true);
         });
-
-
     });
 });
 
