@@ -2,7 +2,7 @@
  * @ngdoc service
  * @name subrosa.components.timeline.timelineCache
  *
- * @required $cacheFactory
+ * @requires $cacheFactory
  *
  * @description
  *  Provides a cache for timeline dialogs so they can be opened later.

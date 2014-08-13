@@ -3,7 +3,7 @@
  * @name subrosa.components.modal.modalCache
  *
  * @requires $modal
- * @required $cacheFactory
+ * @requires $cacheFactory
  *
  * @description
  *  Provides a cache for modal dialogs so they can be opened later.
