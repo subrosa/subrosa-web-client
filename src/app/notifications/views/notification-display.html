@@ -1,6 +1,6 @@
 <div data-ng-repeat="notification in notifications"
      data-alert
-     data-type="{{ notification.type }}"
+     data-type="notification.type"
      data-close="closeNotification($index)">
   {{ notification.message }}
 </div>
