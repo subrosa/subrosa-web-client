@@ -15,7 +15,7 @@ describe('Service: ErrorDictionary', function () {
 
     describe("provides a transform function", function () {
         it("that adds a translated message if the code is in the dictionary", function () {
-            var notification = {code: 'forbidden', severity: "ERROR"},
+            var notification = {code: 'FORBIDDEN', severity: "ERROR"},
                 result = ErrorDictionary.transform(notification);
             expect(result.message).toBe('Forbidden');
         });
@@ -28,7 +28,7 @@ describe('Service: ErrorDictionary', function () {
 
         it("that adds the field to the message if provided", function () {
             var notification = {
-                    code: 'invalidValue',
+                    code: 'INVALID_FIELD_VALUE',
                     severity: "ERROR",
                     details: {
                         field: 'name'
@@ -40,7 +40,7 @@ describe('Service: ErrorDictionary', function () {
 
         it("that adds a translated message to the details field if provided", function () {
             var notification = {
-                    code: 'invalidValue',
+                    code: 'INVALID_FIELD_VALUE',
                     severity: "ERROR",
                     details: {
                         field: 'name',
