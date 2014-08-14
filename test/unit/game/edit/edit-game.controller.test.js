@@ -38,6 +38,10 @@ describe('Controller: EditGame', function () {
             spyOn($scope.game, '$update').andCallThrough();
             $scope.saveGame();
             expect($scope.game.$update).toHaveBeenCalled();
+
+            // TODO remove this once the game is not limited to free assassins
+            expect($scope.game.price).toBe(0);
+            expect($scope.game.gameType).toBe('ASSASSIN');
         });
 
         it("and can error", function () {
