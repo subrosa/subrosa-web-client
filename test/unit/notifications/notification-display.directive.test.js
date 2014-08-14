@@ -1,4 +1,4 @@
-describe('Directive: notifications', function () {
+describe('Directive: notificationDisplay', function () {
     var $scope, $compile, element, elementScope;
 
     beforeEach(module('subrosa.notifications', '/app/notifications/views/notification-display.html'));
@@ -24,8 +24,6 @@ describe('Directive: notifications', function () {
     it("should display notifications if they are present", function () {
         expect(elementScope.notifications.length).toBe(2);
         expect(element.find('[data-alert=""]').length).toBe(2);
-        expect(element.find('[data-type="success"]').length).toBe(1);
-        expect(element.find('[data-type="danger"]').length).toBe(1);
     });
 
     it("should not display notifications if they are not present", function () {
