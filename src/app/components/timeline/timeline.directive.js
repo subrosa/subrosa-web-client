@@ -41,15 +41,6 @@ angular.module('subrosa.components.timeline').directive('timeline', function ($l
             link: function ($scope, $element) {
                 var timeline = new linksTimeline.Timeline($element[0]);
 
-
-                $scope.options = {
-                    editable: $scope.allowEdit,
-                    locale: $locale.id.split('-')[0],
-                    showCurrentTime: true,
-                    showCustomTime: true,
-                    showNavigation: true
-                };
-
                 linksTimeline.events.addListener(timeline, 'add', function () {
                     $scope.onAdd({selection: timeline.getModel($scope.model)});
                 });
@@ -75,8 +66,15 @@ angular.module('subrosa.components.timeline').directive('timeline', function ($l
                     timeline.setVisibleChartRangeAuto();
                 });
 
-                $scope.$watch('options', function () {
-                    timeline.draw($scope.model, $scope.options);
+                $scope.$watch('options', function (options) {
+                    if (options) {
+                        options.editable = $scope.allowEdit;
+                        options.locale = $locale.id.split('-')[0];
+                        options.showCurrentTime = true;
+                        options.showNavigation = true;
+
+                        timeline.draw($scope.model, options);
+                    }
                 });
 
                 timelineCache.put($scope.id, timeline);

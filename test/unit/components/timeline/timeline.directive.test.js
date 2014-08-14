@@ -53,12 +53,12 @@ describe('Directive: modal', function () {
         $scope.allowEdit = true;
 
         $compile(element)($scope);
+        $scope.options = {};
         $scope.$digest();
 
         expect($scope.options.editable).toBe(true);
         expect($scope.options.locale).toBe('en');
         expect($scope.options.showCurrentTime).toBe(true);
-        expect($scope.options.showCustomTime).toBe(true);
         expect($scope.options.showNavigation).toBe(true);
     });
 
