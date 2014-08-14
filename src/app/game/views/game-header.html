@@ -10,6 +10,12 @@
   </div>
   <div class="col-sm-6">
     <dl class="dl-horizontal">
+      <dt data-translate>Registration Period</dt>
+      <dd>
+        <p data-ng-show="game.registrationStart && game.registrationEnd">{{ game.registrationStart | date:'medium' }} - {{ game.registrationEnd | date:'medium' }}</p>
+        <p class="text-danger" data-ng-hide="game.registrationStart && game.registrationEnd" data-translate>Registration period has not been selected</p>
+      </dd>
+
       <dt data-translate>Duration</dt>
       <dd>
         <p data-ng-show="game.gameStart && game.gameEnd">{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</p>
