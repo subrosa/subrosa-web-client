@@ -71,7 +71,6 @@ angular.module('subrosa.components.timeline').directive('timeline', function ($l
                         options.editable = $scope.allowEdit;
                         options.locale = $locale.id.split('-')[0];
                         options.showCurrentTime = true;
-                        options.showNavigation = true;
 
                         timeline.draw($scope.model, options);
                     }

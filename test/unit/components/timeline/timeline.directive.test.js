@@ -59,7 +59,6 @@ describe('Directive: modal', function () {
         expect($scope.options.editable).toBe(true);
         expect($scope.options.locale).toBe('en');
         expect($scope.options.showCurrentTime).toBe(true);
-        expect($scope.options.showNavigation).toBe(true);
     });
 
     it("puts the timeline in the timelineCache", function () {
