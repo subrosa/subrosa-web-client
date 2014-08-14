@@ -3,7 +3,7 @@
         data-form-feedback="notifications" data-ng-submit="saveGame()">
 
     <div class="col-md-5">
-      <div class="thumbnail game-badge pull-left">
+      <div class="thumbnail col-md-3">
         <img data-ng-src="{{ game.image.uri }}" data-ng-show="game.image.uri"
              alt="{{ 'Game Badge for' | translate }} {{ game.name }}"/>
         <i class="avatar-lg fa fa-puzzle-piece center-block" data-ng-hide="game.image.uri"></i>
@@ -12,18 +12,41 @@
         </div>
       </div>
 
-      <div class="form-group col-md-8" data-input-feedback="gameForm.name">
+      <div class="col-md-8" data-input-feedback="gameForm.name">
         <label for="name" class="sr-only" data-translate>Game Name</label>
         <input id="name" type="text" class="form-control input-lg" required
                placeholder="{{ 'Game Name' | translate }}" data-ng-model="game.name"/>
       </div>
 
-      <div class="form-group col-md-8" data-input-feedback="gameForm.description">
+      <div class="col-md-8" data-input-feedback="gameForm.description">
         <label for="description" class="sr-only" data-translate>Brief Game Description</label>
         <textarea id="description" name="description" type="text" class="form-control" rows="5"
                placeholder="{{ 'Brief Game Description' | translate }}" data-ng-model="game.description">
         </textarea>
       </div>
+
+      <fieldset class="col-md-8">
+        <div class="form-group" data-input-feedback="gameOptionsForm.price">
+          <label for="price" class="col-md-4 control-label" data-translate>Price (USD)</label>
+          <div class="col-md-5">
+            <input id="price" name="price" type="number" min="0" class="form-control" data-ng-model="game.price"/>
+          </div>
+        </div>
+
+        <div class="form-group" data-input-feedback="gameOptionsForm.minimumAge">
+          <label for="minimumAge" class="col-md-4 control-label" data-translate>Minimum Age</label>
+          <div class="col-md-5">
+            <input id="minimumAge" name="minimumAge" type="number" min="13" class="form-control" data-ng-model="game.minimumAge"/>
+          </div>
+        </div>
+
+        <div class="form-group" data-input-feedback="gameOptionsForm.password">
+          <label for="gamePassword" class="col-md-4 control-label" data-translate>Password to Join</label>
+          <div class="col-md-5">
+            <input id="gamePassword" name="password" type="password" class="form-control" data-ng-model="game.password"/>
+          </div>
+        </div>
+      </fieldset>
     </div>
 
     <div class="col-md-5">
@@ -63,6 +86,24 @@
             <option value="game.gameType">{{ game.gameType | gameType }}</option>
           </select>
           <p class="help-block" data-translate>In the future we will offer additional game types, stay tuned!</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-4 col-md-10">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" data-ng-model="game.teamGame"/>Team Game
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" data-ng-show="game.teamGame" data-input-feedback="gameOptionsForm.maximumTeamSize">
+        <label for="maximumTeamSize" class="col-md-4 control-label" data-translate>Maximum Team Size</label>
+        <div class="col-md-7">
+          <input id="maximumTeamSize" name="maximumTeamSize" type="number" class="form-control"
+                 min="2" data-ng-model="game.maximumTeamSize" data-ng-required="game.teamGame"/>
         </div>
       </div>
 

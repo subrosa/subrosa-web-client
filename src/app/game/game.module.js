@@ -110,16 +110,6 @@ angular.module('subrosa.game').config(function ($stateProvider) {
                 templateUrl: '/app/game/edit/views/edit-game-menu.html'
             },
             'middle@game.edit': {
-                controller: 'EditGameController',
-                templateUrl: '/app/game/edit/views/edit-game-options.html'
-            }
-        }
-    });
-    $stateProvider.state('game.edit.rules', {
-        url: '/rules',
-
-        views: {
-            'middle@game.edit': {
                 controller: 'GameRulesController',
                 templateUrl: '/app/game/views/game-rules.html'
             }
