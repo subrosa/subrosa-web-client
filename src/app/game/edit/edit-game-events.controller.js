@@ -4,6 +4,7 @@
  *
  * @requires $scope
  * @requires gettext
+ * @requires modalCache
  * @requires timelineCache
  * @requires GameEvent
  *
@@ -11,33 +12,12 @@
  *  Handles the editing of game events.
  */
 angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, gettext, modalCache, timelineCache, GameEvent) {
-    var saveEvent;
+    const ONE_HOUR = 3600000, ONE_WEEK = 604800000, ONE_YEAR = 31556952000, NOW = new Date().getTime();
 
-    $scope.events = [];
-
-    $scope.game.$promise.then(function (game) {
-        var oneDay = 86400000,
-            oneHour = 3600000,
-            max = game.gameEnd + oneDay,
-            min = game.registrationStart || game.gameStart - oneDay;
-
-        $scope.options = {
-            eventMargin: 10,  // minimal margin between events
-            min: min,
-            max: max,
-            zoomMax: max - min,
-            zoomMin: oneHour
-        };
-
-        GameEvent.query({gameUrl: $scope.$stateParams.gameUrl}, function (response) {
-            $scope.events = response.results;
-        });
-    });
-
-    saveEvent = function () {
+    var saveEvent = function () {
         var success, error, gameEvent;
 
-        gameEvent = timelineCache.get('editGameEvents').getModel($scope.data);
+        gameEvent = timelineCache.get('editGameEvents').getModel($scope.events);
 
         success = function (response) {
             gameEvent.id = response.id;
@@ -50,6 +30,35 @@ angular.module('subrosa.game').controller('EditGameEventsController', function (
         gameEvent.$save({gameUrl: $scope.$stateParams.gameUrl, id: gameEvent.id},
             success, error);
     };
+
+    $scope.events = [];
+    $scope.notifications = [];
+
+    $scope.game.$promise.then(function (game) {
+        var registrationStart, registrationEnd, gameStart, gameEnd, editable;
+
+        // Registration and game duration defaults
+        gameStart = game.gameStart || NOW + (ONE_WEEK * 2);
+        gameEnd = game.gameEnd || gameStart + (ONE_WEEK * 3);
+        registrationStart = game.registrationStart || NOW;
+        registrationEnd = game.registrationEnd || gameStart - ONE_HOUR;
+        editable = game.isDraft();
+
+        $scope.options = {
+            eventMargin: 10,  // minimal margin between events
+            minHeight: 200,
+            zoomMax: ONE_YEAR,
+            zoomMin: ONE_HOUR
+        };
+
+        GameEvent.query({gameUrl: $scope.$stateParams.gameUrl}, function (response) {
+            $scope.events = response.results;
+        });
+
+        // Add registration period and game duration
+        $scope.events.push(new GameEvent({id: 1, start: registrationStart, end: registrationEnd, content: "Registration Period", editable: editable}));
+        $scope.events.push(new GameEvent({start: gameStart, end: gameEnd, content: game.name, editable: editable}));
+    });
 
     $scope.eventAdded = function (selection) {
         var removeFromTimeline = function () {
@@ -67,7 +76,7 @@ angular.module('subrosa.game').controller('EditGameEventsController', function (
     };
 
     $scope.eventDeleted = function (selection) {
-        selection.$delete();
+        selection.$delete({gameUrl: $scope.$stateParams.gameUrl, id: selection.id});
     };
 
     $scope.eventEdited = function (selection) {

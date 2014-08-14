@@ -33,10 +33,12 @@ describe('Controller: EditGameEvents', function () {
         GameEvent = resource;
 
         $scope.game = resource.get({id: 1});
+        $scope.game.name = 'Raleigh Wars';
         $scope.game.registrationStart = 33455092236;
         $scope.game.registrationEnd = 33455092336;
-        $scope.game.gameEnd = 33455093336;
+        $scope.game.gameStart = 33455093336;
         $scope.game.gameEnd = 33455103336;
+        $scope.game.isDraft = function () {};
         $scope.$stateParams = {gameUrl: 'raleigh-wars'};
 
         dependencies = {
@@ -49,16 +51,11 @@ describe('Controller: EditGameEvents', function () {
     }));
 
     it("sets up default timeline options", function () {
-        var oneDay = 86400000,
-            oneHour = 3600000,
-            max = $scope.game.gameEnd + oneDay,
-            min = $scope.game.registrationStart || $scope.game.gameStart - oneDay;
-
+        const ONE_HOUR = 3600000, ONE_YEAR = 31556952000;
         expect($scope.options.eventMargin).toBe(10);
-        expect($scope.options.min).toBe(min);
-        expect($scope.options.max).toBe(max);
-        expect($scope.options.zoomMax).toBe(max - min);
-        expect($scope.options.zoomMin).toBe(oneHour);
+        expect($scope.options.minHeight).toBe(200);
+        expect($scope.options.zoomMax).toBe(ONE_YEAR);
+        expect($scope.options.zoomMin).toBe(ONE_HOUR);
     });
 
     it("sets the existing game events on the scope by getting them from the API", function () {

@@ -79,7 +79,7 @@ angular.module('mocks').factory('MockResource', function () {
         Resource.get = function (params, callback) {
             var item;
             angular.forEach(mockResources.results, function (value) {
-                if (value.id.toString() === params.id.toString()) {
+                if (value.id && (value.id.toString() === params.id.toString())) {
                     item = value;
                 }
             });
