@@ -56,7 +56,7 @@
           <p id="registrationPeriod" class="form-control-static">
             <span data-ng-show="game.registrationStart && game.registrationEnd">{{ game.registrationStart | date:'medium' }} - {{ game.registrationEnd | date:'medium' }}</span>
             <span class="text-danger" data-ng-hide="game.registrationStart && game.registrationEnd" data-translate>The Registration Period has not been selected.</span>
-            <a href="#editGameEvents" data-ng-click="go('game.edit.events')"> <i class="fa fa-edit"></i></a>
+            <a href="#editGameEvents" data-ng-click="goToGameEvents()"> <i class="fa fa-edit"></i></a>
           </p>
         </div>
       </div>
