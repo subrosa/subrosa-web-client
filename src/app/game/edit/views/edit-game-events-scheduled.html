@@ -1,15 +1,23 @@
 <h3 data-translate>Time Dependent Events</h3>
 
-<p data-translate>
-  These events will happen at the predetermined times shown below.
+<p>
+  <span data-translate>
+    These events will happen at the chosen times below.  Use the timeline to modify or create new events.
+  </span>
+  <a href="" data-ng-click="showHelp = true">
+    <i class="fa fa-question-circle"></i>
+  </a>
 </p>
 
-<ul>
-  <li data-translate>Add a new event by double clicking in the timeline.</li>
-  <li data-translate>Zoom in to fine tune event time down to the minute.</li>
-  <li data-translate>Single click an event to modify its start, end, duration, or to remove it.</li>
-  <li data-translate>Double click an event to edit its details.</li>
-</ul>
+<section data-ng-show="showHelp">
+  <h4 data-translate>How to Use the Timeline</h4>
+  <ul>
+    <li data-translate>Add a new event by double clicking in the timeline.</li>
+    <li data-translate>Zoom in to fine tune event time down to the minute.</li>
+    <li data-translate>Single click an event to modify its start, end, duration, or to remove it.</li>
+    <li data-translate>Double click an event to edit its details.</li>
+  </ul>
+</section>
 
 <div data-modal="gameEventModal"
      data-template-url="/app/game/edit/views/edit-game-event-modal.html">
