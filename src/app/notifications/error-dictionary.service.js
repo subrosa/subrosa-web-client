@@ -43,7 +43,7 @@ angular.module('subrosa.notifications').service('ErrorDictionary', function (get
             errorMessage = NOTIFICATION_DICTIONARY[code];
         }
 
-        if (notification.hasOwnProperty('details') && notification.details.hasOwnProperty('field')) {
+        if (notification.details && notification.details.hasOwnProperty('field')) {
             errorMessage = errorMessage.replace('%s', notification.details.field);
 
             fieldCode = notification.details.code;
