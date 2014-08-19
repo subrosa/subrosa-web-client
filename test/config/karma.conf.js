@@ -41,7 +41,7 @@ module.exports = function (config) {
 
         coverageReporter: {
             type : 'cobertura',
-            dir : '../coverage'
+            dir : 'test/coverage'
         },
 
         // web server port
