@@ -39,6 +39,7 @@ describe('Controller: EditGameEvents', function () {
         $scope.game.gameStart = 33455093336;
         $scope.game.gameEnd = 33455103336;
         $scope.game.isDraft = function () {};
+        $scope.game.url = 'raleigh-wars';
         $scope.$stateParams = {gameUrl: 'raleigh-wars'};
 
         dependencies = {
