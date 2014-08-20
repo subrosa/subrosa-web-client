@@ -1,13 +1,62 @@
-<div data-modal="saveEvent()" data-ng-model="event">
+<form name="eventForm" role="form" class="" novalidate
+      data-form-feedback="notifications" data-ng-submit="ok(event)">
   <div class="modal-header">
     <i class="icon-remove close" ng-click="cancel()"></i>
-    <h3 data-translate>Edit {{ event.name }}</h3>
+    <h3 data-translate>{{ event.eventType | eventType }} Event</h3>
   </div>
+
   <div class="modal-body">
-    The event: {{event}}
+    <div class="row">
+
+      <div class="col-md-10">
+        <div class="form-group">
+          <label for="eventType" data-translate>Event Type</label>
+          <select id="eventType" class="form-control" required data-ng-model="event.eventType"
+                  data-ng-options="eventType.id as eventType.name for eventType in eventTypes">
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="form-group" data-input-feedback="eventForm.start">
+          <label for="startDate" class="" data-translate>Start Date</label>
+          <input id="startDate" name="startDate" type="text" class="form-control" required
+                 data-ng-model="event.start"
+                 data-datepicker-popup="{{ dateFormat }}"
+                 data-show-button-bar="false"/>
+        </div>
+
+        <div class="form-group">
+          <label for="startTime" class="" data-translate>Start Time</label>
+          <div data-ng-model="event.start">
+            <input id="startTime" name="startTime" type="time" required
+                   data-timepicker data-show-meridian="true"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="form-group" data-input-feedback="eventForm.end">
+          <label for="endDate" class="" data-translate>End Date</label>
+          <input id="endDate" name="endDate" type="text" class="form-control" required
+                 data-ng-model="event.end"
+                 data-datepicker-popup="{{ dateFormat }}"
+                 data-show-button-bar="false"/>
+        </div>
+
+        <div class="form-group">
+          <label for="endTime" class="" data-translate>End Time</label>
+          <div data-ng-model="event.end">
+            <input id="endTime" name="endTime" type="time" required
+                   data-timepicker data-show-meridian="true"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
   <div class="modal-footer">
-    <button class="btn btn-danger" ng-click="ok()" translate>Save Event</button>
-    <button class="btn btn-default" ng-click="cancel()" translate>Cancel</button>
+    <button class="btn btn-danger" data-ng-disabled="!eventForm.$valid" data-translate>Save Event</button>
+    <button class="btn btn-default" ng-click="cancel()" data-translate>Cancel</button>
   </div>
-</div>
+</form>

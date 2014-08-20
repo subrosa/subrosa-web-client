@@ -12,7 +12,7 @@
  *  Handles the editing of game events.
  */
 angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, gettext, modalCache, timelineCache, GameEvent) {
-    const ONE_HOUR = 3600000, ONE_WEEK = 604800000, ONE_YEAR = 31556952000, NOW = new Date().getTime();
+    const ONE_HOUR = 3600000, ONE_YEAR = 31556952000;
 
     var saveEvent = function () {
         var success, error, gameEvent;
@@ -33,16 +33,13 @@ angular.module('subrosa.game').controller('EditGameEventsController', function (
 
     $scope.events = [];
     $scope.notifications = [];
+    // TODO: get valid event types from server
+    $scope.eventTypes = [
+        {id: 'REGISTRATION', name: 'Registration Period'}
+    ];
 
     $scope.game.$promise.then(function (game) {
-        var registrationStart, registrationEnd, gameStart, gameEnd, editable;
-
-        // Registration and game duration defaults
-        gameStart = game.gameStart || NOW + (ONE_WEEK * 2);
-        gameEnd = game.gameEnd || gameStart + (ONE_WEEK * 3);
-        registrationStart = game.registrationStart || NOW;
-        registrationEnd = game.registrationEnd || gameStart - ONE_HOUR;
-        editable = game.isDraft();
+        $scope.editable = game.isDraft();
 
         $scope.options = {
             eventMargin: 10,  // minimal margin between events
@@ -51,13 +48,9 @@ angular.module('subrosa.game').controller('EditGameEventsController', function (
             zoomMin: ONE_HOUR
         };
 
-        GameEvent.query({gameUrl: $scope.$stateParams.gameUrl}, function (response) {
+        GameEvent.query({gameUrl: game.url}, function (response) {
             $scope.events = response.results;
         });
-
-        // Add registration period and game duration
-        $scope.events.push(new GameEvent({id: 1, start: registrationStart, end: registrationEnd, content: "Registration Period", editable: editable}));
-        $scope.events.push(new GameEvent({start: gameStart, end: gameEnd, content: game.name, editable: editable}));
     });
 
     $scope.eventAdded = function (selection) {
