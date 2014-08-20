@@ -5,5 +5,4 @@ dist
 .tmp
 .sass-cache
 src/lib
-test/coverage
 test/results
