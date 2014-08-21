@@ -1,14 +1,21 @@
-<div class="row">
-  <div class="col-sm-5">
-    <div class="game-badge pull-left">
-      <img data-ng-src="{{ game.image.uri }}" data-ng-show="game.image.uri"
-           alt="{{ 'Game Badge for' | translate }} {{ game.name }}"/>
-      <i class="avatar-lg fa fa-puzzle-piece pull-left" data-ng-hide="game.image.uri"></i>
+<div class="game-header row">
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <img data-ng-src="{{ game.image.uri }}" data-ng-show="game.image.uri"
+               alt="{{ 'Game Badge for' | translate }} {{ game.name }}"/>
+          <i class="avatar-lg fa fa-puzzle-piece pull-left" data-ng-hide="game.image.uri"></i>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <h1>{{ game.name }}</h1>
+        <p>{{ game.description }}</p>
+      </div>
     </div>
-    <h1>{{ game.name }}</h1>
-    <p>{{ game.description }}</p>
   </div>
-  <div class="col-sm-6">
+
+  <div class="col-md-5">
     <dl class="dl-horizontal">
       <dt data-translate>Registration Period</dt>
       <dd>
@@ -31,6 +38,7 @@
       <dt data-translate>Game Type</dt>
       <dd>{{ game.gameType | gameType }}</dd>
     </dl>
+
+    <button class="btn btn-default" data-ng-click="go('game.edit')" data-translate>Edit Game</button>
   </div>
-  <button class="btn btn-default" data-ng-click="go('game.edit')" data-translate>Edit Game</button>
 </div>

@@ -2,7 +2,7 @@
   <form name="gameForm" role="form" class="form-horizontal" novalidate
         data-form-feedback="notifications" data-ng-submit="saveGame()">
 
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="thumbnail col-md-3">
         <img data-ng-src="{{ game.image.uri }}" data-ng-show="game.image.uri"
              alt="{{ 'Game Badge for' | translate }} {{ game.name }}"/>
@@ -20,33 +20,10 @@
 
       <div class="col-md-8" data-input-feedback="gameForm.description">
         <label for="description" class="sr-only" data-translate>Brief Game Description</label>
-        <textarea id="description" name="description" type="text" class="form-control" rows="5"
+        <textarea id="description" name="description" type="text" class="form-control" rows="7"
                placeholder="{{ 'Brief Game Description' | translate }}" data-ng-model="game.description">
         </textarea>
       </div>
-
-      <fieldset class="col-md-8">
-        <div class="form-group" data-input-feedback="gameOptionsForm.price">
-          <label for="price" class="col-md-4 control-label" data-translate>Price (USD)</label>
-          <div class="col-md-5">
-            <input id="price" name="price" type="number" min="0" class="form-control" data-ng-model="game.price"/>
-          </div>
-        </div>
-
-        <div class="form-group" data-input-feedback="gameOptionsForm.minimumAge">
-          <label for="minimumAge" class="col-md-4 control-label" data-translate>Minimum Age</label>
-          <div class="col-md-5">
-            <input id="minimumAge" name="minimumAge" type="number" min="13" class="form-control" data-ng-model="game.minimumAge"/>
-          </div>
-        </div>
-
-        <div class="form-group" data-input-feedback="gameOptionsForm.password">
-          <label for="gamePassword" class="col-md-4 control-label" data-translate>Password to Join</label>
-          <div class="col-md-5">
-            <input id="gamePassword" name="password" type="password" class="form-control" data-ng-model="game.password"/>
-          </div>
-        </div>
-      </fieldset>
     </div>
 
     <div class="col-md-5">
@@ -107,21 +84,41 @@
         </div>
       </div>
 
+      <div class="form-group" data-input-feedback="gameOptionsForm.price">
+        <label for="price" class="col-md-4 control-label" data-translate>Price (USD)</label>
+        <div class="col-md-7">
+          <input id="price" name="price" type="number" min="0" class="form-control" data-ng-model="game.price"/>
+        </div>
+      </div>
+
+      <div class="form-group" data-input-feedback="gameOptionsForm.minimumAge">
+        <label for="minimumAge" class="col-md-4 control-label" data-translate>Minimum Age</label>
+        <div class="col-md-7">
+          <input id="minimumAge" name="minimumAge" type="number" min="13" class="form-control" data-ng-model="game.minimumAge"/>
+        </div>
+      </div>
+
+      <div class="form-group" data-input-feedback="gameOptionsForm.password">
+        <label for="gamePassword" class="col-md-4 control-label" data-translate>Password to Join</label>
+        <div class="col-md-7">
+          <input id="gamePassword" name="password" type="password" class="form-control" data-ng-model="game.password"/>
+        </div>
+      </div>
+
       <div class="form-group">
         <div class="col-md-offset-4 col-md-9">
-          <button type="submit" class="btn btn-default"
+          <button type="submit" class="btn btn-primary"
                   data-ng-disabled="gameForm.$invalid"
                   data-translate>Save</button>
+          <button class="btn btn-default"
+                  data-ng-click="go('game')"
+                  data-ng-disabled="saving">
+            <span data-ng-hide="saving" data-translate>Back to Display Mode</span>
+            <span data-ng-show="saving" data-translate>Saving...</span>
+          </button>
         </div>
       </div>
     </div>
-
-    <button class="btn btn-default"
-            data-ng-click="go('game')"
-            data-ng-disabled="saving">
-      <span data-ng-hide="saving" data-translate>Back to Display Mode</span>
-      <span data-ng-show="saving" data-translate>Saving...</span>
-    </button>
   </form>
 </div>
 
