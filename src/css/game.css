@@ -13,3 +13,7 @@
 .registration {
     color: #008000;
 }
+
+.game-header h1 {
+    margin-top: 0;
+}
