@@ -237,7 +237,7 @@ module.exports = function (grunt) {
             }
         },
 
-        ngmin: {
+        ngAnnotate: {
             build: {
                 src: '<%= subrosa.tmp %>/concat/js/scripts.js',
                 dest: '<%= subrosa.tmp %>/concat/js/scripts.js'
@@ -332,7 +332,7 @@ module.exports = function (grunt) {
         'copy:leafletImages',
         'copy:timelineImages',
         'concat:generated',
-        'ngmin',
+        'ngAnnotate',
         'cssmin:generated',
         'uglify:generated',
         'filerev',
