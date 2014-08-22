@@ -208,7 +208,8 @@ module.exports = function (grunt) {
                     flatten: true,
                     src: [
                         '<%= subrosa.src %>/lib/font-awesome/fonts/*',
-                        '<%= subrosa.src %>/lib//bootstrap/fonts/*'
+                        '<%= subrosa.src %>/lib/bootstrap/fonts/*',
+                        '<%= subrosa.src %>/lib/leaflet.locatecontrol/src/font/*'
                     ],
                     dest: '<%= subrosa.dist %>/fonts/'
                 }]
@@ -219,8 +220,7 @@ module.exports = function (grunt) {
                     flatten: true,
                     src: [
                         '<%= subrosa.src %>/lib/leaflet-dist/images/*',
-                        '<%= subrosa.src %>/lib/leaflet.draw/dist/images/*',
-                        '<%= subrosa.src %>/lib/leaflet.locatecontrol/src/images/*'
+                        '<%= subrosa.src %>/lib/leaflet.draw/dist/images/*'
                     ],
                     dest: '<%= subrosa.dist %>/css/images/'
                 }]
