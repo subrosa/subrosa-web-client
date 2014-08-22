@@ -1,6 +1,11 @@
 {
     "name": "subrosa-web-client",
-    "version": "0.0.0",
+    "version": "0.0.1",
+    "description": "Web client for the Subrosa gaming engine.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/subrosa/subrosa-web-client.git"
+    },
     "dependencies": {},
     "devDependencies": {
         "connect-modrewrite": "0.5.11",
