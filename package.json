@@ -22,7 +22,7 @@
         "grunt-filerev": "0.2.0",
         "grunt-htmlhint": "0.4.0",
         "grunt-karma": "0.7.2",
-        "grunt-ngmin": "0.0.3",
+        "grunt-ng-annotate": "0.3.2",
         "grunt-ngdocs": "0.2.1",
         "grunt-open": "0.2.3",
         "grunt-usemin": "2.0.1",
