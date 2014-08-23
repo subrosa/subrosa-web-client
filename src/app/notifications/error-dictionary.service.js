@@ -1,6 +1,6 @@
 /**
  * @ngdoc factory
- * @name subrosa.notifications.ErrorDictionary
+ * @name subrosa.notifications.errorDictionary
  *
  * @requires gettext
  *
@@ -8,7 +8,7 @@
  *  A key value store of error codes and their translated messages.
  *
  */
-angular.module('subrosa.notifications').service('ErrorDictionary', function (gettext) {
+angular.module('subrosa.notifications').service('errorDictionary', function (gettext) {
     var NOTIFICATION_DICTIONARY = {
             UNKNOWN: gettext('Oops, something went wrong'),
             NOT_FOUND: gettext("Not found"),

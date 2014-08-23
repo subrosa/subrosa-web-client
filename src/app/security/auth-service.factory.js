@@ -15,14 +15,14 @@
  *
  * @requires $rootScope
  * @requires $http
- * @requires Session
- * @requires AuthRetryQueue
+ * @requires session
+ * @requires authRetryQueue
  *
  * @description
  *  Handles Authentication related functionality such as providing the current user and
  *  managing sessions via login and logout commands.
  */
-angular.module('subrosa.security').factory('AuthService', function ($rootScope, $http, Session, AuthRetryQueue) {
+angular.module('subrosa.security').factory('AuthService', function ($rootScope, $http, session, authRetryQueue) {
     var service = {
         currentUser: null,
 
@@ -32,7 +32,7 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
          * @returns boolean whether or not the user is authenticated
          */
         isAuthenticated: function () {
-            return Boolean(Session.getToken());
+            return Boolean(session.getToken());
         },
 
         /**
@@ -46,7 +46,7 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
                 return service.currentUser;
             };
             var error = function () {
-                Session.removeToken();
+                session.removeToken();
             };
             return $http.get('/subrosa/v1/user').then(success, error);
         },
@@ -64,7 +64,7 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
                 })
                 .error(function () {
                     // Ensure the user does not have a session
-                    Session.removeToken();
+                    session.removeToken();
                 });
         },
 
@@ -73,7 +73,7 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
          */
         logout: function () {
             $http.post('/subrosa/v1/logout').then(function () {
-                Session.removeToken();
+                session.removeToken();
                 service.currentUser = null;
             });
         },
@@ -87,9 +87,9 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
          */
         loginConfirmed: function (data, configUpdater) {
             service.currentUser = service.getCurrentUser();
-            Session.setToken(data.token);
+            session.setToken(data.token);
             $rootScope.$broadcast('auth-loginConfirmed', data);
-            AuthRetryQueue.retryAll(configUpdater);
+            authRetryQueue.retryAll(configUpdater);
         },
 
         /**
@@ -100,17 +100,17 @@ angular.module('subrosa.security').factory('AuthService', function ($rootScope, 
          * @param reason if provided, the requests are rejected; abandoned otherwise.
          */
         loginCancelled: function (data, reason) {
-            AuthRetryQueue.rejectAll(reason);
+            authRetryQueue.rejectAll(reason);
             $rootScope.$broadcast('auth-loginCancelled', data);
         },
 
         /**
-         * Modify requests in the AuthRetryQueue by providing a function. to
+         * Modify requests in the authRetryQueue by providing a function. to
          *
          * @param func the function to transform with
          */
         transformRequests: function (func) {
-            AuthRetryQueue.transform(func);
+            authRetryQueue.transform(func);
         }
     };
 

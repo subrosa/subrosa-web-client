@@ -41,7 +41,7 @@ describe('Controller: GameListController', function () {
 
         spyOn(MockGameFactory, "query").andCallThrough();
         $controller('GameListController', {$scope: $scope, geolocation: geolocation,
-            geocoder: geocoder, Game: MockGameFactory});
+            geocoder: geocoder, game: MockGameFactory});
     }));
 
     it("sets the games on the $scope", function () {

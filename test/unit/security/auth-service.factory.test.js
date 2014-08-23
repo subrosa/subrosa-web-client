@@ -1,23 +1,23 @@
 describe('Factory: AuthService', function () {
-    var $rootScope, $httpBackend, AuthService, Session, AuthRetryQueue;
+    var $rootScope, $httpBackend, AuthService, session, authRetryQueue;
 
     beforeEach(module('subrosa.security'));
 
     beforeEach(module(function ($provide) {
-        Session = {
+        session = {
             getToken: function () {},
             removeToken: function () {},
             setToken: function () {}
         };
 
-        AuthRetryQueue = {
+        authRetryQueue = {
             rejectAll: function () {},
             retryAll: function () {},
             transform: function () {}
         };
 
-        $provide.value('Session', Session);
-        $provide.value('AuthRetryQueue', AuthRetryQueue);
+        $provide.value('session', session);
+        $provide.value('authRetryQueue', authRetryQueue);
     }));
 
     beforeEach(inject(function (_$rootScope_, _$httpBackend_, _AuthService_) {
@@ -31,11 +31,11 @@ describe('Factory: AuthService', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('can check for authentication via Session', function () {
+    it('can check for authentication via session', function () {
         expect(AuthService.isAuthenticated()).toBe(false);
-        spyOn(Session, 'getToken').andReturn("lalala");
+        spyOn(session, 'getToken').andReturn("lalala");
         expect(AuthService.isAuthenticated()).toBe(true);
-        expect(Session.getToken).toHaveBeenCalled();
+        expect(session.getToken).toHaveBeenCalled();
     });
 
     describe('can retrieve the current user', function () {
@@ -50,14 +50,14 @@ describe('Factory: AuthService', function () {
             expect(AuthService.currentUser.name).toBe(user.name);
         });
 
-        it('and call Session.removeToken on failure', function () {
+        it('and call session.removeToken on failure', function () {
             $httpBackend.expectGET('/subrosa/v1/user').respond(400, '');
-            spyOn(Session, 'removeToken');
+            spyOn(session, 'removeToken');
 
             AuthService.getCurrentUser();
             $httpBackend.flush();
 
-            expect(Session.removeToken).toHaveBeenCalled();
+            expect(session.removeToken).toHaveBeenCalled();
 
         });
     });
@@ -73,59 +73,59 @@ describe('Factory: AuthService', function () {
             expect(AuthService.loginConfirmed).toHaveBeenCalledWith({token: 'lalala'});
         });
 
-        it("and calls Session.removeToken on error", function () {
+        it("and calls session.removeToken on error", function () {
             $httpBackend.expectPOST('/subrosa/v1/session').respond(401, {token: 'lalala'});
-            spyOn(Session, 'removeToken');
+            spyOn(session, 'removeToken');
 
             AuthService.login();
             $httpBackend.flush();
 
-            expect(Session.removeToken).toHaveBeenCalled();
+            expect(session.removeToken).toHaveBeenCalled();
         });
     });
 
-    it('can confirm the login and retry all requests in the AuthRetryQueue', function () {
+    it('can confirm the login and retry all requests in the authRetryQueue', function () {
         var data = {token: 'lalala'}, updater = function () {};
         $httpBackend.expectGET('/subrosa/v1/user').respond(200, '');
-        spyOn(Session, 'setToken');
-        spyOn(AuthRetryQueue, 'retryAll');
+        spyOn(session, 'setToken');
+        spyOn(authRetryQueue, 'retryAll');
         spyOn($rootScope, '$broadcast');
 
         AuthService.loginConfirmed(data, updater);
         $httpBackend.flush();
 
-        expect(Session.setToken).toHaveBeenCalledWith(data.token);
+        expect(session.setToken).toHaveBeenCalledWith(data.token);
         expect($rootScope.$broadcast).toHaveBeenCalledWith('auth-loginConfirmed', data);
-        expect(AuthRetryQueue.retryAll).toHaveBeenCalledWith(updater);
+        expect(authRetryQueue.retryAll).toHaveBeenCalledWith(updater);
     });
 
     it('can cancel the login', function () {
         spyOn($rootScope, '$broadcast');
-        spyOn(AuthRetryQueue, 'rejectAll');
+        spyOn(authRetryQueue, 'rejectAll');
 
         AuthService.loginCancelled({}, 'rejected');
 
-        expect(AuthRetryQueue.rejectAll).toHaveBeenCalledWith('rejected');
+        expect(authRetryQueue.rejectAll).toHaveBeenCalledWith('rejected');
         expect($rootScope.$broadcast).toHaveBeenCalledWith('auth-loginCancelled', {});
     });
 
     it('can logout', function () {
         $httpBackend.expectPOST('/subrosa/v1/logout').respond(200, '');
-        spyOn(Session, 'removeToken');
+        spyOn(session, 'removeToken');
 
         AuthService.logout();
         $httpBackend.flush();
 
-        expect(Session.removeToken).toHaveBeenCalled();
+        expect(session.removeToken).toHaveBeenCalled();
         expect(AuthService.currentUser).toBe(null);
     });
 
-    it('can transform the requests via the AuthRetryQueue', function () {
+    it('can transform the requests via the authRetryQueue', function () {
         var func = function () {};
-        spyOn(AuthRetryQueue, 'transform');
+        spyOn(authRetryQueue, 'transform');
 
         AuthService.transformRequests(func);
 
-        expect(AuthRetryQueue.transform).toHaveBeenCalledWith(func);
+        expect(authRetryQueue.transform).toHaveBeenCalledWith(func);
     });
 });

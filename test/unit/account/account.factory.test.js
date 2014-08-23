@@ -1,4 +1,4 @@
-describe('Factory: Account', function () {
+describe('Factory: account', function () {
     var accountFactory, $httpBackend, account;
 
     beforeEach(module('subrosa.account'));
@@ -8,7 +8,7 @@ describe('Factory: Account', function () {
 
         inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');
-            accountFactory = $injector.get('Account');
+            accountFactory = $injector.get('account');
         });
     });
 

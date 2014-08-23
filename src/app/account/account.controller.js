@@ -4,12 +4,12 @@
  *
  * @requires $scope
  * @requires AuthService
- * @requires Account
+ * @requires account
  *
  * @description
  *  Parent controller for account related functionality.
  */
-angular.module('subrosa.account').controller('AccountController', function ($scope, AuthService, Account) {
+angular.module('subrosa.account').controller('AccountController', function ($scope, AuthService, account) {
     var success, error;
 
     success = function () {
@@ -26,6 +26,6 @@ angular.module('subrosa.account').controller('AccountController', function ($sco
     };
 
     AuthService.getCurrentUser().then(function (user) {
-        $scope.account = Account.get({id: user.id, expand: 'images,addresses'});
+        $scope.account = account.get({id: user.id, expand: 'images,addresses'});
     });
 });

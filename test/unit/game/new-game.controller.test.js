@@ -1,17 +1,17 @@
-describe('Controller: NewGame', function () {
-    var $scope, Game;
+describe('Controller: NewGameController', function () {
+    var $scope, game;
 
     beforeEach(module('subrosa.game', 'mocks'));
 
     beforeEach(inject(function ($controller, $rootScope, MockResource) {
-        Game = MockResource.$new();
+        game = MockResource.$new();
         $scope = $rootScope.$new();
         $scope.transitionTo = function () {
             return {then: function (callback) {
                 callback();
             }};
         };
-        $controller('NewGameController', {$scope: $scope, Game: Game});
+        $controller('NewGameController', {$scope: $scope, game: game});
     }));
 
     it('sets a new Game object on the scope', function () {

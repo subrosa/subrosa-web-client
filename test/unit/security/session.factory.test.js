@@ -1,5 +1,5 @@
-describe('Factory: Session', function () {
-    var $window, Session, token = 'lalala';
+describe('Factory: session', function () {
+    var $window, session, token = 'lalala';
 
     beforeEach(module('subrosa.security'));
 
@@ -9,24 +9,24 @@ describe('Factory: Session', function () {
         $provide.value('$window', $window);
     }));
 
-    beforeEach(inject(function (_Session_) {
-        Session = _Session_;
+    beforeEach(inject(function (_session_) {
+        session = _session_;
     }));
 
     it('can retrieve the current token from sessionStorage', function () {
-        expect(Session.getToken()).toBe(undefined);
+        expect(session.getToken()).toBe(undefined);
         $window.sessionStorage.token = token;
-        expect(Session.getToken()).toBe(token);
+        expect(session.getToken()).toBe(token);
     });
 
     it('can set the sessionStorage token', function () {
-        Session.setToken(token);
+        session.setToken(token);
         expect($window.sessionStorage.token).toBe(token);
     });
 
     it('can remove the current token from sessionStorage', function () {
         $window.sessionStorage.token = token;
-        Session.removeToken();
+        session.removeToken();
         expect($window.sessionStorage.token).toBe(undefined);
     });
 });

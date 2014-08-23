@@ -1,13 +1,13 @@
-describe('Controller: Account', function () {
-    var $controller, $scope, AuthService, Account, account;
+describe('Controller: AccountController', function () {
+    var $controller, $scope, AuthService, accountFactory, account;
 
     beforeEach(module('subrosa.account', 'mocks'));
 
     beforeEach(inject(function (_$controller_, $rootScope, MockResource) {
         $controller = _$controller_;
         $scope = $rootScope.$new();
-        Account = MockResource.$new();
-        account = Account.get({id: 1});
+        accountFactory = MockResource.$new();
+        account = accountFactory.get({id: 1});
 
         AuthService = {
             getCurrentUser: function () {
@@ -21,7 +21,7 @@ describe('Controller: Account', function () {
     it("gets the current user from the auth service and puts it on the scope", function () {
         spyOn(AuthService, 'getCurrentUser').andCallThrough();
 
-        $controller('AccountController', {$scope: $scope, AuthService: AuthService, Account: Account});
+        $controller('AccountController', {$scope: $scope, AuthService: AuthService, account: accountFactory});
 
         expect(AuthService.getCurrentUser).toHaveBeenCalled();
         expect($scope.account).toBe(account);
@@ -29,7 +29,7 @@ describe('Controller: Account', function () {
 
     describe("performs a save of the account", function () {
         beforeEach(function () {
-            $controller('AccountController', {$scope: $scope, AuthService: AuthService, Account: Account});
+            $controller('AccountController', {$scope: $scope, AuthService: AuthService, account: accountFactory});
         });
 
         it("and can be successful", function () {

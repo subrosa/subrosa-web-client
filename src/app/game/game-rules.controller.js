@@ -3,11 +3,11 @@
  * @name subrosa.game.GameRulesController
  *
  * @requires $scope
- * @requires GameZone
+ * @requires gameZone
  *
  * @description
  *  Controller for game rules related functionality.
  */
-angular.module('subrosa.game').controller('GameRulesController', function ($scope, GameZone) {
-    $scope.gameZones = GameZone.query({gameUrl: $scope.$stateParams.gameUrl});
+angular.module('subrosa.game').controller('GameRulesController', function ($scope, gameZone) {
+    $scope.gameZones = gameZone.query({gameUrl: $scope.$stateParams.gameUrl});
 });

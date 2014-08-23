@@ -1,10 +1,10 @@
-describe('Factory: Game', function () {
-    var Game, $httpBackend;
+describe('Factory: game', function () {
+    var gameFactory, $httpBackend;
 
     beforeEach(module('subrosa.game'));
 
     beforeEach(inject(function ($injector) {
-        Game = $injector.get('Game');
+        gameFactory = $injector.get('game');
     }));
     
     describe("makes a request", function () {
@@ -20,17 +20,17 @@ describe('Factory: Game', function () {
 
         it('to get the game from the API.', function () {
             $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars').respond();
-            Game.get({url: 'raleigh-wars'});
+            gameFactory.get({url: 'raleigh-wars'});
         });
 
         it('to query the list of games from the API.', function () {
             $httpBackend.expectGET('/subrosa/v1/game').respond();
-            Game.query();
+            gameFactory.query();
         });
 
         it('to update a game.', function () {
             $httpBackend.expectPUT('/subrosa/v1/game/raleigh-wars').respond();
-            Game.update({url: 'raleigh-wars'});
+            gameFactory.update({url: 'raleigh-wars'});
         });
         
     });
@@ -44,7 +44,7 @@ describe('Factory: Game', function () {
             };
 
         beforeEach(function () {
-            game = new Game();
+            game = new gameFactory();
         });
 
         it('of draft', function () {

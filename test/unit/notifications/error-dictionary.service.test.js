@@ -1,5 +1,5 @@
-describe('Service: ErrorDictionary', function () {
-    var gettext, ErrorDictionary;
+describe('Service: errorDictionary', function () {
+    var gettext, errorDictionary;
 
     beforeEach(module('subrosa.notifications'));
 
@@ -9,21 +9,21 @@ describe('Service: ErrorDictionary', function () {
         $provide.value('gettext', gettext);
     }));
 
-    beforeEach(inject(function (_ErrorDictionary_) {
-        ErrorDictionary = _ErrorDictionary_;
+    beforeEach(inject(function (_errorDictionary_) {
+        errorDictionary = _errorDictionary_;
     }));
 
     describe("provides a transform function", function () {
         it("that adds a translated message if the code is in the dictionary", function () {
             var notification = {code: 'FORBIDDEN', severity: "ERROR"},
-                result = ErrorDictionary.transform(notification);
+                result = errorDictionary.transform(notification);
             expect(result.message).toBe('Forbidden');
         });
 
         it("which defaults to unknown error if the code is not in the dictionary", function () {
             var notification = {code: 'lalalala', severity: "ERROR"},
-                result = ErrorDictionary.transform(notification);
-            expect(result.message).toBe(ErrorDictionary.unknownError);
+                result = errorDictionary.transform(notification);
+            expect(result.message).toBe(errorDictionary.unknownError);
         });
 
         it("that adds the field to the message if provided", function () {
@@ -34,7 +34,7 @@ describe('Service: ErrorDictionary', function () {
                         field: 'name'
                     }
                 },
-                result = ErrorDictionary.transform(notification);
+                result = errorDictionary.transform(notification);
             expect(result.message).toBe('Invalid value for field: name');
         });
 
@@ -47,7 +47,7 @@ describe('Service: ErrorDictionary', function () {
                         code: 'invalidValue'
                     }
                 },
-                result = ErrorDictionary.transform(notification);
+                result = errorDictionary.transform(notification);
             expect(result.details.message).toBe('This value is invalid');
         });
 
@@ -59,13 +59,13 @@ describe('Service: ErrorDictionary', function () {
                         field: 'name'
                     }
                 },
-                result = ErrorDictionary.transform(notification);
+                result = errorDictionary.transform(notification);
             expect(result.details.message).toBe('This field is in error');
 
         });
     });
 
     it("provides an unknown error", function () {
-        expect(ErrorDictionary.unknownError).toBeDefined();
+        expect(errorDictionary.unknownError).toBeDefined();
     });
 });

@@ -1,5 +1,5 @@
-describe('Factory: ErrorInterceptor', function () {
-    var $q, ErrorDictionary, ErrorInterceptor, badRequest;
+describe('Factory: errorInterceptor', function () {
+    var $q, errorDictionary, errorInterceptor, badRequest;
 
     beforeEach(module('subrosa.notifications'));
 
@@ -8,13 +8,13 @@ describe('Factory: ErrorInterceptor', function () {
             reject: function () {}
         };
 
-        ErrorDictionary = {
+        errorDictionary = {
             transform: function () {},
             unknownError: 'yo'
         };
 
         $provide.value('$q', $q);
-        $provide.value('ErrorDictionary', ErrorDictionary);
+        $provide.value('errorDictionary', errorDictionary);
 
         badRequest = {
             status: 400,
@@ -27,11 +27,11 @@ describe('Factory: ErrorInterceptor', function () {
         };
     }));
 
-    beforeEach(inject(function (_ErrorInterceptor_) {
-        ErrorInterceptor = _ErrorInterceptor_;
+    beforeEach(inject(function (_errorInterceptor_) {
+        errorInterceptor = _errorInterceptor_;
     }));
 
-    it('uses the ErrorDictionary to look up notifications if they exist on the response', function () {
+    it('uses the errorDictionary to look up notifications if they exist on the response', function () {
         var notifications = [
             {code: 1234, message: 'lalala'},
             {code: 5678, message: 'yoyoyo'}
@@ -39,22 +39,22 @@ describe('Factory: ErrorInterceptor', function () {
         badRequest.data.notifications = notifications;
 
         spyOn($q, 'reject');
-        spyOn(ErrorDictionary, 'transform').andCallThrough();
+        spyOn(errorDictionary, 'transform').andCallThrough();
 
-        ErrorInterceptor.responseError(badRequest);
+        errorInterceptor.responseError(badRequest);
 
-        expect(ErrorDictionary.transform.callCount).toBe(2);
-        expect(ErrorDictionary.transform).toHaveBeenCalledWith(notifications[0]);
-        expect(ErrorDictionary.transform).toHaveBeenCalledWith(notifications[1]);
+        expect(errorDictionary.transform.callCount).toBe(2);
+        expect(errorDictionary.transform).toHaveBeenCalledWith(notifications[0]);
+        expect(errorDictionary.transform).toHaveBeenCalledWith(notifications[1]);
         expect($q.reject).toHaveBeenCalledWith(badRequest);
     });
 
-    it("adds ErrorDictionary.unknownError to response errors without notifications", function () {
+    it("adds errorDictionary.unknownError to response errors without notifications", function () {
         var expected = badRequest;
-        expected.data.notifications = ErrorDictionary.unknownError;
+        expected.data.notifications = errorDictionary.unknownError;
         spyOn($q, 'reject');
 
-        ErrorInterceptor.responseError(badRequest);
+        errorInterceptor.responseError(badRequest);
 
         expect($q.reject).toHaveBeenCalledWith(expected);
     });
@@ -67,11 +67,11 @@ describe('Factory: ErrorInterceptor', function () {
             }
         };
         spyOn($q, 'reject');
-        spyOn(ErrorDictionary, 'transform');
+        spyOn(errorDictionary, 'transform');
 
-        ErrorInterceptor.responseError(unauthorized);
+        errorInterceptor.responseError(unauthorized);
 
-        expect(ErrorDictionary.transform).not.toHaveBeenCalled();
+        expect(errorDictionary.transform).not.toHaveBeenCalled();
         expect($q.reject).toHaveBeenCalledWith(unauthorized);
     });
 });

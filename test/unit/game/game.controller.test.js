@@ -20,7 +20,7 @@ describe('Controller: Game', function () {
             }
         };
         spyOn(MockGameFactory, "get").andCallThrough();
-        $provide.value('Game', MockGameFactory);
+        $provide.value('game', MockGameFactory);
     }));
 
     beforeEach(inject(function ($controller, $rootScope) {

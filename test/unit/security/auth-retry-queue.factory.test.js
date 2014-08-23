@@ -1,5 +1,5 @@
-describe('Factory: AuthRetryQueue', function () {
-    var $http, deferred, AuthRetryQueue;
+describe('Factory: authRetryQueue', function () {
+    var $http, deferred, authRetryQueue;
 
     beforeEach(module('subrosa.security'));
 
@@ -27,19 +27,19 @@ describe('Factory: AuthRetryQueue', function () {
         $provide.value('$http', $http);
     }));
 
-    beforeEach(inject(function (_AuthRetryQueue_) {
-        AuthRetryQueue = _AuthRetryQueue_;
+    beforeEach(inject(function (_authRetryQueue_) {
+        authRetryQueue = _authRetryQueue_;
     }));
 
     it('can return the request queue', function () {
-        var queue = AuthRetryQueue.getQueue();
+        var queue = authRetryQueue.getQueue();
         expect(queue.length).toBe(0);
     });
 
     it('can append HTTP requests', function () {
         var queue;
-        AuthRetryQueue.append('config', deferred);
-        queue = AuthRetryQueue.getQueue();
+        authRetryQueue.append('config', deferred);
+        queue = authRetryQueue.getQueue();
         expect(queue.length).toBe(1);
         expect(queue[0].config).toBe('config');
         expect(queue[0].deferred).toBe(deferred);
@@ -50,34 +50,34 @@ describe('Factory: AuthRetryQueue', function () {
 
         beforeEach(function () {
             config = {success: true};
-            AuthRetryQueue.append(config, deferred);
-            AuthRetryQueue.append(config, deferred);
-            AuthRetryQueue.append(config, deferred);
+            authRetryQueue.append(config, deferred);
+            authRetryQueue.append(config, deferred);
+            authRetryQueue.append(config, deferred);
         });
 
         it('by transforming all requests', function () {
-            AuthRetryQueue.transform(function () {
+            authRetryQueue.transform(function () {
                 return {config: 'newValue', deferred: deferred};
             });
 
-            angular.forEach(AuthRetryQueue.getQueue(), function (item) {
+            angular.forEach(authRetryQueue.getQueue(), function (item) {
                 expect(item.config).toBe('newValue');
             });
         });
 
         it('by rejecting all requests with a reason', function () {
             spyOn(deferred, 'reject');
-            AuthRetryQueue.rejectAll('invalid');
+            authRetryQueue.rejectAll('invalid');
             expect(deferred.reject).toHaveBeenCalledWith('invalid');
             expect(deferred.reject.callCount).toBe(3);
-            expect(AuthRetryQueue.getQueue().length).toBe(0);
+            expect(authRetryQueue.getQueue().length).toBe(0);
         });
 
         it('by rejecting all requests without a reason', function () {
             spyOn(deferred, 'reject');
-            AuthRetryQueue.rejectAll();
+            authRetryQueue.rejectAll();
             expect(deferred.reject).not.toHaveBeenCalled();
-            expect(AuthRetryQueue.getQueue().length).toBe(0);
+            expect(authRetryQueue.getQueue().length).toBe(0);
         });
 
         it('by retrying all requests and updating them', function () {
@@ -85,28 +85,28 @@ describe('Factory: AuthRetryQueue', function () {
                 updater = function () { return newConfig; };
 
             spyOn(deferred, 'resolve');
-            AuthRetryQueue.retryAll(updater);
+            authRetryQueue.retryAll(updater);
             expect(deferred.resolve).toHaveBeenCalledWith(newConfig);
             expect(deferred.resolve.callCount).toBe(3);
-            expect(AuthRetryQueue.getQueue().length).toBe(0);
+            expect(authRetryQueue.getQueue().length).toBe(0);
         });
 
         it('by retrying all requests and not updating them', function () {
             spyOn(deferred, 'resolve');
-            AuthRetryQueue.retryAll();
+            authRetryQueue.retryAll();
             expect(deferred.resolve).toHaveBeenCalledWith(config);
             expect(deferred.resolve.callCount).toBe(3);
-            expect(AuthRetryQueue.getQueue().length).toBe(0);
+            expect(authRetryQueue.getQueue().length).toBe(0);
         });
     });
 
     it('by retying all requests and encountering an error', function () {
         var config = {success: false};
-        AuthRetryQueue.append(config, deferred);
+        authRetryQueue.append(config, deferred);
         spyOn(deferred, 'reject');
-        AuthRetryQueue.retryAll();
+        authRetryQueue.retryAll();
         expect(deferred.reject).toHaveBeenCalledWith(config);
         expect(deferred.reject.callCount).toBe(1);
-        expect(AuthRetryQueue.getQueue().length).toBe(0);
+        expect(authRetryQueue.getQueue().length).toBe(0);
     });
 });
