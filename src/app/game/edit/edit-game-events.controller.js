@@ -6,28 +6,28 @@
  * @requires gettext
  * @requires modalCache
  * @requires timelineCache
- * @requires GameEvent
+ * @requires gameEvent
  *
  * @description
  *  Handles the editing of game events.
  */
-angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, gettext, modalCache, timelineCache, GameEvent) {
+angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, gettext, modalCache, timelineCache, gameEvent) {
     const ONE_HOUR = 3600000, ONE_YEAR = 31556952000;
 
     var saveEvent = function () {
-        var success, error, gameEvent;
+        var success, error, event;
 
-        gameEvent = timelineCache.get('editGameEvents').getModel($scope.events);
+        event = timelineCache.get('editGameEvents').getModel($scope.events);
 
         success = function (response) {
-            gameEvent.id = response.id;
+            event.id = response.id;
         };
 
         error = function (response) {
             $scope.notifications = response.data.notifications;
         };
 
-        gameEvent.$save({gameUrl: $scope.$stateParams.gameUrl, id: gameEvent.id},
+        event.$save({gameUrl: $scope.$stateParams.gameUrl, id: event.id},
             success, error);
     };
 
@@ -48,7 +48,7 @@ angular.module('subrosa.game').controller('EditGameEventsController', function (
             zoomMin: ONE_HOUR
         };
 
-        GameEvent.query({gameUrl: game.url}, function (response) {
+        gameEvent.query({gameUrl: game.url}, function (response) {
             $scope.events = response.results;
         });
     });

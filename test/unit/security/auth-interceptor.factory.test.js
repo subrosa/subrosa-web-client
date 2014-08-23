@@ -1,5 +1,5 @@
-describe('Factory: AuthInterceptor', function () {
-    var $q, $rootScope, $window, AuthRetryQueue, AuthInterceptor;
+describe('Factory: authInterceptor', function () {
+    var $q, $rootScope, $window, authRetryQueue, authInterceptor;
 
     beforeEach(module('subrosa.security'));
 
@@ -16,7 +16,7 @@ describe('Factory: AuthInterceptor', function () {
         $rootScope = {$broadcast: function () {}};
         $window = {sessionStorage: {}};
 
-        AuthRetryQueue = {
+        authRetryQueue = {
             queue: [],
             append: function () {}
         };
@@ -24,23 +24,23 @@ describe('Factory: AuthInterceptor', function () {
         $provide.value('$rootScope', $rootScope);
         $provide.value('$q', $q);
         $provide.value('$window', $window);
-        $provide.value('AuthRetryQueue', AuthRetryQueue);
+        $provide.value('authRetryQueue', authRetryQueue);
     }));
 
-    beforeEach(inject(function (_AuthInterceptor_) {
-        AuthInterceptor = _AuthInterceptor_;
+    beforeEach(inject(function (_authInterceptor_) {
+        authInterceptor = _authInterceptor_;
     }));
 
     describe('modifies request headers', function () {
         it('by adding the auth token if it exists.', function () {
             var request;
             $window.sessionStorage.token = 'abcde';
-            request = AuthInterceptor.request({});
+            request = authInterceptor.request({});
             expect(request.headers['X-SUBROSA-AUTH']).toBe($window.sessionStorage.token);
         });
 
         it('by doing nothing if auth token does not exist', function () {
-            var request = AuthInterceptor.request({});
+            var request = authInterceptor.request({});
             expect(request.headers['X-SUBROSA-AUTH']).toBe(undefined);
         });
     });
@@ -59,32 +59,32 @@ describe('Factory: AuthInterceptor', function () {
 
         describe('and alters 401 responses', function () {
             it('by deleting the $window.sessionStorage token', function () {
-                AuthInterceptor.responseError(unauthorized);
+                authInterceptor.responseError(unauthorized);
                 expect($window.sessionStorage.token).not.toBeDefined();
             });
 
             it('by adding the response to the retry queue.', function () {
-                spyOn(AuthRetryQueue, 'append');
-                AuthInterceptor.responseError(unauthorized);
-                expect(AuthRetryQueue.append).toHaveBeenCalledWith(unauthorized.config, jasmine.any(Object));
+                spyOn(authRetryQueue, 'append');
+                authInterceptor.responseError(unauthorized);
+                expect(authRetryQueue.append).toHaveBeenCalledWith(unauthorized.config, jasmine.any(Object));
             });
 
             it('by broadcasting an event on the $rootScope', function () {
                 spyOn($rootScope, '$broadcast');
-                AuthInterceptor.responseError(unauthorized);
+                authInterceptor.responseError(unauthorized);
                 expect($rootScope.$broadcast).toHaveBeenCalledWith('auth-loginRequired', unauthorized);
             });
 
             it('if the url is not the authenticate url', function () {
                 unauthorized.config.url = '/subrosa/v1/session';
                 spyOn($rootScope, '$broadcast');
-                spyOn(AuthRetryQueue, 'append');
+                spyOn(authRetryQueue, 'append');
                 spyOn($q, 'reject');
 
-                AuthInterceptor.responseError(unauthorized);
+                authInterceptor.responseError(unauthorized);
 
                 expect($rootScope.$broadcast).not.toHaveBeenCalled();
-                expect(AuthRetryQueue.append).not.toHaveBeenCalled();
+                expect(authRetryQueue.append).not.toHaveBeenCalled();
                 expect($q.reject).toHaveBeenCalledWith(unauthorized);
             });
         });
@@ -98,7 +98,7 @@ describe('Factory: AuthInterceptor', function () {
             }
         };
         spyOn($q, 'reject');
-        AuthInterceptor.responseError(badRequest);
+        authInterceptor.responseError(badRequest);
         expect($q.reject).toHaveBeenCalledWith(badRequest);
     });
 });

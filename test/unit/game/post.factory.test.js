@@ -1,4 +1,4 @@
-describe('Factory: Post', function () {
+describe('Factory: post', function () {
     var postFactory, $httpBackend, posts;
 
     beforeEach(module('subrosa.game'));
@@ -15,7 +15,7 @@ describe('Factory: Post', function () {
 
         inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');
-            postFactory = $injector.get('Post');
+            postFactory = $injector.get('post');
         });
     });
 

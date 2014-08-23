@@ -3,12 +3,12 @@
  * @name subrosa.game.NewGameController
  *
  * @requires $scope
- * @requires Game
+ * @requires game
  *
  * @description
  *  Controller for creating a new game.
  */
-angular.module('subrosa.game').controller('NewGameController', function ($scope, Game) {
+angular.module('subrosa.game').controller('NewGameController', function ($scope, game) {
     var success, error;
 
     success = function (game) {
@@ -19,7 +19,7 @@ angular.module('subrosa.game').controller('NewGameController', function ($scope,
         $scope.notifications = response.data.notifications;
     };
 
-    $scope.game = new Game();
+    $scope.game = new game();
 
     // Hardcoded to ASSASSIN for now because that's all we have
     $scope.game.gameType = 'ASSASSIN';

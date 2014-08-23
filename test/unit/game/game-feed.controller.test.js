@@ -9,7 +9,7 @@ describe('Controller: GameFeedController', function () {
         MockPostFactory = MockResource.$new();
 
         spyOn(MockPostFactory, "query").andCallThrough();
-        $controller('GameFeedController', {$scope: $scope, Post: MockPostFactory});
+        $controller('GameFeedController', {$scope: $scope, post: MockPostFactory});
     }));
 
     it("gets the game's posts by calling the Game Feed Service.", function () {

@@ -1,5 +1,5 @@
-describe('Controller: EditGameEvents', function () {
-    var $controller, $scope, modalCache, timelineCache, dependencies, GameEvent;
+describe('Controller: EditGameEventsController', function () {
+    var $controller, $scope, modalCache, timelineCache, dependencies, gameEvent;
     beforeEach(module('subrosa.game', 'mocks'));
 
     beforeEach(inject(function ($q, _$controller_, $rootScope, MockResource) {
@@ -30,7 +30,7 @@ describe('Controller: EditGameEvents', function () {
             get: function () {}
         };
 
-        GameEvent = resource;
+        gameEvent = resource;
 
         $scope.game = resource.get({id: 1});
         $scope.game.name = 'Raleigh Wars';
@@ -46,7 +46,7 @@ describe('Controller: EditGameEvents', function () {
             $scope: $scope,
             modalCache: modalCache,
             timelineCache: timelineCache,
-            GameEvent: GameEvent
+            gameEvent: gameEvent
         };
         $controller('EditGameEventsController', dependencies);
     }));
@@ -60,30 +60,30 @@ describe('Controller: EditGameEvents', function () {
     });
 
     it("sets the existing game events on the scope by getting them from the API", function () {
-        spyOn(GameEvent, 'query').andCallThrough();
+        spyOn(gameEvent, 'query').andCallThrough();
 
         $controller('EditGameEventsController', dependencies);
 
-        expect(GameEvent.query).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'}, jasmine.any(Function));
-        expect($scope.events).toBe(GameEvent.query().results);
+        expect(gameEvent.query).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'}, jasmine.any(Function));
+        expect($scope.events).toBe(gameEvent.query().results);
     });
 
     describe("responds to timeline event", function () {
-        var gameEvent, timeline, error = {
+        var expectedEvent, timeline, error = {
             data: {
                 notifications: 'lalala'
             }
         };
 
         beforeEach(function () {
-            gameEvent = GameEvent.get({id: 1});
+            expectedEvent = gameEvent.get({id: 1});
             timeline = {
                 deleteItem: function () {},
                 getIndex: function () {
                     return 1;
                 },
                 getModel: function () {
-                    return gameEvent;
+                    return expectedEvent;
                 },
                 getSelection: function () {}
             };
@@ -94,14 +94,14 @@ describe('Controller: EditGameEvents', function () {
 
         describe("on event added", function () {
             it("by setting the event on the scope", function () {
-                $scope.eventAdded(gameEvent);
-                expect($scope.event).toBe(gameEvent);
+                $scope.eventAdded(expectedEvent);
+                expect($scope.event).toBe(expectedEvent);
             });
 
             describe("by opening an edit modal,", function () {
                 beforeEach(function () {
                     spyOn(modalCache, 'openModal').andCallThrough();
-                    spyOn(gameEvent, '$save').andCallThrough();
+                    spyOn(expectedEvent, '$save').andCallThrough();
                     spyOn(timeline, 'deleteItem');
                 });
 
@@ -110,8 +110,8 @@ describe('Controller: EditGameEvents', function () {
                 });
 
                 it("saving the event on submit", function () {
-                    $scope.eventAdded(gameEvent);
-                    expect(gameEvent.$save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars', id: 1},
+                    $scope.eventAdded(expectedEvent);
+                    expect(expectedEvent.$save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars', id: 1},
                         jasmine.any(Function), jasmine.any(Function));
                     expect(timeline.deleteItem).not.toHaveBeenCalled();
                 });
@@ -120,47 +120,47 @@ describe('Controller: EditGameEvents', function () {
                     spyOn(timelineCache, 'get').andCallThrough();
                     modalCache.cancel = true;
 
-                    $scope.eventAdded(gameEvent);
+                    $scope.eventAdded(expectedEvent);
 
-                    expect(gameEvent.$save).not.toHaveBeenCalled();
+                    expect(expectedEvent.$save).not.toHaveBeenCalled();
                     expect(timeline.deleteItem).toHaveBeenCalledWith(1);
                 });
             });
         });
 
         it("on change by saving the event and succeeding", function () {
-            spyOn(gameEvent, '$save').andCallThrough();
-            GameEvent.setSuccessResponse({id: 2});
+            spyOn(expectedEvent, '$save').andCallThrough();
+            gameEvent.setSuccessResponse({id: 2});
 
-            $scope.eventChanged(gameEvent);
+            $scope.eventChanged(expectedEvent);
 
-            expect(gameEvent.$save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars', id: 1},
+            expect(expectedEvent.$save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars', id: 1},
                 jasmine.any(Function), jasmine.any(Function));
-            expect(gameEvent.id).toBe(2);
+            expect(expectedEvent.id).toBe(2);
         });
 
 
         it("on change by saving the event and failing", function () {
-            spyOn(gameEvent, '$save').andCallThrough();
-            GameEvent.setErrorResponse(error);
+            spyOn(expectedEvent, '$save').andCallThrough();
+            gameEvent.setErrorResponse(error);
 
-            gameEvent.failed = true;
-            $scope.eventChanged(gameEvent);
+            expectedEvent.failed = true;
+            $scope.eventChanged(expectedEvent);
 
-            expect(gameEvent.$save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars', id: 1},
+            expect(expectedEvent.$save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars', id: 1},
                 jasmine.any(Function), jasmine.any(Function));
             expect($scope.notifications).toBe(error.data.notifications);
         });
 
         it("on delete by deleting the resource.", function () {
-            spyOn(gameEvent, '$delete');
-            $scope.eventDeleted(gameEvent);
-            expect(gameEvent.$delete).toHaveBeenCalled();
+            spyOn(expectedEvent, '$delete');
+            $scope.eventDeleted(expectedEvent);
+            expect(expectedEvent.$delete).toHaveBeenCalled();
         });
 
         it("on edit by setting the event, opening an edit modal, and saving the event on close, if the event is editable", function () {
             spyOn(modalCache, 'openModal').andCallThrough();
-            spyOn(gameEvent, '$save').andCallThrough();
+            spyOn(expectedEvent, '$save').andCallThrough();
 
             gameEvent.editable = true;
 
@@ -168,7 +168,7 @@ describe('Controller: EditGameEvents', function () {
 
             expect($scope.event).toBe(gameEvent);
             expect(modalCache.openModal).toHaveBeenCalledWith('gameEventModal', $scope);
-            expect(gameEvent.$save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars', id: 1},
+            expect(expectedEvent.$save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars', id: 1},
                 jasmine.any(Function), jasmine.any(Function));
         });
 

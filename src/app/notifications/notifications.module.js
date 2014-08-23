@@ -14,8 +14,8 @@ angular.module('subrosa.notifications', ['gettext']);
  * @requires $httpProvider
  *
  * @description
- *  Add ErrorInterceptor to $httpProvider interceptors.
+ *  Add errorInterceptor to $httpProvider interceptors.
  */
 angular.module('subrosa.notifications').config(function ($httpProvider) {
-    $httpProvider.interceptors.push('ErrorInterceptor');
+    $httpProvider.interceptors.push('errorInterceptor');
 });

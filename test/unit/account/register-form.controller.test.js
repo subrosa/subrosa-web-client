@@ -1,5 +1,5 @@
 describe('Controller: RegisterFormController', function () {
-    var $rootScope, $scope, $state, Account, AuthService, postData;
+    var $rootScope, $scope, $state, account, AuthService, postData;
 
     beforeEach(module('subrosa.account', 'mocks'));
 
@@ -18,12 +18,12 @@ describe('Controller: RegisterFormController', function () {
         $scope = $rootScope.$new();
         $scope.transitionTo = function () {};
 
-        Account = MockResource.$new();
+        account = MockResource.$new();
 
         $controller('RegisterFormController', {
             $scope: $scope,
             $state: $state,
-            Account: Account,
+            account: account,
             AuthService: AuthService
         });
 
@@ -67,9 +67,9 @@ describe('Controller: RegisterFormController', function () {
 
         it("by calling the API and encountering an error", function () {
             var error = {data: {notifications: [{severity: "ERROR", "code": 10000010008}]}};
-            Account.setErrorResponse(error);
+            account.setErrorResponse(error);
 
-            Account.failed = true;
+            account.failed = true;
             $scope.register();
 
             expect($scope.notifications.length).toBe(1);

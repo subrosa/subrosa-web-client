@@ -1,15 +1,15 @@
 /**
  * @ngdoc factory
- * @name subrosa.notifications.ErrorInterceptor
+ * @name subrosa.notifications.errorInterceptor
  *
  * @requires $q
- * @requires ErrorDictionary
+ * @requires errorDictionary
  *
  * @description
  *  An $httpProvider interceptor that looks up error codes and add the translated display message
  *  to the notification object.
  */
-angular.module('subrosa.notifications').factory('ErrorInterceptor', function ($q, ErrorDictionary) {
+angular.module('subrosa.notifications').factory('errorInterceptor', function ($q, errorDictionary) {
     return {
         responseError: function (rejection) {
             var notifications = [];
@@ -17,7 +17,7 @@ angular.module('subrosa.notifications').factory('ErrorInterceptor', function ($q
             if (rejection.status !== 401) {
                 if (rejection.hasOwnProperty('data') && rejection.data.hasOwnProperty('notifications')) {
                     angular.forEach(rejection.data.notifications, function (notification) {
-                        notification = ErrorDictionary.transform(notification);
+                        notification = errorDictionary.transform(notification);
                         notifications.push(notification);
                     });
                     rejection.data.notifications = notifications;
@@ -26,7 +26,7 @@ angular.module('subrosa.notifications').factory('ErrorInterceptor', function ($q
                     rejection.data = {
                         notifications: [
                             {
-                                message: ErrorDictionary.unknownError,
+                                message: errorDictionary.unknownError,
                                 severity: 'ERROR'
                             }
                         ]

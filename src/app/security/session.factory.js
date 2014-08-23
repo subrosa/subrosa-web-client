@@ -1,13 +1,13 @@
 /**
  * @ngdoc factory
- * @name subrosa.security.Session
+ * @name subrosa.security.session
  *
  * @requires $window
  *
  * @description
  *
  */
-angular.module('subrosa.security').factory('Session', function ($window) {
+angular.module('subrosa.security').factory('session', function ($window) {
     var service = {
         /**
          * Return the current session token.

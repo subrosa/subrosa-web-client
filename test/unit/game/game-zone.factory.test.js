@@ -1,11 +1,11 @@
-describe('Factory: Game', function () {
+describe('Factory: game', function () {
     var gameZoneFactory, $httpBackend;
 
     beforeEach(module('subrosa.game'));
 
     beforeEach(inject(function ($injector) {
         $httpBackend = $injector.get('$httpBackend');
-        gameZoneFactory = $injector.get('GameZone');
+        gameZoneFactory = $injector.get('gameZone');
     }));
 
     afterEach(function () {
