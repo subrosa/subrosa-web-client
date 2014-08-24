@@ -1,4 +1,4 @@
-describe('Factory: authService', function () {
+describe('Service: authService', function () {
     var $rootScope, $httpBackend, authService, session, authRetryQueue;
 
     beforeEach(module('subrosa.security'));

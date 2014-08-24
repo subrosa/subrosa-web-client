@@ -1,4 +1,4 @@
-describe('Factory: session', function () {
+describe('Service: session', function () {
     var $window, session, token = 'lalala';
 
     beforeEach(module('subrosa.security'));
