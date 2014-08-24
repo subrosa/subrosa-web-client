@@ -1,4 +1,4 @@
-describe('Factory: errorInterceptor', function () {
+describe('Service: errorInterceptor', function () {
     var $q, errorDictionary, errorInterceptor, badRequest;
 
     beforeEach(module('subrosa.notifications'));

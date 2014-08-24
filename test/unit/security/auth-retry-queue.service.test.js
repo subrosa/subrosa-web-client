@@ -1,4 +1,4 @@
-describe('Factory: authRetryQueue', function () {
+describe('Service: authRetryQueue', function () {
     var $http, deferred, authRetryQueue;
 
     beforeEach(module('subrosa.security'));
