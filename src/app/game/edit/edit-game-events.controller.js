@@ -3,7 +3,7 @@
  * @name subrosa.game.EditGameEventsController
  *
  * @requires $scope
- * @requires gettext
+ * @requires i18n
  * @requires modalCache
  * @requires timelineCache
  * @requires GameEvent
@@ -11,7 +11,7 @@
  * @description
  *  Handles the editing of game events.
  */
-angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, gettext, modalCache, timelineCache, GameEvent) {
+angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, i18n, modalCache, timelineCache, GameEvent) {
     const ONE_HOUR = 3600000, ONE_YEAR = 31556952000;
 
     var saveEvent = function () {

@@ -1,7 +1,7 @@
 <section>
-  <h2 data-translate>Rules for {{ game.name }}</h2>
+  <h2 data-i18n>Rules for {{ game.name }}</h2>
   <div data-ng-show="game.rules.GAME_SPECIFIC">
-    <h3 data-translate>Game Specific Rules</h3>
+    <h3 data-i18n>Game Specific Rules</h3>
     <ul>
       <li data-ng-repeat="rule in game.rules.GAME_SPECIFIC">
         {{ rule }}
@@ -10,7 +10,7 @@
   </div>
 
   <div>
-    <h3 data-translate>Rules for all Games</h3>
+    <h3 data-i18n>Rules for all Games</h3>
     <ul>
       <li data-ng-repeat="rule in game.rules.ALL_GAMES">
         {{ rule }}

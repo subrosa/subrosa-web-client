@@ -5,13 +5,13 @@
  * @requires $scope
  * @requires geolocation
  * @requires geocoder
- * @requires gettext
+ * @requires i18n
  * @requires Game
  *
  * @description
  *  Display the list of games.
  */
-angular.module('subrosa.game').controller('GameListController', function ($scope, geolocation, geocoder, gettext, Game) {
+angular.module('subrosa.game').controller('GameListController', function ($scope, geolocation, geocoder, i18n, Game) {
     $scope.games = Game.query({limit: 0});
     // TODO: make it so an object isn't required
     $scope.postalCode = {};
@@ -50,7 +50,7 @@ angular.module('subrosa.game').controller('GameListController', function ($scope
         };
 
         notFound = function () {
-            var notification = {type: 'error', message: gettext('Cannot find postal code: ' + postalCode)};
+            var notification = {type: 'error', message: i18n('Cannot find postal code: ' + postalCode)};
             $scope.notifications.push(notification);
         };
 

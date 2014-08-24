@@ -2,15 +2,17 @@
  * @ngdoc filter
  * @name  subrosa.game:gameType
  *
+ * @requires i18n
+ *
  * @description
  *   A filter to return the translated game type string.
  *
  * @example
  *   {{ 'ASSASSIN' | gameType }} will produce the translated string "Assassins".
  */
-angular.module('subrosa.game').filter('gameType', function (gettext) {
+angular.module('subrosa.game').filter('gameType', function (i18n) {
     var GAME_TYPES = {
-        ASSASSIN: gettext('Assassins')
+        ASSASSIN: i18n('Assassins')
     };
 
     return function (input) {

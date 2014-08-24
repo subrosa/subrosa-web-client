@@ -1,20 +1,20 @@
 <dl class="dl-horizontal">
-  <dt data-translate>Username</dt>
+  <dt data-i18n>Username</dt>
   <dd>{{ account.username }}</dd>
 
-  <dt data-translate>Real Name</dt>
+  <dt data-i18n>Real Name</dt>
   <dd>{{ account.name }}</dd>
 
-  <dt data-translate>Email</dt>
+  <dt data-i18n>Email</dt>
   <dd>{{ account.email }}</dd>
 
-  <dt data-translate>Cell Phone Number</dt>
+  <dt data-i18n>Cell Phone Number</dt>
   <dd>{{ account.cellPhone }}</dd>
 
-  <dt data-translate>Date of Birth</dt>
+  <dt data-i18n>Date of Birth</dt>
   <dd>{{ account.dateOfBirth | date:'longDate' }}</dd>
 
-  <dt data-ng-show="account.addresses.HOME" data-translate>Home Address</dt>
+  <dt data-ng-show="account.addresses.HOME" data-i18n>Home Address</dt>
   <dd data-ng-show="account.addresses.HOME">
     <address>
       {{ account.addresses.HOME.streetAddress }}<br/>
@@ -23,7 +23,7 @@
     </address>
   </dd>
 
-  <dt data-ng-show="account.addresses.WORK" data-translate>Work Address</dt>
+  <dt data-ng-show="account.addresses.WORK" data-i18n>Work Address</dt>
   <dd data-ng-show="account.addresses.WORK">
     <address>
       {{ account.addresses.WORK.streetAddress }}<br/>
@@ -32,7 +32,7 @@
     </address>
   </dd>
 
-  <dt data-ng-show="account.addresses.SCHOOL" data-translate>School Address</dt>
+  <dt data-ng-show="account.addresses.SCHOOL" data-i18n>School Address</dt>
   <dd data-ng-show="account.addresses.SCHOOL">
     <address>
       {{ account.addresses.SCHOOL.streetAddress }}<br/>
@@ -41,4 +41,4 @@
     </address>
   </dd>
 </dl>
-<button class="btn btn-primary" data-ng-click="go('account.edit')" data-translate>Edit</button>
+<button class="btn btn-primary" data-ng-click="go('account.edit')" data-i18n>Edit</button>

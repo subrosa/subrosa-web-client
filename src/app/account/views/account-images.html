@@ -1,38 +1,38 @@
 <div class="row">
   <div class="col-md-5">
     <div class="thumbnail">
-      <img data-ng-src="{{ account.images.PHOTO_ID.uri }}" alt="{{ 'ID Image for' | translate}} {{ account.username }}"/>
+      <img data-ng-src="{{ account.images.PHOTO_ID.uri }}" alt="ID Image for {{ account.username }}" data-i18n-attrs="alt"/>
       <div class="caption">
-        <h3 data-translate>Photo ID</h3>
-        <p data-translate>Photo IDs are similar to passport photos and have the following requirements:</p>
+        <h3 data-i18n>Photo ID</h3>
+        <p data-i18n>Photo IDs are similar to passport photos and have the following requirements:</p>
         <ul>
-          <li data-translate>
+          <li data-i18n>
             Must include your full face, front view, eyes open.
           </li>
-          <li data-translate>
+          <li data-i18n>
             Must be a recent picture representing how you actually look for the duration of the game. You may not take a picture with long hair and then shave it, for example.
           </li>
-          <li data-translate>
+          <li data-i18n>
             No garments or accessories that obscure your face or hair, including hats, sunglasses, scarves, etc. Prescription eyeglasses are okay.
           </li>
         </ul>
-        <button class="btn btn-default center-block" data-translate>Edit Image</button>
+        <button class="btn btn-default center-block" data-i18n>Edit Image</button>
       </div>
     </div>
   </div>
 
   <div class="col-md-5">
     <div class="thumbnail">
-      <img data-ng-src="{{ account.images.ACTION_PHOTO.uri }}" alt="{{ 'Action Photo for' | translate}} {{ account.username }}"/>
+      <img data-ng-src="{{ account.images.ACTION_PHOTO.uri }}" alt="Action Photo for {{ account.username }}" data-i18n-attrs="alt"/>
       <div class="caption">
-        <h3 data-translate>Action Photo</h3>
-        <p data-translate>Action Photos are used to show off your skills. They have the following requirements:</p>
+        <h3 data-i18n>Action Photo</h3>
+        <p data-i18n>Action Photos are used to show off your skills. They have the following requirements:</p>
         <ul>
-          <li data-translate>
+          <li data-i18n>
             Must show you being awesome.
           </li>
         </ul>
-        <button class="btn btn-default center-block" data-translate>Edit Image</button>
+        <button class="btn btn-default center-block" data-i18n>Edit Image</button>
       </div>
     </div>
   </div>

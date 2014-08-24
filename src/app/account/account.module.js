@@ -6,7 +6,6 @@
  *  Module for account related functionality.
  */
 angular.module('subrosa.account', [
-    'gettext',
     'ngResource',
     'ui.bootstrap.modal',
     'ui.router'
