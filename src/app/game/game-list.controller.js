@@ -6,13 +6,13 @@
  * @requires geolocation
  * @requires geocoder
  * @requires gettext
- * @requires game
+ * @requires Game
  *
  * @description
  *  Display the list of games.
  */
-angular.module('subrosa.game').controller('GameListController', function ($scope, geolocation, geocoder, gettext, game) {
-    $scope.games = game.query({limit: 0});
+angular.module('subrosa.game').controller('GameListController', function ($scope, geolocation, geocoder, gettext, Game) {
+    $scope.games = Game.query({limit: 0});
     // TODO: make it so an object isn't required
     $scope.postalCode = {};
     $scope.notifications = [];
@@ -21,7 +21,7 @@ angular.module('subrosa.game').controller('GameListController', function ($scope
         var locationAllowed, locationDenied;
 
         locationAllowed = function (data) {
-            $scope.games = game.query({
+            $scope.games = Game.query({
                 limit: 0,
                 latitude: data.coords.latitude,
                 longitude: data.coords.longitude
@@ -42,7 +42,7 @@ angular.module('subrosa.game').controller('GameListController', function ($scope
             var latitude = results[0].geometry.location.lat(),
                 longitude = results[0].geometry.location.lng();
 
-            $scope.games = game.query({
+            $scope.games = Game.query({
                 limit: 0,
                 latitude: latitude,
                 longitude: longitude

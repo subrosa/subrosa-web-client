@@ -1,5 +1,5 @@
 describe('Controller: EditGameEventsController', function () {
-    var $controller, $scope, modalCache, timelineCache, dependencies, gameEvent;
+    var $controller, $scope, modalCache, timelineCache, dependencies, GameEvent;
     beforeEach(module('subrosa.game', 'mocks'));
 
     beforeEach(inject(function ($q, _$controller_, $rootScope, MockResource) {
@@ -30,7 +30,7 @@ describe('Controller: EditGameEventsController', function () {
             get: function () {}
         };
 
-        gameEvent = resource;
+        GameEvent = resource;
 
         $scope.game = resource.get({id: 1});
         $scope.game.name = 'Raleigh Wars';
@@ -46,7 +46,7 @@ describe('Controller: EditGameEventsController', function () {
             $scope: $scope,
             modalCache: modalCache,
             timelineCache: timelineCache,
-            gameEvent: gameEvent
+            GameEvent: GameEvent
         };
         $controller('EditGameEventsController', dependencies);
     }));
@@ -60,12 +60,12 @@ describe('Controller: EditGameEventsController', function () {
     });
 
     it("sets the existing game events on the scope by getting them from the API", function () {
-        spyOn(gameEvent, 'query').andCallThrough();
+        spyOn(GameEvent, 'query').andCallThrough();
 
         $controller('EditGameEventsController', dependencies);
 
-        expect(gameEvent.query).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'}, jasmine.any(Function));
-        expect($scope.events).toBe(gameEvent.query().results);
+        expect(GameEvent.query).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'}, jasmine.any(Function));
+        expect($scope.events).toBe(GameEvent.query().results);
     });
 
     describe("responds to timeline event", function () {
@@ -76,7 +76,7 @@ describe('Controller: EditGameEventsController', function () {
         };
 
         beforeEach(function () {
-            expectedEvent = gameEvent.get({id: 1});
+            expectedEvent = GameEvent.get({id: 1});
             timeline = {
                 deleteItem: function () {},
                 getIndex: function () {
@@ -130,7 +130,7 @@ describe('Controller: EditGameEventsController', function () {
 
         it("on change by saving the event and succeeding", function () {
             spyOn(expectedEvent, '$save').andCallThrough();
-            gameEvent.setSuccessResponse({id: 2});
+            GameEvent.setSuccessResponse({id: 2});
 
             $scope.eventChanged(expectedEvent);
 
@@ -142,7 +142,7 @@ describe('Controller: EditGameEventsController', function () {
 
         it("on change by saving the event and failing", function () {
             spyOn(expectedEvent, '$save').andCallThrough();
-            gameEvent.setErrorResponse(error);
+            GameEvent.setErrorResponse(error);
 
             expectedEvent.failed = true;
             $scope.eventChanged(expectedEvent);
@@ -162,11 +162,11 @@ describe('Controller: EditGameEventsController', function () {
             spyOn(modalCache, 'openModal').andCallThrough();
             spyOn(expectedEvent, '$save').andCallThrough();
 
-            gameEvent.editable = true;
+            expectedEvent.editable = true;
 
-            $scope.eventEdited(gameEvent);
+            $scope.eventEdited(expectedEvent);
 
-            expect($scope.event).toBe(gameEvent);
+            expect($scope.event).toBe(expectedEvent);
             expect(modalCache.openModal).toHaveBeenCalledWith('gameEventModal', $scope);
             expect(expectedEvent.$save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars', id: 1},
                 jasmine.any(Function), jasmine.any(Function));
@@ -176,8 +176,8 @@ describe('Controller: EditGameEventsController', function () {
             spyOn(modalCache, 'openModal');
 
             angular.forEach([false, null, undefined, 'true', 'false'], function (test) {
-                gameEvent.editable = test;
-                $scope.eventEdited(gameEvent);
+                GameEvent.editable = test;
+                $scope.eventEdited(expectedEvent);
             });
 
             expect(modalCache.openModal).not.toHaveBeenCalled();

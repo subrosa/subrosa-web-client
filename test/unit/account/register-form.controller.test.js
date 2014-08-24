@@ -1,5 +1,5 @@
 describe('Controller: RegisterFormController', function () {
-    var $rootScope, $scope, $state, account, AuthService, postData;
+    var $rootScope, $scope, $state, Account, authService, postData;
 
     beforeEach(module('subrosa.account', 'mocks'));
 
@@ -8,7 +8,7 @@ describe('Controller: RegisterFormController', function () {
             transitionTo: function () {}
         };
 
-        AuthService = {
+        authService = {
             login: function () {}
         };
     });
@@ -18,13 +18,13 @@ describe('Controller: RegisterFormController', function () {
         $scope = $rootScope.$new();
         $scope.transitionTo = function () {};
 
-        account = MockResource.$new();
+        Account = MockResource.$new();
 
         $controller('RegisterFormController', {
             $scope: $scope,
             $state: $state,
-            account: account,
-            AuthService: AuthService
+            Account: Account,
+            authService: authService
         });
 
         $scope.user = {email: 'valid@valid.com', password: 'bitcheye'};
@@ -34,11 +34,11 @@ describe('Controller: RegisterFormController', function () {
     describe("handles registrations", function () {
         describe("by calling the API and successfully creating an account", function () {
             it("and logs the user in", function () {
-                spyOn(AuthService, 'login');
+                spyOn(authService, 'login');
 
                 $scope.register();
 
-                expect(AuthService.login).toHaveBeenCalledWith($scope.user);
+                expect(authService.login).toHaveBeenCalledWith($scope.user);
             });
 
             describe("and handles state transitions", function () {
@@ -67,9 +67,9 @@ describe('Controller: RegisterFormController', function () {
 
         it("by calling the API and encountering an error", function () {
             var error = {data: {notifications: [{severity: "ERROR", "code": 10000010008}]}};
-            account.setErrorResponse(error);
+            Account.setErrorResponse(error);
 
-            account.failed = true;
+            Account.failed = true;
             $scope.register();
 
             expect($scope.notifications.length).toBe(1);

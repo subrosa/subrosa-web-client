@@ -12,7 +12,7 @@ describe('Controller: GameRulesController', function () {
 
     it("sets the game zones on the $scope.", function () {
         spyOn(MockGameZoneFactory, "query").andCallThrough();
-        $controller('GameRulesController', {$scope: $scope, gameZone: MockGameZoneFactory});
+        $controller('GameRulesController', {$scope: $scope, GameZone: MockGameZoneFactory});
 
         expect(MockGameZoneFactory.query).toHaveBeenCalled();
         expect($scope.gameZones).toEqual(MockGameZoneFactory.query());

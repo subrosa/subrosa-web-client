@@ -1,4 +1,4 @@
-describe('Controller: Game', function () {
+describe('Controller: GameController', function () {
     var $scope, MockGameFactory;
 
     beforeEach(module('subrosa.game'));
@@ -20,7 +20,7 @@ describe('Controller: Game', function () {
             }
         };
         spyOn(MockGameFactory, "get").andCallThrough();
-        $provide.value('game', MockGameFactory);
+        $provide.value('Game', MockGameFactory);
     }));
 
     beforeEach(inject(function ($controller, $rootScope) {

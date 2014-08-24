@@ -1,6 +1,6 @@
 /**
  * @ngdoc factory
- * @name subrosa.game.gameEvent
+ * @name subrosa.game.GameEvent
  *
  * @requires $resource
  * @requires eventTypeFilter
@@ -8,7 +8,7 @@
  * @description
  *  Provides a $resource for game event(s).
  */
-angular.module('subrosa.game').factory('gameEvent', function ($resource, eventTypeFilter) {
+angular.module('subrosa.game').factory('GameEvent', function ($resource, eventTypeFilter) {
     return $resource('/subrosa/v1/game/:gameUrl/event/:id', {gameUrl: '@gameUrl', id: '@id'}, {
         query: {isArray: false, transformResponse: function (data) {
             var response = angular.fromJson(data);

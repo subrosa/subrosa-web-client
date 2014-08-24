@@ -3,17 +3,17 @@
  * @name subrosa.game.GameFeedController
  *
  * @requires $scope
- * @requires post
+ * @requires Post
  *
  * @description
  *  Controller for game feed related functionality.
  */
-angular.module('subrosa.game').controller('GameFeedController', function ($scope, post) {
+angular.module('subrosa.game').controller('GameFeedController', function ($scope, Post) {
     var success, error;
 
     $scope.errors = null;
-    $scope.post = new post();
-    $scope.posts = post.query({gameUrl: $scope.$stateParams.gameUrl});
+    $scope.post = new Post();
+    $scope.posts = Post.query({gameUrl: $scope.$stateParams.gameUrl});
 
     success = function (data) {
         $scope.posts.results.unshift(data);
@@ -25,6 +25,6 @@ angular.module('subrosa.game').controller('GameFeedController', function ($scope
 
     $scope.createPost = function () {
         $scope.post.$save({gameUrl: $scope.$stateParams.gameUrl}, success, error);
-        $scope.post = new post();
+        $scope.post = new Post();
     };
 });
