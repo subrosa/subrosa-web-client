@@ -7,7 +7,7 @@
  */
 angular.module('subrosa.game', [
     'geolocation',
-    'gettext',
+    'i18n',
     'ngResource',
     'subrosa.components.map',
     'subrosa.components.modal',

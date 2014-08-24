@@ -1,9 +1,8 @@
 <div class="media">
   <div class="pull-left">
     <i class="media-object fa fa-puzzle-piece" data-ng-hide="game.image.uri"></i>
-    <img class="media-object" data-ng-show="game.image.uri"
-         data-ng-src="{{ game.image.uri }}"
-         alt="{{ 'Image for game' | translate }}"/>
+    <img class="media-object" data-ng-show="game.image.uri" data-ng-src="{{ game.image.uri }}"
+         alt="Image for game" data-i18n-attrs="alt"/>
   </div>
   <div class="media-body">
     <h4 class="media-heading">
@@ -12,22 +11,22 @@
     <p>{{ game.description }}</p>
 
     <div data-ng-show="game.status">
-      <i class="fa fa-circle {{ game.status | lowercase}}" title="{{ 'Game Status' | translate }}"></i>
+      <i class="fa fa-circle {{ game.status | lowercase}}" title="Game Status" data-i18n-attrs="title"></i>
       <span>{{ game.status | gameStatus }}</span>
     </div>
 
     <div data-ng-show="game.gameStart && game.gameEnd">
-      <i class="fa fa-calendar" title="{{ 'Duration' | translate }}"></i>
+      <i class="fa fa-calendar" title="Duration" data-i18n-attrs="title"></i>
       <span>{{ game.gameStart | date:'short' }} - {{ game.gameEnd | date:'short' }}</span>
     </div>
 
     <div data-ng-show="game.gameType">
-      <i class="fa fa-gamepad" title="{{ 'Game Type' | translate }}"></i>
+      <i class="fa fa-gamepad" title="Game Type" data-i18n-attrs="title"></i>
       <span>{{ game.gameType | gameType }}</span>
     </div>
 
     <div data-ng-show="game.ordnance">
-      <i class="fa fa-crosshairs" title="{{ 'Ordnance' | translate }}"></i>
+      <i class="fa fa-crosshairs" title="Ordnance" data-i18n-attrs="title"></i>
       <span>{{ game.ordnance }}</span>
     </div>
   </div>

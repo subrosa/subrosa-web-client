@@ -4,12 +4,12 @@
  *
  * @requires $q
  * @requires googleMaps
- * @requires gettext
+ * @requires i18n
  *
  * @description
  *  Provides a geocode pass-through to google.
  */
-angular.module('subrosa.components.map').service('geocoder', function ($q, googleMaps, gettext) {
+angular.module('subrosa.components.map').service('geocoder', function ($q, googleMaps, i18n) {
 
     this.geocode = function (options) {
         var deferred = $q.defer(),
@@ -19,7 +19,7 @@ angular.module('subrosa.components.map').service('geocoder', function ($q, googl
             if (status === googleMaps.maps.GeocoderStatus.OK) {
                 deferred.resolve(results);
             } else {
-                deferred.reject(gettext('Geocoder failed due to: ') + status);
+                deferred.reject(i18n('Geocoder failed due to: ') + status);
             }
         });
 

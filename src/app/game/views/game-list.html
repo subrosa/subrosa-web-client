@@ -1,18 +1,18 @@
 <section>
-  <a href="" data-ng-click="getCloseGames()" data-translate>Find Games Near Me</a>
+  <a href="" data-ng-click="getCloseGames()" data-i18n>Find Games Near Me</a>
   <form name="geocodeForm" class="form" role="form" novalidate
         data-ng-show="locationDenied" data-form-feedback="notifications"
         data-ng-submit="getCloseGamesViaPostalCode(postalCode.code)">
-    <p translate>Don't want to share your location with us?  We understand, there are spies among us.</p>
-    <p translate>Look over your back and enter your postal code below.</p>
+    <p data-i18n>Don't want to share your location with us?  We understand, there are spies among us.</p>
+    <p data-i18n>Look over your back and enter your postal code below.</p>
 
     <div class="form-group">
-      <label for="postalCode" data-translate>Postal Code</label>
+      <label for="postalCode" data-i18n>Postal Code</label>
       <input id="postalCode" data-ng-model="postalCode.code" type="text" required/>
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-default"
-              data-ng-disabled="!geocodeForm.$valid" data-translate>Locate</button>
+              data-ng-disabled="!geocodeForm.$valid" data-i18n>Locate</button>
     </div>
   </form>
 

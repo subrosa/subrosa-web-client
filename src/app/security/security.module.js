@@ -5,7 +5,7 @@
  * @description
  *  Module for security related functionality.
  */
-angular.module('subrosa.security', ['gettext']);
+angular.module('subrosa.security', []);
 
 /**
  * @ngdoc config

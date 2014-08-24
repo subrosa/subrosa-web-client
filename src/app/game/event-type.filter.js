@@ -9,9 +9,9 @@
  *   The expression {{ 'REGISTRATION' | eventType }} will produce
  *   the translated string "Registration Period".
  */
-angular.module('subrosa.game').filter('eventType', function (gettext) {
+angular.module('subrosa.game').filter('eventType', function (i18n) {
     var EVENT_TYPE = {
-        REGISTRATION: gettext('Registration Period')
+        REGISTRATION: i18n('Registration Period')
     };
 
     return function (input) {

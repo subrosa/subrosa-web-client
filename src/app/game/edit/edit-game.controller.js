@@ -39,4 +39,5 @@ angular.module('subrosa.game').controller('EditGameController', function ($scope
             $anchorScroll();
         });
     };
+
 });

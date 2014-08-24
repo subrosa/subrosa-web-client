@@ -1,31 +1,31 @@
 <form name="loginForm" class="form-horizontal" role="form" novalidate>
   <div class="modal-body">
 
-    <p class="alert alert-info" data-translate>
+    <p class="alert alert-info" data-i18n>
       Welcome back player.  Login below with your Subrosa account.
     </p>
 
-    <p data-ng-show="errors.authError" class="alert alert-danger" data-translate>
+    <p data-ng-show="errors.authError" class="alert alert-danger" data-i18n>
       Sorry, we couldn't log you in with those credentials. Want to give it another shot?
     </p>
 
-    <p data-ng-show="errors.unknownError" class="alert alert-danger" data-translate>
+    <p data-ng-show="errors.unknownError" class="alert alert-danger" data-i18n>
       Something went wrong with login, please try again later.
     </p>
 
     <div class="form-group">
-      <label for="loginEmail" class="col-sm-2 control-label" data-translate>E-mail</label>
+      <label for="loginEmail" class="col-sm-2 control-label" data-i18n>E-mail</label>
       <div class="col-sm-10">
         <input id="loginEmail" name="login" type="email" class="form-control" data-ng-model="user.email" placeholder="Email" required autofocus/>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="loginPassword" class="col-sm-2 control-label" data-translate>Password</label>
+      <label for="loginPassword" class="col-sm-2 control-label" data-i18n>Password</label>
       <div class="col-sm-10">
         <input id="loginPassword" name="pass" type="password" class="form-control" data-ng-model="user.password" placeholder="Password" required/>
         <p class="help-block">
-          <a href="" data-ng-click="showForgotPassword(true)" data-translate>I forgot my password</a>
+          <a href="" data-ng-click="showForgotPassword(true)" data-i18n>I forgot my password</a>
         </p>
       </div>
     </div>
@@ -33,9 +33,9 @@
   </div>
 
   <div class="modal-footer">
-    <a href="" class="pull-left" data-ng-click="goToRegister()" data-translate>I need to register</a>
+    <a href="" class="pull-left" data-ng-click="goToRegister()" data-i18n>I need to register</a>
     <button type="submit" class="btn btn-primary" data-ng-disabled="!loginForm.$valid"
-            data-ng-click="login()" data-translate>Login</button>
-    <button class="btn btn-default" data-ng-click="cancel()" data-translate>Cancel</button>
+            data-ng-click="login()" data-i18n>Login</button>
+    <button class="btn btn-default" data-ng-click="cancel()" data-i18n>Cancel</button>
   </div>
 </form>

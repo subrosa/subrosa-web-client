@@ -1,18 +1,18 @@
 <header class="row row-centered page-header" data-ng-show="game.isDraft()">
   <div class="col-sm-8 col-centered">
-    <p class="text-center alert alert-info" data-translate>
+    <p class="text-center alert alert-info" data-i18n>
       This game is in draft mode and will not be displayed in the list of games or able to be joined until it is published.
     </p>
 
-    <p data-ng-show="confirmPublish" class="text-center alert alert-warning" data-translate>
+    <p data-ng-show="confirmPublish" class="text-center alert alert-warning" data-i18n>
       Are you sure?  Once you click the button below your game will be displayed to the public and able to be joined.  There is no going back.
     </p>
     <button class="btn btn-primary center-block" data-ng-hide="confirmPublish"
             data-ng-click="confirmPublish = true"
-            data-translate>Publish Game</button>
+            data-i18n>Publish Game</button>
     <button class="btn btn-primary center-block" data-ng-show="confirmPublish"
             data-ng-click="publishGame()"
-            data-translate>Do it.</button>
+            data-i18n>Do it.</button>
   </div>
 </header>
 
