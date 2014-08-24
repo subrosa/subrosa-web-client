@@ -9,6 +9,7 @@
  */
 angular.module('subrosa.components.modal').directive('modal', function (modalCache) {
     return {
+        restrict: 'A',
         replace: true,
         scope: {
             id: '@modal',

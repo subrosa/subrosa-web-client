@@ -38,6 +38,7 @@ angular.module('subrosa.forms').directive('inputFeedback', function ($compile) {
     };
 
     return {
+        restrict: 'A',
         require: '^?formFeedback',
         replace: true,
         transclude: true,
