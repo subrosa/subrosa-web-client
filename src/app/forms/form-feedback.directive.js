@@ -12,8 +12,6 @@ angular.module('subrosa.forms').directive('formFeedback', function () {
         templateUrl: '/app/forms/views/form-feedback.html',
         scope: {
             notifications: '=formFeedback'
-        },
-        // controller necessary for input-feedback require to work
-        controller: function () {}
+        }
     };
 });
