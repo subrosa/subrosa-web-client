@@ -15,6 +15,7 @@ function ($compile, $timeout, leaflet, leafletData, leafletMarkersHelpers) {
     var SHAPE_COLOR = '#E43E59';
 
     return {
+        restrict: 'A',
         templateUrl: '/app/components/map/views/map.html',
         controller: 'MapController',
         scope: {
@@ -117,9 +118,10 @@ function ($compile, $timeout, leaflet, leafletData, leafletMarkersHelpers) {
                                 var marker = leaflet.marker([point.latitude, point.longitude]);
 
                                 if (scope.popupTemplateUrl) {
-                                    var template = angular.element('<div><div data-ng-include="\'' +
-                                            scope.popupTemplateUrl  + '\'"></div></div>'),
-                                        model = scope.$new();
+                                    var model = scope.$new(),
+                                        template = angular.element(['<div>',
+                                                                      '<div data-ng-include="\'' + scope.popupTemplateUrl + '\'"></div>',
+                                                                    '</div>'].join(''));
 
                                     model[point.modelName] = point.model;
                                     template = $compile(template)(model);
