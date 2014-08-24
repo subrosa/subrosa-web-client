@@ -3,13 +3,13 @@
  * @name subrosa.game.GameController
  *
  * @requires $scope
- * @requires game
+ * @requires Game
  *
  * @description
  *  Parent controller for game related functionality.
  *  Loads the game and sets up common game related functionality.
  */
-angular.module('subrosa.game').controller('GameController', function ($scope, game) {
+angular.module('subrosa.game').controller('GameController', function ($scope, Game) {
     var success, error;
 
     success = function () {
@@ -22,7 +22,7 @@ angular.module('subrosa.game').controller('GameController', function ($scope, ga
         $scope.notifications = response.data.notifications;
     };
 
-    $scope.game = game.get({url: $scope.$stateParams.gameUrl});
+    $scope.game = Game.get({url: $scope.$stateParams.gameUrl});
 
     $scope.publishGame = function () {
         $scope.saving = false;

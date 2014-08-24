@@ -5,7 +5,7 @@ describe('Factory: game', function () {
 
     beforeEach(inject(function ($injector) {
         $httpBackend = $injector.get('$httpBackend');
-        gameZoneFactory = $injector.get('gameZone');
+        gameZoneFactory = $injector.get('GameZone');
     }));
 
     afterEach(function () {

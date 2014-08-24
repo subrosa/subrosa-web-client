@@ -6,14 +6,14 @@
  * @requires $scope
  * @requires $state
  * @requires $modalInstance
- * @requires AuthService
+ * @requires authService
  * @requires user (resolved user if provided to modal)
  *
  * @description
  *  Handle submission of the login form.
  */
 angular.module('subrosa.account').controller('LoginModalController',
-    function ($rootScope, $scope, $state, $modalInstance, AuthService, user) {
+    function ($rootScope, $scope, $state, $modalInstance, authService, user) {
         var success, error;
 
         $scope.user = user || {};
@@ -36,7 +36,7 @@ angular.module('subrosa.account').controller('LoginModalController',
         };
 
         $scope.login = function () {
-            AuthService.login($scope.user).then(success, error);
+            authService.login($scope.user).then(success, error);
         };
 
         $scope.cancel = function () {

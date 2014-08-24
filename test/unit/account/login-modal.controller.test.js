@@ -1,5 +1,5 @@
 describe("Controller: LoginModalController", function () {
-    var $q, $controller, $rootScope, $scope, $state, $modalInstance, AuthService, user;
+    var $q, $controller, $rootScope, $scope, $state, $modalInstance, authService, user;
 
     beforeEach(module('subrosa.account'));
 
@@ -20,7 +20,7 @@ describe("Controller: LoginModalController", function () {
             dismiss: function () {}
         };
 
-        AuthService = {
+        authService = {
             status: null,
             login: function () {
                 var deferred = $q.defer();
@@ -47,20 +47,20 @@ describe("Controller: LoginModalController", function () {
             $scope: $scope,
             $state: $state,
             $modalInstance: $modalInstance,
-            AuthService: AuthService,
+            authService: authService,
             user: user
         });
     }));
 
     describe("handles login functionality", function () {
         it("by logging in with the correct credentials", function () {
-            spyOn(AuthService, 'login').andCallThrough();
+            spyOn(authService, 'login').andCallThrough();
             $scope.login();
-            expect(AuthService.login).toHaveBeenCalledWith($scope.user);
+            expect(authService.login).toHaveBeenCalledWith($scope.user);
         });
 
         it("by closing the modal on success", function () {
-            AuthService.status = 200;
+            authService.status = 200;
             spyOn($modalInstance, 'close');
 
             $scope.login();
@@ -71,25 +71,25 @@ describe("Controller: LoginModalController", function () {
 
         describe("by dealing with login failures", function () {
             it("by setting $scope.authError on 401", function () {
-                AuthService.status = 401;
-                spyOn(AuthService, 'login').andCallThrough();
+                authService.status = 401;
+                spyOn(authService, 'login').andCallThrough();
 
                 $scope.login();
                 $scope.$digest();
 
-                expect(AuthService.login).toHaveBeenCalled();
+                expect(authService.login).toHaveBeenCalled();
                 expect($scope.errors.authError).toBe(true);
                 expect($scope.errors.unknownError).toBe(false);
             });
 
             it("by setting $scope.unknownError on other errors", function () {
-                AuthService.status = 500;
-                spyOn(AuthService, 'login').andCallThrough();
+                authService.status = 500;
+                spyOn(authService, 'login').andCallThrough();
 
                 $scope.login();
                 $scope.$digest();
 
-                expect(AuthService.login).toHaveBeenCalled();
+                expect(authService.login).toHaveBeenCalled();
                 expect($scope.errors.authError).toBe(false);
                 expect($scope.errors.unknownError).toBe(true);
             });
@@ -134,7 +134,7 @@ describe("Controller: LoginModalController", function () {
             $scope: $scope,
             $state: $state,
             $modalInstance: $modalInstance,
-            AuthService: AuthService,
+            authService: authService,
             user: user
         });
 

@@ -4,7 +4,7 @@ describe('Factory: game', function () {
     beforeEach(module('subrosa.game'));
 
     beforeEach(inject(function ($injector) {
-        gameFactory = $injector.get('game');
+        gameFactory = $injector.get('Game');
     }));
     
     describe("makes a request", function () {
@@ -44,7 +44,7 @@ describe('Factory: game', function () {
             };
 
         beforeEach(function () {
-            game = new gameFactory();
+            game = gameFactory.get(1);
         });
 
         it('of draft', function () {

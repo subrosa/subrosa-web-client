@@ -1,5 +1,5 @@
 describe('Controller: EditGameZone', function () {
-    var $controller, $scope, dependencies, gameZone;
+    var $controller, $scope, dependencies, GameZone;
     beforeEach(module('subrosa.game', 'mocks'));
 
     beforeEach(inject(function ($q, _$controller_, $rootScope, MockResource) {
@@ -8,20 +8,20 @@ describe('Controller: EditGameZone', function () {
 
         $scope.$stateParams = {gameUrl: 'raleigh-wars'};
 
-        gameZone = MockResource.$new();
+        GameZone = MockResource.$new();
         dependencies = {
             $scope: $scope,
-            gameZone: gameZone
+            GameZone: GameZone
         };
     }));
 
     it("sets the existing game layer on the scope", function () {
-        spyOn(gameZone, 'query').andCallThrough();
+        spyOn(GameZone, 'query').andCallThrough();
 
         $controller('EditGameZoneController', dependencies);
 
-        expect(gameZone.query).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'});
-        expect($scope.gameZones).toBe(gameZone.query());
+        expect(GameZone.query).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'});
+        expect($scope.gameZones).toBe(GameZone.query());
     });
 
     describe("sets up map listeners", function () {
@@ -54,11 +54,11 @@ describe('Controller: EditGameZone', function () {
                         }
                     }
                 };
-                spyOn(gameZone, 'save').andCallThrough();
+                spyOn(GameZone, 'save').andCallThrough();
             });
 
             afterEach(function () {
-                expect(gameZone.save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'},
+                expect(GameZone.save).toHaveBeenCalledWith({gameUrl: 'raleigh-wars'},
                     {points: event.layer._latlngs}, jasmine.any(Function), jasmine.any(Function));
             });
 
@@ -67,8 +67,8 @@ describe('Controller: EditGameZone', function () {
             });
 
             it("and error", function () {
-                gameZone.setErrorResponse(error);
-                gameZone.failed = true;
+                GameZone.setErrorResponse(error);
+                GameZone.failed = true;
 
                 $scope.onZoneCreated(event);
 
@@ -92,11 +92,11 @@ describe('Controller: EditGameZone', function () {
                         }
                     }
                 };
-                spyOn(gameZone, 'update').andCallThrough();
+                spyOn(GameZone, 'update').andCallThrough();
             });
 
             afterEach(function () {
-                expect(gameZone.update).toHaveBeenCalledWith({id: 1, gameUrl: 'raleigh-wars'},
+                expect(GameZone.update).toHaveBeenCalledWith({id: 1, gameUrl: 'raleigh-wars'},
                     {points: event.layers.getLayers()[0]._latlngs}, jasmine.any(Function),
                     jasmine.any(Function));
             });
@@ -106,8 +106,8 @@ describe('Controller: EditGameZone', function () {
             });
 
             it("and error", function () {
-                gameZone.setErrorResponse(error);
-                gameZone.failed = true;
+                GameZone.setErrorResponse(error);
+                GameZone.failed = true;
 
                 $scope.onZoneEdited(event);
 
@@ -131,11 +131,11 @@ describe('Controller: EditGameZone', function () {
                         }
                     }
                 };
-                spyOn(gameZone, 'remove').andCallThrough();
+                spyOn(GameZone, 'remove').andCallThrough();
             });
 
             afterEach(function () {
-                expect(gameZone.remove).toHaveBeenCalledWith({id: 1, gameUrl: 'raleigh-wars'},
+                expect(GameZone.remove).toHaveBeenCalledWith({id: 1, gameUrl: 'raleigh-wars'},
                     jasmine.any(Function), jasmine.any(Function));
             });
 
@@ -144,8 +144,8 @@ describe('Controller: EditGameZone', function () {
             });
 
             it("and error", function () {
-                gameZone.setErrorResponse(error);
-                gameZone.failed = true;
+                GameZone.setErrorResponse(error);
+                GameZone.failed = true;
 
                 $scope.onZoneDeleted(event);
 

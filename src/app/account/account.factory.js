@@ -1,13 +1,13 @@
 /**
  * @ngdoc factory
- * @name subrosa.account.account
+ * @name subrosa.account.Account
  *
  * @requires $resource
  *
  * @description
  *  Provides a $resource for account(s).
  */
-angular.module('subrosa.account').factory('account', function ($resource) {
+angular.module('subrosa.account').factory('Account', function ($resource) {
     return $resource('/subrosa/v1/account/:id', {id: '@id'}, {
         update: {method: 'PUT'}
     });

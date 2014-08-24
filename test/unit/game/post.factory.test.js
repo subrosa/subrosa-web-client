@@ -15,7 +15,7 @@ describe('Factory: post', function () {
 
         inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');
-            postFactory = $injector.get('post');
+            postFactory = $injector.get('Post');
         });
     });
 
