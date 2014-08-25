@@ -26,11 +26,9 @@ angular.module('subrosa.forms').directive('inputFeedback', function () {
             var input = element.find('input');
 
             transclude(function (clone) {
-                var helpBlocks = element.find('p');
                 element.append(clone);
-                element.find('p').remove();
                 input = element.find('input');
-                input.after(helpBlocks);
+                input.after(element.find('p'));
             });
 
             scope.min = input.attr('min');
