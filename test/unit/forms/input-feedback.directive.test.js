@@ -3,8 +3,8 @@ describe('Directive: inputFeedback', function () {
 
     beforeEach(module(
         'subrosa.forms',
-        '/app/forms/views/form-feedback.html',
-        '/app/forms/views/input-feedback.html'
+        '/app/forms/views/input-feedback.html',
+        '/app/forms/views/input-messages.html'
     ));
 
     beforeEach(inject(function (_$compile_, $rootScope) {

@@ -5,7 +5,9 @@
       <p data-i18n>
         Create your own game and invite others to join in on the fun.  You call all the shots.  It's FREE.
       </p>
-      <form name="createGameForm" role="form" novalidate data-form-feedback="notifications" data-ng-submit="createGame()">
+      <form name="createGameForm" role="form" novalidate
+            data-form-feedback="createGameForm" data-form-notifications="notifications"
+            data-ng-submit="createGame()">
 
         <div class="form-group">
           <label for="gameName" data-i18n>Enter the name of your Game</label>

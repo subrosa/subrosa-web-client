@@ -5,7 +5,7 @@
  * @description
  *  Module for maps.
  */
-angular.module('subrosa.components.map', ['i18n', 'leaflet-directive']);
+angular.module('subrosa.components.map', ['i18n', 'leaflet-directive', 'subrosa.forms']);
 
 /**
  * @ngdoc constant

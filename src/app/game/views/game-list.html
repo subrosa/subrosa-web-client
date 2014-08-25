@@ -1,7 +1,8 @@
 <section>
   <a href="" data-ng-click="getCloseGames()" data-i18n>Find Games Near Me</a>
   <form name="geocodeForm" class="form" role="form" novalidate
-        data-ng-show="locationDenied" data-form-feedback="notifications"
+        data-ng-show="locationDenied"
+        data-form-feedback="geocodeForm" data-form-notifications="notifications"
         data-ng-submit="getCloseGamesViaPostalCode(postalCode.code)">
     <p data-i18n>Don't want to share your location with us?  We understand, there are spies among us.</p>
     <p data-i18n>Look over your back and enter your postal code below.</p>
