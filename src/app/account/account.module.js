@@ -7,6 +7,7 @@
  */
 angular.module('subrosa.account', [
     'ngResource',
+    'subrosa.forms',
     'ui.bootstrap.modal',
     'ui.router'
 ]);

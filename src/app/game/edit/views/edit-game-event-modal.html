@@ -1,5 +1,6 @@
 <form name="eventForm" role="form" class="" novalidate
-      data-form-feedback="notifications" data-ng-submit="ok(event)">
+      data-form-feedback="eventForm" data-form-notifications="notifications"
+      data-ng-submit="ok(event)">
   <div class="modal-header">
     <i class="icon-remove close" ng-click="cancel()"></i>
     <h3 data-i18n>{{ event.eventType | eventType }} Event</h3>

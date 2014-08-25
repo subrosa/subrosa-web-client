@@ -12,6 +12,7 @@ angular.module('subrosa.game', [
     'subrosa.components.map',
     'subrosa.components.modal',
     'subrosa.components.timeline',
+    'subrosa.forms',
     'ui.router',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.timepicker'

@@ -43,7 +43,7 @@ angular.module('subrosa.forms').directive('inputFeedback', function () {
             };
 
             scope.hasError = function (field) {
-                return Boolean(field && field.$dirty && field.$invalid && !scope.warn);
+                return Boolean(!scope.warn && field && field.$dirty && field.$invalid);
             };
         }
     };
