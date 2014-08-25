@@ -13,17 +13,21 @@
         </div>
       </div>
 
-      <div class="col-md-8" data-input-feedback="gameForm.name">
-        <label for="name" class="sr-only" data-i18n>Game Name</label>
-        <input id="name" name="name" type="text" class="form-control input-lg" required
-               data-ng-model="game.name" placeholder="Game Name" data-i18n-attrs="placeholder"/>
+      <div class="col-md-8 col-md-offset-1" data-input-feedback="gameForm.name">
+        <div class="form-group">
+          <label for="name" class="sr-only" data-i18n>Game Name</label>
+          <input id="name" name="name" type="text" class="form-control input-lg" required
+                 data-ng-model="game.name" placeholder="Game Name" data-i18n-attrs="placeholder"/>
+        </div>
       </div>
 
-      <div class="col-md-8" data-input-feedback="gameForm.description">
-        <label for="description" class="sr-only" data-i18n>Brief Game Description</label>
-        <textarea id="description" name="description" type="text" class="form-control" rows="7"
-                  data-ng-model="game.description" placeholder="Brief Game Description" data-i18n-attrs="placeholder">
-        </textarea>
+      <div class="col-md-8 col-md-offset-1" data-input-feedback="gameForm.description">
+        <div class="form-group">
+          <label for="description" class="sr-only" data-i18n>Brief Game Description</label>
+          <textarea id="description" name="description" type="text" class="form-control" rows="7"
+                    data-ng-model="game.description" placeholder="Brief Game Description" data-i18n-attrs="placeholder">
+          </textarea>
+        </div>
       </div>
     </div>
 
@@ -39,9 +43,9 @@
           </p>
           
           <input name="registrationStart" ng-model="game.registrationStart" type="hidden"/>
-          <input name="registrationEnd" ng-model="game.registrationStart" type="hidden"/>
+          <input name="registrationEnd" ng-model="game.registrationEnd" type="hidden"/>
           <p data-input-messages="gameForm.registrationStart"></p>
-          <p data-ng-show="!gameForm.registrationStart.$error" data-input-messages="gameForm.registrationEnd"></p>
+          <p data-ng-if="!gameForm.registrationStart.$error" data-input-messages="gameForm.registrationEnd"></p>
         </div>
       </div>
 
@@ -57,7 +61,7 @@
           <input name="gameStart" ng-model="game.gameStart" type="hidden"/>
           <input name="gameEnd" ng-model="game.gameStart" type="hidden"/>
           <p data-input-messages="gameForm.gameStart"></p>
-          <p data-ng-show="!gameForm.gameStart.$error" data-input-messages="gameForm.gameEnd"></p>
+          <p data-ng-if="!gameForm.gameStart.$error" data-input-messages="gameForm.gameEnd"></p>
         </div>
       </div>
 
