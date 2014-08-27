@@ -1,0 +1,11 @@
+.angular-leaflet-map {
+    height: 800px;
+}
+
+html .leaflet-popup-content p {
+    margin: 0 0 10px;
+}
+
+.leaflet-popup-content .media-body {
+    padding-left: 10px;
+}

@@ -1,9 +1,16 @@
-<section>
-  <a href="" data-ng-click="getCloseGames()" data-i18n>Find Games Near Me</a>
+<div class="page-header">
+  <h1>
+    <span data-i18n>Find Games</span>
+    <small data-i18n>Discover Games in your area</small>
+  </h1>
+</div>
+
+<section class="col-md-3">
+  <a href="" data-ng-click="sortByDistance()" data-i18n>Sort by Distance</a>
   <form name="geocodeForm" class="form" role="form" novalidate
         data-ng-show="locationDenied"
         data-form-feedback="geocodeForm" data-form-notifications="notifications"
-        data-ng-submit="getCloseGamesViaPostalCode(postalCode.code)">
+        data-ng-submit="sortByPostalCode(postalCode.code)">
     <p data-i18n>Don't want to share your location with us?  We understand, there are spies among us.</p>
     <p data-i18n>Look over your back and enter your postal code below.</p>
 
@@ -23,3 +30,14 @@
     </li>
   </ul>
 </section>
+
+<section class="col-md-9">
+  <p class="alert alert-warning" data-ng-show="rejectedGeolocation" data-i18n>
+    You have elected not to share your current location, please manually move the map to find games.
+  </p>
+
+  <div data-map="gameListMap" data-allow-current-location="true" data-on-location-error="onLocationError">
+    <div data-map-points="gameMarkers" data-popup-template-url="'/app/game/views/partials/game-media-object.html'"></div>
+  </div>
+</section>
+

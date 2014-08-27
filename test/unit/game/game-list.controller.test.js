@@ -1,10 +1,12 @@
 describe('Controller: GameListController', function () {
-    var $controller, $scope, successfulCall, geolocation, geocoder, currentLocation, geocoderResults, MockGameFactory;
+    var $controller, $scope, successfulCall, geolocation, geocoder,
+        currentLocation, geocoderResults, MockGameFactory;
 
     beforeEach(module('subrosa.game', 'mocks'));
 
     beforeEach(function () {
         successfulCall = true;
+
         geolocation = {
             getLocation: function () {
                 return {
@@ -38,16 +40,31 @@ describe('Controller: GameListController', function () {
         $controller = _$controller_;
         $scope = $rootScope.$new();
         MockGameFactory = MockResource.$new();
+        MockGameFactory.queryPoints = MockGameFactory.query;
 
         spyOn(MockGameFactory, "query").andCallThrough();
+        spyOn(MockGameFactory, "queryPoints").andCallThrough();
+
         $controller('GameListController', {$scope: $scope, geolocation: geolocation,
             geocoder: geocoder, Game: MockGameFactory});
     }));
 
-    it("sets the games on the $scope", function () {
+    it("sets the game list on the $scope", function () {
         expect(MockGameFactory.query).toHaveBeenCalledWith({limit: 0});
         expect($scope.games).toEqual(MockGameFactory.query());
         expect($scope.games.results.length).toBe(1);
+    });
+
+    it("sets the game marker list on the $scope", function () {
+        expect(MockGameFactory.queryPoints).toHaveBeenCalledWith({limit: 0});
+        expect($scope.games).toEqual(MockGameFactory.queryPoints());
+        expect($scope.games.results.length).toBe(1);
+    });
+
+    it("provides a function for location errors", function () {
+        expect($scope.rejectedGeolocation).toBe(undefined);
+        $scope.onLocationError();
+        expect($scope.rejectedGeolocation).toBe(true);
     });
 
     describe("can get games that are close to the current location", function () {
@@ -84,7 +101,7 @@ describe('Controller: GameListController', function () {
                 };
                 spyOn(geolocation, 'getLocation').andCallThrough();
 
-                $scope.getCloseGames();
+                $scope.sortByDistance();
 
                 expect(geolocation.getLocation).toHaveBeenCalled();
                 expect(MockGameFactory.query).toHaveBeenCalledWith(expected);
@@ -92,7 +109,7 @@ describe('Controller: GameListController', function () {
 
             it("and fail", function () {
                 successfulCall = false;
-                $scope.getCloseGames();
+                $scope.sortByDistance();
                 expect($scope.locationDenied).toBe(true);
             });
         });
@@ -107,7 +124,7 @@ describe('Controller: GameListController', function () {
                 };
                 spyOn(geocoder, 'geocode').andCallThrough();
 
-                $scope.getCloseGamesViaPostalCode(postalCode);
+                $scope.sortByPostalCode(postalCode);
 
                 expect(geocoder.geocode).toHaveBeenCalledWith({address: postalCode});
                 expect(MockGameFactory.query).toHaveBeenCalledWith(expected);
@@ -115,16 +132,12 @@ describe('Controller: GameListController', function () {
 
             it("and fail", function () {
                 successfulCall = false;
-                $scope.getCloseGamesViaPostalCode('abcde');
+                $scope.sortByPostalCode('abcde');
                 expect($scope.notifications.length).toBe(1);
                 expect($scope.notifications[0].message).toBe('Cannot find postal code: abcde');
                 expect($scope.notifications[0].type).toBe('error');
             });
-
-
         });
     });
-
-
 });
 

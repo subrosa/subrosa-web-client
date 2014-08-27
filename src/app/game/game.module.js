@@ -31,24 +31,8 @@ angular.module('subrosa.game').config(function ($stateProvider) {
 
     $stateProvider.state('games', {
         url: '/games',
-        views: {
-            '@': {
-                controller: 'GameListController',
-                templateUrl: '/app/game/views/game-list-layout.html'
-            },
-            'game-list@games': {
-                templateUrl: '/app/game/views/game-list.html'
-            }
-        }
-    });
-    $stateProvider.state('games.map', {
-        url: '/games/map',
-        views: {
-            'game-list': {
-                controller: 'GameListMapController',
-                templateUrl: '/app/game/views/game-list-map.html'
-            }
-        }
+        controller: 'GameListController',
+        templateUrl: '/app/game/views/game-list.html'
     });
 
     $stateProvider.state('new-game', {

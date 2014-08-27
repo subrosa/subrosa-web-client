@@ -13,7 +13,6 @@ describe('Factory: game', function () {
         }));
 
         afterEach(function () {
-            $httpBackend.flush();
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
         });
@@ -21,18 +20,56 @@ describe('Factory: game', function () {
         it('to get the game from the API.', function () {
             $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars').respond();
             gameFactory.get({url: 'raleigh-wars'});
+            $httpBackend.flush();
         });
 
         it('to query the list of games from the API.', function () {
             $httpBackend.expectGET('/subrosa/v1/game').respond();
             gameFactory.query();
+            $httpBackend.flush();
+        });
+
+        describe('to query the game points from the API by transforming the response', function () {
+            var promise, response;
+
+            beforeEach(function () {
+                response = {
+                    results: [{
+                        url: 'raleigh-wars',
+                        location: {
+                            latitude: 1,
+                            longitude: 2
+                        }
+                    }]
+                };
+                $httpBackend.expectGET('/subrosa/v1/game').respond(response);
+            });
+
+            it('and have a game with a location', function () {
+                promise = gameFactory.queryPoints();
+                $httpBackend.flush();
+
+                expect(typeof promise.raleighwars).toBe('object');
+                expect(promise.raleighwars.group).toBe('games');
+                expect(promise.raleighwars.latitude).toBe(1);
+                expect(promise.raleighwars.longitude).toBe(2);
+                expect(promise.raleighwars.modelName).toBe('game');
+            });
+
+            it('and have a game without a location', function () {
+                delete response.results[0].location;
+                promise = gameFactory.queryPoints();
+                $httpBackend.flush();
+
+                expect(promise.raleighwars).toBe(undefined);
+            });
         });
 
         it('to update a game.', function () {
             $httpBackend.expectPUT('/subrosa/v1/game/raleigh-wars').respond();
             gameFactory.update({url: 'raleigh-wars'});
+            $httpBackend.flush();
         });
-        
     });
 
     describe('can check for game status', function () {

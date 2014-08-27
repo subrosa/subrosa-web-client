@@ -12,12 +12,17 @@
  *  Display the list of games.
  */
 angular.module('subrosa.game').controller('GameListController', function ($scope, geolocation, geocoder, i18n, Game) {
-    $scope.games = Game.query({limit: 0});
-    // TODO: make it so an object isn't required
     $scope.postalCode = {};
     $scope.notifications = [];
 
-    $scope.getCloseGames = function () {
+    $scope.games = Game.query({limit: 0});
+    $scope.gameMarkers = Game.queryPoints({limit: 0});
+
+    $scope.onLocationError = function () {
+        $scope.rejectedGeolocation = true;
+    };
+
+    $scope.sortByDistance = function () {
         var locationAllowed, locationDenied;
 
         locationAllowed = function (data) {
@@ -35,7 +40,7 @@ angular.module('subrosa.game').controller('GameListController', function ($scope
         geolocation.getLocation().then(locationAllowed, locationDenied);
     };
 
-    $scope.getCloseGamesViaPostalCode = function (postalCode) {
+    $scope.sortByPostalCode = function (postalCode) {
         var found, notFound;
 
         found = function (results) {
