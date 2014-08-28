@@ -2,12 +2,15 @@
  * @ngdoc controller
  * @name subrosa.components.map:map
  *
+ * @requires $scope
  * @requires leaflet
+ * @requires i18n
+ * @requires units
  *
  * @description
- *  The controller for the map directive.  Provides common functionality to maps.
+ *  The controller for the map directive.  Provides common functionality to maps and sets defaults.
  */
-angular.module('subrosa.components.map').controller('MapDirectiveController', function ($scope, leaflet) {
+angular.module('subrosa.components.map').controller('MapDirectiveController', function ($scope, leaflet, i18n, units) {
     this.mapId = $scope.id;
     this.controls = {};  // Default to empty object, otherwise angular-leaflet errors
     this.shapes = new leaflet.FeatureGroup();
@@ -21,12 +24,21 @@ angular.module('subrosa.components.map').controller('MapDirectiveController', fu
     };
 
     $scope.options = {
-        minZoom: 3
+        minZoom: 3,
+        zoomControl: false
     };
 
     if ($scope.allowCurrentLocation === true) {
         var onLocationError =  $scope.onLocationError || function () {},
-            control = leaflet.control.locate({onLocationError: onLocationError});
+            control = leaflet.control.locate({
+                onLocationError: onLocationError,
+                metric: units.metric,
+                strings: {
+                    title: i18n('Show me where I am'),
+                    popup: i18n('You are within {distance} {unit} from this point'),
+                    outsideMapsBoundsMsg: i18n('You seem located outside the boundaries of the map')
+                }
+            });
 
         if (!angular.isArray($scope.controls.custom)) {
             $scope.controls.custom = [];

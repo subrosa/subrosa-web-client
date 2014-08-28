@@ -1,9 +1,21 @@
 describe('Service: mapDraw', function () {
-    var leaflet, map, mapDraw, expectedOptions;
+    var leaflet, map, mapDraw, mapDrawI18n, expectedOptions;
 
     beforeEach(module('subrosa.components.map'));
 
     beforeEach(module(function ($provide) {
+        expectedOptions = {
+            draw: {
+                circle: false,
+                marker: false,
+                polyline: false
+            },
+            edit: {
+                edit: false,
+                remove: false
+            }
+        };
+
         leaflet = {
             Control: {
                 Draw: function () {}
@@ -16,20 +28,12 @@ describe('Service: mapDraw', function () {
             on: function () {}
         };
 
-        expectedOptions = {
-            draw: {
-                circle: false,
-                marker: false,
-                polyline: false,
-                rectangle: false
-            },
-            edit: {
-                edit: false,
-                remove: false
-            }
+        mapDrawI18n = {
+            setStrings: function () {}
         };
 
         $provide.constant('leaflet', leaflet);
+        $provide.constant('mapDrawI18n', mapDrawI18n);
     }));
 
     beforeEach(inject(function (_mapDraw_) {

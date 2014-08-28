@@ -18,6 +18,7 @@ describe('Directive: mapPoints', function () {
         };
 
         leaflet = {
+            control: {zoom: function () {}},
             Icon: {Default: {imagePath: ''}},
             'MarkerClusterGroup': function () {
                 return markerClusterGroup;
@@ -26,7 +27,8 @@ describe('Directive: mapPoints', function () {
         };
 
         mapElement = {
-            addLayer: function () {}
+            addLayer: function () {},
+            addControl: function () {}
         };
 
         leafletData = {

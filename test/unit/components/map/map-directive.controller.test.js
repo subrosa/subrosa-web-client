@@ -64,14 +64,23 @@ describe('Controller: MapDirectiveController', function () {
     });
 
     it("can display a map that allows current location", function () {
-        var callback = function () {};
+        var callback = function () {},
+            locationOptions = {
+                onLocationError: callback,
+                metric: false,
+                strings: {
+                    title: 'Show me where I am',
+                    popup: 'You are within {distance} {unit} from this point',
+                    outsideMapsBoundsMsg: 'You seem located outside the boundaries of the map'
+                }
+            };
         spyOn(leaflet.control, 'locate');
 
         $scope.onLocationError = callback;
         $scope.allowCurrentLocation = true;
         $controller('MapDirectiveController', dependencies);
 
-        expect(leaflet.control.locate).toHaveBeenCalledWith({onLocationError: callback});
+        expect(leaflet.control.locate).toHaveBeenCalledWith(locationOptions);
         expect($scope.controls.custom).toBeDefined();
         expect($scope.controls.custom.length).toBe(1);
     });

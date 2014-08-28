@@ -10,12 +10,14 @@ describe('Directive: mapPolygons', function () {
         };
 
         leaflet = {
+            control: {zoom: function () {}},
             Icon: {Default: {imagePath: ''}},
             latLng: function () {},
             polygon: function () {}
         };
 
         mapElement = {
+            addControl: function () {},
             addLayer: function () {},
             fitBounds: function () {},
             on: function () {}
