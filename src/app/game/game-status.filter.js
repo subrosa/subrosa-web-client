@@ -17,7 +17,7 @@ angular.module('subrosa.game').filter('gameStatus', function (i18n) {
         REGISTRATION: i18n('Accepting players'),
         POSTREGISTRATION: i18n('Game about to begin'),
         RUNNING: i18n('In progress'),
-        ARCHIVED: i18n('Game over man')
+        ARCHIVED: i18n('Archived')
     };
 
     return function (input) {

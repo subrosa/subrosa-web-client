@@ -5,13 +5,14 @@
   <p class="alert alert-warning" data-ng-show="rejectedGeolocation" data-i18n>
     You have elected not to share your current location, please manually move the map to where your game will take place.
   </p>
-  <div data-map
+  <div data-map="editGameZone"
        data-allow-current-location="true"
-       data-allow-edit="true"
-       data-on-created="onZoneCreated(event)"
-       data-on-deleted="onZoneDeleted(event)"
-       data-on-edited="onZoneEdited(event)"
-       data-on-location-error="onLocationError"
-       data-polygons="gameZones">
+       data-on-location-error="onLocationError">
+    <div data-map-polygons="gameZones"
+         data-draw="true"
+         data-on-create="onZoneCreated(event)"
+         data-on-delete="onZoneDeleted(event)"
+         data-on-edit="onZoneEdited(event)">
+    </div>
   </div>
 </section>

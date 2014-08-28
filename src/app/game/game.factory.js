@@ -11,7 +11,26 @@ angular.module('subrosa.game').factory('Game', function ($resource) {
     var game = $resource('/subrosa/v1/game/:url', {url: '@url'}, {
         query: {method: 'GET', isArray: false},
         update: {method: 'PUT'},
-        publish: {method: 'POST', url: '/subrosa/v1/game/:url/publish'}
+        publish: {method: 'POST', url: '/subrosa/v1/game/:url/publish'},
+        queryPoints: {method: 'GET', isArray: false, transformResponse: function (response) {
+            var markers = {};
+            response = angular.fromJson(response);
+
+            angular.forEach(response.results, function (game) {
+                if (game.hasOwnProperty('location')) {
+                    var marker = {
+                        group: 'games',
+                        latitude: game.location.latitude,
+                        longitude: game.location.longitude,
+                        modelName: 'game',
+                        model: game
+                    };
+                    markers[game.url.replace(/-/g, '')] = marker;
+                }
+            });
+
+            return markers;
+        }}
     });
 
     // Game statuses
