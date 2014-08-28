@@ -3,23 +3,25 @@
  * @name subrosa.components.map:mapDraw
  *
  * @requires leaflet
+ * @requires i18n
  *
  * @description
  *  A service to handle map drawing.
  */
-angular.module('subrosa.components.map').service('mapDraw', function (leaflet) {
+angular.module('subrosa.components.map').service('mapDraw', function (leaflet, mapDrawI18n) {
     var drawOptions = {
         draw: {
             circle: false,
             marker: false,
-            polyline: false,
-            rectangle: false
+            polyline: false
         },
         edit: {
             edit: false,
             remove: false
         }
     };
+
+    mapDrawI18n.setStrings();
 
     this.getOptions = function () {
         return drawOptions;
