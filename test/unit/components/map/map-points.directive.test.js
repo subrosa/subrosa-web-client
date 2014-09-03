@@ -2,7 +2,7 @@ describe('Directive: mapPoints', function () {
     var $q, $timeout, $httpBackend, $compile, $scope, MockResource, leaflet, leafletData,
         mapElement, element, markerClusterGroup;
 
-    beforeEach(module('subrosa.components', 'mocks', '/app/components/map/views/map.html'));
+    beforeEach(module('subrosa.components.map', 'mocks', '/app/components/map/views/map.html'));
 
     beforeEach(module(function ($controllerProvider) {
         $controllerProvider.register('MapDirectiveController', function () {});
