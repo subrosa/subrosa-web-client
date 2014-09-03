@@ -2,7 +2,7 @@ describe('Directive: mapPolygons', function () {
     var $q, $compile, $scope, MockResource, leaflet, mapDraw, featureGroup, leafletData,
         mapElement, element, event;
 
-    beforeEach(module('subrosa.components', 'mocks', '/app/components/map/views/map.html'));
+    beforeEach(module('subrosa.components.map', 'mocks', '/app/components/map/views/map.html'));
 
     beforeEach(module(function ($provide) {
         var handler = function (map, callback) {

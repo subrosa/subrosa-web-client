@@ -14,13 +14,14 @@ module.exports = function (config) {
             'lib/angular-bootstrap/ui-bootstrap-tpls.js',
             'lib/angularjs-geolocation/src/geolocation.js',
             'lib/angular-mocks/angular-mocks.js',
-            'lib/angular-leaflet-directive/dist/angular-leaflet-directive.js',
             'lib/angular-messages/angular-messages.js',
             'lib/angular-resource/angular-resource.js',
             'lib/angular-sanitize/angular-sanitize.js',
             'lib/angular-ui-router/release/angular-ui-router.js',
 
-            '../test/unit/mocks.module.js',
+            '../test/unit/mocks/third-party.js',
+            '../test/unit/mocks/mocks.module.js',
+            '../test/unit/mocks/*',
 
             // Must load modules first
             'app/**/*.module.js',

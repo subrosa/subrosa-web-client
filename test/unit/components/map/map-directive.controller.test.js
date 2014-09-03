@@ -2,7 +2,7 @@
 describe('Controller: MapDirectiveController', function () {
     var $controller, $scope, leaflet, dependencies;
 
-    beforeEach(module('subrosa.components'));
+    beforeEach(module('subrosa.components.map'));
 
     beforeEach(function () {
         leaflet = {
