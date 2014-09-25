@@ -26,6 +26,6 @@ angular.module('subrosa.account').controller('AccountController', function ($sco
     };
 
     authService.getCurrentUser().then(function (user) {
-        $scope.account = Account.get({id: user.id, expand: 'images,addresses'});
+        $scope.account = Account.get({id: user.id});
     });
 });

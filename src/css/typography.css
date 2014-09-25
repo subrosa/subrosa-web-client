@@ -1,5 +1,16 @@
 .avatar-lg {
     font-size: 12em;
+    width: 150px;
+}
+
+.avatar-md {
+    font-size: 6em;
+    width: 75px;
+}
+
+.avatar-sm {
+    font-size: 3em;
+    width: 25px;
 }
 
 .media-object.fa {

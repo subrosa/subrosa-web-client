@@ -8,6 +8,7 @@
 angular.module('subrosa.account', [
     'ngResource',
     'subrosa.forms',
+    'subrosa.security',
     'ui.bootstrap.modal',
     'ui.router'
 ]);
@@ -28,37 +29,37 @@ angular.module('subrosa.account').config(function ($stateProvider) {
         views: {
             '@': {
                 controller: 'AccountController',
-                templateUrl: '/app/account/views/account-layout.html'
-            },
-            'right@account': {
-                templateUrl: '/app/account/views/account-profile.html'
+                templateUrl: '/app/account/views/account.html'
             },
             'profile@account': {
-                templateUrl: '/app/account/views/account-profile-display.html'
+                templateUrl: '/app/account/views/account-profile.html'
             }
         }
     });
-    $stateProvider.state('account.edit', {
+
+    $stateProvider.state('account.edit-profile', {
         url: '/edit',
         views: {
             'profile@account': {
-                templateUrl: '/app/account/views/account-profile-edit.html'
+                templateUrl: '/app/account/edit/views/edit-account-profile.html'
             }
         }
     });
-    $stateProvider.state('account.security', {
-        url: '/account/security',
+
+    $stateProvider.state('account.edit-security', {
+        url: '/account/edit/security',
         views: {
-            'right@account': {
-                templateUrl: '/app/account/views/account-security.html'
+            'security@account': {
+                templateUrl: '/app/account/edit/views/edit-account-security.html'
             }
         }
     });
-    $stateProvider.state('account.images', {
-        url: '/account/images',
+
+    $stateProvider.state('account.edit-preferences', {
+        url: '/account/edit/preferences',
         views: {
-            'right@account': {
-                templateUrl: '/app/account/views/account-images.html'
+            'preferences@account': {
+                templateUrl: '/app/account/edit/views/account-preferences.html'
             }
         }
     });

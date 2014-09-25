@@ -16,8 +16,8 @@
 <ul class="media-list">
   <li class="media" data-ng-show="posts.results.length > 0" data-ng-repeat="post in posts.results">
     <div class="pull-left">
-      <i class="media-object fa fa-user" data-ng-hide="post.image.uri"></i>
-      <img class="media-object" data-ng-show="post.image.uri" data-ng-src="{{ post.image.uri }}"
+      <i class="media-object fa fa-user" data-ng-hide="post.image"></i>
+      <img class="media-object" data-ng-show="post.image" data-ng-src="{{ post.image }}"
            alt="Image for post" data-i18n-attrs="alt"/>
     </div>
     <div class="media-body">

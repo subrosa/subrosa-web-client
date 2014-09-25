@@ -52,7 +52,7 @@
 
 <div class="subrosa-container">
   <header>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="NavigationController">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="MainMenuController">
       <div class="navbar-header">
 
         <button class="navbar-toggle" type="button" data-ng-click="toggleCollapse()">
@@ -71,28 +71,40 @@
       <div data-collapse="collapsed" class="navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li data-ui-sref-active="active">
-            <a data-ui-sref="new-game" data-ng-click="toggleCollapse()" data-i18n>Create Game</a>
+            <a data-ui-sref="new-game" data-i18n>Create Game</a>
           </li>
 
           <li data-ui-sref-active="active">
-            <a data-ui-sref="games" data-ng-click="toggleCollapse()" data-i18n>Find Games</a>
+            <a data-ui-sref="games" data-i18n>Find Games</a>
           </li>
 
           <li data-ng-if="!isAuthenticated()">
-            <a href="" data-ng-click="toggleCollapse(); openModal()" data-i18n>Login</a>
-            <dialog login-modal></dialog>
+            <a href="" data-ng-click="openModal()" data-i18n>Login</a>
+            <dialog data-login-modal></dialog>
           </li>
 
-          <li class="dropdown" data-ng-if="isAuthenticated()">
+          <li data-dropdown data-ng-if="isAuthenticated()">
             <a href="" class="dropdown-toggle" data-i18n>
               Account<b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a data-ui-sref="account" data-ng-click="toggleCollapse()" data-i18n>Profile</a>
+                  <div class="media">
+                    <div data-avatar="user" data-size="md"></div>
+                    <div class="media-body">
+                      <h4 class="media-heading">{{ user.username }}</h4>
+                      {{ user.email }}
+                    </div>
+                    <div class="row">
+                      <a class="col-sm-6" data-ui-sref="account" data-i18n>Account</a>
+                      <a class="col-sm-6" data-ui-sref="privacy" data-i18n>Privacy</a>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+                  <button class="btn btn-default btn-xs pull-right" data-ng-click="logout()" data-i18n>Log out</button>
               </li>
               <li>
-                <a href="" data-ng-click="toggleCollapse(); logout()" data-i18n>Log out</a>
+
               </li>
             </ul>
           </li>
@@ -105,7 +117,7 @@
   <div data-ui-view="menu"></div>
   <div data-ui-view></div>
 
-  <footer>
+  <footer class="page-footer">
     <p data-i18n>
       <a href="/about/copyright">Copyright</a> &copy;2007-2014 Sub Rosa Games, Inc. All Rights Reserved.
     </p>
@@ -134,11 +146,14 @@
 <script type="text/javascript" src="/lib/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 
 <script type="text/javascript" src="/app/subrosa.module.js"></script>
-<script type="text/javascript" src="/app/navigation.controller.js"></script>
+<script type="text/javascript" src="/app/main-menu.controller.js"></script>
 
 <script type="text/javascript" src="/app/account/account.module.js"></script>
 <script type="text/javascript" src="/app/account/account.factory.js"></script>
 <script type="text/javascript" src="/app/account/account.controller.js"></script>
+<script type="text/javascript" src="/app/account/account-display-name.filter.js"></script>
+<script type="text/javascript" src="/app/account/authenticated-account.service.js"></script>
+<script type="text/javascript" src="/app/account/avatar.directive.js"></script>
 <script type="text/javascript" src="/app/account/login-modal.controller.js"></script>
 <script type="text/javascript" src="/app/account/login-modal.directive.js"></script>
 <script type="text/javascript" src="/app/account/register-form.controller.js"></script>

@@ -3,10 +3,6 @@ describe('Filter:eventType', function () {
 
     beforeEach(module('subrosa.game'));
 
-    beforeEach(module(function ($provide) {
-        $provide.value('gettext',  function (a) {return a; });
-    }));
-
     beforeEach(inject(function ($filter) {
         eventTypeFilter = $filter('eventType');
     }));
