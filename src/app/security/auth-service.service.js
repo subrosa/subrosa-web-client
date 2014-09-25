@@ -41,13 +41,17 @@ angular.module('subrosa.security').service('authService', function ($rootScope, 
      * @returns object $http $promise.
      */
     this.getCurrentUser = function () {
-        var success = function (response) {
+        var success, error;
+
+        success = function (response) {
             service.currentUser = response.data;
             return service.currentUser;
         };
-        var error = function () {
+
+        error = function () {
             session.removeToken();
         };
+
         return $http.get('/subrosa/v1/user').then(success, error);
     };
 

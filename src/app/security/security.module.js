@@ -19,18 +19,3 @@ angular.module('subrosa.security', []);
 angular.module('subrosa.security').config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
 });
-
-/**
- * @ngdoc run
- * @name subrosa.security.run
- *
- * @requires $rootScope
- * @requires authService
- *
- * @description
- *  Set some authService functionality on the $rootScope.
- */
-angular.module('subrosa.security').run(function ($rootScope, authService) {
-    $rootScope.isAuthenticated = authService.isAuthenticated;
-    $rootScope.logout = authService.logout;
-});
