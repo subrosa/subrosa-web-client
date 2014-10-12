@@ -12,7 +12,6 @@ module.exports = function (config) {
             'lib/angular/angular.js',
             'lib/angular-bootstrap/ui-bootstrap.js',
             'lib/angular-bootstrap/ui-bootstrap-tpls.js',
-            'lib/angularjs-geolocation/src/geolocation.js',
             'lib/angular-mocks/angular-mocks.js',
             'lib/angular-messages/angular-messages.js',
             'lib/angular-resource/angular-resource.js',

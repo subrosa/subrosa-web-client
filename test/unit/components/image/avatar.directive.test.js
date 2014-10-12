@@ -1,16 +1,15 @@
 describe('Directive: avatar', function () {
-    var $compile, $scope, element, elementScope, image, icon;
+    var $compile, $scope, element, elementScope, image;
 
     function compileDirective() {
         $compile(element)($scope);
         $scope.$digest();
 
         elementScope = element.scope();
-        icon = element.find('i');
         image = element.find('img');
     }
 
-    beforeEach(module('subrosa.account', '/app/account/views/avatar.html'));
+    beforeEach(module('subrosa.components.image', '/app/components/image/views/avatar.html'));
 
     beforeEach(inject(function (_$compile_, _$rootScope_) {
         $compile = _$compile_;
@@ -26,19 +25,17 @@ describe('Directive: avatar', function () {
         var expectedImg = 'pic.jpg';
         $scope.account.images.AVATAR = expectedImg;
         compileDirective();
-        expect(icon.attr('class')).toContain('ng-hide');
         expect(image.attr('src')).toBe(expectedImg);
     });
 
-    it("displays an icon if the avatar is not present", function () {
+    it("displays a default avatar if the avatar is not present", function () {
         compileDirective();
-        expect(image.attr('class')).toContain('ng-hide');
+        expect(image.attr('src')).toBe('/img/placeholder/user.png');
     });
 
     it("allows the setting of an avatar size", function () {
         $scope.size = 'md';
         compileDirective();
-        expect(icon.attr('class')).toContain('avatar-md');
         expect(image.attr('class')).toContain('avatar-md');
     });
 });
