@@ -1,0 +1,45 @@
+<div data-flow-init="{singleFile:true}">
+  <div data-flow-drag-enter="dropClass='drag-over'" data-flow-drag-leave="dropClass=''"
+       data-flow-files-submitted="$flow.upload()"
+       data-flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+
+    <div data-ng-repeat="file in $flow.files">
+      <div class="thumbnail" data-ng-show="$flow.files.length">
+        <img alt="Thumbnail for {{ file.name }}" data-i18n-attrs="alt" data-ng-show="file.isComplete()"
+             data-flow-img="file"/>
+
+        <div class="divider"></div>
+        <button type="button" class="btn btn-danger btn-sm center-block" aria-hidden="true"
+                data-ng-show="file.isComplete()" data-ng-click="file.cancel()">
+          <span data-i18n>Remove</span>
+        </button>
+      </div>
+      <div class="progress" data-ng-hide="file.isComplete()" data-ng-class="{active: file.isUploading()}">
+        <div class="progress-bar" role="progressbar"
+             aria-valuenow="{{ file.progress() * 100 }}" aria-valuemin="0" aria-valuemax="100"
+             data-ng-style="{width: (file.progress() * 100) + '%'}">
+          <span class="sr-only" data-i18n>{{ file.progress() * 100 }}% Complete</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drop text-center" data-ng-class="dropClass" data-flow-drop data-ng-show="!$flow.files.length">
+      <div data-ng-show="!$flow.files.length">
+        <p data-i18n>Drag your avatar here</p>
+        <p data-i18n>- or -</p>
+        <button class="btn btn-default btn-primary" data-flow-btn>
+          <span data-i18n>Select an avatar from your computer</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-right">
+    <button type="button" class="btn btn-default" data-ui-sref="account">
+      <span data-i18n>Cancel</span>
+    </button>
+    <button type="button" class="btn btn-primary" data-ng-disabled="!$flow.files.length" data-ng-click="">
+      <span data-i18n>Save</span>
+    </button>
+  </div>
+</div>

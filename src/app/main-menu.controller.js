@@ -9,6 +9,11 @@
  *  Provides functionality to the Main Menu.
  */
 angular.module('subrosa').controller("MainMenuController", function ($scope, authService) {
+    $scope.collapsed = {
+        left: true,
+        right: true
+    };
+
     $scope.isAuthenticated = authService.isAuthenticated;
     $scope.logout = authService.logout;
     $scope.user = {};

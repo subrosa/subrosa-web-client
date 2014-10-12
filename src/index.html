@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/lib/leaflet.markercluster/dist/MarkerCluster.Default.css">
 
   <link rel="stylesheet" href="/css/game.css">
+  <link rel="stylesheet" href="/css/image.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/map.css">
   <link rel="stylesheet" href="/css/overrides.css">
@@ -38,11 +39,9 @@
     <link rel="stylesheet" href="/lib/leaflet.locatecontrol/src/L.Control.Locate.ie.css">
   <![endif]-->
   <!-- endbuild -->
-
 </head>
 
 <body data-ng-cloak>
-
 <!-- build:js /js/ie.js -->
 <!--[if lt IE 9]>
   <script src="/lib/es5-shim/es5-shim.js"></script>
@@ -55,7 +54,21 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="MainMenuController">
       <div class="navbar-header">
 
-        <button class="navbar-toggle" type="button" data-ng-click="toggleCollapse()">
+        <button class="navbar-toggle" type="button" data-ng-if="!isAuthenticated()" data-ng-click="openModal()" data-i18n>
+          Login
+          <dialog data-login-modal></dialog>
+        </button>
+
+        <button class="navbar-toggle" type="button"
+                data-ng-if="isAuthenticated()"
+                data-ng-click="collapsed.right = !collapsed.right">
+          <span class="sr-only" data-i18n>Toggle account navigation</span>
+          <a data-ui-sref="account.edit-avatar">
+            <div data-avatar="user" data-size="xs"></div>
+          </a>
+        </button>
+
+        <button class="navbar-toggle" type="button" data-ng-click="collapsed.left = !collapsed.left">
           <span class="sr-only" data-i18n>Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -68,56 +81,67 @@
         </a>
       </div>
 
-      <div data-collapse="collapsed" class="navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li data-ui-sref-active="active">
-            <a data-ui-sref="new-game" data-i18n>Create Game</a>
-          </li>
+      <ul class="nav navbar-nav navbar-left navbar-collapse" data-collapse="collapsed.left"
+          data-ng-click="collapsed.left = true">
+        <li data-ui-sref-active="active">
+          <a data-ui-sref="new-game" data-i18n>Create Game</a>
+        </li>
 
-          <li data-ui-sref-active="active">
-            <a data-ui-sref="games" data-i18n>Find Games</a>
-          </li>
+        <li data-ui-sref-active="active">
+          <a data-ui-sref="games" data-i18n>Find Games</a>
+        </li>
+       </ul>
 
-          <li data-ng-if="!isAuthenticated()">
-            <a href="" data-ng-click="openModal()" data-i18n>Login</a>
-            <dialog data-login-modal></dialog>
-          </li>
+      <ul class="nav navbar-nav navbar-right navbar-collapse" data-collapse="collapsed.right"
+          data-ng-click="collapsed.right = true">
 
-          <li data-dropdown data-ng-if="isAuthenticated()">
-            <a href="" class="dropdown-toggle" data-i18n>
-              Account<b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                  <div class="media">
-                    <div data-avatar="user" data-size="md"></div>
-                    <div class="media-body">
-                      <h4 class="media-heading">{{ user.username }}</h4>
-                      {{ user.email }}
-                    </div>
-                    <div class="row">
-                      <a class="col-sm-6" data-ui-sref="account" data-i18n>Account</a>
-                      <a class="col-sm-6" data-ui-sref="privacy" data-i18n>Privacy</a>
-                    </div>
-                  </div>
-                  <div class="divider"></div>
-                  <button class="btn btn-default btn-xs pull-right" data-ng-click="logout()" data-i18n>Log out</button>
-              </li>
-              <li>
+        <li data-ng-if="!isAuthenticated()">
+          <a href="" data-ng-click="openModal()" data-i18n>Login</a>
+          <dialog data-login-modal></dialog>
+        </li>
 
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+        <li class="hidden-md hidden-lg" data-ng-if="isAuthenticated()">
+          <a data-ui-sref="account" data-i18n>Account</a>
+        </li>
 
+        <li class="hidden-md hidden-lg" data-ng-if="isAuthenticated()">
+          <a data-ng-click="logout()" data-i18n>Logout</a>
+        </li>
+
+        <li class="hidden-sm hidden-xs" data-ng-if="isAuthenticated()">
+          <div class="dropdown-toggle" data-avatar="user" data-size="sm"></div>
+          <ul class="dropdown-menu" role="menu">
+            <li class="user-menu">
+              <div>
+                <a data-ui-sref="account.edit-avatar">
+                  <span data-avatar="user" data-size="md" data-editable="true"></span>
+                </a>
+              </div>
+
+              <div>
+                <h4>{{ user.username }}</h4>
+                <span>{{ user.email }}</span>
+                <div>
+                  <a  data-ui-sref="account" data-i18n>Account</a>
+                  -
+                  <a data-ui-sref="privacy" data-i18n>Privacy</a>
+                </div>
+              </div>
+
+              <footer>
+                <button class="btn btn-default btn-xs pull-right" data-ng-click="logout()" data-i18n>Log out</button>
+              </footer>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </nav>
   </header>
 
   <div data-ui-view="menu"></div>
   <div data-ui-view></div>
 
-  <footer class="page-footer">
+  <footer>
     <p data-i18n>
       <a href="/about/copyright">Copyright</a> &copy;2007-2014 Sub Rosa Games, Inc. All Rights Reserved.
     </p>
@@ -144,6 +168,7 @@
 <script type="text/javascript" src="/lib/leaflet.draw/dist/leaflet.draw.js"></script>
 <script type="text/javascript" src="/lib/leaflet.locatecontrol/src/L.Control.Locate.js"></script>
 <script type="text/javascript" src="/lib/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+<script type="text/javascript" src="/lib/ng-flow/dist/ng-flow-standalone.js"></script>
 
 <script type="text/javascript" src="/app/subrosa.module.js"></script>
 <script type="text/javascript" src="/app/main-menu.controller.js"></script>
@@ -152,13 +177,13 @@
 <script type="text/javascript" src="/app/account/account.factory.js"></script>
 <script type="text/javascript" src="/app/account/account.controller.js"></script>
 <script type="text/javascript" src="/app/account/account-display-name.filter.js"></script>
-<script type="text/javascript" src="/app/account/authenticated-account.service.js"></script>
-<script type="text/javascript" src="/app/account/avatar.directive.js"></script>
 <script type="text/javascript" src="/app/account/login-modal.controller.js"></script>
 <script type="text/javascript" src="/app/account/login-modal.directive.js"></script>
 <script type="text/javascript" src="/app/account/register-form.controller.js"></script>
 
 <script type="text/javascript" src="/app/components/components.module.js"></script>
+<script type="text/javascript" src="/app/components/image/image.module.js"></script>
+<script type="text/javascript" src="/app/components/image/avatar.directive.js"></script>
 <script type="text/javascript" src="/app/components/map/map.module.js"></script>
 <script type="text/javascript" src="/app/components/map/geocoder.service.js"></script>
 <script type="text/javascript" src="/app/components/map/map.directive.js"></script>
