@@ -29,17 +29,13 @@ describe('Controller: EditGame', function () {
                 $location: $location, $anchorScroll: $anchorScroll});
         });
 
-        it("and can be successful", function () {
+        it("and can be successful.", function () {
             spyOn($scope.game, '$update').andCallThrough();
             $scope.saveGame();
             expect($scope.game.$update).toHaveBeenCalled();
-
-            // TODO remove this once the game is not limited to free assassins
-            expect($scope.game.price).toBe(0);
-            expect($scope.game.gameType).toBe('ASSASSIN');
         });
 
-        it("and can error", function () {
+        it("and can error.", function () {
             spyOn($scope.game, '$update').andCallThrough();
             $scope.game.failed = true;
             $scope.saveGame();
@@ -47,7 +43,7 @@ describe('Controller: EditGame', function () {
             expect($scope.notifications.code).toBe(1000);
         });
 
-        it("can ", function () {
+        it("change state to the game events page and scroll to events.", function () {
             spyOn($state, 'go').andCallThrough();
             spyOn($location, 'hash');
 

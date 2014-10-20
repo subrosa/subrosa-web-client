@@ -9,3 +9,7 @@
 .registration {
     color: #008000;
 }
+
+.join-game-form .thumbnail {
+    margin-bottom: 0;
+}

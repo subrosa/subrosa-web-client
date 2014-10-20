@@ -26,10 +26,6 @@ angular.module('subrosa.game').controller('EditGameController', function ($scope
 
     $scope.saveGame = function () {
         $scope.saving = true;
-
-        // TODO remove this once the game is not limited to free assassins
-        $scope.game.price = 0;
-        $scope.game.gameType = 'ASSASSIN';
         $scope.game.$update(success, error);
     };
 

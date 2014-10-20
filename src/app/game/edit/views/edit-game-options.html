@@ -1,0 +1,69 @@
+<div class="col-md-4">
+  <h2 data-i18n>Game Options</h2>
+  <form name="gameOptionsForm" role="form" novalidate data-form-feedback="gameOptionsForm"
+        data-form-notifications="gameOptionNotifications" data-ng-submit="saveGame()">
+
+    <h3 data-i18n>Gameplay</h3>
+
+    <div class="form-group sr-only">
+      <label>
+        <input type="radio" data-ng-model="game.teamGame" data-ng-value="false"/>
+        <span data-i18n>Single Player</span>
+      </label>
+
+      <label>
+        <input type="radio" data-ng-model="game.teamGame" data-ng-value="true"/>
+        <span data-i18n>Team Game</span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <div data-toggle-switch
+           ng-model="game.teamGame"
+           data-knob-label="Teams"
+           data-on-label="On"
+           data-off-label="Off"
+           data-i18n-attrs="data-on-label,data-off-label,knob-label">
+      </div>
+    </div>
+
+    <div class="form-group" data-ng-show="game.teamGame ===true" data-input-feedback="gameOptionsForm.maximumTeamSize">
+      <label for="maximumTeamSize" class="control-label" data-i18n>Maximum Team Size</label>
+      <input id="maximumTeamSize" name="maximumTeamSize" type="number" class="form-control"
+             min="2" data-ng-model="game.maximumTeamSize" data-ng-required="game.teamGame"/>
+    </div>
+
+    <div class="form-group" data-input-feedback="gameOptionsForm.password">
+      <label for="gamePassword" class="control-label" data-i18n>Password to Join</label>
+      <input id="gamePassword" name="password" type="password" class="form-control" data-ng-model="game.password"/>
+    </div>
+
+    <div class="form-group" data-input-feedback="gameOptionsForm.minimumAge">
+      <label for="minimumAge" class="control-label" data-i18n>Minimum Age</label>
+      <input id="minimumAge" name="minimumAge" type="number" min="13" class="form-control"
+             data-ng-model="game.minimumAge" data-validate-integer/>
+      <p class="help-block" data-i18n>The minimum age for players.</p>
+    </div>
+
+    <div class="form-group" data-input-feedback="gameOptionsForm.maximumAge">
+      <label for="maximumAge" class="control-label" data-i18n>Maximum Age</label>
+      <input id="maximumAge" name="maximumAge" type="number" min="13" class="form-control"
+             data-ng-model="game.maximumAge" data-validate-integer/>
+      <p class="help-block" data-i18n>The maximum age for players.</p>
+    </div>
+
+    <div class="form-group" data-input-feedback="gameOptionsForm.price">
+      <label for="price" class="control-label" data-i18n>Price (USD)</label>
+      <input id="price" name="price" type="number" min="0" class="form-control" data-ng-model="game.price"/>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary"
+              data-ng-disabled="gameOptionsForm.$invalid || saving"
+              data-i18n>
+        <span data-ng-hide="saving" data-i18n>Save</span>
+        <span data-ng-show="saving" data-i18n>Saving...</span>
+      </button>
+    </div>
+  </form>
+</div>

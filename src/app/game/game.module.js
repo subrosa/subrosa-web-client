@@ -9,10 +9,12 @@ angular.module('subrosa.game', [
     'geolocation',
     'i18n',
     'ngResource',
+    'subrosa.components.form',
     'subrosa.components.map',
     'subrosa.components.modal',
     'subrosa.components.timeline',
-    'subrosa.forms',
+    'subrosa.player',
+    'subrosa.utils',
     'ui.router',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.timepicker'
@@ -50,22 +52,15 @@ angular.module('subrosa.game').config(function ($stateProvider) {
                 controller: 'GameController',
                 templateUrl: '/app/game/views/game.html'
             },
-            'content@game': {
-                templateUrl: '/app/game/views/game-layout.html'
-            },
             'header@game': {
                 templateUrl: '/app/game/views/game-header.html'
             },
-            'menu@game': {
-                templateUrl: '/app/game/views/game-menu.html'
-            },
-            'left@game': {
+            'content@game': {
                 controller: 'GameFeedController',
                 templateUrl: '/app/game/views/game-feed.html'
             },
-            'right@game': {
-                controller: 'GameStatsController',
-                templateUrl: '/app/game/views/game-stats.html'
+            'menu@game': {
+                templateUrl: '/app/game/views/game-menu.html'
             }
         }
     });
@@ -73,48 +68,100 @@ angular.module('subrosa.game').config(function ($stateProvider) {
     $stateProvider.state('game.rules', {
         url: '/rules',
         views: {
-            'right@game': {
+            'content@game': {
                 controller: 'GameRulesController',
                 templateUrl: '/app/game/views/game-rules.html'
             }
         }
+    });
+
+    $stateProvider.state('game.statistics', {
+        url: '/statistics',
+        views: {
+            'content@game': {
+                templateUrl: '/app/game/views/game-stats.html'
+            }
+        }
+    });
+
+    $stateProvider.state('game.enroll', {
+        url: '/join',
+        views: {
+            'content@game': {
+                controller: 'GameEnrollmentController',
+                templateUrl: '/app/game/enroll/views/game-enrollment.html'
+            },
+            'right@game.enroll': {
+                controller: 'GameRulesController',
+                templateUrl: '/app/game/views/game-rules.html'
+            }
+        }
+    });
+    $stateProvider.state('game.enroll.edit-player', {
+        url: '/edit-player',
+        templateUrl: '/app/player/views/edit-player.html'
+    });
+    $stateProvider.state('game.enroll.select-player', {
+        url: '/select-player',
+        templateUrl: '/app/player/views/select-player.html'
+    });
+    $stateProvider.state('game.enroll.join-game', {
+        templateUrl: '/app/game/enroll/views/join-game-form.html'
     });
 
     $stateProvider.state('game.edit', {
         url: '/edit',
-
         views: {
-            'content@game': {
-                templateUrl: '/app/game/edit/views/edit-game-layout.html'
-            },
             'header@game': {
                 controller: 'EditGameController',
                 templateUrl: '/app/game/edit/views/edit-game-header.html'
             },
-            'menu@game.edit': {
-                templateUrl: '/app/game/edit/views/edit-game-menu.html'
-            },
-            'middle@game.edit': {
+            'content@game': {
                 controller: 'GameRulesController',
                 templateUrl: '/app/game/views/game-rules.html'
+            },
+            'menu@game': {
+                templateUrl: '/app/game/edit/views/edit-game-menu.html'
             }
         }
     });
+
+    $stateProvider.state('game.edit.options', {
+        url: '/options',
+        views: {
+            'content@game': {
+                controller: 'EditGameOptionsController',
+                templateUrl: '/app/game/edit/views/edit-game-options.html'
+            }
+        }
+    });
+
+    $stateProvider.state('game.edit.enrollment', {
+        url: '/enrollment',
+        views: {
+            'content@game': {
+                controller: 'EditGameEnrollmentController',
+                templateUrl: '/app/game/edit/views/edit-game-enrollment.html'
+            }
+        }
+    });
+
     $stateProvider.state('game.edit.zone', {
         url: '/zone',
 
         views: {
-            'middle@game.edit': {
+            'content@game': {
                 controller: 'EditGameZoneController',
                 templateUrl: '/app/game/edit/views/edit-game-zone.html'
             }
         }
     });
+
     $stateProvider.state('game.edit.events', {
         url: '/events',
 
         views: {
-            'middle@game.edit': {
+            'content@game': {
                 controller: 'EditGameEventsController',
                 templateUrl: '/app/game/edit/views/edit-game-events.html'
             },

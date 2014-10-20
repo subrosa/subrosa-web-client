@@ -3,17 +3,11 @@
 </header>
 
 <div class="row">
-
-  <div class="col-md-3 col-md-offset-2">
-    <h2 data-i18n>Avatar</h2>
-    <div data-ui-view="avatar"></div>
-  </div>
-
   <div class="col-md-4 col-md-offset-1">
     <div>
       <h2>
-        <span data-i18n>Profile</span>
-        <a href="#" data-ng-show="!isState('account.edit-profile')" data-ng-click="go('account.edit-profile')">
+        <span data-i18n>Account Information</span>
+        <a href="#" data-ng-show="!isState('account.edit-information')" data-ng-click="go('account.edit-information')">
           <i class="fa fa-edit small"></i>
         </a>
       </h2>
@@ -53,5 +47,9 @@
 
       <div data-ui-view="security"></div>
     </div>
+  </div>
+
+  <div class="col-md-5 col-md-offset-1">
+    <div data-ui-view="players"></div>
   </div>
 </div>

@@ -9,6 +9,7 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             'lib/jquery/dist/jquery.min.js',
+            'lib/lodash/dist/lodash.js',
             'lib/angular/angular.js',
             'lib/angular-bootstrap/ui-bootstrap.js',
             'lib/angular-bootstrap/ui-bootstrap-tpls.js',

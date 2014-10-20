@@ -3,14 +3,6 @@ describe('Directive: map', function () {
 
     beforeEach(module('subrosa.components.map', 'mocks', '/app/components/map/views/map.html'));
 
-    // Prevent actual dependent leaflet directive from running
-    angular.module("subrosa.components").directive("leaflet", function () {
-        return {
-            priority: 1,
-            terminal: true
-        };
-    });
-
     beforeEach(module(function ($controllerProvider) {
         $controllerProvider.register('MapDirectiveController', function () {});
     }));

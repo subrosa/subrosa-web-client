@@ -1,4 +1,4 @@
-describe('Factory: account', function () {
+describe('Factory: Account', function () {
     var $httpBackend, Account, account;
 
     beforeEach(module('subrosa.account'));
