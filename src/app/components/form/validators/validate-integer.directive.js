@@ -11,16 +11,14 @@ angular.module('subrosa.components.form').directive('validateInteger', function 
     return {
         restrict: 'A',
         require: 'ngModel',
-        link: function (scope, element, attrs, ctrl) {
-            ctrl.$parsers.unshift(function (viewValue) {
-                if (INTEGER_REGEXP.test(viewValue)) {
-                    ctrl.$setValidity('integer', true);
-                    return viewValue;
-                } else {
-                    ctrl.$setValidity('integer', false);
-                    return undefined;
+        link: function (scope, element, attrs, ngModel) {
+            ngModel.$validators.integer = function (value) {
+                var valid = false;
+                if (INTEGER_REGEXP.test(value)) {
+                    valid = true;
                 }
-            });
+                return valid;
+            };
         }
     };
 });

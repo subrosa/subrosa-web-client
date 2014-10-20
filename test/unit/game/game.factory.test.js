@@ -73,15 +73,16 @@ describe('Factory: game', function () {
     });
 
     describe('can check for game status', function () {
-        var game,
-            ensureStatusesAreFalse = function (types) {
-                angular.forEach(types, function (type) {
-                    expect(game['is' + type]()).toBe(false);
-                });
-            };
+        var game, ensureStatusesAreFalse;
+
+        ensureStatusesAreFalse = function (types) {
+            angular.forEach(types, function (type) {
+                expect(game['is' + type]()).toBe(false);
+            });
+        };
 
         beforeEach(function () {
-            game = gameFactory.get(1);
+            game = gameFactory.get({id: 1});
         });
 
         it('of draft', function () {
