@@ -12,7 +12,7 @@ describe('Directive: uploadSingleImage', function () {
     }));
 
     beforeEach(function () {
-        element = angular.element('<div upload-single-image="\'/subrosa/v1/upload\'"></div>');
+        element = angular.element('<div upload-single-image></div>');
         $compile(element)($scope);
         $scope.$digest();
         elementScope = element.isolateScope();
@@ -39,5 +39,18 @@ describe('Directive: uploadSingleImage', function () {
         $scope.$digest();
         expect(element.find('.progress').length).toBe(1);
         expect(element.find('.progress-bar').length).toBe(1);
+    });
+
+    it("defaults the upload URL to /subrosa/v1/user/image", function () {
+        expect(elementScope.uploadUrl).toBe('/subrosa/v1/user/image');
+    });
+
+    it("accepts an upload URL", function () {
+        element = angular.element('<div upload-single-image="\'/upload\'"></div>');
+        $compile(element)($scope);
+        $scope.$digest();
+        elementScope = element.isolateScope();
+
+        expect(elementScope.uploadUrl).toBe('/upload');
     });
 });
