@@ -7,7 +7,7 @@
  */
 angular.module('subrosa', [
     'subrosa.account',
-    'subrosa.forms',
+    'subrosa.components.form',
     'subrosa.game',
     'subrosa.notifications',
     'subrosa.security',
@@ -28,7 +28,6 @@ angular.module('subrosa', [
  *  Used for establishing application wide configuration.
  */
 angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
-
     $stateProvider.state('home', {
         url: '/'
     });
@@ -51,10 +50,11 @@ angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
  */
 angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
+    $rootScope.go = $state.go;
+    $rootScope.href = $state.href;
     $rootScope.$stateParams = $stateParams;
     $rootScope.stateIncludes = $state.includes;
     $rootScope.transitionTo = $state.transitionTo;
-    $rootScope.go = $state.go;
 
     $rootScope.isState = function (stateName) {
         return $state.is(stateName);
@@ -70,4 +70,3 @@ angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
         }
     );
 });
-

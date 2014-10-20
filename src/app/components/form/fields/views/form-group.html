@@ -1,0 +1,7 @@
+<!-- ng-form is necessary because we have to use strings for form names -->
+<div data-ng-form name="form">
+  <div class="form-group" data-input-feedback="form.formGroup">
+    <div data-ng-include="templateUrl"></div>
+    <p class="help-block">{{ field.description }}</p>
+  </div>
+</div>

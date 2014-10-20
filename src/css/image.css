@@ -1,10 +1,15 @@
 .drop {
-    border-color: #f1f1f1;
+    border-color: #868686;
     border-radius: 5px;
     border-style: dashed;
     border-width: 2px;
     height: 200px;
     margin: 10px;
+}
+
+/* Ensure FlowJS hidden file input does not have width */
+.drop input[type="file"] {
+    width: 0;
 }
 
 /* A ghost element, nudged to maintain perfect centering */
@@ -47,13 +52,14 @@
     width: 22px;
 }
 
-.avatar-change {
+.avatar-overlay {
     background-color: #4E90FE;
     background-color: rgba(78,144,254,.7);
     bottom: 0;
     color: #ffffff;
     padding: 7px 0;
     position: absolute;
+    text-align: center;
 }
 
 .thumbnail button {

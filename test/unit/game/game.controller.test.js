@@ -1,5 +1,5 @@
 describe('Controller: GameController', function () {
-    var $scope, MockGameFactory;
+    var $scope, $state, MockGameFactory;
 
     beforeEach(module('subrosa.game'));
 
@@ -25,14 +25,30 @@ describe('Controller: GameController', function () {
 
     beforeEach(inject(function ($controller, $rootScope) {
         $scope = $rootScope.$new();
+        $state = {go: function () {}};
         $scope.$stateParams = {gameUrl: 'raleigh-wars'};
-        $controller('GameController', {$scope: $scope});
+        $controller('GameController', {$scope: $scope, $state: $state});
     }));
 
     it('sets the game on the $scope by calling the Game Service.', function () {
         expect(MockGameFactory.get).toHaveBeenCalledWith({url: 'raleigh-wars'});
         expect($scope.game.name).toBe(MockGameFactory.get().name);
         expect($scope.game.url).toBe(MockGameFactory.get().url);
+    });
+
+    describe("transitions to a page where players can join the game", function () {
+        it("if the game requires a password", function () {
+            spyOn($state, 'go');
+            $scope.game.requiresPassword = true;
+            $scope.joinGame();
+            expect($state.go).toHaveBeenCalledWith('game.enroll.enter-password');
+        });
+
+        it("if the game does not require a password", function () {
+            spyOn($state, 'go');
+            $scope.joinGame();
+            expect($state.go).toHaveBeenCalledWith('game.enroll');
+        });
     });
 
     describe('allows the publishing of a game.', function () {

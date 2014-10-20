@@ -9,7 +9,7 @@
              alt="Game Badge for {{ game.name }}" data-i18n-attrs="alt"/>
         <i class="avatar-lg fa fa-puzzle-piece center-block" data-ng-hide="game.image"></i>
         <div class="caption">
-          <button class="btn btn-default center-block" data-i18n>Edit Image</button>
+          <button type="button" class="btn btn-default center-block" data-i18n>Edit Image</button>
         </div>
       </div>
 
@@ -35,17 +35,15 @@
       <div class="form-group">
         <label for="registrationPeriod" class="col-md-4 control-label" data-i18n>Registration Period</label>
         <div class="col-md-7" data-ng-class="{'has-error': gameForm.registrationStart.$error}">
-          
           <p id="registrationPeriod" class="form-control-static">
             <span data-ng-show="game.registrationStart && game.registrationEnd">{{ game.registrationStart | date:'medium' }} - {{ game.registrationEnd | date:'medium' }}</span>
             <span class="text-danger" data-ng-hide="game.registrationStart && game.registrationEnd" data-i18n>The Registration Period has not been selected.</span>
-            <a href="#editGameEvents" data-ng-click="goToGameEvents()"> <i class="fa fa-edit"></i></a>
+            <div>
+              <a href="#editGameEvents" data-ng-click="goToGameEvents()">
+                <i class="fa fa-edit"></i>
+              </a>
+            </div>
           </p>
-          
-          <input name="registrationStart" ng-model="game.registrationStart" type="hidden"/>
-          <input name="registrationEnd" ng-model="game.registrationEnd" type="hidden"/>
-          <p data-input-messages="gameForm.registrationStart"></p>
-          <p data-ng-if="!gameForm.registrationStart.$error" data-input-messages="gameForm.registrationEnd"></p>
         </div>
       </div>
 
@@ -55,20 +53,19 @@
           <p id="gameDuration" class="form-control-static">
             <span data-ng-show="game.gameStart && game.gameEnd">{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</span>
             <span class="text-danger" data-ng-hide="game.gameStart && game.gameEnd" data-i18n>The Game Duration has not been set.</span>
-            <a href="#editGameEvents" data-ng-click="go('game.edit.events')"> <i class="fa fa-edit"></i></a>
+            <div>
+              <a href="#editGameEvents" data-ng-click="goToGameEvents()">
+                <i class="fa fa-edit"></i>
+              </a>
+            </div>
           </p>
-
-          <input name="gameStart" ng-model="game.gameStart" type="hidden"/>
-          <input name="gameEnd" ng-model="game.gameStart" type="hidden"/>
-          <p data-input-messages="gameForm.gameStart"></p>
-          <p data-ng-if="!gameForm.gameStart.$error" data-input-messages="gameForm.gameEnd"></p>
         </div>
       </div>
 
       <div class="form-group" data-input-feedback="gameForm.ordnance">
         <label for="ordnance" class="col-md-4 control-label" data-i18n>Ordnance</label>
         <div class="col-md-7">
-          <input id="ordnance" type="text" class="form-control" data-ng-model="game.ordnance"/>
+          <input id="ordnance" name="ordnance" type="text" class="form-control" data-ng-model="game.ordnance"/>
         </div>
       </div>
 
@@ -83,55 +80,18 @@
       </div>
 
       <div class="form-group">
-        <div class="col-md-offset-4 col-md-10">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" data-ng-model="game.teamGame"/>Team Game
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group" data-ng-show="game.teamGame" data-input-feedback="gameForm.maximumTeamSize">
-        <label for="maximumTeamSize" class="col-md-4 control-label" data-i18n>Maximum Team Size</label>
-        <div class="col-md-7">
-          <input id="maximumTeamSize" name="maximumTeamSize" type="number" class="form-control"
-                 min="2" data-ng-model="game.maximumTeamSize" data-ng-required="game.teamGame"/>
-        </div>
-      </div>
-
-      <div class="form-group" data-input-feedback="gameForm.price">
-        <label for="price" class="col-md-4 control-label" data-i18n>Price (USD)</label>
-        <div class="col-md-7">
-          <input id="price" name="price" type="number" min="0" class="form-control" data-ng-model="game.price"/>
-        </div>
-      </div>
-
-      <div class="form-group" data-input-feedback="gameForm.minimumAge">
-        <label for="minimumAge" class="col-md-4 control-label" data-i18n>Minimum Age</label>
-        <div class="col-md-7">
-          <input id="minimumAge" name="minimumAge" type="number" min="13" class="form-control"
-                 data-ng-model="game.minimumAge" data-validate-integer/>
-        </div>
-      </div>
-
-      <div class="form-group" data-input-feedback="gameForm.password">
-        <label for="gamePassword" class="col-md-4 control-label" data-i18n>Password to Join</label>
-        <div class="col-md-7">
-          <input id="gamePassword" name="password" type="password" class="form-control" data-ng-model="game.password"/>
-        </div>
-      </div>
-
-      <div class="form-group">
         <div class="col-md-offset-4 col-md-9">
           <button type="submit" class="btn btn-primary"
-                  data-ng-disabled="gameForm.$invalid"
-                  data-i18n>Save</button>
-          <button class="btn btn-default"
+                  data-ng-disabled="gameForm.$invalid || saving"
+                  data-i18n>
+            <span data-ng-hide="saving" data-i18n>Save</span>
+            <span data-ng-show="saving" data-i18n>Saving...</span>
+          </button>
+
+          <button type="button" class="btn btn-default"
                   data-ng-click="go('game')"
                   data-ng-disabled="saving">
-            <span data-ng-hide="saving" data-i18n>Back to Display Mode</span>
-            <span data-ng-show="saving" data-i18n>Saving...</span>
+            <span data-i18n>Back to Display Mode</span>
           </button>
         </div>
       </div>

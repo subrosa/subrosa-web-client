@@ -11,7 +11,7 @@
  *   {{ 'ASSASSIN' | gameType }} will produce the translated string "Assassins".
  */
 angular.module('subrosa.game').filter('gameType', function (i18n) {
-    var GAME_TYPES = {
+    const GAME_TYPES = {
         ASSASSIN: i18n('Assassins')
     };
 

@@ -39,8 +39,6 @@ angular.module('subrosa.game').controller('EditGameEventsController', function (
     ];
 
     $scope.game.$promise.then(function (game) {
-        $scope.editable = game.isDraft();
-
         $scope.options = {
             eventMargin: 10,  // minimal margin between events
             minHeight: 200,

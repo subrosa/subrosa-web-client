@@ -1,0 +1,27 @@
+<div class="row">
+  <h2 data-i18n>Select your Player</h2>
+
+  <div class="col-sm-6 col-md-4" data-ng-repeat="existingPlayer in account.players">
+    <div class="thumbnail">
+      <a href="#" class="text-center" data-ng-click="setPlayer(existingPlayer)"
+         data-avatar="existingPlayer" data-size="md" data-show-username="true">
+      </a>
+      <button class="btn btn-default btn-sm center-block"
+              data-ng-click="editPlayer(existingPlayer)">
+        <span data-i18n>Edit Player</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="avatar-container text-center">
+        <img class="avatar-md" src="/img/placeholder/new-player.png" alt="Default Avatar" data-i18n-attrs="alt"/>
+      </div>
+      <button class="btn btn-default btn-sm center-block"
+              data-ng-click="newPlayer()">
+        <span data-i18n>New Player</span>
+      </button>
+    </div>
+  </div>
+</div>

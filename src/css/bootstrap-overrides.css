@@ -1,0 +1,42 @@
+/* Bootstrap 3 overrides */
+html .navbar-brand {
+    padding: 12px;
+}
+
+html .navbar-nav.navbar-right:last-child {
+    margin-right: 0;
+}
+
+html .navbar-toggle {
+    height: 42px;
+}
+
+html .page-header {
+    margin-top: 20px;
+}
+
+table[data-timepicker] tr:first-of-type,
+table[data-timepicker] tr:last-of-type {
+    display: none;
+}
+
+html .dl-horizontal dt {
+    text-align: left;
+}
+
+html .dl-horizontal dt,
+html .dl-horizontal dd {
+    padding-bottom: 10px;
+}
+
+html address {
+    margin-bottom: 0;
+}
+
+html .alert {
+    margin: 20px;
+}
+
+html .form-horizontal .checkbox-inline {
+    margin: 0 10px 0 0;
+}

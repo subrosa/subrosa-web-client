@@ -1,20 +1,70 @@
-<header class="row row-centered page-header" data-ng-show="game.isDraft()">
-  <div class="col-sm-8 col-centered">
-    <p class="text-center alert alert-info" data-i18n>
-      This game is in draft mode and will not be displayed in the list of games or able to be joined until it is published.
-    </p>
+<div class="jumbotron" data-ng-show="game.isDraft()">
+  <h2 data-translate>A Work in Progress</h2>
 
-    <p data-ng-show="confirmPublish" class="text-center alert alert-warning" data-i18n>
-      Are you sure?  Once you click the button below your game will be displayed to the public and able to be joined.  There is no going back.
-    </p>
-    <button class="btn btn-primary center-block" data-ng-hide="confirmPublish"
-            data-ng-click="confirmPublish = true"
-            data-i18n>Publish Game</button>
-    <button class="btn btn-primary center-block" data-ng-show="confirmPublish"
-            data-ng-click="publishGame()"
-            data-i18n>Do it.</button>
-  </div>
+  <p data-i18n>
+    This game is in draft mode and will not be displayed in the list of games or able to be joined until it is published.
+  </p>
+
+  <p data-ng-show="confirmPublish" class="alert alert-warning" data-i18n>
+    Are you sure?  Once you click the button below your game will be displayed to the public and able to be joined.  There is no going back.
+  </p>
+  <button class="btn btn-primary btn-lg" data-ng-hide="confirmPublish"
+          data-ng-click="confirmPublish = true"
+          data-i18n>Publish Game</button>
+  <button class="btn btn-primary btn-lg" data-ng-show="confirmPublish"
+          data-ng-click="publishGame()"
+          data-i18n>Do it.</button>
+</div>
+
+<a class="visible-xs visible-sm" data-ng-hide="collapseHeader" data-ng-click="collapseHeader = true;">Hide</a>
+<header class="page-header" data-ui-view="header" data-collapse="collapseHeader"></header>
+<header class="page-header visible-xs visible-sm" data-ng-show="collapseHeader">
+  <a data-ng-click="collapseHeader = false;"><h1>{{ game.name }}</h1></a>
 </header>
 
-<header class="page-header" data-ui-view="header"></header>
-<section class="row" data-ui-view="content"></section>
+<div class="jumbotron"
+     data-ng-show="game.isRegistration() && !stateIncludes('game.enroll') && !stateIncludes('game.edit')">
+  <h2 data-translate>Want to join this game?</h2>
+
+  <div data-ng-hide="game.requiresPassword">
+    <p data-translate>
+      The game {{ game.name }} is accepting players, click the button below to join this game.
+    </p>
+    <p>
+      <a class="btn btn-primary btn-lg" role="button" data-ng-click="joinGame()">Join Game</a>
+    </p>
+  </div>
+
+  <div data-ng-show="game.requiresPassword">
+    <p data-translate>
+      The game {{ game.name }} is accepting players but requires a password in order to join.  Please fill in the password below and click join.
+    </p>
+
+    <div class="row">
+      <form name="gamePasswordForm" role="form" class="col-md-3" data-ng-submit="joinGame()">
+        <div class="form-group">
+          <label for="gamePassword" data-translate>Password for {{ game.name }}</label>
+          <input id="gamePassword" name="name" type="password" class="form-control" data-ng-model="gamePassword" required autofocus/>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-lg" data-ng-disabled="!gamePasswordForm.$valid"
+                  data-translate>Join Game</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <nav data-ui-view="menu"></nav>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div data-ui-view="content"></div>
+  </div>
+</div>

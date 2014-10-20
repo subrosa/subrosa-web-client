@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- build:css /css/styles.css -->
+  <link rel="stylesheet" href="/lib/angular-toggle-switch/angular-toggle-switch.css">
+  <link rel="stylesheet" href="/lib/angular-toggle-switch/angular-toggle-switch-bootstrap.css">
   <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="/lib/chap-links-timeline/timeline.css">
   <link rel="stylesheet" href="/lib/chap-links-timeline/timeline-theme.css">
@@ -24,11 +26,11 @@
   <link rel="stylesheet" href="/lib/leaflet.markercluster/dist/MarkerCluster.css">
   <link rel="stylesheet" href="/lib/leaflet.markercluster/dist/MarkerCluster.Default.css">
 
+  <link rel="stylesheet" href="/css/bootstrap-overrides.css">
   <link rel="stylesheet" href="/css/game.css">
   <link rel="stylesheet" href="/css/image.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/map.css">
-  <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/timeline.css">
   <link rel="stylesheet" href="/css/typography.css">
   <!-- endbuild -->
@@ -63,16 +65,12 @@
                 data-ng-if="isAuthenticated()"
                 data-ng-click="collapsed.right = !collapsed.right">
           <span class="sr-only" data-i18n>Toggle account navigation</span>
-          <a data-ui-sref="account.edit-avatar">
-            <div data-avatar="user" data-size="xs"></div>
-          </a>
+          <div data-avatar="user" data-size="xs"></div>
         </button>
 
         <button class="navbar-toggle" type="button" data-ng-click="collapsed.left = !collapsed.left">
           <span class="sr-only" data-i18n>Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <i class="fa fa-gamepad"></i>
         </button>
 
         <a data-ui-sref="home" class="navbar-brand">
@@ -122,7 +120,7 @@
                 <h4>{{ user.username }}</h4>
                 <span>{{ user.email }}</span>
                 <div>
-                  <a  data-ui-sref="account" data-i18n>Account</a>
+                  <a data-ui-sref="account" data-i18n>Account</a>
                   -
                   <a data-ui-sref="privacy" data-i18n>Privacy</a>
                 </div>
@@ -152,16 +150,18 @@
 <script src="//maps.google.com/maps/api/js?sensor=false"></script>
 
 <!-- build:js /js/scripts.js -->
+<script type="text/javascript" src="/lib/lodash/dist/lodash.js"></script>
 <script type="text/javascript" src="/lib/angular/angular.js"></script>
 <script type="text/javascript" src="/lib/angular-animate/angular-animate.js"></script>
 <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
 <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script type="text/javascript" src="/lib/angularjs-geolocation/src/geolocation.js"></script>
 <script type="text/javascript" src="/lib/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
 <script type="text/javascript" src="/lib/angular-messages/angular-messages.js"></script>
 <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
 <script type="text/javascript" src="/lib/angular-sanitize/angular-sanitize.js"></script>
+<script type="text/javascript" src="/lib/angular-toggle-switch/angular-toggle-switch.js"></script>
 <script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
+<script type="text/javascript" src="/lib/angularjs-geolocation/src/geolocation.js"></script>
 <script type="text/javascript" src="/lib/chap-links-timeline/timeline.js"></script>
 <script type="text/javascript" src="/lib/chap-links-timeline/timeline-locales.js"></script>
 <script type="text/javascript" src="/lib/leaflet/dist/leaflet-src.js"></script>
@@ -182,8 +182,15 @@
 <script type="text/javascript" src="/app/account/register-form.controller.js"></script>
 
 <script type="text/javascript" src="/app/components/components.module.js"></script>
+<script type="text/javascript" src="/app/components/form/form.module.js"></script>
+<script type="text/javascript" src="/app/components/form/fields-match.directive.js"></script>
+<script type="text/javascript" src="/app/components/form/form-feedback.directive.js"></script>
+<script type="text/javascript" src="/app/components/form/input-feedback.directive.js"></script>
+<script type="text/javascript" src="/app/components/form/input-messages.directive.js"></script>
+<script type="text/javascript" src="/app/components/form/fields/form-group.directive.js"></script>
+<script type="text/javascript" src="/app/components/form/validators/validate-integer.directive.js"></script>
 <script type="text/javascript" src="/app/components/image/image.module.js"></script>
-<script type="text/javascript" src="/app/components/image/avatar.directive.js"></script>
+<script type="text/javascript" src="/app/components/image/upload-single-image.directive.js"></script>
 <script type="text/javascript" src="/app/components/map/map.module.js"></script>
 <script type="text/javascript" src="/app/components/map/geocoder.service.js"></script>
 <script type="text/javascript" src="/app/components/map/map.directive.js"></script>
@@ -200,13 +207,6 @@
 <script type="text/javascript" src="/app/components/timeline/timeline.directive.js"></script>
 <script type="text/javascript" src="/app/components/timeline/timeline-cache.service.js"></script>
 
-<script type="text/javascript" src="/app/forms/forms.module.js"></script>
-<script type="text/javascript" src="/app/forms/fields-match.directive.js"></script>
-<script type="text/javascript" src="/app/forms/form-feedback.directive.js"></script>
-<script type="text/javascript" src="/app/forms/input-feedback.directive.js"></script>
-<script type="text/javascript" src="/app/forms/input-messages.directive.js"></script>
-<script type="text/javascript" src="/app/forms/validators/validate-integer.directive.js"></script>
-
 <script type="text/javascript" src="/app/game/game.module.js"></script>
 <script type="text/javascript" src="/app/game/event-type.filter.js"></script>
 <script type="text/javascript" src="/app/game/game-list.controller.js"></script>
@@ -214,16 +214,21 @@
 <script type="text/javascript" src="/app/game/game.controller.js"></script>
 <script type="text/javascript" src="/app/game/game-event.factory.js"></script>
 <script type="text/javascript" src="/app/game/game-feed.controller.js"></script>
+<script type="text/javascript" src="/app/game/game-field.filter.js"></script>
 <script type="text/javascript" src="/app/game/game-rules.controller.js"></script>
 <script type="text/javascript" src="/app/game/game-stats.controller.js"></script>
 <script type="text/javascript" src="/app/game/game-type.filter.js"></script>
 <script type="text/javascript" src="/app/game/game-status.filter.js"></script>
 <script type="text/javascript" src="/app/game/game-zone.factory.js"></script>
 <script type="text/javascript" src="/app/game/new-game.controller.js"></script>
+<script type="text/javascript" src="/app/game/game-player.factory.js"></script>
 <script type="text/javascript" src="/app/game/post.factory.js"></script>
 <script type="text/javascript" src="/app/game/edit/edit-game.controller.js"></script>
+<script type="text/javascript" src="/app/game/edit/edit-game-enrollment.controller.js"></script>
 <script type="text/javascript" src="/app/game/edit/edit-game-events.controller.js"></script>
+<script type="text/javascript" src="/app/game/edit/edit-game-options.controller.js"></script>
 <script type="text/javascript" src="/app/game/edit/edit-game-zone.controller.js"></script>
+<script type="text/javascript" src="/app/game/enroll/game-enrollment.controller.js"></script>
 
 <script type="text/javascript" src="/app/i18n/i18n.module.js"></script>
 <script type="text/javascript" src="/app/i18n/i18n.service.js"></script>
@@ -234,11 +239,17 @@
 <script type="text/javascript" src="/app/notifications/error-dictionary.service.js"></script>
 <script type="text/javascript" src="/app/notifications/notification-display.directive.js"></script>
 
+<script type="text/javascript" src="/app/player/player.module.js"></script>
+<script type="text/javascript" src="/app/player/avatar.directive.js"></script>
+<script type="text/javascript" src="/app/player/player.factory.js"></script>
+
 <script type="text/javascript" src="/app/security/security.module.js"></script>
 <script type="text/javascript" src="/app/security/auth-interceptor.service.js"></script>
 <script type="text/javascript" src="/app/security/auth-service.service.js"></script>
 <script type="text/javascript" src="/app/security/auth-retry-queue.service.js"></script>
 <script type="text/javascript" src="/app/security/session.service.js"></script>
+
+<script type="text/javascript" src="/app/utils/utils.module.js"></script>
 <!-- endbuild -->
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

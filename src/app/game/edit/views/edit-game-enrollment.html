@@ -1,0 +1,93 @@
+<h2 data-i18n>Join Game Form</h2>
+
+
+<div class="col-md-5">
+  <h3 data-i18n>Create Field</h3>
+  <form name="addFieldForm"  novalidate data-form-feedback="addFieldForm"
+        data-form-notifications="saveFieldNotifications" data-ng-submit="saveField();">
+
+    <div class="form-group" data-input-feedback="addFieldForm.type">
+      <label for="type" class="control-label"
+             data-i18n>Field Type</label>
+
+        <select id="type" name="type" class="form-control" required
+                data-ng-change="addField(field)" data-ng-model="field.type"
+                data-ng-options="field.id as field.label for field in fieldTypes">
+          <option></option>
+        </select>
+    </div>
+
+    <div class="form-group" data-ng-show="field.type === 'address'">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" data-ng-model="field.constraints.inGameArea"/>
+          <span data-i18n>Must be in the <a data-ui-sref="game.edit.zone">Game Area</a></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group" data-input-feedback="addFieldForm.name">
+      <label for="name" class="control-label"
+             data-i18n>Name</label>
+
+      <input id="name" name="name" type="text" class="form-control" required data-ng-model="field.name"/>
+      <p class="help-block" data-i18n>The name of the required information, "Home Address" for example.</p>
+    </div>
+
+    <div class="form-group" data-input-feedback="addFieldForm.description">
+      <label for="description" class="control-label" data-i18n>Description</label>
+
+      <textarea id="description" name="description" class="form-control" data-ng-model="field.description"></textarea>
+      <p class="help-block" data-i18n>A description of the field.  This will appear as help text under the input.</p>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-default btn-primary"
+              data-ng-disabled="addFieldForm.$invalid || saving">
+        <span data-ng-hide="saving" data-i18n>Save Field</span>
+        <span data-ng-show="saving" data-i18n>Saving...</span>
+      </button>
+
+      <button type="button" class="btn btn-default btn-default"
+              data-ng-click="removeField(field)">
+        <span data-ng-hide="saving" data-i18n>Cancel</span>
+        <span data-ng-show="saving" data-i18n>Saving...</span>
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="col-md-6 col-md-offset-1">
+  <p class="alert alert-info" data-ng-hide="game.playerInfo.length > 0" data-i18n>
+    Create the form your players will use to join the game.
+  </p>
+
+  <div data-notification-display="fieldNotifications"></div>
+
+  <form name="joinGamePreviewForm" role="form"
+        data-ng-show="game.playerInfo.length > 0"
+        data-ng-submit="fakeEnroll()">
+    <h3 data-i18n>Join {{ game.name }}</h3>
+
+    <div data-ng-repeat="field in game.playerInfo">
+      <span class="pull-right">
+        <a href="" data-ng-click="editField(field)">
+          <i class="fa fa-edit"></i>
+        </a>
+        <a href="" data-ng-click="removeField(field)">
+          <i class="fa fa-remove"></i>
+        </a>
+      </span>
+
+      <div data-form-group="field"></div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-default btn-primary"
+              data-ng-disabled="joinGamePreviewForm.$invalid">
+        <span data-i18n>Join Game</span>
+      </button>
+    </div>
+  </form>
+</div>
+

@@ -7,8 +7,8 @@
  */
 angular.module('subrosa.account', [
     'ngResource',
+    'subrosa.components.form',
     'subrosa.components.image',
-    'subrosa.forms',
     'subrosa.security',
     'ui.bootstrap.modal',
     'ui.router'
@@ -32,8 +32,8 @@ angular.module('subrosa.account').config(function ($stateProvider) {
                 controller: 'AccountController',
                 templateUrl: '/app/account/views/account.html'
             },
-            'avatar@account': {
-                templateUrl: '/app/account/views/account-avatar.html'
+            'players@account': {
+                templateUrl: '/app/player/views/select-player.html'
             },
             'profile@account': {
                 templateUrl: '/app/account/views/account-profile.html'
@@ -41,20 +41,11 @@ angular.module('subrosa.account').config(function ($stateProvider) {
         }
     });
 
-    $stateProvider.state('account.edit-avatar', {
-        url: '/edit/avatar',
-        views: {
-            'avatar@account': {
-                templateUrl: '/app/account/edit/views/edit-account-avatar.html'
-            }
-        }
-    });
-
-    $stateProvider.state('account.edit-profile', {
+    $stateProvider.state('account.edit-information', {
         url: '/edit',
         views: {
             'profile@account': {
-                templateUrl: '/app/account/edit/views/edit-account-profile.html'
+                templateUrl: '/app/account/edit/views/edit-account-information.html'
             }
         }
     });
