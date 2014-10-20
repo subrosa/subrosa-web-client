@@ -26,6 +26,6 @@ describe('Directive: validateInteger', function () {
 
     it("Does not set an error if value is an integer", function () {
         $scope.myForm.integerValue.$setViewValue('1');
-        expect($scope.myForm.integerValue.$error.integer).toBe(false);
+        expect($scope.myForm.integerValue.$error.integer).toBe(undefined);
     });
 });
