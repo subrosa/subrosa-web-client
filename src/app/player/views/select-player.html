@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" data-ng-hide="edit">
   <h2 data-i18n>Select your Player</h2>
 
   <div class="col-sm-6 col-md-4" data-ng-repeat="existingPlayer in account.players">
@@ -24,4 +24,44 @@
       </button>
     </div>
   </div>
+</div>
+
+<div class="row" data-ng-show="edit">
+  <h3 data-i18n>Get your Player Ready</h3>
+
+  <form name="editPlayerForm" role="form" novalidate
+        data-form-feedback="editPlayerForm"
+        data-form-notifications="editPlayerNotifications"
+        data-ng-submit="savePlayer(player)">
+
+    <div class="form-group" data-input-feedback="editPlayerForm.username">
+      <label for="username" class="control-label" data-i18n>Username</label>
+      <input id="username" name="username" type="text" class="form-control" required data-ng-model="player.username"/>
+      <p class="help-block" data-i18n>How you are known to other players.</p>
+    </div>
+
+
+    <div data-ng-hide="editAvatar" class="thumbnail">
+      <a href="" data-ng-click="editAvatar = true;">
+        <div class="text-center" data-avatar="player" data-size="lg" data-editable="true"></div>
+      </a>
+      <div class="caption">
+        <p data-i18n>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
+      </div>
+    </div>
+
+    <div data-ng-show="editAvatar" data-ng-include="'/app/player/views/edit-avatar.html'"></div>
+
+    <button type="submit" class="btn btn-primary"
+            data-ng-disabled="editPlayerForm.$invalid || saving">
+      <span data-ng-hide="saving" data-i18n>Save Player</span>
+      <span data-ng-show="saving" data-i18n>Saving...</span>
+    </button>
+
+    <button type="button" class="btn btn-default"
+            data-ng-click="cancelEditPlayer()">
+      <span data-ng-hide="saving" data-i18n>Cancel</span>
+      <span data-ng-show="saving" data-i18n>Saving...</span>
+    </button>
+  </form>
 </div>

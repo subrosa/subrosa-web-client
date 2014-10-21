@@ -97,15 +97,8 @@ angular.module('subrosa.game').config(function ($stateProvider) {
             }
         }
     });
-    $stateProvider.state('game.enroll.edit-player', {
-        url: '/edit-player',
-        templateUrl: '/app/player/views/edit-player.html'
-    });
-    $stateProvider.state('game.enroll.select-player', {
-        url: '/select-player',
-        templateUrl: '/app/player/views/select-player.html'
-    });
-    $stateProvider.state('game.enroll.join-game', {
+
+    $stateProvider.state('game.enroll.join', {
         templateUrl: '/app/game/enroll/views/join-game-form.html'
     });
 

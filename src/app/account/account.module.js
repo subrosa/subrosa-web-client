@@ -9,6 +9,7 @@ angular.module('subrosa.account', [
     'ngResource',
     'subrosa.components.form',
     'subrosa.components.image',
+    'subrosa.player',
     'subrosa.security',
     'ui.bootstrap.modal',
     'ui.router'
@@ -31,9 +32,6 @@ angular.module('subrosa.account').config(function ($stateProvider) {
             '@': {
                 controller: 'AccountController',
                 templateUrl: '/app/account/views/account.html'
-            },
-            'players@account': {
-                templateUrl: '/app/player/views/select-player.html'
             },
             'profile@account': {
                 templateUrl: '/app/account/views/account-profile.html'
