@@ -4,7 +4,6 @@
 //TODO get cdnify working with CDN
 //TODO add ngdocs:  https://github.com/m7r/grunt-ngdocs
 
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
@@ -67,7 +66,6 @@ module.exports = function (grunt) {
                                 '!^/(css|app|img|photos|lib|subrosa|template).+$ /index.html'
                             ]),
                             proxySnippet,
-                            lrSnippet,
                             mountFolder(connect, subrosaConfig.src)
                         ];
                     }
