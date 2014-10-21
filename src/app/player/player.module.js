@@ -5,4 +5,8 @@
  * @description
  *  Module for player related functionality.
  */
-angular.module('subrosa.player', ['ngResource', 'subrosa.account']);
+angular.module('subrosa.player', [
+    'ngResource',
+    'subrosa.account',
+    'ui.router'
+]);
