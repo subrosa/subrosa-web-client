@@ -28,19 +28,6 @@ module.exports = function (grunt) {
         subrosa: subrosaConfig,
 
         // Dev server
-        watch: {
-            all: {
-                options: { livereload: true },
-                files: [
-                    '<%= subrosa.src %>/index.html',
-                    '<%= subrosa.src %>/app/**/*.html',
-                    '<%= subrosa.src %>/css/**/*.css',
-                    '<%= subrosa.src %>/app/**/*.js',
-                    '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
-                ]
-            }
-        },
-
         connect: {
             proxies: [
                 {
@@ -58,6 +45,7 @@ module.exports = function (grunt) {
             livereload: {
                 options: {
                     port: 9000,
+                    livereload: true,
                     // Change this to '0.0.0.0' to access the server from outside.
                     hostname: 'localhost',
                     middleware: function (connect) {
@@ -85,6 +73,18 @@ module.exports = function (grunt) {
         open: {
             server: {
                 url: 'http://localhost:<%= connect.livereload.options.port %>'
+            }
+        },
+        watch: {
+            all: {
+                options: { livereload: true },
+                files: [
+                    '<%= subrosa.src %>/index.html',
+                    '<%= subrosa.src %>/app/**/*.html',
+                    '<%= subrosa.src %>/css/**/*.css',
+                    '<%= subrosa.src %>/app/**/*.js',
+                    '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
+                ]
             }
         },
 
