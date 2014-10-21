@@ -22,7 +22,7 @@ describe('Directive: avatar', function () {
     });
 
     it("displays an avatar is one is present", function () {
-        var expectedImg = 'pic.jpg';
+        var expectedImg = '/img/placeholder/user.png';
         $scope.player.images.AVATAR = expectedImg;
         compileDirective();
         expect(image.attr('src')).toBe(expectedImg);
