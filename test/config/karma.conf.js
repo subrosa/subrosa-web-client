@@ -8,9 +8,6 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            // necessary in order to prevent 404 from <img src> in tests
-            {pattern: 'img/placeholder/user.png', watched: false, included: false, served: true},
-
             'lib/jquery/dist/jquery.min.js',
             'lib/lodash/dist/lodash.js',
             'lib/angular/angular.js',
@@ -32,6 +29,11 @@ module.exports = function (config) {
             'app/**/*.html',
             '../test/unit/**/*.test.js'
         ],
+
+        // necessary in order to prevent 404 from <img src> in tests
+        proxies:  {
+            '/img/': 'img/'
+        },
 
         // list of files to exclude
         exclude: [],
