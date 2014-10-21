@@ -18,15 +18,6 @@ describe('Controller: AccountController', function () {
         };
     }));
 
-    it("gets the current user from the auth service and puts it on the scope", function () {
-        spyOn(authService, 'getCurrentUser').andCallThrough();
-
-        $controller('AccountController', {$scope: $scope, authService: authService, Account: accountFactory});
-
-        expect(authService.getCurrentUser).toHaveBeenCalled();
-        expect($scope.account).toBe(account);
-    });
-
     describe("performs a save of the account", function () {
         beforeEach(function () {
             $controller('AccountController', {$scope: $scope, authService: authService, Account: accountFactory});
@@ -45,5 +36,24 @@ describe('Controller: AccountController', function () {
             expect($scope.account.$update).toHaveBeenCalled();
             expect($scope.notifications.code).toBe(1000);
         });
+    });
+
+    it("allows setting the current player", function () {
+        var player = {id: 1, name: 'walden'};
+        $controller('AccountController', {$scope: $scope, authService: authService, Account: accountFactory});
+        spyOn($scope, 'saveAccount');
+
+        $scope.setPlayer(player);
+
+        expect($scope.saveAccount).toHaveBeenCalled();
+    });
+
+    it("gets the current user from the auth service and puts it on the scope", function () {
+        spyOn(authService, 'getCurrentUser').andCallThrough();
+
+        $controller('AccountController', {$scope: $scope, authService: authService, Account: accountFactory});
+
+        expect(authService.getCurrentUser).toHaveBeenCalled();
+        expect($scope.account).toBe(account);
     });
 });
