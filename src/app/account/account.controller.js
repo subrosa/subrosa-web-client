@@ -26,7 +26,7 @@ angular.module('subrosa.account').controller('AccountController', function ($sco
     };
 
     $scope.setPlayer = function (player) {
-        $scope.account.player = player;
+        $scope.account.currentPlayer = player;
         $scope.saveAccount();
     };
 
