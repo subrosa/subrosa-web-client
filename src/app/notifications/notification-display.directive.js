@@ -7,7 +7,7 @@
  */
 angular.module('subrosa.notifications').directive('notificationDisplay', function () {
     return {
-        restrict: 'A',
+        restrict: 'AE',
         templateUrl: '/app/notifications/views/notification-display.html',
         scope: {
             notifications: '=notificationDisplay'

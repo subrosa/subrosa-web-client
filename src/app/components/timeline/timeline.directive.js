@@ -26,7 +26,7 @@
 angular.module('subrosa.components.timeline').directive('timeline', function ($locale, linksTimeline, timelineCache) {
 
         return {
-            restrict: 'A',
+            restrict: 'AE',
             scope: {
                 id: '@timeline',
                 model: '=timelineData',

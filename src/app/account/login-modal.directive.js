@@ -9,7 +9,7 @@
  */
 angular.module('subrosa.account').directive('loginModal', function ($modal) {
     return {
-        restrict: 'A',
+        restrict: 'AE',
         replace: true,
         link: function (scope) {
             scope.openModal = function (user) {

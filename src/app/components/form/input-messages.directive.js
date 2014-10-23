@@ -11,7 +11,7 @@
  */
 angular.module('subrosa.components.form').directive('inputMessages', function () {
     return {
-        restrict: 'A',
+        restrict: 'AE',
         replace: true,
         templateUrl: '/app/components/form/views/input-messages.html',
         scope: {

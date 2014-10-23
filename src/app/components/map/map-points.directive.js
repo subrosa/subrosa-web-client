@@ -15,7 +15,7 @@ function ($compile, $http, $timeout, leaflet, leafletData) {
     const MIN_POPUP_WIDTH = 325;
 
     return {
-        restrict: 'A',
+        restrict: 'AE',
         require: '^map',
         transclude: true,
         scope: {

@@ -7,7 +7,7 @@
  */
 angular.module('subrosa.components.form').directive('formFeedback', function () {
     return {
-        restrict: 'A',
+        restrict: 'AE',
         transclude: true,
         templateUrl: '/app/components/form/views/form-feedback.html',
         scope: {

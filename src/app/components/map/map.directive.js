@@ -11,7 +11,7 @@
  */
 angular.module('subrosa.components.map').directive('map', function (leaflet, leafletData, i18n) {
     return {
-        restrict: 'A',
+        restrict: 'AE',
         transclude: true,
         controller: 'MapDirectiveController',
         templateUrl: '/app/components/map/views/map.html',
