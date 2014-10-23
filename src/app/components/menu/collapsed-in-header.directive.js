@@ -18,7 +18,7 @@ angular.module('subrosa.components.menu').directive('collapsedInHeader', functio
         restrict: 'AE',
         transclude: true,
         scope: {
-            title: '@collapsedInHeader'
+            image: '=headerImage'
         },
         link: function (scope, element, attributes, ctrl, transclude) {
             var menuItems = [];
@@ -28,10 +28,10 @@ angular.module('subrosa.components.menu').directive('collapsedInHeader', functio
                 element.append(clone);
             });
 
-            scope.$watch('title', function (title) {
-                if (title) {
-                    collapsedHeaderMenu.setMenu(scope.title, menuItems);
-                }
+            collapsedHeaderMenu.setMenu(menuItems);
+
+            scope.$watch('image', function (image) {
+                collapsedHeaderMenu.setMenuIcon(image);
             });
         }
     };

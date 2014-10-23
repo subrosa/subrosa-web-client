@@ -10,20 +10,33 @@ describe('Service: collapsedHeaderMenu', function () {
     }));
 
     it('can retrieve menu items', function () {
-        expect(collapsedHeaderMenu.getMenuItems()).toEqual([]);
+        expect(collapsedHeaderMenu.getMenu()).toEqual([]);
     });
 
-    it('can retrieve the menu title', function () {
-        expect(collapsedHeaderMenu.getTitle()).toEqual('');
+    it('can retrieve the menu image', function () {
+        expect(collapsedHeaderMenu.getMenuIcon()).toEqual(null);
     });
 
     it('can add a menu item', function () {
         spyOn($rootScope, '$broadcast');
 
-        collapsedHeaderMenu.setMenu('title', [1, 2]);
+        collapsedHeaderMenu.setMenu([1, 2]);
 
-        expect(collapsedHeaderMenu.getMenuItems()).toEqual([1, 2]);
-        expect(collapsedHeaderMenu.getTitle()).toEqual('title');
+        expect(collapsedHeaderMenu.getMenu()).toEqual([1, 2]);
+        expect($rootScope.$broadcast).toHaveBeenCalledWith('menu-items-changed');
+
+        collapsedHeaderMenu.setMenu([3, 4]);
+
+        expect(collapsedHeaderMenu.getMenu()).toEqual([3, 4]);
+        expect($rootScope.$broadcast).toHaveBeenCalledWith('menu-items-changed');
+    });
+
+    it('can add a menu image', function () {
+        var image = {name: 'image.png'};
+        spyOn($rootScope, '$broadcast');
+
+        collapsedHeaderMenu.setMenuIcon(image);
+
         expect($rootScope.$broadcast).toHaveBeenCalledWith('menu-items-changed');
     });
 });
