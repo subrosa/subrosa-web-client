@@ -4,7 +4,7 @@ describe('Filter:accountDisplayName', function () {
     beforeEach(module('subrosa.account'));
 
     beforeEach(module(function ($provide) {
-        $provide.value('i18n',  function (a) {return a; });
+        $provide.value('i18n', function (a) {return a; });
     }));
 
     beforeEach(inject(function ($filter) {

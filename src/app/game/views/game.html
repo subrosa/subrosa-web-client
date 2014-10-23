@@ -16,7 +16,10 @@
           data-i18n>Do it.</button>
 </div>
 
-<a class="visible-xs visible-sm" data-ng-hide="collapseHeader" data-ng-click="collapseHeader = true;">Hide</a>
+<a class="visible-xs visible-sm text-center" data-ng-hide="collapseHeader" data-ng-click="collapseHeader = true;">
+  <i class="fa fa-caret-square-o-up fa-2x"></i>
+</a>
+
 <header class="page-header" data-ui-view="header" data-collapse="collapseHeader"></header>
 <header class="page-header visible-xs visible-sm" data-ng-show="collapseHeader">
   <a data-ng-click="collapseHeader = false;"><h1>{{ game.name }}</h1></a>

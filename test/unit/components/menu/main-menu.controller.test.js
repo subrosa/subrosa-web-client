@@ -1,7 +1,7 @@
-describe('Controller: Navigation', function () {
+describe('Controller: MainMenu', function () {
     var $scope, authService, user;
 
-    beforeEach(module('subrosa'));
+    beforeEach(module('subrosa.components.menu'));
 
     beforeEach(inject(function ($controller, $rootScope) {
         user = {id: 1};
@@ -22,8 +22,8 @@ describe('Controller: Navigation', function () {
     }));
 
     it("sets collapsed responsive menu defaults", function () {
-        expect($scope.collapsed.left).toBe(true);
-        expect($scope.collapsed.right).toBe(true);
+        expect($scope.collapsed.main).toBe(true);
+        expect($scope.collapsed.account).toBe(true);
     });
 
     it("gets the current user from the auth service and puts it on the scope", function () {

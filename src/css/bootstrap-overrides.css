@@ -40,3 +40,10 @@ html .alert {
 html .form-horizontal .checkbox-inline {
     margin: 0 10px 0 0;
 }
+
+ul .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}

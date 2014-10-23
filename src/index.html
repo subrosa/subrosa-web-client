@@ -57,19 +57,19 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="MainMenuController">
       <div class="navbar-header">
 
-        <button class="navbar-toggle" type="button" data-ng-if="!isAuthenticated()" data-ng-click="openModal()" data-i18n>
-          Login
+        <button class="navbar-toggle" type="button" data-ng-if="!isAuthenticated()" data-ng-click="openModal()">
+          <span data-i18n>Login</span>
           <dialog data-login-modal></dialog>
         </button>
 
         <button class="navbar-toggle" type="button"
                 data-ng-if="isAuthenticated()"
-                data-ng-click="collapsed.right = !collapsed.right">
+                data-ng-click="collapsed.account = !collapsed.account">
           <span class="sr-only" data-i18n>Toggle account navigation</span>
           <div data-avatar="user" data-size="xs"></div>
         </button>
 
-        <button class="navbar-toggle" type="button" data-ng-click="collapsed.left = !collapsed.left">
+        <button class="navbar-toggle" type="button" data-ng-click="collapsed.main = !collapsed.main">
           <span class="sr-only" data-i18n>Toggle navigation</span>
           <i class="fa fa-gamepad"></i>
         </button>
@@ -80,35 +80,36 @@
         </a>
       </div>
 
-      <ul class="nav navbar-nav navbar-left navbar-collapse" data-collapse="collapsed.left"
-          data-ng-click="collapsed.left = true">
-        <li data-ui-sref-active="active">
-          <a data-ui-sref="new-game" data-i18n>Create Game</a>
+      <ul class="nav navbar-nav navbar-left navbar-collapse" data-collapse="collapsed.main"
+          data-collapsed-header-dropdown
+          data-ng-click="collapsed.main = true">
+        <li role="presentation" data-ui-sref-active="active">
+          <a role="menuitem" data-ui-sref="new-game" data-i18n>Create Game</a>
         </li>
 
-        <li data-ui-sref-active="active">
-          <a data-ui-sref="games" data-i18n>Find Games</a>
+        <li role="presentation" data-ui-sref-active="active">
+          <a role="menuitem" data-ui-sref="games" data-i18n>Find Games</a>
         </li>
-       </ul>
+      </ul>
 
-      <ul class="nav navbar-nav navbar-right navbar-collapse" data-collapse="collapsed.right"
-          data-ng-click="collapsed.right = true">
+      <ul class="nav navbar-nav navbar-right navbar-collapse" data-collapse="collapsed.account"
+          data-ng-click="collapsed.account = true">
 
-        <li data-ng-if="!isAuthenticated()">
-          <a href="" data-ng-click="openModal()" data-i18n>Login</a>
+        <li role="presentation" data-ng-if="!isAuthenticated()">
+          <a role="menuitem" href="" data-ng-click="openModal()" data-i18n>Login</a>
           <dialog data-login-modal></dialog>
         </li>
 
-        <li class="hidden-md hidden-lg" data-ng-if="isAuthenticated()">
-          <a data-ui-sref="account" data-i18n>Account</a>
+        <li role="presentation" class="hidden-md hidden-lg" data-ng-if="isAuthenticated()">
+          <a role="menuitem" data-ui-sref="account" data-i18n>Account</a>
         </li>
 
-        <li class="hidden-md hidden-lg" data-ng-if="isAuthenticated()">
-          <a data-ng-click="logout()" data-i18n>Logout</a>
+        <li role="presentation" class="hidden-md hidden-lg" data-ng-if="isAuthenticated()">
+          <a role="menuitem" data-ng-click="logout()" data-i18n>Logout</a>
         </li>
 
-        <li class="hidden-sm hidden-xs" data-ng-if="isAuthenticated()">
-          <div class="dropdown-toggle" data-avatar="user" data-size="sm"></div>
+        <li role="presentation" class="hidden-sm hidden-xs" data-ng-if="isAuthenticated()">
+          <div role="menu" class="dropdown-toggle" data-avatar="user" data-size="sm"></div>
           <ul class="dropdown-menu" role="menu">
             <li class="user-menu">
               <div>
@@ -172,7 +173,6 @@
 <script type="text/javascript" src="/lib/ng-flow/dist/ng-flow-standalone.js"></script>
 
 <script type="text/javascript" src="/app/subrosa.module.js"></script>
-<script type="text/javascript" src="/app/main-menu.controller.js"></script>
 
 <script type="text/javascript" src="/app/account/account.module.js"></script>
 <script type="text/javascript" src="/app/account/account.factory.js"></script>
@@ -200,6 +200,11 @@
 <script type="text/javascript" src="/app/components/map/map-draw-i18n.service.js"></script>
 <script type="text/javascript" src="/app/components/map/map-points.directive.js"></script>
 <script type="text/javascript" src="/app/components/map/map-polygons.directive.js"></script>
+<script type="text/javascript" src="/app/components/menu/menu.module.js"></script>
+<script type="text/javascript" src="/app/components/menu/collapsed-header-menu.service.js"></script>
+<script type="text/javascript" src="/app/components/menu/collapsed-header-dropdown.directive.js"></script>
+<script type="text/javascript" src="/app/components/menu/collapsed-in-header.directive.js"></script>
+<script type="text/javascript" src="/app/components/menu/main-menu.controller.js"></script>
 <script type="text/javascript" src="/app/components/modal/modal.module.js"></script>
 <script type="text/javascript" src="/app/components/modal/modal.controller.js"></script>
 <script type="text/javascript" src="/app/components/modal/modal.directive.js"></script>
