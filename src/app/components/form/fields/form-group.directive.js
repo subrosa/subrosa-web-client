@@ -7,7 +7,7 @@
  */
 angular.module('subrosa.components.form').directive('formGroup', function () {
     return {
-        restrict: 'A',
+        restrict: 'AE',
         templateUrl: '/app/components/form/fields/views/form-group.html',
         scope: {
             field: '=formGroup',

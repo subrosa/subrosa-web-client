@@ -9,7 +9,7 @@ angular.module('subrosa.components.form').directive('validateInteger', function 
     var INTEGER_REGEXP = /^\-?\d+$/;
 
     return {
-        restrict: 'A',
+        restrict: 'AE',
         require: 'ngModel',
         link: function (scope, element, attrs, ngModel) {
             ngModel.$validators.integer = function (value) {

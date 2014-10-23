@@ -10,7 +10,7 @@
  */
 angular.module('subrosa.player').directive('avatar', function () {
     return {
-        restrict: 'A',
+        restrict: 'AE',
         transclude: true,
         templateUrl: '/app/player/views/avatar.html',
         scope: {

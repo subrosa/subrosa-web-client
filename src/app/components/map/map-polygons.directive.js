@@ -13,7 +13,7 @@ angular.module('subrosa.components.map').directive('mapPolygons', function (leaf
     const SHAPE_COLOR = '#E43E59';
 
     return {
-        restrict: 'A',
+        restrict: 'AE',
         require: '^map',
         scope: {
             polygons: '=mapPolygons',

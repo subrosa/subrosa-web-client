@@ -11,7 +11,7 @@
 angular.module('subrosa.components.image').directive('uploadSingleImage', function () {
     const UPLOAD_URL = '/subrosa/v1/user/image';
     return {
-        restrict: 'A',
+        restrict: 'AE',
         transclude: true,
         templateUrl: '/app/components/image/views/upload-single-image.html',
         scope: {

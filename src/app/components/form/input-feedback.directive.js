@@ -28,7 +28,7 @@ angular.module('subrosa.components.form').directive('inputFeedback', function ()
     }
 
     return {
-        restrict: 'A',
+        restrict: 'AE',
         replace: true,
         transclude: true,
         templateUrl: '/app/components/form/views/input-feedback.html',

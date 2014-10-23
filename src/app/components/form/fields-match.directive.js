@@ -7,7 +7,7 @@
  */
 angular.module('subrosa.components.form').directive('fieldsMatch', function () {
     return {
-        restrict: 'A',
+        restrict: 'AE',
         scope: true,
         require: 'ngModel',
         link: function (scope, elem, attrs, control) {
