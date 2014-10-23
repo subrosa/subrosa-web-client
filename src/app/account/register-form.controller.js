@@ -42,7 +42,7 @@ angular.module('subrosa.account').controller('RegisterFormController', function 
 
     $scope.goToLogin = function () {
         redirect();
-        $scope.openLogin($scope.user);
+        $scope.openLoginModal($scope.user);
     };
 
     $rootScope.$on('toRegisterFromLogin', function (event, user) {

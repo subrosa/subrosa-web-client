@@ -71,6 +71,12 @@ angular.module('subrosa.account').config(function ($stateProvider) {
         controller: 'RegisterFormController',
         templateUrl: '/app/account/views/register-form.html'
     });
+
+    $stateProvider.state('login', {
+        url: '/login',
+        controller: 'LoginModalController',
+        templateUrl: '/app/account/views/login-form.html'
+    });
 });
 
 /**
@@ -83,7 +89,7 @@ angular.module('subrosa.account').config(function ($stateProvider) {
  *  Allow the opening of the login dialog.
  */
 angular.module('subrosa.account').run(function ($rootScope) {
-    $rootScope.openLogin = function (user) {
+    $rootScope.openLoginModal = function (user) {
         $rootScope.$broadcast('auth-loginRequired', user);
     };
 });
