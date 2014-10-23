@@ -52,6 +52,8 @@
 <![endif]-->
 <!-- endbuild -->
 
+<dialog data-login-modal></dialog>
+
 <div class="subrosa-container">
   <header>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="MainMenuController">
@@ -60,9 +62,8 @@
           <img class="img-responsive" src="/img/logo/subrosa-horizontal-93x25.png" alt="Subrosa Logo" data-i18n-attrs="alt"/>
         </a>
         
-        <button class="navbar-toggle" type="button" data-ng-if="!isAuthenticated()" data-ng-click="openModal()">
+        <button class="navbar-toggle" type="button" data-ng-if="!isAuthenticated()" data-ng-click="openLoginModal()">
           <span data-i18n>Login</span>
-          <dialog data-login-modal></dialog>
         </button>
 
         <button class="navbar-toggle" type="button"
@@ -106,8 +107,7 @@
           data-ng-click="collapsed.account = true">
 
         <li role="presentation" data-ng-if="!isAuthenticated()">
-          <a role="menuitem" href="" data-ng-click="openModal()" data-i18n>Login</a>
-          <dialog data-login-modal></dialog>
+          <a role="menuitem" href="" data-ng-click="openLoginModal()" data-i18n>Login</a>
         </li>
 
         <li role="presentation" class="hidden-md hidden-lg" data-ng-if="isAuthenticated()">

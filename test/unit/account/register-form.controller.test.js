@@ -79,11 +79,11 @@ describe('Controller: RegisterFormController', function () {
         describe("can transition to the login dialog", function () {
             beforeEach(function () {
                 spyOn($state, 'transitionTo');
-                spyOn($scope, 'openLogin');
+                spyOn($scope, 'openLoginModal');
             });
 
             afterEach(function () {
-                expect($scope.openLogin).toHaveBeenCalled();
+                expect($scope.openLoginModal).toHaveBeenCalled();
             });
 
             it("by transitioning to fromState if it exists", function () {
