@@ -11,6 +11,10 @@ html .navbar-toggle {
     height: 42px;
 }
 
+.navbar-toggle img {
+    max-width: 42px;
+}
+
 html .page-header {
     margin-top: 20px;
 }
