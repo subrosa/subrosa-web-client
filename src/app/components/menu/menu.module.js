@@ -5,4 +5,4 @@
  * @description
  *  Module for subrosa menus.
  */
-angular.module('subrosa.components.menu', []);
+angular.module('subrosa.components.menu', ['ui.router']);

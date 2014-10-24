@@ -1,19 +1,29 @@
 describe('Directive: collapsedHeaderMenuButton', function () {
-    var $compile, $scope, element, elementScope, image, collapsedHeaderMenu;
+    var $compile, $scope, $state, element, elementScope, state, image, collapsedHeaderMenu;
 
     beforeEach(module('subrosa.components.menu', '/app/components/menu/views/collapsed-header-menu-button.html'));
 
     beforeEach(module(function ($provide) {
+        state = null;
         image = {name: 'image.png'};
+
+        $state = {
+            includes: function () {}
+        };
 
         collapsedHeaderMenu = {
             getMenu: function () {
                 return [];
             },
+            getMenuState: function () {
+                return state;
+            },
             getMenuIcon: function () {
                 return image;
             }
         };
+
+        $provide.value('$state', $state);
         $provide.value('collapsedHeaderMenu', collapsedHeaderMenu);
     }));
 
@@ -35,7 +45,6 @@ describe('Directive: collapsedHeaderMenuButton', function () {
     });
 
     describe("determines whether or not to show the button", function () {
-
         it("defaults to false", function () {
             expect(elementScope.$parent.showMenu).toBe(false);
         });
@@ -52,10 +61,11 @@ describe('Directive: collapsedHeaderMenuButton', function () {
             expect(elementScope.$parent.showMenu).toBe(false);
         });
 
-        it("sets to false on $stateChangeSuccess", function () {
-            elementScope.$parent.showMenu = true;
+        it("checks to see if the current state includes the menu state on $stateChangeSuccess", function () {
+            spyOn($state, 'includes').andReturn(true);
             $scope.$broadcast('$stateChangeSuccess');
-            expect(elementScope.$parent.showMenu).toBe(false);
+            expect($state.includes).toHaveBeenCalled();
+            expect(elementScope.$parent.showMenu).toBe(true);
         });
     });
 });
