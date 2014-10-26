@@ -44,6 +44,6 @@ angular.module('subrosa.player').controller('SelectPlayerDirectiveController', f
 
     $scope.setPlayer = function (player) {
         $scope.player = player;
-        $scope.setPlayerCallback(player);
+        $scope.setPlayerCallback({player: player});
     };
 });

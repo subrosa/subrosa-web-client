@@ -12,7 +12,7 @@
 
         <select id="type" name="type" class="form-control" required
                 data-ng-change="addField(field)" data-ng-model="field.type"
-                data-ng-options="field.id as field.label for field in fieldTypes">
+                data-ng-options="field.type as field.label for field in fieldTypes">
           <option></option>
         </select>
     </div>
@@ -27,8 +27,7 @@
     </div>
 
     <div class="form-group" data-input-feedback="addFieldForm.name">
-      <label for="name" class="control-label"
-             data-i18n>Name</label>
+      <label for="name" class="control-label" data-i18n>Name</label>
 
       <input id="name" name="name" type="text" class="form-control" required data-ng-model="field.name"/>
       <p class="help-block" data-i18n>The name of the required information, "Home Address" for example.</p>
@@ -69,18 +68,22 @@
         data-ng-submit="fakeEnroll()">
     <h3 data-i18n>Join {{ game.name }}</h3>
 
-    <div data-ng-repeat="field in game.playerInfo">
-      <span class="pull-right">
-        <a href="" data-ng-click="editField(field)">
-          <i class="fa fa-edit"></i>
-        </a>
-        <a href="" data-ng-click="removeField(field)">
-          <i class="fa fa-remove"></i>
-        </a>
-      </span>
+    <ul data-as-sortable="dragControlListeners" data-ng-model="game.playerInfo">
+      <li data-ng-repeat="field in game.playerInfo" data-as-sortable-item>
+        <span class="pull-right">
+          <a href="" data-ng-click="editField(field)">
+            <i class="fa fa-edit"></i>
+          </a>
+          <a href="" data-ng-click="removeField(field)">
+            <i class="fa fa-remove"></i>
+          </a>
+        </span>
 
-      <div data-form-group="field"></div>
-    </div>
+        <div class="row" data-as-sortable-item-handle>
+          <div class="col-sm-11" data-form-group="field"></div>
+        </div>
+      </li>
+    </ul>
 
     <div class="form-group">
       <button type="submit" class="btn btn-default btn-primary"

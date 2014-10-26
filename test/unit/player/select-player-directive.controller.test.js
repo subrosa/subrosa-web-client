@@ -68,6 +68,6 @@ describe('Controller: SelectPlayerDirectiveController', function () {
         $scope.setPlayer(player);
 
         expect($scope.player).toEqual(player);
-        expect($scope.setPlayerCallback).toHaveBeenCalledWith(player);
+        expect($scope.setPlayerCallback).toHaveBeenCalledWith({player: player});
     });
 });

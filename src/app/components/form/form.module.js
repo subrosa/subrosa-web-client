@@ -9,5 +9,6 @@ angular.module('subrosa.components.form', [
     'ngMessages',
     'toggle-switch',
     'ui.bootstrap.alert',
-    'ui.bootstrap.tpls'
+    'ui.bootstrap.tpls',
+    'ui.sortable'
 ]);
