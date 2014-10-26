@@ -13,6 +13,10 @@ describe('Service: collapsedHeaderMenu', function () {
         expect(collapsedHeaderMenu.getMenu()).toEqual([]);
     });
 
+    it('can retrieve the menu state', function () {
+        expect(collapsedHeaderMenu.getMenuState()).toEqual(null);
+    });
+
     it('can retrieve the menu image', function () {
         expect(collapsedHeaderMenu.getMenuIcon()).toEqual(null);
     });
@@ -31,6 +35,14 @@ describe('Service: collapsedHeaderMenu', function () {
         expect($rootScope.$broadcast).toHaveBeenCalledWith('menu-items-changed');
     });
 
+    it('can set the menu state', function () {
+        spyOn($rootScope, '$broadcast');
+
+        collapsedHeaderMenu.setMenuState('game');
+
+        expect(collapsedHeaderMenu.getMenuState()).toBe('game');
+    });
+
     it('can add a menu image', function () {
         var image = {name: 'image.png'};
         spyOn($rootScope, '$broadcast');
@@ -38,5 +50,6 @@ describe('Service: collapsedHeaderMenu', function () {
         collapsedHeaderMenu.setMenuIcon(image);
 
         expect($rootScope.$broadcast).toHaveBeenCalledWith('menu-items-changed');
+        expect(collapsedHeaderMenu.getMenuIcon()).toBe(image);
     });
 });

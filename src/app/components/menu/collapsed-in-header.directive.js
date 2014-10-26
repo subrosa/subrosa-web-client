@@ -18,6 +18,7 @@ angular.module('subrosa.components.menu').directive('collapsedInHeader', functio
         restrict: 'AE',
         transclude: true,
         scope: {
+            headerState: '@',
             image: '=headerImage'
         },
         link: function (scope, element, attributes, ctrl, transclude) {
@@ -29,6 +30,7 @@ angular.module('subrosa.components.menu').directive('collapsedInHeader', functio
             });
 
             collapsedHeaderMenu.setMenu(menuItems);
+            collapsedHeaderMenu.setMenuState(scope.headerState);
 
             scope.$watch('image', function (image) {
                 collapsedHeaderMenu.setMenuIcon(image);
