@@ -12,6 +12,7 @@ describe('Controller: EditGameEnrollment', function () {
         $scope = $rootScope.$new();
         $scope.game = MockResource.$new().get({id: 1});
         $scope.game.playerInfo = [];
+        $scope.addFieldForm = {$setPristine: function () {}};
 
         $controller('EditGameEnrollmentController', {$scope: $scope, i18n: i18n});
     }));
@@ -22,11 +23,57 @@ describe('Controller: EditGameEnrollment', function () {
 
     it("sets up the default field types", function () {
         var expectedFieldTypes = [
-            {id: 'address', label: 'Address'},
-            {id: 'image', label: 'Image'},
-            {id: 'text', label: 'Text'}
+            {type: 'address', label: 'Address'},
+            {type: 'image', label: 'Image'},
+            {type: 'text', label: 'Text'}
         ];
         expect($scope.fieldTypes).toEqual(expectedFieldTypes);
+    });
+
+    describe("updates the game on the order changed ng-sortable event", function () {
+        beforeEach(function () {
+            spyOn($scope.game, '$update').andCallThrough();
+        });
+
+        afterEach(function () {
+            expect($scope.game.$update).toHaveBeenCalled();
+        });
+
+        it("and succeeds", function () {
+            $scope.dragControlListeners.orderChanged();
+            expect($scope.fieldNotifications.length).toBe(1);
+            expect($scope.fieldNotifications[0].type).toBe('success');
+        });
+
+        it("and error", function () {
+            var event = {
+                dest: {
+                    index: 2,
+                    sortableScope: {
+                        removeItem: function () {}
+                    }
+                },
+                source: {
+                    index: 1,
+                    itemScope: {
+                        task: 'lalala',
+                        sortableScope: {
+                            insertItem: function () {}
+                        }
+                    }
+                }
+            };
+            spyOn(event.dest.sortableScope, 'removeItem');
+            spyOn(event.source.itemScope.sortableScope, 'insertItem');
+            $scope.game.failed = true;
+
+            $scope.dragControlListeners.orderChanged(event);
+
+            expect($scope.fieldNotifications.code).toBe(1000);
+            expect(event.dest.sortableScope.removeItem).toHaveBeenCalledWith(event.dest.index);
+            expect(event.source.itemScope.sortableScope.insertItem).toHaveBeenCalledWith(event.source.index,
+                event.source.itemScope.task);
+        });
     });
 
     describe("can modify required game information", function () {
@@ -55,7 +102,13 @@ describe('Controller: EditGameEnrollment', function () {
             });
 
             it("and succeed", function () {
+                spyOn($scope.addFieldForm, '$setPristine');
+                $scope.saveField('field');
 
+                expect($scope.saveFieldNotifications.length).toBe(1);
+                expect($scope.saveFieldNotifications[0].type).toBe('success');
+                expect($scope.field).toEqual({});
+                expect($scope.addFieldForm.$setPristine).toHaveBeenCalled();
             });
 
             it("and error", function () {
@@ -71,14 +124,20 @@ describe('Controller: EditGameEnrollment', function () {
                 spyOn($scope.game, '$update').andCallThrough();
             });
 
-            it("and succeed", function () {
+            afterEach(function () {
+                expect($scope.game.$update).toHaveBeenCalled();
+            });
 
+            it("and succeed", function () {
+                $scope.game.playerInfo = ['field'];
+                $scope.removeField('field');
+                expect($scope.fieldNotifications.length).toBe(1);
+                expect($scope.fieldNotifications[0].type).toBe('success');
             });
 
             it("and error", function () {
                 $scope.game.failed = true;
                 $scope.removeField();
-                expect($scope.game.$update).toHaveBeenCalled();
                 expect($scope.fieldNotifications.code).toBe(1000);
             });
         });

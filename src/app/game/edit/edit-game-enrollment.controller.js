@@ -12,10 +12,31 @@
 angular.module('subrosa.game').controller('EditGameEnrollmentController', function ($scope, _, i18n) {
     $scope.field = {};
     $scope.fieldTypes = [
-        {id: 'address', label: i18n('Address')},
-        {id: 'image', label: i18n('Image')},
-        {id: 'text', label: i18n('Text')}
+        {type: 'address', label: i18n('Address')},
+        {type: 'image', label: i18n('Image')},
+        {type: 'text', label: i18n('Text')}
     ];
+
+    $scope.dragControlListeners = {
+        orderChanged: function (event) {
+            var success, error;
+
+            success = function () {
+                $scope.saving = false;
+                $scope.fieldNotifications = [{type: 'success', message: i18n('Field Order Saved.')}];
+            };
+
+            error = function (response) {
+                $scope.saving = false;
+                $scope.fieldNotifications = response.data.notifications;
+                event.dest.sortableScope.removeItem(event.dest.index);
+                event.source.itemScope.sortableScope.insertItem(event.source.index, event.source.itemScope.task);
+            };
+
+            $scope.saving = true;
+            $scope.game.$update(success, error);
+        }
+    };
 
     $scope.addField = function (field) {
         $scope.game.playerInfo.push(field);
@@ -45,7 +66,7 @@ angular.module('subrosa.game').controller('EditGameEnrollmentController', functi
     };
 
     $scope.removeField = function (field) {
-        var success, error, game = $scope.game;
+        var success, error, playerInfo = angular.copy($scope.game.playerInfo);
 
         $scope.game.playerInfo = _.filter($scope.game.playerInfo, function (info) {
             return info !== field;
@@ -57,10 +78,9 @@ angular.module('subrosa.game').controller('EditGameEnrollmentController', functi
 
         error = function (response) {
             $scope.fieldNotifications = response.data.notifications;
-            $scope.game = game;
+            $scope.game.playerInfo = playerInfo;
         };
 
-        $scope.saving = true;
         $scope.game.$update(success, error);
     };
 });
