@@ -9,34 +9,35 @@
  *
  */
 angular.module('subrosa.notifications').service('errorDictionary', function (i18n) {
-    var NOTIFICATION_DICTIONARY = {
-            UNKNOWN: i18n('Oops, something went wrong'),
-            NOT_FOUND: i18n("Not found"),
-            FORBIDDEN: i18n("Forbidden"),
-            NOT_ACCEPTABLE: i18n("Media type in Accept header not supported"),
-            UNAUTHORIZED_FIELD_ACCESS: i18n("Unauthorized field access"),
-            MISSING_REQUIRED_FIELD: i18n("Missing required field: %s"),
-            INVALID_FIELD_VALUE: i18n("Invalid value for field: %s"),
-            READ_ONLY_FIELD: i18n("Cannot update this field: %s"),
-            INVALID_REQUEST_ENTITY: i18n("Invalid request entity"),
-            INTERNAL_ERROR: i18n("Internal error"),
-            DOMAIN_OBJECT_NOT_FOUND: i18n("Domain object not found"),
-            DESERIALIZATION_ERROR: i18n("Error deserializing request"),
-            FILE_CORRUPT: i18n("File is corrupt"),
-            FILE_TOO_LARGE: i18n("File is too large"),
-            FILE_NOT_FOUND: i18n("File not found")
-        },
-        FIELD_DICTIONARY = {
-            unknown: i18n('This field is in error'),
-            invalidValue: i18n('This value is invalid')
-        };
+    const NOTIFICATION_DICTIONARY = {
+        unknown: i18n('Oops, something went wrong'),
+        notFound: i18n("Not found"),
+        forbidden: i18n("Forbidden"),
+        badRequest: i18n("Your request is malformed"),
+        notAcceptable: i18n("Media type in Accept header not supported"),
+        unauthorizedFieldAccess: i18n("Unauthorized field access"),
+        missingRequiredField: i18n("Missing required field: %s"),
+        invalidValue: i18n("Invalid value for field: %s"),
+        readOnly: i18n("Cannot update this field: %s"),
+        invalidRequestEntity: i18n("The request body is missing or of the wrong type"),
+        internalError: i18n("Internal error"),
+        objectNotFound: i18n("Domain object not found"),
+        requestCorrupt: i18n("Your request is corrupt"),
+        fileCorrupt: i18n("File is corrupt"),
+        fileTooLarge: i18n("File is too large"),
+        fileNotFound: i18n("File not found")
+    },
+    FIELD_DICTIONARY = {
+        unknown: i18n('This field is in error'),
+        invalidValue: i18n('This value is invalid')
+    };
 
-    this.unknownError = NOTIFICATION_DICTIONARY.UNKNOWN;
+    this.unknownError = NOTIFICATION_DICTIONARY.unknown;
 
     this.transform = function (notification) {
         var code = notification.code,
             fieldCode = null,
-            errorMessage = NOTIFICATION_DICTIONARY.UNKNOWN,
+            errorMessage = NOTIFICATION_DICTIONARY.unknown,
             fieldErrorMessage = FIELD_DICTIONARY.unknown;
 
         if (NOTIFICATION_DICTIONARY.hasOwnProperty(code)) {
