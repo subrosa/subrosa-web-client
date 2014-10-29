@@ -3,77 +3,75 @@
  * @name subrosa.game.EditGameEventsController
  *
  * @requires $scope
+ * @requires _
  * @requires i18n
- * @requires modalCache
- * @requires timelineCache
  * @requires GameEvent
  *
  * @description
  *  Handles the editing of game events.
  */
-angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, i18n, modalCache, timelineCache, GameEvent) {
-    const ONE_HOUR = 3600000, ONE_YEAR = 31556952000;
-
-    var saveEvent = function () {
-        var success, error, event;
-
-        event = timelineCache.get('editGameEvents').getModel($scope.events);
-
-        success = function (response) {
-            event.id = response.id;
-        };
-
-        error = function (response) {
-            $scope.notifications = response.data.notifications;
-        };
-
-        event.$save({gameUrl: $scope.$stateParams.gameUrl, id: event.id},
-            success, error);
-    };
-
+angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, _, i18n, GameEvent) {
     $scope.events = [];
     $scope.notifications = [];
+
     // TODO: get valid event types from server
     $scope.eventTypes = [
-        {id: 'REGISTRATION', name: 'Registration Period'}
+        {id: 'registrationStart', name: 'Registration Start'},
+        {id: 'registrationEnd', name: 'Registration End'}
     ];
 
     $scope.game.$promise.then(function (game) {
-        $scope.options = {
-            eventMargin: 10,  // minimal margin between events
-            minHeight: 200,
-            zoomMax: ONE_YEAR,
-            zoomMin: ONE_HOUR
-        };
-
         GameEvent.query({gameUrl: game.url}, function (response) {
             $scope.events = response.results;
         });
     });
 
-    $scope.eventAdded = function (selection) {
-        var removeFromTimeline = function () {
-            var timeline = timelineCache.get('editGameEvents');
-            timeline.deleteItem(timeline.getIndex(selection));
+    $scope.event = new GameEvent();
+
+    $scope.addEvent = function (event) {
+        event.gameUrl = $scope.game.url;
+        $scope.events.push(event);
+    };
+
+    $scope.editEvent = function (event) {
+        $scope.event = event;
+    };
+
+    $scope.saveEvent = function (event) {
+        var success, error;
+
+        success = function () {
+            $scope.saving = false;
+            $scope.saveEventNotifications = [{type: 'success', message: i18n('Event Saved.')}];
+            $scope.event = {};
+            $scope.saveEventForm.$setPristine();
         };
 
-        $scope.event = selection;
-        modalCache.openModal('gameEventModal', $scope).result.then(saveEvent,
-            removeFromTimeline);
+        error = function (response) {
+            $scope.saving = false;
+            $scope.saveEventNotifications = response.data.notifications;
+        };
+
+        $scope.saving = true;
+        event.$save(success, error);
     };
 
-    $scope.eventChanged = function (selection) {
-        saveEvent(selection);
-    };
+    $scope.removeEvent = function (event) {
+        var success, error, events = angular.copy($scope.events);
 
-    $scope.eventDeleted = function (selection) {
-        selection.$delete({gameUrl: $scope.$stateParams.gameUrl, id: selection.id});
-    };
+        $scope.events = _.filter($scope.events, function (info) {
+            return info !== event;
+        });
 
-    $scope.eventEdited = function (selection) {
-        if (selection.editable === true) {
-            $scope.event = selection;
-            modalCache.openModal('gameEventModal', $scope).result.then(saveEvent);
-        }
+        success = function () {
+            $scope.eventNotifications = [{type: 'success', message: i18n('Event Removed.')}];
+        };
+
+        error = function (response) {
+            $scope.eventNotifications = response.data.notifications;
+            $scope.events = events;
+        };
+
+        event.$delete(success, error);
     };
 });

@@ -29,8 +29,12 @@ angular.module('mocks').factory('MockResource', function () {
 
         mockResource = {
             id: 1,
-            $delete: function (callback) {
-                callback();
+            $delete: function (success, error) {
+                if (this.failed) {
+                    error(errorResponse);
+                } else {
+                    success(this);
+                }
             },
             $get: function () {},
             $save: function (data, success, error) {

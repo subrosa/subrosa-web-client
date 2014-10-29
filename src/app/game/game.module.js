@@ -12,7 +12,6 @@ angular.module('subrosa.game', [
     'subrosa.components.form',
     'subrosa.components.map',
     'subrosa.components.modal',
-    'subrosa.components.timeline',
     'subrosa.player',
     'subrosa.utils',
     'ui.router',

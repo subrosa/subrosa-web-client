@@ -1,11 +1,11 @@
-describe('Factory: GameZone', function () {
-    var gameZoneFactory, $httpBackend;
+describe('Factory: GameEvent', function () {
+    var GameEventFactory, $httpBackend;
 
     beforeEach(module('subrosa.game'));
 
     beforeEach(inject(function ($injector) {
         $httpBackend = $injector.get('$httpBackend');
-        gameZoneFactory = $injector.get('GameZone');
+        GameEventFactory = $injector.get('GameEvent');
     }));
 
     afterEach(function () {
@@ -15,18 +15,18 @@ describe('Factory: GameZone', function () {
     });
 
     it('makes a request to get the game zone from the API.', function () {
-        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/zone/1').respond();
-        gameZoneFactory.get({gameUrl: 'raleigh-wars', id: 1});
+        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/event/1').respond();
+        GameEventFactory.get({gameUrl: 'raleigh-wars', id: 1});
     });
 
     it('makes a request to query the list of game zones from the API.', function () {
-        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/zone').respond();
-        gameZoneFactory.query({gameUrl: 'raleigh-wars'});
+        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/event').respond();
+        GameEventFactory.query({gameUrl: 'raleigh-wars'});
     });
 
     it('makes a request to update a game zone.', function () {
-        $httpBackend.expectPUT('/subrosa/v1/game/raleigh-wars/zone/1').respond();
-        gameZoneFactory.update({gameUrl: 'raleigh-wars', id: 1});
+        $httpBackend.expectPUT('/subrosa/v1/game/raleigh-wars/event/1').respond();
+        GameEventFactory.update({gameUrl: 'raleigh-wars', id: 1});
     });
 });
 
