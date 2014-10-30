@@ -1,35 +1,48 @@
 <h3 data-i18n>Time Dependent Events</h3>
-<div data-notification-display="notifications"></div>
 
-<p>
-  <span data-i18n>
+<p data-i18n>
     These events will happen at the chosen times below.  Use the timeline to modify or create new events.
-  </span>
-  <a href="" data-ng-click="showHelp = true">
-    <i class="fa fa-question-circle"></i>
-  </a>
 </p>
 
-<section data-ng-show="showHelp">
-  <h4 data-i18n>How to Use the Timeline</h4>
-  <ul>
-    <li data-i18n>Add a new event by double clicking in the timeline.</li>
-    <li data-i18n>Zoom in to fine tune event time down to the minute.</li>
-    <li data-i18n>Single click an event to modify its start, end, duration, or to remove it.</li>
-    <li data-i18n>Double click an event to edit its details.</li>
-  </ul>
-</section>
+<div class="col-md-5">
+  <h4 data-i18n>Create New Event</h4>
+  <form name="saveEventForm" role="form" class="" novalidate
+        data-form-feedback="savEventForm" data-form-notifications="saveEventNotifications">
 
-<div data-modal="gameEventModal"
-     data-template-url="/app/game/edit/views/edit-game-event-modal.html">
+    <div class="form-group">
+      <label for="event" data-i18n>Type</label>
+      <select id="event" class="form-control" required
+              data-ng-change="addEvent(event)" data-ng-model="event.event"
+              data-ng-options="eventType.id as eventType.name for eventType in eventTypes">
+      </select>
+    </div>
+
+    <div class="form-group" data-input-feedback="savEventForm.date">
+      <label for="date" data-i18n>Date</label>
+      <input id="date" name="date" type="text" class="form-control" required
+             data-ng-model="event.date"
+             data-datepicker-popup="{{ dateFormat }}"
+             data-show-button-bar="false"/>
+    </div>
+
+    <div class="form-group">
+      <label for="startTime" class="" data-i18n>Start Time</label>
+      <div data-ng-model="event.start">
+        <input id="startTime" name="startTime" type="time" required
+               data-timepicker data-show-meridian="true"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" data-ng-click="saveEvent(event)" class="btn btn-primary" data-ng-disabled="!saveEventForm.$valid" data-i18n>Save Event</button>
+      <button class="btn btn-default" data-ng-click="removeEvent(event)" data-i18n>Cancel</button>
+    </div>
+  </form>
 </div>
 
-<div data-timeline="editGameEvents"
-     data-timeline-allow-edit="true"
-     data-timeline-data="events"
-     data-timeline-options="options"
-     data-timeline-on-add="eventAdded(selection)"
-     data-timeline-on-change="eventChanged(selection)"
-     data-timeline-on-delete="eventDeleted(selection)"
-     data-timeline-on-edit="eventEdited(selection)">
+<div class="col-md-6 col-md-offset-1">
+  <div data-notification-display="eventNotifications"></div>
+  <div class="row">
+    <div data-game-event-timeline="events"></div>
+  </div>
 </div>

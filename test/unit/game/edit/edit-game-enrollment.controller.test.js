@@ -12,7 +12,7 @@ describe('Controller: EditGameEnrollment', function () {
         $scope = $rootScope.$new();
         $scope.game = MockResource.$new().get({id: 1});
         $scope.game.playerInfo = [];
-        $scope.addFieldForm = {$setPristine: function () {}};
+        $scope.saveFieldForm = {$setPristine: function () {}};
 
         $controller('EditGameEnrollmentController', {$scope: $scope, i18n: i18n});
     }));
@@ -101,20 +101,23 @@ describe('Controller: EditGameEnrollment', function () {
                 spyOn($scope.game, '$update').andCallThrough();
             });
 
+            afterEach(function () {
+                expect($scope.game.$update).toHaveBeenCalled();
+            });
+
             it("and succeed", function () {
-                spyOn($scope.addFieldForm, '$setPristine');
+                spyOn($scope.saveFieldForm, '$setPristine');
                 $scope.saveField('field');
 
                 expect($scope.saveFieldNotifications.length).toBe(1);
                 expect($scope.saveFieldNotifications[0].type).toBe('success');
                 expect($scope.field).toEqual({});
-                expect($scope.addFieldForm.$setPristine).toHaveBeenCalled();
+                expect($scope.saveFieldForm.$setPristine).toHaveBeenCalled();
             });
 
             it("and error", function () {
                 $scope.game.failed = true;
                 $scope.saveField();
-                expect($scope.game.$update).toHaveBeenCalled();
                 expect($scope.saveFieldNotifications.code).toBe(1000);
             });
         });

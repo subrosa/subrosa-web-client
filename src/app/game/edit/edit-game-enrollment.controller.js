@@ -53,7 +53,7 @@ angular.module('subrosa.game').controller('EditGameEnrollmentController', functi
             $scope.saving = false;
             $scope.saveFieldNotifications = [{type: 'success', message: i18n('Field Saved.')}];
             $scope.field = {};
-            $scope.addFieldForm.$setPristine();
+            $scope.saveFieldForm.$setPristine();
         };
 
         error = function (response) {

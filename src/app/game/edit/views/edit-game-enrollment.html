@@ -3,10 +3,10 @@
 
 <div class="col-md-5">
   <h3 data-i18n>Create Field</h3>
-  <form name="addFieldForm"  novalidate data-form-feedback="addFieldForm"
+  <form name="saveFieldForm"  novalidate data-form-feedback="saveFieldForm"
         data-form-notifications="saveFieldNotifications" data-ng-submit="saveField();">
 
-    <div class="form-group" data-input-feedback="addFieldForm.type">
+    <div class="form-group" data-input-feedback="saveFieldForm.type">
       <label for="type" class="control-label"
              data-i18n>Field Type</label>
 
@@ -26,14 +26,14 @@
       </div>
     </div>
 
-    <div class="form-group" data-input-feedback="addFieldForm.name">
+    <div class="form-group" data-input-feedback="saveFieldForm.name">
       <label for="name" class="control-label" data-i18n>Name</label>
 
       <input id="name" name="name" type="text" class="form-control" required data-ng-model="field.name"/>
       <p class="help-block" data-i18n>The name of the required information, "Home Address" for example.</p>
     </div>
 
-    <div class="form-group" data-input-feedback="addFieldForm.description">
+    <div class="form-group" data-input-feedback="saveFieldForm.description">
       <label for="description" class="control-label" data-i18n>Description</label>
 
       <textarea id="description" name="description" class="form-control" data-ng-model="field.description"></textarea>
@@ -42,7 +42,7 @@
 
     <div class="form-group">
       <button type="submit" class="btn btn-default btn-primary"
-              data-ng-disabled="addFieldForm.$invalid || saving">
+              data-ng-disabled="saveFieldForm.$invalid || saving">
         <span data-ng-hide="saving" data-i18n>Save Field</span>
         <span data-ng-show="saving" data-i18n>Saving...</span>
       </button>
