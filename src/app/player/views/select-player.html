@@ -34,9 +34,9 @@
         data-form-notifications="editPlayerNotifications"
         data-ng-submit="savePlayer(player)">
 
-    <div class="form-group" data-input-feedback="editPlayerForm.username">
+    <div class="form-group" data-input-feedback="editPlayerForm.name">
       <label for="username" class="control-label" data-i18n>Username</label>
-      <input id="username" name="username" type="text" class="form-control" required data-ng-model="player.username"/>
+      <input id="username" name="player.username" type="text" class="form-control" required data-ng-model="player.name"/>
       <p class="help-block" data-i18n>How you are known to other players.</p>
     </div>
 
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div data-ng-show="editAvatar" data-ng-include="'/app/player/views/edit-avatar.html'"></div>
+    <div data-ng-show="editAvatar" data-upload-single-image data-after-upload="setPlayerImage"></div>
 
     <button type="submit" class="btn btn-primary"
             data-ng-disabled="editPlayerForm.$invalid || saving">

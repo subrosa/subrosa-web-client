@@ -8,7 +8,7 @@ describe('Directive: selectPlayer', function () {
         '/app/components/form/views/form-feedback.html',
         '/app/components/form/views/input-feedback.html',
         '/app/components/form/views/input-messages.html',
-        '/app/player/views/edit-avatar.html'
+        '/app/components/image/views/upload-single-image.html'
     ));
 
     beforeEach(inject(function (_$compile_, _$rootScope_) {
@@ -43,12 +43,12 @@ describe('Directive: selectPlayer', function () {
             rows = element.find('.row');
         });
 
-        it("displays a select player interface if no player is selected", function () {
+        it("a select player interface if no player is selected", function () {
             expect(rows.first().hasClass('ng-hide')).toBe(false);
             expect(rows.last().hasClass('ng-hide')).toBe(true);
         });
 
-        it("displays an edit player form if a player is selected", function () {
+        it("an edit player form if a player is selected", function () {
             elementScope.edit = true;
             $scope.$digest();
 

@@ -12,6 +12,7 @@ angular.module('subrosa.player').controller('SelectPlayerDirectiveController', f
     $scope.edit = false;
 
     $scope.newPlayer = function () {
+        $scope.editAvatar = true;
         $scope.editPlayer(new Player());
     };
 
@@ -23,6 +24,10 @@ angular.module('subrosa.player').controller('SelectPlayerDirectiveController', f
     $scope.cancelEditPlayer = function () {
         $scope.player = null;
         $scope.edit = false;
+    };
+
+    $scope.setPlayerImage = function (file) {
+        $scope.player.imageId = file.id;
     };
 
     $scope.savePlayer = function (player) {
