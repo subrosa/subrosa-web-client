@@ -10,7 +10,7 @@ angular.module('subrosa.player').directive('selectPlayer', function () {
         restrict: 'AE',
         templateUrl: '/app/player/views/select-player.html',
         scope: {
-            account: '=selectPlayer',
+            players: '=selectPlayer',
             setPlayerCallback: '&setPlayer'
         },
         controller: 'SelectPlayerDirectiveController'
