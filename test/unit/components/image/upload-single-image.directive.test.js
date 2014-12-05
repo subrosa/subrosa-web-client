@@ -40,17 +40,4 @@ describe('Directive: uploadSingleImage', function () {
         expect(element.find('.progress').length).toBe(1);
         expect(element.find('.progress-bar').length).toBe(1);
     });
-
-    it("defaults the upload URL to /subrosa/v1/user/image", function () {
-        expect(elementScope.uploadUrl).toBe('/subrosa/v1/user/image');
-    });
-
-    it("accepts an upload URL", function () {
-        element = angular.element('<div upload-single-image="\'/upload\'"></div>');
-        $compile(element)($scope);
-        $scope.$digest();
-        elementScope = element.isolateScope();
-
-        expect(elementScope.uploadUrl).toBe('/upload');
-    });
 });

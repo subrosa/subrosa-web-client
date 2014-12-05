@@ -18,8 +18,8 @@ describe('Factory: Player', function () {
     });
 
     it('make a request to get the player from the API.', function () {
-        $httpBackend.expectGET('/subrosa/v1/account/abcd/player/1234').respond(player);
-        playerFactory.get({accountId: 'abcd', id: 1234}, function (response) {
+        $httpBackend.expectGET('/subrosa/v1/user/player/1234').respond(player);
+        playerFactory.get({id: 1234}, function (response) {
             expect(response.id).toBe(player.id);
             expect(response.username).toBe(player.username);
             expect(response.email).toBe(player.email);

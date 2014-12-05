@@ -1,7 +1,8 @@
-<div data-flow-init="{target: uploadUrl, singleFile: true}">
+<div data-flow-init="{target: '/subrosa/v1/user/image', singleFile: true, testChunks: false}">
   <div data-flow-drag-enter="dropClass='drag-over'" data-flow-drag-leave="dropClass=''"
        data-flow-files-submitted="$flow.upload()"
-       data-flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+       data-flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+       data-flow-complete="fileSuccess($flow)">
 
     <div data-ng-repeat="file in $flow.files">
       <div class="thumbnail" data-ng-show="$flow.files.length">
@@ -27,7 +28,7 @@
       <div data-ng-show="!$flow.files.length">
         <p data-i18n>Drag your image here</p>
         <p data-i18n>- or -</p>
-        <button class="btn btn-default btn-default" data-flow-btn>
+        <button class="btn btn-default" type="button" data-flow-btn>
           <span data-i18n>Upload</span>
         </button>
       </div>
