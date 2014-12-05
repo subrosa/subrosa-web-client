@@ -25,9 +25,7 @@ angular.module('subrosa.components.menu').controller("MainMenuController", funct
         },
         function (authenticated) {
             if (authenticated) {
-                authService.getCurrentUser().then(function (user) {
-                    $scope.user = user;
-                });
+                $scope.user = authService.getCurrentUser();
             } else {
                 $scope.user = null;
             }

@@ -11,9 +11,7 @@ describe('Controller: AccountController', function () {
 
         authService = {
             getCurrentUser: function () {
-                return {then: function (callback) {
-                    callback(account);
-                }};
+                return account;
             }
         };
     }));
