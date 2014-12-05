@@ -17,8 +17,7 @@ describe('Directive: selectPlayer', function () {
     }));
 
     beforeEach(function () {
-        element = angular.element('<div data-select-player="account" data-set-player-callback="doSomething()">');
-        $scope.account = {username: null, images: {}};
+        element = angular.element('<div data-select-player="players" data-set-player-callback="doSomething()">');
 
         $compile(element)($scope);
         $scope.$digest();
@@ -31,7 +30,7 @@ describe('Directive: selectPlayer', function () {
     });
 
     it("displays a list of players if they exist", function () {
-        $scope.account.players = ['player'];
+        $scope.players = ['player'];
         $scope.$digest();
         expect(element.find('[data-avatar="existingPlayer"]').length).toBe(1);
     });

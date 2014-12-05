@@ -3,10 +3,6 @@ describe('Controller: SelectPlayerDirectiveController', function () {
 
     beforeEach(module('subrosa.player', 'mocks'));
 
-    beforeEach(module(function ($provide) {
-        $provide.value('Player',  Player);
-    }));
-
     beforeEach(inject(function ($q, $controller, $rootScope, MockResource) {
         $scope = $rootScope.$new();
 
