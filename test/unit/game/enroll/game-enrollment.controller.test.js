@@ -21,9 +21,7 @@ describe('Controller: GameEnrollmentController', function () {
 
         authService = {
             getCurrentUser: function () {
-                return {then: function (callback) {
-                    callback(account);
-                }};
+                return account;
             }
         };
 
@@ -59,12 +57,10 @@ describe('Controller: GameEnrollmentController', function () {
 
     it("gets the current user and sets the account on the $scope", function () {
         spyOn(authService, 'getCurrentUser').andCallThrough();
-        spyOn(Account, 'get').andCallThrough();
 
         $controller('GameEnrollmentController', dependencies);
 
-        expect(Account.get).toHaveBeenCalledWith({id: 1, expansion: 'player'});
-        expect(authService.getCurrentUser).toHaveBeenCalled();
+        expect(authService.getCurrentUser).toHaveBeenCalledWith('player');
         expect($scope.account).toBe(account);
     });
 });

@@ -8,9 +8,7 @@ describe('Controller: MainMenu', function () {
 
         authService = {
             getCurrentUser: function () {
-                return {then: function (callback) {
-                    callback(user);
-                }};
+                return user;
             },
             isAuthenticated: function () {
                 return user.authenticated;

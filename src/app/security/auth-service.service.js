@@ -15,6 +15,7 @@
  *
  * @requires $rootScope
  * @requires $http
+ * @requires User
  * @requires session
  * @requires authRetryQueue
  *
@@ -22,7 +23,7 @@
  *  Handles Authentication related functionality such as providing the current user and
  *  managing sessions via login and logout commands.
  */
-angular.module('subrosa.security').service('authService', function ($rootScope, $http, session, authRetryQueue) {
+angular.module('subrosa.security').service('authService', function ($rootScope, $http, User, session, authRetryQueue) {
     var service = this;
     this.currentUser = null;
 
@@ -38,21 +39,20 @@ angular.module('subrosa.security').service('authService', function ($rootScope, 
     /**
      * Get the current user.
      *
-     * @returns object $http $promise.
+     * @returns object promise
      */
-    this.getCurrentUser = function () {
+    this.getCurrentUser = function (expansion) {
         var success, error;
 
         success = function (response) {
             service.currentUser = response.data;
-            return service.currentUser;
         };
 
         error = function () {
             session.removeToken();
         };
 
-        return $http.get('/subrosa/v1/user').then(success, error);
+        return User.get({expansion: expansion}, success, error);
     };
 
     /**

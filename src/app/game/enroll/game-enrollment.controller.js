@@ -35,7 +35,5 @@ function ($scope, $state, authService, Account, GamePlayer) {
         GamePlayer.save({url: $scope.game.url}, $scope.player, success, error);
     };
 
-    authService.getCurrentUser().then(function (user) {
-        $scope.account = Account.get({id: user.id, expansion: 'player'});
-    });
+    $scope.account = authService.getCurrentUser('player');
 });
