@@ -7,6 +7,10 @@
     margin: 10px;
 }
 
+form .drop {
+    margin: 0;
+}
+
 /* Ensure FlowJS hidden file input does not have width */
 .drop input[type="file"] {
     width: 0;
