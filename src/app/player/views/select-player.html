@@ -35,33 +35,39 @@
         data-ng-submit="savePlayer(player)">
 
     <div class="form-group" data-input-feedback="editPlayerForm.name">
-      <label for="username" class="control-label" data-i18n>Username</label>
+      <label for="username" data-i18n>Username</label>
       <input id="username" name="player.username" type="text" class="form-control" required data-ng-model="player.name"/>
       <p class="help-block" data-i18n>How you are known to other players.</p>
     </div>
 
 
-    <div data-ng-hide="editAvatar" class="thumbnail">
-      <a href="" data-ng-click="editAvatar = true;">
-        <div class="text-center" data-avatar="player" data-size="lg" data-editable="true"></div>
-      </a>
-      <div class="caption">
-        <p data-i18n>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
+    <div class="form-group">
+      <label data-i18n>Avatar</label>
+      <div data-ng-hide="editAvatar" class="thumbnail">
+        <a href="" data-ng-click="editAvatar = true;">
+          <div class="text-center" data-avatar="player" data-size="lg" data-editable="true"></div>
+        </a>
+        <div class="caption">
+          <p data-i18n>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
+        </div>
       </div>
+
+      <div data-ng-show="editAvatar" data-upload-single-image data-after-upload="setPlayerImage">
+        <p class="help-block" data-i18n>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary"
+              data-ng-disabled="editPlayerForm.$invalid || saving">
+        <span data-ng-hide="saving" data-i18n>Save Player</span>
+        <span data-ng-show="saving" data-i18n>Saving...</span>
+      </button>
+
+      <button type="button" class="btn btn-default"
+              data-ng-click="cancelEditPlayer()">
+        <span data-ng-hide="saving" data-i18n>Cancel</span>
+        <span data-ng-show="saving" data-i18n>Saving...</span>
+      </button>
     </div>
 
-    <div data-ng-show="editAvatar" data-upload-single-image data-after-upload="setPlayerImage"></div>
-
-    <button type="submit" class="btn btn-primary"
-            data-ng-disabled="editPlayerForm.$invalid || saving">
-      <span data-ng-hide="saving" data-i18n>Save Player</span>
-      <span data-ng-show="saving" data-i18n>Saving...</span>
-    </button>
-
-    <button type="button" class="btn btn-default"
-            data-ng-click="cancelEditPlayer()">
-      <span data-ng-hide="saving" data-i18n>Cancel</span>
-      <span data-ng-show="saving" data-i18n>Saving...</span>
-    </button>
   </form>
 </div>
