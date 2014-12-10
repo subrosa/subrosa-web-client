@@ -98,6 +98,7 @@ angular.module('subrosa.game').config(function ($stateProvider) {
     });
 
     $stateProvider.state('game.enroll.join', {
+        controller: 'GameEnrollmentController',
         templateUrl: '/app/game/enroll/views/join-game-form.html'
     });
 

@@ -4,7 +4,7 @@ describe('Factory: GamePlayer', function () {
     beforeEach(module('subrosa.game'));
 
     beforeEach(function () {
-        player = {id: "1234", username: "yo", email: "yoyo@yo.com"};
+        player = {id: "1234", name: "yo", email: "yoyo@yo.com"};
 
         inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');
@@ -21,7 +21,7 @@ describe('Factory: GamePlayer', function () {
         $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/player/1234').respond(player);
         gamePlayerFactory.get({url: 'raleigh-wars', id: 1234}, function (response) {
             expect(response.id).toBe(player.id);
-            expect(response.username).toBe(player.username);
+            expect(response.name).toBe(player.name);
             expect(response.email).toBe(player.email);
         });
         $httpBackend.flush();

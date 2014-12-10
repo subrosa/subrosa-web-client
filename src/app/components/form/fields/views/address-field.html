@@ -1,3 +1,4 @@
 <label for="{{ field.fieldId }}" class="control-label">{{ field.name }}</label>
 <textarea id="{{ field.fieldId }}" name="formGroup" class="form-control" required
-          data-ng-model="field.value"></textarea>
+          data-ng-model="field.value" ng-model-options="{debounce: {default: 500, blur: 0}}">
+</textarea>

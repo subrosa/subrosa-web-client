@@ -8,7 +8,7 @@ describe('Service: authService', function () {
 
         User = {
             failed: false,
-            get: function (expansion, success, error) {
+            get: function (success, error) {
                 if (this.failed) {
                     error();
                 } else {

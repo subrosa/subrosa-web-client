@@ -17,7 +17,7 @@ angular.module('subrosa.player').directive('avatar', function () {
             player: '=avatar',
             size: '@',
             editable: '=',
-            showUsername: '='
+            showName: '='
         }
     };
 });

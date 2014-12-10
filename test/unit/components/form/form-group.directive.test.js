@@ -2,7 +2,7 @@ describe('Directive: formGroup', function () {
     var $compile, $scope, $httpBackend, element, elementScope;
 
     function compileDirective(info) {
-        element = angular.element('<div form-group="info" data-model="user"></div>');
+        element = angular.element('<form name="formTest"><div form-group="info" data-model="user"></div></form>');
         $scope.info = info;
         $compile(element)($scope);
         $scope.$digest();
