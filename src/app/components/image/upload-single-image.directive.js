@@ -24,7 +24,9 @@ angular.module('subrosa.components.image').directive('uploadSingleImage', functi
                     lastChunk = chunks[chunks.length - 1],
                     response = angular.fromJson(lastChunk.xhr.responseText);
 
-                scope.afterUpload(response);
+                if (scope.afterUpload) {
+                    scope.afterUpload(response);
+                }
             };
         }
     };

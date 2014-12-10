@@ -21,7 +21,7 @@ describe('Factory: Player', function () {
         $httpBackend.expectGET('/subrosa/v1/user/player/1234').respond(player);
         playerFactory.get({id: 1234}, function (response) {
             expect(response.id).toBe(player.id);
-            expect(response.username).toBe(player.username);
+            expect(response.name).toBe(player.name);
             expect(response.email).toBe(player.email);
         });
         $httpBackend.flush();

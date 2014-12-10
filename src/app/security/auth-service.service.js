@@ -39,20 +39,29 @@ angular.module('subrosa.security').service('authService', function ($rootScope, 
     /**
      * Get the current user.
      *
-     * @returns object promise
+     * @param {function} successFn the function to call on success
+     * @param {function} errorFn the function to call on error
+     *
+     * @returns {object} $resource
      */
-    this.getCurrentUser = function (expansion) {
+    this.getCurrentUser = function (successFn, errorFn) {
         var success, error;
 
         success = function (response) {
             service.currentUser = response.data;
+            if (successFn) {
+                successFn(response);
+            }
         };
 
-        error = function () {
+        error = function (response) {
             session.removeToken();
+            if (errorFn) {
+                errorFn(response);
+            }
         };
 
-        return User.get({expansion: expansion}, success, error);
+        return User.get(success, error);
     };
 
     /**

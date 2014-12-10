@@ -4,7 +4,7 @@
   <div class="col-sm-6 col-md-4" data-ng-repeat="existingPlayer in players">
     <div class="thumbnail">
       <a href="#" class="text-center" data-ng-click="setPlayer(existingPlayer)"
-         data-avatar="existingPlayer" data-size="md" data-show-username="true">
+         data-avatar="existingPlayer" data-size="md" data-show-name="true">
       </a>
       <button class="btn btn-default btn-sm center-block"
               data-ng-click="editPlayer(existingPlayer)">
@@ -36,7 +36,7 @@
 
     <div class="form-group" data-input-feedback="editPlayerForm.name">
       <label for="username" data-i18n>Username</label>
-      <input id="username" name="player.username" type="text" class="form-control" required data-ng-model="player.name"/>
+      <input id="username" name="player.name" type="text" class="form-control" required data-ng-model="player.name"/>
       <p class="help-block" data-i18n>How you are known to other players.</p>
     </div>
 
@@ -47,9 +47,6 @@
         <a href="" data-ng-click="editAvatar = true;">
           <div class="text-center" data-avatar="player" data-size="lg" data-editable="true"></div>
         </a>
-        <div class="caption">
-          <p data-i18n>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
-        </div>
       </div>
 
       <div data-ng-show="editAvatar" data-upload-single-image data-after-upload="setPlayerImage">
