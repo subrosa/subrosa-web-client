@@ -1,30 +1,37 @@
-<p class="help-block" data-ng-show="field.$dirty"
-   data-ng-messages="field.$error" data-ng-messages-multiple>
-    <span class="has-error" data-ng-message="required" data-i18n>
-      You forgot to fill this out.
-    </span>
+<p data-ng-show="field.$dirty" data-ng-messages="field.$error" data-ng-messages-multiple>
+  <span class="has-error" data-ng-message="required" data-i18n>
+    You forgot to fill this out.
+  </span>
 
-    <span class="has-error" data-ng-message="min" data-i18n>
-      This value should be greater than {{ min }}.
-    </span>
+  <span class="has-error" data-ng-message="unique" data-i18n>
+    A {{ field.name }} called {{ field.value }} already exists.
+  </span>
 
-    <span class="has-error" data-ng-message="max" data-i18n>
-      This value should be less than {{ max }}.
-    </span>
+  <span class="has-error" data-ng-message="invalid" data-i18n>
+    This field is invalid.
+  </span>
 
-    <span class="has-error" data-ng-message="number" data-i18n>
-      This should be a number.
-    </span>
+  <span class="has-error" data-ng-message="min" data-i18n>
+    This value should be greater than {{ min }}.
+  </span>
 
-    <span class="has-error" data-ng-message="integer" data-i18n>
-      This should be a whole number.
-    </span>
+  <span class="has-error" data-ng-message="max" data-i18n>
+    This value should be less than {{ max }}.
+  </span>
 
-    <span class="has-error" data-ng-message="email" data-i18n>
-      This should be formatted as 'an@email.com'.
-    </span>
+  <span class="has-error" data-ng-message="number" data-i18n>
+    This should be a number.
+  </span>
 
-    <span class="has-error" data-ng-message="server" data-i18n>
-      {{ field.$error.message }}
-    </span>
+  <span class="has-error" data-ng-message="integer" data-i18n>
+    This should be a whole number.
+  </span>
+
+  <span class="has-error" data-ng-message="email" data-i18n>
+    This should be formatted as 'an@email.com'.
+  </span>
+
+  <span class="has-error" data-ng-message="server" data-i18n>
+    {{ field.$error.message }}
+  </span>
 </p>

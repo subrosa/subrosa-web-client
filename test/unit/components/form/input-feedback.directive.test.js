@@ -26,8 +26,8 @@ describe('Directive: inputFeedback', function () {
         elementScope = element.isolateScope();
     });
 
-    it("appends an ng-messages help-block to the element", function () {
-        expect(element.find('.help-block').length).toBe(1);
+    it("appends an ng-messages element", function () {
+        expect(element.find('p').length).toBe(1);
         expect(element.find('[data-ng-messages="field.$error"]').length).toBe(1);
     });
 
@@ -83,7 +83,7 @@ describe('Directive: inputFeedback', function () {
 
             $scope.$digest();
 
-            expect(element.hasClass('has-error')).toBe(true);
+            expect(element.hasClass('alert alert-danger')).toBe(true);
         });
     });
 });

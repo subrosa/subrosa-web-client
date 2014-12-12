@@ -3,7 +3,7 @@
  * @name subrosa.utils
  *
  * @description
- *  Module for game related functionality.
+ *  Module for utility related functionality.
  */
 angular.module('subrosa.utils', []);
 

@@ -7,6 +7,7 @@
  */
 angular.module('subrosa.components.form', [
     'ngMessages',
+    'subrosa.utils',
     'toggle-switch',
     'ui.bootstrap.alert',
     'ui.bootstrap.tpls',

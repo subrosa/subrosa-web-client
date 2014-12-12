@@ -38,13 +38,6 @@ angular.module('subrosa.components.form').directive('formGroup', function () {
                     unbindControlWatch();
                 }
             });
-
-            scope.$watch('field.value', function (field) {
-                if (field) {
-                    scope.model[field.fieldId] = field.value;
-                }
-            });
-
         }
     };
 });
