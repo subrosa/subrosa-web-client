@@ -16,8 +16,7 @@ angular.module('subrosa.notifications').service('errorInterceptor', function ($q
         if (rejection.status !== 401) {
             if (rejection.hasOwnProperty('data') && rejection.data.hasOwnProperty('notifications')) {
                 angular.forEach(rejection.data.notifications, function (notification) {
-                    notification = errorDictionary.transform(notification);
-                    notifications.push(notification);
+                    notifications.push(errorDictionary.translate(notification));
                 });
                 rejection.data.notifications = notifications;
             } else {

@@ -34,8 +34,10 @@ describe('Directive: formGroup', function () {
         expect(element.find('.form-group').length).toBe(1);
     });
 
-    it("displays a bootstrap 3 .help-block and an error messages .help-block", function () {
-        expect(element.find('.help-block').length).toBe(2);
+    it("displays a bootstrap 3 .help-block and error messages", function () {
+        expect(element.find('p').length).toBe(2);
+        expect(element.find('p.help-block').length).toBe(1);
+        expect(element.find('p:not(.help-block)').length).toBe(1);
     });
 
     it("displays bootstrap 3 label and input", function () {

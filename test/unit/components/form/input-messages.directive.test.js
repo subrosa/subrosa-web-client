@@ -18,9 +18,8 @@ describe('Directive: inputMessages', function () {
         elementScope = element.isolateScope();
     });
 
-    it("should display a ng-messages help block", function () {
+    it("should display a ng-messages element", function () {
         expect(elementScope.field).toBe($scope.field);
-        expect(element.attr('class')).toContain('help-block');
         expect(element.attr('data-ng-messages')).toBe('field.$error');
     });
 

@@ -9,7 +9,7 @@ describe('Service: errorInterceptor', function () {
         };
 
         errorDictionary = {
-            transform: function () {},
+            translate: function () {},
             unknownError: 'yo'
         };
 
@@ -39,13 +39,13 @@ describe('Service: errorInterceptor', function () {
         badRequest.data.notifications = notifications;
 
         spyOn($q, 'reject');
-        spyOn(errorDictionary, 'transform').andCallThrough();
+        spyOn(errorDictionary, 'translate').andCallThrough();
 
         errorInterceptor.responseError(badRequest);
 
-        expect(errorDictionary.transform.callCount).toBe(2);
-        expect(errorDictionary.transform).toHaveBeenCalledWith(notifications[0]);
-        expect(errorDictionary.transform).toHaveBeenCalledWith(notifications[1]);
+        expect(errorDictionary.translate.callCount).toBe(2);
+        expect(errorDictionary.translate).toHaveBeenCalledWith(notifications[0]);
+        expect(errorDictionary.translate).toHaveBeenCalledWith(notifications[1]);
         expect($q.reject).toHaveBeenCalledWith(badRequest);
     });
 
@@ -67,11 +67,11 @@ describe('Service: errorInterceptor', function () {
             }
         };
         spyOn($q, 'reject');
-        spyOn(errorDictionary, 'transform');
+        spyOn(errorDictionary, 'translate');
 
         errorInterceptor.responseError(unauthorized);
 
-        expect(errorDictionary.transform).not.toHaveBeenCalled();
+        expect(errorDictionary.translate).not.toHaveBeenCalled();
         expect($q.reject).toHaveBeenCalledWith(unauthorized);
     });
 });

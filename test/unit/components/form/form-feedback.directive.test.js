@@ -33,18 +33,19 @@ describe('Directive: formFeedback', function () {
     });
 
     describe("watches the notifications", function () {
-        var notification;
+        var notification, constraint;
 
         beforeEach(function () {
             spyOn(elementScope.form.myField, '$setValidity');
-            notification = {details: {field: 'myField', message: 'yo'}};
+            notification = {details: {field: 'myField', message: 'yo', constraint: 'required'}};
+            constraint = notification.details.constraint;
             $scope.notifications = [notification];
         });
 
         it("and updates the relevant form field if found", function () {
             $scope.$digest();
 
-            expect(elementScope.form.myField.$setValidity).toHaveBeenCalledWith('server', false);
+            expect(elementScope.form.myField.$setValidity).toHaveBeenCalledWith(constraint, false);
             expect(elementScope.form.myField.$error.message).toBe(notification.details.message);
         });
 
@@ -53,7 +54,7 @@ describe('Directive: formFeedback', function () {
 
             $scope.$digest();
 
-            expect(elementScope.form.myField.$setValidity).not.toHaveBeenCalledWith('server', false);
+            expect(elementScope.form.myField.$setValidity).not.toHaveBeenCalledWith(constraint, false);
             expect(elementScope.form.myField.$error.message).toBe(undefined);
         });
 
@@ -62,7 +63,7 @@ describe('Directive: formFeedback', function () {
 
             $scope.$digest();
 
-            expect(elementScope.form.myField.$setValidity).not.toHaveBeenCalledWith('server', false);
+            expect(elementScope.form.myField.$setValidity).not.toHaveBeenCalledWith(constraint, false);
             expect(elementScope.form.myField.$error.message).toBe(undefined);
         });
 
@@ -71,7 +72,7 @@ describe('Directive: formFeedback', function () {
 
             $scope.$digest();
 
-            expect(elementScope.form.myField.$setValidity).not.toHaveBeenCalledWith('server', false);
+            expect(elementScope.form.myField.$setValidity).not.toHaveBeenCalledWith(constraint, false);
             expect(elementScope.form.myField.$error.message).toBe(undefined);
         });
     });
