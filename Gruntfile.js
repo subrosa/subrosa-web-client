@@ -81,10 +81,16 @@ module.exports = function (grunt) {
                 files: [
                     '<%= subrosa.src %>/index.html',
                     '<%= subrosa.src %>/app/**/*.html',
-                    '<%= subrosa.src %>/css/**/*.css',
                     '<%= subrosa.src %>/app/**/*.js',
                     '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
                 ]
+            },
+            styles: {
+                files: ['<%= subrosa.src %>/less/**/*.less'],
+                tasks: ['less'],
+                options: {
+                    nospawn: true
+                }
             }
         },
 
@@ -121,6 +127,20 @@ module.exports = function (grunt) {
                     'style-disabled': true,
                     'img-alt-require': true,
                     'spec-char-escape': true
+                }
+            }
+        },
+
+        // Preprocessors
+        less: {
+            development: {
+                options: {
+                    compress: true,
+                    yuicompress: true,
+                    optimization: 2
+                },
+                files: {
+                    '<%= subrosa.src %>/css/subrosa.css': '<%= subrosa.src %>/less/subrosa.less'
                 }
             }
         },
@@ -290,6 +310,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('server', [
         'clean:tmp',
+        'less',
         'configureProxies',
         'connect:livereload',
         'open',
@@ -297,6 +318,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('lint', [
+        'less',
         'csslint',
         'jshint',
         'htmlhint'
