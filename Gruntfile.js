@@ -174,13 +174,6 @@ module.exports = function (grunt) {
             tmp: subrosaConfig.tmp
         },
 
-        useminPrepare: {
-            html: '<%= subrosa.src %>/index.html',
-            options: {
-                dest: 'dist'
-            }
-        },
-
         imagemin: {
             build: {
                 files: [{
@@ -197,14 +190,14 @@ module.exports = function (grunt) {
 
         ngtemplates: {
             subrosa: {
-                options: {
-                    concat: 'generated',
-                    htmlmin: '<%= htmlmin.options %>',
-                    prefix: '/'
-                },
                 cwd: '<%= subrosa.src %>',
                 src: [ 'app/**/*.html' ],
-                dest: '<%= subrosa.tmp %>/templates/templates.js'
+                dest: '<%= subrosa.tmp %>/templates/templates.js',
+                options: {
+                    usemin: 'js/scripts.js',
+                    htmlmin: '<%= htmlmin.options %>',
+                    prefix: '/'
+                }
             }
         },
 
@@ -242,16 +235,6 @@ module.exports = function (grunt) {
                     ],
                     dest: '<%= subrosa.dist %>/css/images/'
                 }]
-            },
-            timelineImages: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= subrosa.src %>/lib/chap-links-timeline/img',
-                    src: [
-                        '**/*'
-                    ],
-                    dest: '<%= subrosa.dist %>/css/img/'
-                }]
             }
         },
 
@@ -279,10 +262,24 @@ module.exports = function (grunt) {
             }
         },
 
-        usemin: {
-            html: ['<%= subrosa.dist %>/**/*.html'],
+        useminPrepare: {
+            html: '<%= subrosa.src %>/*.html',
             options: {
-                revmap: '<%= filerev.summary %>'
+                dest: '<%= subrosa.dist %>'
+            }
+        },
+
+        usemin: {
+            css: ['<%= subrosa.dist %>/css/*.css'],
+            html: ['<%= subrosa.dist %>/**/*.html'],
+            js: ['<%= subrosa.dist %>/js/*.js'],
+            options: {
+                assetsDirs: ['<%= subrosa.dist %>', '<%= subrosa.dist %>/img'],
+                patterns: {
+                    js: [
+                        [/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference revved images']
+                    ]
+                }
             }
         },
 
@@ -350,7 +347,6 @@ module.exports = function (grunt) {
         'copy:assets',
         'copy:fonts',
         'copy:leafletImages',
-        'copy:timelineImages',
         'concat:generated',
         'ngAnnotate',
         'cssmin:generated',
@@ -358,7 +354,7 @@ module.exports = function (grunt) {
         'filerev',
         'usemin',
         'htmlmin',
-        'clean:tmp'
+        //'clean:tmp'
     ]);
 
     grunt.registerTask('default', ['build']);
