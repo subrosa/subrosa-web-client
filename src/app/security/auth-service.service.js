@@ -18,14 +18,17 @@
  * @requires User
  * @requires session
  * @requires authRetryQueue
+ * @requires $facebook
+ * @requires API
  *
  * @description
  *  Handles Authentication related functionality such as providing the current user and
  *  managing sessions via login and logout commands.
  */
-angular.module('subrosa.security').service('authService', function ($rootScope, $http, User, session, authRetryQueue) {
+angular.module('subrosa.security').service('authService', function ($rootScope, $http, User, session, authRetryQueue, $facebook, API) {
     var service = this;
     this.currentUser = null;
+    this.baseApiUrl = API.BASE_URL + '/v' + API.VERSION;
 
     /**
      * Is the user authenticated?
@@ -72,6 +75,37 @@ angular.module('subrosa.security').service('authService', function ($rootScope, 
      */
     this.login = function (user) {
         return $http.post('/subrosa/v1/session', user)
+            .success(function (data) {
+                service.loginConfirmed(data);
+            })
+            .error(function () {
+                // Ensure the user does not have a session
+                session.removeToken();
+            });
+    };
+
+    this.loginWithFb = function () {
+        console.log('logging in with fb');
+        $facebook.login().then(function(response) {
+            console.log(response);
+            if (!response.authResponse || response.status != 'connected') {
+                return;
+            }
+            service.socialLogin({
+                provider: 'facebook',
+                accessToken: response.authResponse.accessToken
+            });
+        });
+    };
+
+    /**
+     * Log the user into the subrosa API via social login.
+     *
+     * @param sessionRequest session data
+     * @returns object $http $promise.
+     */
+    this.socialLogin = function (sessionRequest) {
+        return $http.post(this.baseApiUrl + '/session/' + sessionRequest.provider, sessionRequest)
             .success(function (data) {
                 service.loginConfirmed(data);
             })
