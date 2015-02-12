@@ -78,7 +78,6 @@ angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
         }
     );
 
-+
     // Load the facebook SDK asynchronously
     (function () {
         // If we've already installed the SDK, we're done

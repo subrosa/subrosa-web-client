@@ -14,6 +14,7 @@
  * @name subrosa.security.authService
  *
  * @requires $rootScope
+ * @requires $log
  * @requires $http
  * @requires User
  * @requires session
@@ -25,7 +26,7 @@
  *  Handles Authentication related functionality such as providing the current user and
  *  managing sessions via login and logout commands.
  */
-angular.module('subrosa.security').service('authService', function ($rootScope, $http, User, session, authRetryQueue, $facebook, API) {
+angular.module('subrosa.security').service('authService', function ($rootScope, $log, $http, User, session, authRetryQueue, $facebook, API) {
     var service = this;
     this.currentUser = null;
     this.baseApiUrl = API.BASE_URL + '/v' + API.VERSION;
@@ -85,10 +86,9 @@ angular.module('subrosa.security').service('authService', function ($rootScope, 
     };
 
     this.loginWithFb = function () {
-        console.log('logging in with fb');
-        $facebook.login().then(function(response) {
-            console.log(response);
-            if (!response.authResponse || response.status != 'connected') {
+        $facebook.login().then(function (response) {
+            $log.debug('fb login attempted', response);
+            if (!response.authResponse || response.status !== 'connected') {
                 return;
             }
             service.socialLogin({
