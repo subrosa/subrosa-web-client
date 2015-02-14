@@ -1,5 +1,5 @@
 describe('Service: authService', function () {
-    var $rootScope, $httpBackend, authService, User, user, session, authRetryQueue;
+    var $rootScope, $httpBackend, authService, User, user, session, authRetryQueue, $facebook, API;
 
     beforeEach(module('subrosa.security'));
 
@@ -29,9 +29,20 @@ describe('Service: authService', function () {
             transform: function () {}
         };
 
+        $facebook = {
+            login: function () {}
+        };
+
+        API = {
+            BASE_URL: 'fake.org',
+            VERSION: 1
+        };
+
         $provide.value('User', User);
         $provide.value('session', session);
         $provide.value('authRetryQueue', authRetryQueue);
+        $provide.value('$facebook', $facebook);
+        $provide.value('API', API);
     }));
 
     beforeEach(inject(function (_$rootScope_, _$httpBackend_, _authService_) {

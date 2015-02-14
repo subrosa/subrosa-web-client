@@ -17,6 +17,7 @@ angular.module('subrosa.components.menu').controller("MainMenuController", funct
 
     $scope.isAuthenticated = authService.isAuthenticated;
     $scope.logout = authService.logout;
+    $scope.loginWithFb = authService.loginWithFb;
     $scope.user = {};
 
     $scope.$watch(

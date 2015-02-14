@@ -302,11 +302,55 @@ module.exports = function (grunt) {
                     dest: '<%= subrosa.dist %>'
                 }]
             }
+        },
+
+        // Environment configurations
+        ngconstant: {
+            options: {
+                space: '  ',
+                dest: '<%= subrosa.src %>/app/config.js',
+                wrap: '/* jshint ignore:start */\n\n {%= __ngModule %}\n\n/* jshint ignore:end */',
+                name: 'subrosa.config'
+            },
+            development: {
+                constants: {
+                    ENV: 'development',
+                    API: {
+                        BASE_URL: grunt.option('api-url') || 'http://localhost:9000/subrosa',
+                        VERSION: grunt.option('api-version') || '1'
+                    },
+                    FB: {
+                        APP_ID: grunt.option('fb-app-id') || '121867348713',
+                        GRAPH_VERSION: grunt.option('fb-graph-version') || '2.2'
+                    }
+                },
+                values: {
+                    DEBUG: true
+                }
+            },
+            production: {
+                constants: {
+                    ENV: 'production',
+                    API: {
+                        BASE_URL: grunt.option('api-url') || 'https://subrosagames.com:8080/subrosa',
+                        VERSION: grunt.option('api-version') || '1'
+                    },
+                    FB: {
+                        APP_ID: grunt.option('fb-app-id') || '121867348713',
+                        GRAPH_VERSION: grunt.option('fb-graph-version') || '2.2'
+                    }
+                },
+                values: {
+                    DEBUG: false
+                }
+            }
         }
+
     });
 
     grunt.registerTask('server', [
         'clean:tmp',
+        'ngconstant:development',
         'less',
         'configureProxies',
         'connect:livereload',
@@ -322,12 +366,14 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
+        'ngconstant:development',
         'connect:test',
         'karma:singleRunUnit',
         'karma:singleRunE2E'
     ]);
 
     grunt.registerTask('test:server', [
+        'ngconstant:development',
         'connect:test',
         'karma:server'
     ]);
@@ -341,6 +387,7 @@ module.exports = function (grunt) {
         'lint',
         'test',
         'clean:dist',
+        'ngconstant:production',
         'useminPrepare',
         'imagemin',
         'ngtemplates',
