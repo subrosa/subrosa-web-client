@@ -119,7 +119,7 @@ angular.module('subrosa.security').service('authService', function ($rootScope, 
      * Log the user out by calling the API and deleting the sessionStorage token.
      */
     this.logout = function () {
-        $http.post('/subrosa/v1/logout').then(function () {
+        $http.delete('/subrosa/v1/session').then(function () {
             session.removeToken();
             service.currentUser = null;
         });
