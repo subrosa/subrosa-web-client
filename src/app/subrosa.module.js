@@ -6,6 +6,7 @@
  *  Base module that defines the subrosa namespace and includes modules used by the application.
  */
 angular.module('subrosa', [
+    'ngAnimate',
     'subrosa.config',
     'subrosa.account',
     'subrosa.components.form',
