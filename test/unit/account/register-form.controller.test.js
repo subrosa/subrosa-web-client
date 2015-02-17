@@ -1,5 +1,5 @@
 describe('Controller: RegisterFormController', function () {
-    var $rootScope, $scope, $state, Account, authService, postData;
+    var $rootScope, $scope, $state, Account, authService, postData, flash;
 
     beforeEach(module('subrosa.account', 'mocks'));
 
@@ -9,11 +9,28 @@ describe('Controller: RegisterFormController', function () {
         };
 
         authService = {
-            login: function () {}
+            failed: false,
+            login: function () {
+                var self = this;
+                return {
+                    then: function (success, error) {
+                        if (self.failed) {
+                            error();
+                        } else {
+                            success();
+                        }
+
+                    }
+                };
+            }
         };
     });
 
     beforeEach(inject(function ($controller, _$rootScope_, MockResource) {
+        var i18n = jasmine.createSpy('i18n').andReturn('translated');
+
+        flash = {add: function () {}};
+
         $rootScope = _$rootScope_;
         $scope = $rootScope.$new();
         $scope.transitionTo = function () {};
@@ -24,7 +41,9 @@ describe('Controller: RegisterFormController', function () {
             $scope: $scope,
             $state: $state,
             Account: Account,
-            authService: authService
+            authService: authService,
+            i18n: i18n,
+            flash: flash
         });
 
         $scope.user = {email: 'valid@valid.com', password: 'bitcheye'};
@@ -74,6 +93,34 @@ describe('Controller: RegisterFormController', function () {
 
             expect($scope.notifications.length).toBe(1);
             expect($scope.notifications).toBe(error.data.notifications);
+        });
+
+        describe("by handling the case when an account already exists", function () {
+            beforeEach(function () {
+                spyOn(authService, 'login').andCallThrough();
+                Account.setErrorResponse({status: 409});
+                Account.failed = true;
+
+            });
+
+            it("by logging in and displaying a message if provided with correct credentials.", function () {
+                spyOn(flash, 'add');
+
+                $scope.register();
+
+                expect(authService.login).toHaveBeenCalledWith($scope.user);
+                expect(flash.add).toHaveBeenCalledWith('success', jasmine.any(String));
+            });
+
+            it("by logging in and displaying a message if provided with incorrect credentials.", function () {
+                spyOn($scope, 'goToLogin');
+
+                authService.failed = true;
+                $scope.register();
+
+                expect(authService.login).toHaveBeenCalledWith($scope.user);
+                expect($scope.goToLogin).toHaveBeenCalledWith({loginViaRegisterFailed: true});
+            });
         });
 
         describe("can transition to the login dialog", function () {

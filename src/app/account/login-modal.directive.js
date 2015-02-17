@@ -25,7 +25,10 @@ angular.module('subrosa.account').directive('loginModal', function ($modal) {
             };
 
             // Open the modal when login is required
-            scope.$on('auth-loginRequired', function (event, user) {
+            scope.$on('auth-loginRequired', function (event, user, options) {
+                if (options && options.loginViaRegisterFailed) {
+                    user.loginViaRegisterFailed = true;
+                }
                 scope.openModal(user);
             });
         }
