@@ -1,8 +1,12 @@
 <form name="loginForm" class="form-horizontal" role="form" novalidate>
   <div class="modal-body">
 
-    <p class="alert alert-info" data-i18n>
+    <p class="alert alert-info" data-ng-hide="user.loginViaRegisterFailed" data-i18n>
       Login below with your Subrosa account.
+    </p>
+
+    <p alert="warning" data-ng-show="user.loginViaRegisterFailed" translate>
+      You already have an account but did not enter the correct password.  Would you like to try again?
     </p>
 
     <p data-ng-show="errors.authError" class="alert alert-danger" data-i18n>
