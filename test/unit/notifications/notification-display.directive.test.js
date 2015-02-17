@@ -1,7 +1,15 @@
 describe('Directive: notificationDisplay', function () {
-    var $scope, $compile, element, elementScope;
+    var $scope, $compile, $timeout, element, elementScope;
 
     beforeEach(module('subrosa.notifications', '/app/notifications/views/notification-display.html'));
+
+    beforeEach(module(function ($provide) {
+        $timeout = function (callback) {
+            callback();
+        };
+
+        $provide.value('$timeout', $timeout);
+    }));
 
     beforeEach(inject(function (_$compile_, $rootScope) {
         $compile = _$compile_;
@@ -16,7 +24,7 @@ describe('Directive: notificationDisplay', function () {
 
         $scope.notifications = [
             {severity: 'ERROR', message: 'yo error!'},
-            {severity: 'SUCCESS', message: 'successful!'}
+            {severity: 'WARNING', message: 'successful!'}
         ];
         $scope.$digest();
     });
@@ -53,6 +61,15 @@ describe('Directive: notificationDisplay', function () {
 
         expect(element.find('[data-alert=""]').length).toBe(1);
         expect(elementScope.notifications.length).toBe(1);
-        expect(elementScope.notifications[0].type).toBe('success');
+        expect(elementScope.notifications[0].type).toBe('warning');
+    });
+    
+    it("fades the notification out if success", function () {
+        var elementScope = element.isolateScope();
+        $scope.notifications = [{type: 'success', message: 'yay!'}];
+        spyOn(elementScope, 'closeNotification').andCallThrough();
+
+        $scope.$digest();
+        expect(elementScope.notifications.length).toBe(0);
     });
 });

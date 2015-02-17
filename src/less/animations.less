@@ -1,0 +1,26 @@
+.notification.ng-leave {
+  -webkit-transition: 1s linear all;
+  -moz-transition: 1s linear all;
+  -o-transition: 1s linear all;
+  transition: 1s linear all;
+  position:relative;
+}
+
+.notification.ng-enter {
+  left:-10px;
+  opacity:0;
+}
+
+.notification.ng-enter.notification.ng-enter-active {
+  left:0;
+  opacity:1;
+}
+
+.notification.ng-leave {
+  left:0;
+  opacity:1;
+}
+.notification.ng-leave.notification.ng-leave-active {
+  left:-10px;
+  opacity:0;
+}
