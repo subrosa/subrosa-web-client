@@ -132,7 +132,7 @@ describe('Service: authService', function () {
     });
 
     it('can logout', function () {
-        $httpBackend.expectPOST('/subrosa/v1/logout').respond(200, '');
+        $httpBackend.expectDELETE('/subrosa/v1/session').respond(200, '');
         spyOn(session, 'removeToken');
 
         authService.logout();
