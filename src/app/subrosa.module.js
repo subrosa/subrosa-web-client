@@ -9,6 +9,7 @@ angular.module('subrosa', [
     'ngAnimate',
     'subrosa.config',
     'subrosa.account',
+    'subrosa.components.flash',
     'subrosa.components.form',
     'subrosa.components.menu',
     'subrosa.game',
