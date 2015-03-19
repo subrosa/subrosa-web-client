@@ -7,6 +7,7 @@
  */
 angular.module('subrosa', [
     'ngAnimate',
+    'subrosa.auth',
     'subrosa.config',
     'subrosa.account',
     'subrosa.components.flash',
@@ -14,12 +15,10 @@ angular.module('subrosa', [
     'subrosa.components.menu',
     'subrosa.game',
     'subrosa.notifications',
-    'subrosa.security',
     'ui.router',
     'ui.bootstrap.collapse',
     'ui.bootstrap.dropdownToggle',
-    'ui.bootstrap.tpls',
-    'ngFacebook'
+    'ui.bootstrap.tpls'
 ]);
 
 /**
@@ -28,13 +27,11 @@ angular.module('subrosa', [
  *
  * @requires $stateProvider
  * @requires $locationProvider
- * @requires $facebookProvider
- * @requires FB
  *
  * @description
  *  Used for establishing application wide configuration.
  */
-angular.module('subrosa').config(function ($stateProvider, $locationProvider, $facebookProvider, FB) {
+angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
     $stateProvider.state('home', {
         url: '/'
     });
@@ -42,9 +39,6 @@ angular.module('subrosa').config(function ($stateProvider, $locationProvider, $f
     // Configure html5 mode, otherwise URLs will be base.com/#/home rather than base.com/home.
     // The hashPrefix and the <meta name="fragment" content="!" /> in the index allows google to crawl correctly.
     $locationProvider.html5Mode(true).hashPrefix('!');
-
-    $facebookProvider.setAppId(FB.APP_ID);
-    $facebookProvider.setVersion("v" + FB.GRAPH_VERSION);
 });
 
 /**
@@ -79,20 +73,4 @@ angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
             }
         }
     );
-
-    // Load the facebook SDK asynchronously
-    (function () {
-        // If we've already installed the SDK, we're done
-        if (document.getElementById('facebook-jssdk')) { return; }
-        // Get the first script element, which we'll use to find the parent node
-        var firstScriptElement = document.getElementsByTagName('script')[0];
-        // Create a new script element and set its id
-        var facebookJS = document.createElement('script');
-        facebookJS.id = 'facebook-jssdk';
-        // Set the new script's source to the source of the Facebook JS SDK
-        facebookJS.src = '//connect.facebook.net/en_US/all.js';
-        // Insert the Facebook JS SDK into the DOM
-        firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
-    }());
-
 });

@@ -1,7 +1,7 @@
 describe('Service: session', function () {
     var $window, session, token = 'lalala';
 
-    beforeEach(module('subrosa.security'));
+    beforeEach(module('subrosa.auth'));
 
     beforeEach(module(function ($provide) {
         $window = {sessionStorage: {}};

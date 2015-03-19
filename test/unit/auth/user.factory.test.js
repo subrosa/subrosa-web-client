@@ -1,7 +1,7 @@
 describe('Factory: User', function () {
     var $httpBackend, User, user;
 
-    beforeEach(module('subrosa.security'));
+    beforeEach(module('subrosa.auth'));
 
     beforeEach(function () {
         user = {id: "1234", username: "yo", email: "yoyo@yo.com"};

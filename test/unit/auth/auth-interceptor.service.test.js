@@ -1,7 +1,7 @@
 describe('Service: authInterceptor', function () {
     var $q, $rootScope, $window, authRetryQueue, authInterceptor;
 
-    beforeEach(module('subrosa.security'));
+    beforeEach(module('subrosa.auth'));
 
     beforeEach(module(function ($provide) {
         $q = {

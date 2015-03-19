@@ -11,7 +11,7 @@
 
 /**
  * @ngdoc service
- * @name subrosa.security.authService
+ * @name subrosa.auth.authService
  *
  * @requires $rootScope
  * @requires $log
@@ -26,7 +26,7 @@
  *  Handles Authentication related functionality such as providing the current user and
  *  managing sessions via login and logout commands.
  */
-angular.module('subrosa.security').service('authService', function ($rootScope, $log, $http, User, session, authRetryQueue, $facebook, API) {
+angular.module('subrosa.auth').service('authService', function ($rootScope, $log, $http, User, session, authRetryQueue, $facebook, API) {
     var service = this;
     this.currentUser = null;
     this.baseApiUrl = API.BASE_URL + '/v' + API.VERSION;

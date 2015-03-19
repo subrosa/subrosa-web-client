@@ -1,7 +1,7 @@
 describe('Service: authService', function () {
     var $rootScope, $httpBackend, authService, User, user, session, authRetryQueue, $facebook, API;
 
-    beforeEach(module('subrosa.security'));
+    beforeEach(module('subrosa.auth'));
 
     beforeEach(module(function ($provide) {
         user = {email: 'blah@blah.com', name: 'walden'};
