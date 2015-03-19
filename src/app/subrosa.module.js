@@ -48,17 +48,20 @@ angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
  * @requires $rootScope
  * @requires $state
  * @requires $stateParams
+ * @requiers API_CONFIG
  *
  * @description
  *  Set common items on the $rootScope such as $state related information.
  */
-angular.module('subrosa').run(function ($rootScope, $state, $stateParams) {
+angular.module('subrosa').run(function ($rootScope, $state, $stateParams, API_CONFIG) {
     $rootScope.$state = $state;
     $rootScope.go = $state.go;
     $rootScope.href = $state.href;
     $rootScope.$stateParams = $stateParams;
     $rootScope.stateIncludes = $state.includes;
     $rootScope.transitionTo = $state.transitionTo;
+
+    $rootScope.API_CONFIG = API_CONFIG;
 
     $rootScope.isState = function (stateName) {
         return $state.is(stateName);

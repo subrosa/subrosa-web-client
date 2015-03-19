@@ -308,18 +308,18 @@ module.exports = function (grunt) {
         ngconstant: {
             options: {
                 space: '  ',
-                dest: '<%= subrosa.src %>/app/config.js',
+                dest: '<%= subrosa.src %>/app/config/config.module.js',
                 wrap: '/* jshint ignore:start */\n\n {%= __ngModule %}\n\n/* jshint ignore:end */',
                 name: 'subrosa.config'
             },
             development: {
                 constants: {
                     ENV: 'development',
-                    API: {
+                    API_CONFIG: {
                         BASE_URL: grunt.option('api-url') || 'http://localhost:9000/subrosa',
                         VERSION: grunt.option('api-version') || '1'
                     },
-                    FB: {
+                    FB_CONFIG: {
                         APP_ID: grunt.option('fb-app-id') || '121867348713',
                         GRAPH_VERSION: grunt.option('fb-graph-version') || '2.2'
                     }
@@ -331,11 +331,11 @@ module.exports = function (grunt) {
             production: {
                 constants: {
                     ENV: 'production',
-                    API: {
+                    API_CONFIG: {
                         BASE_URL: grunt.option('api-url') || 'https://subrosagames.com:8080/subrosa',
                         VERSION: grunt.option('api-version') || '1'
                     },
-                    FB: {
+                    FB_CONFIG: {
                         APP_ID: grunt.option('fb-app-id') || '121867348713',
                         GRAPH_VERSION: grunt.option('fb-graph-version') || '2.2'
                     }

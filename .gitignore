@@ -4,7 +4,7 @@ dist
 .idea
 .tmp
 .sass-cache
-src/app/config.js
+src/app/config/config.module.js
 src/lib
 src/css
 test/results

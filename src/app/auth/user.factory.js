@@ -3,12 +3,13 @@
  * @name subrosa.auth.User
  *
  * @requires $resource
+ * @requires API_CONFIG
  *
  * @description
  *  Provides a $resource for user(s).
  */
-angular.module('subrosa.auth').factory('User', function ($resource) {
-    return $resource('/subrosa/v1/user/', {}, {
+angular.module('subrosa.auth').factory('User', function ($resource, API_CONFIG) {
+    return $resource(API_CONFIG.URL + '/user/', {}, {
         update: {method: 'PUT'}
     });
 });

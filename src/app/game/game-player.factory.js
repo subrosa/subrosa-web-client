@@ -3,12 +3,13 @@
  * @name subrosa.game.GamePlayer
  *
  * @requires $resource
+ * @requires API_CONFIG
  *
  * @description
  *  Provides a $resource for game player(s).
  */
-angular.module('subrosa.game').factory('GamePlayer', function ($resource) {
-    return $resource('/subrosa/v1/game/:url/player/:id', {url: '@url', id: '@gamePlayerId'}, {
+angular.module('subrosa.game').factory('GamePlayer', function ($resource, API_CONFIG) {
+    return $resource(API_CONFIG.URL + '/game/:url/player/:id', {url: '@url', id: '@gamePlayerId'}, {
         query: {method: 'GET', isArray: false}
     });
 });

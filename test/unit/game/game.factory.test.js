@@ -1,5 +1,5 @@
 describe('Factory: game', function () {
-    var gameFactory, $httpBackend;
+    var gameFactory, $httpBackend, API_CONFIG;
 
     beforeEach(module('subrosa.game'));
 
@@ -10,6 +10,7 @@ describe('Factory: game', function () {
     describe("makes a request", function () {
         beforeEach(inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');
+            API_CONFIG = $injector.get('API_CONFIG');
         }));
 
         afterEach(function () {
@@ -18,13 +19,13 @@ describe('Factory: game', function () {
         });
 
         it('to get the game from the API.', function () {
-            $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars').respond();
+            $httpBackend.expectGET(API_CONFIG.URL + '/game/raleigh-wars').respond();
             gameFactory.get({url: 'raleigh-wars'});
             $httpBackend.flush();
         });
 
         it('to query the list of games from the API.', function () {
-            $httpBackend.expectGET('/subrosa/v1/game').respond();
+            $httpBackend.expectGET(API_CONFIG.URL + '/game').respond();
             gameFactory.query();
             $httpBackend.flush();
         });
@@ -42,7 +43,7 @@ describe('Factory: game', function () {
                         }
                     }]
                 };
-                $httpBackend.expectGET('/subrosa/v1/game').respond(response);
+                $httpBackend.expectGET(API_CONFIG.URL + '/game').respond(response);
             });
 
             it('and have a game with a location', function () {
@@ -66,7 +67,7 @@ describe('Factory: game', function () {
         });
 
         it('to update a game.', function () {
-            $httpBackend.expectPUT('/subrosa/v1/game/raleigh-wars').respond();
+            $httpBackend.expectPUT(API_CONFIG.URL + '/game/raleigh-wars').respond();
             gameFactory.update({url: 'raleigh-wars'});
             $httpBackend.flush();
         });

@@ -16,6 +16,7 @@
  * @requires $rootScope
  * @requires $q
  * @requires $window
+ * @requires API_CONFIG
  * @requires authRetryQueue
  *
  * @description
@@ -24,7 +25,7 @@
  *   - Checks for 401 on responses, adds the response to the authRetryQueue,
  *     and then broadcasts auth-loginRequired event
  */
-angular.module('subrosa.auth').service('authInterceptor', function ($rootScope, $q, $window, authRetryQueue) {
+angular.module('subrosa.auth').service('authInterceptor', function ($rootScope, $q, $window, API_CONFIG, authRetryQueue) {
     this.request = function (config) {
         config.headers = config.headers || {};
         if ($window.sessionStorage.token) {
@@ -34,7 +35,7 @@ angular.module('subrosa.auth').service('authInterceptor', function ($rootScope, 
     };
 
     this.responseError = function (rejection) {
-        if (rejection.status === 401 && rejection.config.url !== '/subrosa/v1/session') {
+        if (rejection.status === 401 && rejection.config.url !== API_CONFIG.URL + '/session') {
             var deferred = $q.defer();
             delete $window.sessionStorage.token;
             authRetryQueue.append(rejection.config, deferred);

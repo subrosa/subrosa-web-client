@@ -1,5 +1,5 @@
 describe('Service: errorInterceptor', function () {
-    var $q, errorDictionary, errorInterceptor, badRequest;
+    var $q, errorDictionary, errorInterceptor, API_CONFIG, badRequest;
 
     beforeEach(module('subrosa.notifications'));
 
@@ -15,20 +15,21 @@ describe('Service: errorInterceptor', function () {
 
         $provide.value('$q', $q);
         $provide.value('errorDictionary', errorDictionary);
+    }));
+
+    beforeEach(inject(function (_errorInterceptor_, _API_CONFIG_) {
+        errorInterceptor = _errorInterceptor_;
+        API_CONFIG = _API_CONFIG_;
 
         badRequest = {
             status: 400,
             config: {
-                url: '/subrosa/v1/targets'
+                url: API_CONFIG.URL + '/targets'
             },
             data: {
                 notifications: []
             }
         };
-    }));
-
-    beforeEach(inject(function (_errorInterceptor_) {
-        errorInterceptor = _errorInterceptor_;
     }));
 
     it('uses the errorDictionary to look up notifications if they exist on the response', function () {
@@ -63,7 +64,7 @@ describe('Service: errorInterceptor', function () {
         var unauthorized = {
             status: 401,
             config: {
-                url: '/subrosa/v1/targets'
+                url: API_CONFIG.URL + '/targets'
             }
         };
         spyOn($q, 'reject');

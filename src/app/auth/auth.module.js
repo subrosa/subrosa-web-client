@@ -16,15 +16,17 @@ angular.module('subrosa.auth', [
  * @name subrosa.auth.config
  *
  * @requires $httpProvider
+ * @requires $facebookProvider
+ * @requires FB_CONFIG
  *
  * @description
  *  Add authInterceptor to $httpProvider interceptors and configure facebook auth integration.
  */
-angular.module('subrosa.auth').config(function ($httpProvider, $facebookProvider, FB) {
+angular.module('subrosa.auth').config(function ($httpProvider, $facebookProvider, FB_CONFIG) {
     $httpProvider.interceptors.push('authInterceptor');
 
-    $facebookProvider.setAppId(FB.APP_ID);
-    $facebookProvider.setVersion("v" + FB.GRAPH_VERSION);
+    $facebookProvider.setAppId(FB_CONFIG.APP_ID);
+    $facebookProvider.setVersion("v" + FB_CONFIG.GRAPH_VERSION);
 });
 
 /**
