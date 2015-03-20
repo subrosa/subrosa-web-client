@@ -5,7 +5,10 @@
  * @description
  *  Notifications module.
  */
-angular.module('subrosa.notifications', ['i18n']);
+angular.module('subrosa.notifications', [
+    'i18n',
+    'subrosa.config'
+]);
 
 /**
  * @ngdoc config

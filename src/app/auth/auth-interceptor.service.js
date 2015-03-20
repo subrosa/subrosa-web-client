@@ -11,20 +11,21 @@
 
 /**
  * @ngdoc service
- * @name subrosa.security.authInterceptor
+ * @name subrosa.auth.authInterceptor
  *
  * @requires $rootScope
  * @requires $q
  * @requires $window
+ * @requires API_CONFIG
  * @requires authRetryQueue
  *
  * @description
  *  An $httpProvider interceptor that provides the following functionality:
- *   - Adds the security token to the Authorization header of the outgoing request
+ *   - Adds the auth token to the Authorization header of the outgoing request
  *   - Checks for 401 on responses, adds the response to the authRetryQueue,
  *     and then broadcasts auth-loginRequired event
  */
-angular.module('subrosa.security').service('authInterceptor', function ($rootScope, $q, $window, authRetryQueue) {
+angular.module('subrosa.auth').service('authInterceptor', function ($rootScope, $q, $window, API_CONFIG, authRetryQueue) {
     this.request = function (config) {
         config.headers = config.headers || {};
         if ($window.sessionStorage.token) {
@@ -34,7 +35,7 @@ angular.module('subrosa.security').service('authInterceptor', function ($rootSco
     };
 
     this.responseError = function (rejection) {
-        if (rejection.status === 401 && rejection.config.url !== '/subrosa/v1/session') {
+        if (rejection.status === 401 && rejection.config.url !== API_CONFIG.URL + '/session') {
             var deferred = $q.defer();
             delete $window.sessionStorage.token;
             authRetryQueue.append(rejection.config, deferred);

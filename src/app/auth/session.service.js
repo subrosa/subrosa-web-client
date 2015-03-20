@@ -1,13 +1,13 @@
 /**
  * @ngdoc service
- * @name subrosa.security.session
+ * @name subrosa.auth.session
  *
  * @requires $window
  *
  * @description
  *
  */
-angular.module('subrosa.security').service('session', function ($window) {
+angular.module('subrosa.auth').service('session', function ($window) {
     /**
      * Return the current session token.
      *

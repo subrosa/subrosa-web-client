@@ -1,7 +1,7 @@
 describe('Service: authService', function () {
-    var $rootScope, $httpBackend, authService, User, user, session, authRetryQueue, $facebook, API;
+    var $rootScope, $httpBackend, authService, User, user, session, authRetryQueue, $facebook, API_CONFIG;
 
-    beforeEach(module('subrosa.security'));
+    beforeEach(module('subrosa.auth'));
 
     beforeEach(module(function ($provide) {
         user = {email: 'blah@blah.com', name: 'walden'};
@@ -33,22 +33,17 @@ describe('Service: authService', function () {
             login: function () {}
         };
 
-        API = {
-            BASE_URL: 'fake.org',
-            VERSION: 1
-        };
-
         $provide.value('User', User);
         $provide.value('session', session);
         $provide.value('authRetryQueue', authRetryQueue);
         $provide.value('$facebook', $facebook);
-        $provide.value('API', API);
     }));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _authService_) {
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _authService_, _API_CONFIG_) {
         $rootScope = _$rootScope_;
         $httpBackend = _$httpBackend_;
         authService = _authService_;
+        API_CONFIG = _API_CONFIG_;
     }));
 
     afterEach(function () {
@@ -85,9 +80,9 @@ describe('Service: authService', function () {
         });
     });
 
-    describe('can login via the Subrosa API', function () {
+    describe('can login via the Subrosa API_CONFIG', function () {
         it("and calls loginConfirmed on success", function () {
-            $httpBackend.expectPOST('/subrosa/v1/session').respond(200, {token: 'lalala'});
+            $httpBackend.expectPOST(API_CONFIG.URL + '/session').respond(200, {token: 'lalala'});
             spyOn(authService, 'loginConfirmed');
 
             authService.login({email: 'blah@blah.com', password: 'walden'});
@@ -97,7 +92,7 @@ describe('Service: authService', function () {
         });
 
         it("and calls session.removeToken on error", function () {
-            $httpBackend.expectPOST('/subrosa/v1/session').respond(401, {token: 'lalala'});
+            $httpBackend.expectPOST(API_CONFIG.URL + '/session').respond(401, {token: 'lalala'});
             spyOn(session, 'removeToken');
 
             authService.login();
@@ -132,7 +127,7 @@ describe('Service: authService', function () {
     });
 
     it('can logout', function () {
-        $httpBackend.expectDELETE('/subrosa/v1/session').respond(200, '');
+        $httpBackend.expectDELETE(API_CONFIG.URL + '/session').respond(200, '');
         spyOn(session, 'removeToken');
 
         authService.logout();

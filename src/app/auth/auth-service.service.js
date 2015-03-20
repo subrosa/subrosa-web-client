@@ -11,7 +11,7 @@
 
 /**
  * @ngdoc service
- * @name subrosa.security.authService
+ * @name subrosa.auth.authService
  *
  * @requires $rootScope
  * @requires $log
@@ -20,16 +20,15 @@
  * @requires session
  * @requires authRetryQueue
  * @requires $facebook
- * @requires API
+ * @requires API_CONFIG
  *
  * @description
  *  Handles Authentication related functionality such as providing the current user and
  *  managing sessions via login and logout commands.
  */
-angular.module('subrosa.security').service('authService', function ($rootScope, $log, $http, User, session, authRetryQueue, $facebook, API) {
+angular.module('subrosa.auth').service('authService', function ($rootScope, $log, $http, User, session, authRetryQueue, $facebook, API_CONFIG) {
     var service = this;
     this.currentUser = null;
-    this.baseApiUrl = API.BASE_URL + '/v' + API.VERSION;
 
     /**
      * Is the user authenticated?
@@ -75,7 +74,7 @@ angular.module('subrosa.security').service('authService', function ($rootScope, 
      * @returns object $http $promise.
      */
     this.login = function (user) {
-        return $http.post('/subrosa/v1/session', user)
+        return $http.post(API_CONFIG.URL + '/session', user)
             .success(function (data) {
                 service.loginConfirmed(data);
             })
@@ -105,7 +104,7 @@ angular.module('subrosa.security').service('authService', function ($rootScope, 
      * @returns object $http $promise.
      */
     this.socialLogin = function (sessionRequest) {
-        return $http.post(this.baseApiUrl + '/session/' + sessionRequest.provider, sessionRequest)
+        return $http.post(API_CONFIG.URL + '/session/' + sessionRequest.provider, sessionRequest)
             .success(function (data) {
                 service.loginConfirmed(data);
             })
@@ -119,7 +118,7 @@ angular.module('subrosa.security').service('authService', function ($rootScope, 
      * Log the user out by calling the API and deleting the sessionStorage token.
      */
     this.logout = function () {
-        $http.delete('/subrosa/v1/session').then(function () {
+        $http.delete(API_CONFIG.URL + '/session').then(function () {
             session.removeToken();
             service.currentUser = null;
         });

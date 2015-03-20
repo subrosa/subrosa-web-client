@@ -3,15 +3,16 @@
  * @name subrosa.game.Game
  *
  * @requires $resource
+ * @requires API_CONFIG
  *
  * @description
  *  Provides a $resource for game(s).
  */
-angular.module('subrosa.game').factory('Game', function ($resource) {
-    var game = $resource('/subrosa/v1/game/:url', {url: '@url'}, {
+angular.module('subrosa.game').factory('Game', function ($resource, API_CONFIG) {
+    var game = $resource(API_CONFIG.URL + '/game/:url', {url: '@url'}, {
         query: {method: 'GET', isArray: false},
         update: {method: 'PUT'},
-        publish: {method: 'POST', url: '/subrosa/v1/game/:url/publish'},
+        publish: {method: 'POST', url: API_CONFIG.URL + '/game/:url/publish'},
         queryPoints: {method: 'GET', isArray: false, transformResponse: function (response) {
             var markers = {};
             response = angular.fromJson(response);

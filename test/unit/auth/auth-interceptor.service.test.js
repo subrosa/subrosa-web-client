@@ -1,7 +1,7 @@
 describe('Service: authInterceptor', function () {
-    var $q, $rootScope, $window, authRetryQueue, authInterceptor;
+    var $q, $rootScope, $window, API_CONFIG, authRetryQueue, authInterceptor;
 
-    beforeEach(module('subrosa.security'));
+    beforeEach(module('subrosa.auth'));
 
     beforeEach(module(function ($provide) {
         $q = {
@@ -27,8 +27,9 @@ describe('Service: authInterceptor', function () {
         $provide.value('authRetryQueue', authRetryQueue);
     }));
 
-    beforeEach(inject(function (_authInterceptor_) {
+    beforeEach(inject(function (_authInterceptor_, _API_CONFIG_) {
         authInterceptor = _authInterceptor_;
+        API_CONFIG = _API_CONFIG_;
     }));
 
     describe('modifies request headers', function () {
@@ -52,7 +53,7 @@ describe('Service: authInterceptor', function () {
             unauthorized = {
                 status: 401,
                 config: {
-                    url: '/subrosa/v1/targets'
+                    url: API_CONFIG.URL + '/targets'
                 }
             };
         });
@@ -76,7 +77,7 @@ describe('Service: authInterceptor', function () {
             });
 
             it('if the url is not the authenticate url', function () {
-                unauthorized.config.url = '/subrosa/v1/session';
+                unauthorized.config.url = API_CONFIG.URL + '/session';
                 spyOn($rootScope, '$broadcast');
                 spyOn(authRetryQueue, 'append');
                 spyOn($q, 'reject');
@@ -94,7 +95,7 @@ describe('Service: authInterceptor', function () {
         var badRequest = {
             status: 400,
             config: {
-                url: '/subrosa/v1/targets'
+                url: API_CONFIG.URL + '/targets'
             }
         };
         spyOn($q, 'reject');

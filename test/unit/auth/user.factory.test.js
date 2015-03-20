@@ -1,7 +1,7 @@
 describe('Factory: User', function () {
-    var $httpBackend, User, user;
+    var $httpBackend, User, API_CONFIG, user;
 
-    beforeEach(module('subrosa.security'));
+    beforeEach(module('subrosa.auth'));
 
     beforeEach(function () {
         user = {id: "1234", username: "yo", email: "yoyo@yo.com"};
@@ -9,6 +9,7 @@ describe('Factory: User', function () {
         inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');
             User = $injector.get('User');
+            API_CONFIG = $injector.get('API_CONFIG');
         });
     });
 
@@ -18,7 +19,7 @@ describe('Factory: User', function () {
     });
 
     it('make a request to get the user from the API.', function () {
-        $httpBackend.expectGET('/subrosa/v1/user').respond(user);
+        $httpBackend.expectGET(API_CONFIG.URL + '/user').respond(user);
         User.get(function (response) {
             expect(response.id).toBe(user.id);
             expect(response.username).toBe(user.username);

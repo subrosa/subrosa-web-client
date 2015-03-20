@@ -7,10 +7,10 @@
  */
 angular.module('subrosa.account', [
     'ngResource',
+    'subrosa.auth',
     'subrosa.components.form',
     'subrosa.components.image',
     'subrosa.player',
-    'subrosa.security',
     'ui.bootstrap.modal',
     'ui.router'
 ]);
@@ -48,11 +48,11 @@ angular.module('subrosa.account').config(function ($stateProvider) {
         }
     });
 
-    $stateProvider.state('account.edit-security', {
-        url: '/edit/security',
+    $stateProvider.state('account.edit-auth', {
+        url: '/edit/auth',
         views: {
             'security@account': {
-                templateUrl: '/app/account/edit/views/edit-account-security.html'
+                templateUrl: '/app/account/edit/views/edit-account-auth.html'
             }
         }
     });

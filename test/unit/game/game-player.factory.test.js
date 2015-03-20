@@ -1,5 +1,5 @@
 describe('Factory: GamePlayer', function () {
-    var gamePlayerFactory, $httpBackend, player;
+    var gamePlayerFactory, $httpBackend, player, API_CONFIG;
 
     beforeEach(module('subrosa.game'));
 
@@ -9,6 +9,7 @@ describe('Factory: GamePlayer', function () {
         inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');
             gamePlayerFactory = $injector.get('GamePlayer');
+            API_CONFIG = $injector.get('API_CONFIG');
         });
     });
 
@@ -18,7 +19,7 @@ describe('Factory: GamePlayer', function () {
     });
 
     it('make a request to get the player from the API.', function () {
-        $httpBackend.expectGET('/subrosa/v1/game/raleigh-wars/player/1234').respond(player);
+        $httpBackend.expectGET(API_CONFIG.URL + '/game/raleigh-wars/player/1234').respond(player);
         gamePlayerFactory.get({url: 'raleigh-wars', id: 1234}, function (response) {
             expect(response.id).toBe(player.id);
             expect(response.name).toBe(player.name);
