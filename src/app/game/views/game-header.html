@@ -1,42 +1,40 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-xs-12">
+
     <div class="row">
-      <div class="col-md-3">
-        <img data-ng-src="{{ game.image }}" data-ng-show="game.image"
-             alt="Game Badge for {{ game.name }}" data-i18n-attrs="alt"/>
-        <i class="avatar-lg fa fa-puzzle-piece pull-left" data-ng-hide="game.image"></i>
-      </div>
-      <div class="col-md-8">
-        <h1>{{ game.name }}</h1>
-        <p>{{ game.description }}</p>
+      <div class="col-xs-12">
+        <h1>{{ game.name }} <small>{{ game.gameType | gameType }}</small></h1>
+
+        <button class="btn btn-default" data-ng-click="go('game.edit')">
+          <span data-i18n>Edit Game</span>
+        </button>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-5">
-    <dl class="dl-horizontal">
-      <dt data-i18n>Registration Period</dt>
-      <dd>
-        <p data-ng-show="game.registrationStart && game.registrationEnd">{{ game.registrationStart | date:'medium' }} - {{ game.registrationEnd | date:'medium' }}</p>
-        <p class="text-danger" data-ng-hide="game.registrationStart && game.registrationEnd" data-i18n>Registration period has not been selected</p>
-      </dd>
+    <div class="row">
+      <div class="col-xs-12">
+        <div data-timer ng-if="game.$resolved" end-time="game.registrationEnd" data-i18n>
+          <div class="alert alert-warning" ng-show="days === 0">
+            Only {{ hours }} hours, {{ minutes }} minutes, and {{ seconds }} seconds until registration ends.
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <dt data-i18n>Duration</dt>
-      <dd>
-        <p data-ng-show="game.gameStart && game.gameEnd">{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</p>
-        <p class="text-danger" data-ng-hide="game.gameStart && game.gameEnd" data-i18n>Duration has not been selected</p>
-      </dd>
+    <div class="row" data-ng-show="game.isRegistration()">
+      <div class="col-xs-6">
+        <dl>
+          <dt data-i18n>Presented By</dt>
+          <dd>{{ game.gameMaster.username }}</dd>
+        </dl>
+      </div>
 
-      <dt data-i18n>Ordnance</dt>
-      <dd>
-        <p data-ng-show="game.ordnance">{{ game.ordnance }}</p>
-        <p class="text-danger" data-ng-hide="game.ordnance">Ordnance hat not been selected</p>
-      </dd>
-
-      <dt data-i18n>Game Type</dt>
-      <dd>{{ game.gameType | gameType }}</dd>
-    </dl>
-
-    <button class="btn btn-default" data-ng-click="go('game.edit')" data-i18n>Edit Game</button>
+      <div class="col-xs-6 col-md-12">
+        <button class="btn btn-primary" data-ng-click="joinGame()">
+          <span data-i18n>Join</span>
+          <span data-ng-show="game.price"> - {{ game.price | currency:"$":0 }}</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

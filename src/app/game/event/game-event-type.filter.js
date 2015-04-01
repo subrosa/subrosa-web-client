@@ -11,10 +11,10 @@
  */
 angular.module('subrosa.game').filter('gameEventType', function (i18n) {
     const EVENT_TYPE = {
-        gameStart: i18n('The Game Begins'),
-        registrationStart: i18n('Registration is Open'),
-        registrationEnd: i18n('Registration is Closed'),
-        gameEnd: i18n('The Game Ends')
+        gameStart: i18n('Game Begins'),
+        registrationStart: i18n('Registration Open'),
+        registrationEnd: i18n('Registration Closed'),
+        gameEnd: i18n('Game Ends')
     };
 
     return function (input) {

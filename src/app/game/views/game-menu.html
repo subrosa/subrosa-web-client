@@ -1,15 +1,14 @@
-<ul role="menu" class="nav nav-tabs" data-collapsed-in-header
-    data-header-state="game" data-header-image="game.image">
+<ul role="menu" class="nav nav-pills">
   <li data-ui-sref-active="active">
-    <a data-ui-sref="game" data-i18n>Game Feed</a>
+    <a data-ui-sref="game" data-i18n>Updates</a>
   </li>
   <li data-ui-sref-active="active">
+    <a data-ui-sref="game.info" data-i18n>About</a>
+  </li>
+  <li data-ui-sref-active="active" data-ng-show="gameZones.length > 0">
+    <a data-ui-sref="game.map" data-i18n>Map</a>
+  </li>
+  <li data-ui-sref-active="active" data-ng-hide="game.isRegistration()">
     <a data-ui-sref="game.statistics" data-i18n>Statistics</a>
-  </li>
-  <li data-ui-sref-active="active">
-    <a data-ui-sref="game.rules" data-i18n>Rules</a>
-  </li>
-  <li data-ng-if="game.isRegistration()" data-ng-class="{'active': stateIncludes('game.enroll')}">
-    <a data-ui-sref="game.enroll" data-i18n>Join Game</a>
   </li>
 </ul>

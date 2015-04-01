@@ -8,7 +8,7 @@ describe('Filter:gameEventType', function () {
     }));
 
     it("returns a translated string if the event type exists", function () {
-        expect(gameEventTypeFilter("gameStart")).toBe("The Game Begins");
+        expect(gameEventTypeFilter("gameStart")).toBe("Game Begins");
     });
 
     it("returns the provided value if the event type does not exist", function () {

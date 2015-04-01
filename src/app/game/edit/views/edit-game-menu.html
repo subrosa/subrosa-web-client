@@ -1,6 +1,8 @@
-<ul role="menu" class="nav nav-tabs" data-collapsed-in-header
-    data-header-state="game" data-header-image="game.image">
+<ul role="menu" class="nav nav-pills">
   <li data-ng-class="{active: isState('game.edit')}">
+    <a data-ui-sref="game.edit" data-i18n>Game Information</a>
+  </li>
+  <li data-ng-class="{active: isState('game.edit.rules')}">
     <a data-ui-sref="game.edit" data-i18n>Rules</a>
   </li>
   <li data-ng-class="{active: isState('game.edit.options')}">

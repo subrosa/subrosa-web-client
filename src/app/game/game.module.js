@@ -14,6 +14,7 @@ angular.module('subrosa.game', [
     'subrosa.components.modal',
     'subrosa.player',
     'subrosa.utils',
+    'timer',
     'ui.router',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.timepicker'
@@ -64,12 +65,20 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         }
     });
 
-    $stateProvider.state('game.rules', {
-        url: '/rules',
+    $stateProvider.state('game.info', {
+        url: '/info',
         views: {
             'content@game': {
-                controller: 'GameRulesController',
-                templateUrl: '/app/game/views/game-rules.html'
+                templateUrl: '/app/game/views/game-info.html'
+            }
+        }
+    });
+
+    $stateProvider.state('game.map', {
+        url: '/map',
+        views: {
+            'content@game': {
+                templateUrl: '/app/game/views/game-map.html'
             }
         }
     });
@@ -91,8 +100,7 @@ angular.module('subrosa.game').config(function ($stateProvider) {
                 templateUrl: '/app/game/enroll/views/game-enrollment.html'
             },
             'right@game.enroll': {
-                controller: 'GameRulesController',
-                templateUrl: '/app/game/views/game-rules.html'
+                templateUrl: '/app/game/views/game-info.html'
             }
         }
     });
@@ -110,8 +118,7 @@ angular.module('subrosa.game').config(function ($stateProvider) {
                 templateUrl: '/app/game/edit/views/edit-game-header.html'
             },
             'content@game': {
-                controller: 'GameRulesController',
-                templateUrl: '/app/game/views/game-rules.html'
+                templateUrl: '/app/game/edit/views/edit-game.html'
             },
             'menu@game': {
                 templateUrl: '/app/game/edit/views/edit-game-menu.html'
