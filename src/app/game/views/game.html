@@ -16,53 +16,11 @@
           data-i18n>Do it.</button>
 </div>
 
-<a class="visible-xs visible-sm text-center" data-ng-hide="collapseHeader" data-ng-click="collapseHeader = true;">
-  <i class="fa fa-caret-square-o-up fa-2x"></i>
-</a>
-
-<header class="page-header" data-ui-view="header" data-collapse="collapseHeader"></header>
-<header class="page-header visible-xs visible-sm" data-ng-show="collapseHeader">
-  <a data-ng-click="collapseHeader = false;"><h1>{{ game.name }}</h1></a>
-</header>
-
-<div class="jumbotron"
-     data-ng-show="game.isRegistration() && !stateIncludes('game.enroll') && !stateIncludes('game.edit')">
-  <h2 data-translate>Want to join this game?</h2>
-
-  <div data-ng-hide="game.requiresPassword">
-    <p data-translate>
-      The game {{ game.name }} is accepting players, click the button below to join this game.
-    </p>
-    <p>
-      <a class="btn btn-primary btn-lg" role="button" data-ng-click="joinGame()">Join Game</a>
-    </p>
-  </div>
-
-  <div data-ng-show="game.requiresPassword">
-    <p data-translate>
-      The game {{ game.name }} is accepting players but requires a password in order to join.  Please fill in the password below and click join.
-    </p>
-
-    <div class="row">
-      <form name="gamePasswordForm" role="form" class="col-md-3" data-ng-submit="joinGame()">
-        <div class="form-group">
-          <label for="gamePassword" data-translate>Password for {{ game.name }}</label>
-          <input id="gamePassword" name="name" type="password" class="form-control" data-ng-model="gamePassword" required autofocus/>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-lg" data-ng-disabled="!gamePasswordForm.$valid"
-                  data-translate>Join Game</button>
-        </div>
-      </form>
-    </div>
-
-  </div>
-</div>
+<header data-ui-view="header"></header>
 
 <div class="row">
   <div class="col-md-12">
-    <nav class="hidden-xs" data-ui-view="menu"></nav>
+    <nav data-ui-view="menu"></nav>
   </div>
 </div>
 

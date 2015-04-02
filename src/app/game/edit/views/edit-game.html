@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-xs-12 col-md-4">
+    <h2 data-i18n>Game Information</h2>
+
+    <form name="gameForm" role="form" novalidate
+          data-form-feedback="gameForm" data-form-notifications="notifications"
+          data-ng-submit="saveGame()">
+
+      <div class="thumbnail">
+        <img data-ng-src="{{ game.image }}" data-ng-show="game.image"
+             alt="Game Badge for {{ game.name }}" data-i18n-attrs="alt"/>
+        <i class="avatar-lg fa fa-puzzle-piece center-block" data-ng-hide="game.image"></i>
+        <div class="caption">
+          <button type="button" class="btn btn-default center-block" data-i18n>Edit Image</button>
+        </div>
+      </div>
+
+      <div class="form-group" data-input-feedback="gameForm.name">
+        <label for="name" class="control-label" data-i18n>Game Name</label>
+        <input id="name" name="name" type="text" class="form-control" required
+               data-ng-model="game.name" placeholder="Game Name" data-i18n-attrs="placeholder"/>
+      </div>
+
+      <div class="form-group" data-input-feedback="gameForm.description">
+        <label for="description" class="control-label" data-i18n>Game Description</label>
+        <textarea id="description" name="description" type="text" class="form-control" rows="7"
+                  data-ng-model="game.description" placeholder="Brief Game Description" data-i18n-attrs="placeholder">
+        </textarea>
+      </div>
+
+      <div class="form-group" data-input-feedback="gameForm.ordnance">
+        <label for="ordnance" class="control-label" data-i18n>Ordnance</label>
+        <input id="ordnance" name="ordnance" type="text" class="form-control" data-ng-model="game.ordnance"/>
+      </div>
+
+      <div class="form-group" data-input-feedback="gameForm.gameType">
+        <label for="gameType" class="control-label" data-i18n>Game Type</label>
+        <select id="gameType" type="text" class="form-control" data-ng-disabled="true">
+          <option value="game.gameType">{{ game.gameType | gameType }}</option>
+        </select>
+        <p class="help-block" data-i18n>In the future we will offer additional game types, stay tuned!</p>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary"
+                data-ng-disabled="gameForm.$invalid || saving"
+                data-i18n>
+          <span data-ng-hide="saving" data-i18n>Save</span>
+          <span data-ng-show="saving" data-i18n>Saving...</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

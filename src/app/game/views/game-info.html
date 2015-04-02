@@ -1,0 +1,56 @@
+<div>
+  <img data-ng-src="{{ game.image }}" data-ng-show="game.image"
+       alt="Game Badge for {{ game.name }}" data-i18n-attrs="alt"/>
+  <i class="avatar-lg fa fa-puzzle-piece pull-left" data-ng-hide="game.image"></i>
+</div>
+
+<section>
+  <h2 data-i18n>Description</h2>
+  <p>{{ game.description }}</p>
+</section>
+
+<section>
+  <h2 data-i18n>Rules</h2>
+
+  <div data-ng-show="game.rules.GAME_SPECIFIC">
+    <h3 data-i18n>Game Specific Rules</h3>
+    <ul>
+      <li data-ng-repeat="rule in game.rules.GAME_SPECIFIC">
+        {{ rule }}
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 data-i18n>Rules for all Games</h3>
+    <ul>
+      <li data-ng-repeat="rule in game.rules.ALL_GAMES">
+        {{ rule }}
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2 data-i18n>Details</h2>
+
+  <dl>
+    <dt data-i18n>Registration Period</dt>
+    <dd>
+      <p data-ng-show="game.registrationStart && game.registrationEnd">{{ game.registrationStart | date:'medium' }} - {{ game.registrationEnd | date:'medium' }}</p>
+      <p class="text-danger" data-ng-hide="game.registrationStart && game.registrationEnd" data-i18n>Registration period has not been selected</p>
+    </dd>
+
+    <dt data-i18n>Duration</dt>
+    <dd>
+      <p data-ng-show="game.gameStart && game.gameEnd">{{ game.gameStart | date:'medium' }} - {{ game.gameEnd | date:'medium' }}</p>
+      <p class="text-danger" data-ng-hide="game.gameStart && game.gameEnd" data-i18n>Duration has not been selected</p>
+    </dd>
+
+    <dt data-i18n>Ordnance</dt>
+    <dd>
+      <p data-ng-show="game.ordnance">{{ game.ordnance }}</p>
+      <p class="text-danger" data-ng-hide="game.ordnance">Ordnance hat not been selected</p>
+    </dd>
+  </dl>
+</section>
