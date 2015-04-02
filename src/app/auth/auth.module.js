@@ -31,16 +31,14 @@ angular.module('subrosa.auth').config(function ($httpProvider, $facebookProvider
 
 /**
  * @ngdoc run
- * @name subrosa.run
+ * @name subrosa.auth.run
  *
  * @requires $rootScope
- * @requires $state
- * @requires $stateParams
  *
  * @description
  *  Load the facebook SDK asynchronously.
  */
-angular.module('subrosa.auth').run(function () {
+angular.module('subrosa.auth').run(function ($rootScope) {
     var firstScriptElement, facebookJS;
 
     // If we've already installed the SDK, we're done
@@ -58,4 +56,9 @@ angular.module('subrosa.auth').run(function () {
 
     // Insert the Facebook JS SDK into the DOM
     firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+
+    // Set the current user on the $rootScope
+    $rootScope.$on('auth-currentUserUpdated', function (event, user) {
+        $rootScope.currentUser = user;
+    });
 });

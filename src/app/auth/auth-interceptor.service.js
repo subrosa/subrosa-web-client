@@ -26,6 +26,11 @@
  *     and then broadcasts auth-loginRequired event
  */
 angular.module('subrosa.auth').service('authInterceptor', function ($rootScope, $q, $window, API_CONFIG, authRetryQueue) {
+    const ALLOWED_401_URLS = [
+        API_CONFIG.URL + '/session',
+        API_CONFIG.URL + '/user'
+    ];
+
     this.request = function (config) {
         config.headers = config.headers || {};
         if ($window.sessionStorage.token) {
@@ -35,7 +40,7 @@ angular.module('subrosa.auth').service('authInterceptor', function ($rootScope, 
     };
 
     this.responseError = function (rejection) {
-        if (rejection.status === 401 && rejection.config.url !== API_CONFIG.URL + '/session') {
+        if (rejection.status === 401 && ALLOWED_401_URLS.indexOf(rejection.config.url) === -1) {
             var deferred = $q.defer();
             delete $window.sessionStorage.token;
             authRetryQueue.append(rejection.config, deferred);
