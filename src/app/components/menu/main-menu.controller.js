@@ -11,7 +11,6 @@
 angular.module('subrosa.components.menu').controller("MainMenuController", function ($scope, authService) {
     $scope.collapsed = {
         account: true,
-        game: true,
         main: true
     };
 
