@@ -5,7 +5,7 @@
  * @requires $window
  *
  * @description
- *
+ *   Used to store and retrieve values from the session storage.
  */
 angular.module('subrosa.auth').service('session', function ($window) {
     /**

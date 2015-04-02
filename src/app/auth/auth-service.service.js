@@ -42,26 +42,37 @@ angular.module('subrosa.auth').service('authService', function ($rootScope, $log
     /**
      * Get the current user.
      *
-     * @param {function} successFn the function to call on success
-     * @param {function} errorFn the function to call on error
-     *
-     * @returns {object} $resource
+     * @returns {object} the current user
      */
-    this.getCurrentUser = function (successFn, errorFn) {
+    this.getCurrentUser = function () {
+        return this.currentUser;
+    };
+
+    /**
+     * Set the current user.
+     *
+     * @param user the user to set.
+     */
+    this.setCurrentUser = function (user) {
+        this.currentUser = user;
+        $rootScope.$broadcast('auth-currentUserUpdated', user);
+    };
+
+    /**
+     * Refresh the current user.
+     *
+     * @returns {object} the current user
+     */
+    this.refreshCurrentUser = function () {
         var success, error;
 
         success = function (response) {
-            service.currentUser = response.data;
-            if (successFn) {
-                successFn(response);
-            }
+            service.setCurrentUser(response);
         };
 
-        error = function (response) {
+        error = function () {
             session.removeToken();
-            if (errorFn) {
-                errorFn(response);
-            }
+            service.setCurrentUser(null);
         };
 
         return User.get(success, error);
@@ -120,7 +131,8 @@ angular.module('subrosa.auth').service('authService', function ($rootScope, $log
     this.logout = function () {
         $http.delete(API_CONFIG.URL + '/session').then(function () {
             session.removeToken();
-            service.currentUser = null;
+            service.setCurrentUser(null);
+            $rootScope.$broadcast('auth-currentUserUpdated', null);
         });
     };
 
@@ -132,7 +144,7 @@ angular.module('subrosa.auth').service('authService', function ($rootScope, $log
      * example if you need to pass through details of the user that was logged in
      */
     this.loginConfirmed = function (data, configUpdater) {
-        service.currentUser = service.getCurrentUser();
+        service.refreshCurrentUser();
         session.setToken(data.token);
         $rootScope.$broadcast('auth-loginConfirmed', data);
         authRetryQueue.retryAll(configUpdater);

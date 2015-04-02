@@ -12,7 +12,7 @@ describe('Service: authService', function () {
                 if (this.failed) {
                     error();
                 } else {
-                    success({data: user});
+                    success(user);
                 }
             }
         };
@@ -58,11 +58,27 @@ describe('Service: authService', function () {
         expect(session.getToken).toHaveBeenCalled();
     });
 
-    describe('can retrieve the current user', function () {
+    it("can get the current user", function () {
+        var test = 'blah';
+        authService.currentUser = test;
+        expect(authService.getCurrentUser()).toBe(test);
+    });
+
+    it("can set the current user", function () {
+        var test = 'blah';
+        spyOn($rootScope, '$broadcast');
+
+        authService.setCurrentUser(test);
+
+        expect($rootScope.$broadcast).toHaveBeenCalledWith('auth-currentUserUpdated', test);
+        expect(authService.currentUser).toBe(test);
+    });
+
+    describe('can refresh the current user', function () {
         it('and sets the current user on success', function () {
             spyOn(User, 'get').andCallThrough();
 
-            authService.getCurrentUser();
+            authService.refreshCurrentUser();
 
             expect(authService.currentUser.email).toBe(user.email);
             expect(authService.currentUser.name).toBe(user.name);
@@ -73,7 +89,7 @@ describe('Service: authService', function () {
             spyOn(session, 'removeToken');
 
             User.failed = true;
-            authService.getCurrentUser();
+            authService.refreshCurrentUser();
 
             expect(session.removeToken).toHaveBeenCalled();
 
@@ -129,11 +145,13 @@ describe('Service: authService', function () {
     it('can logout', function () {
         $httpBackend.expectDELETE(API_CONFIG.URL + '/session').respond(200, '');
         spyOn(session, 'removeToken');
+        spyOn($rootScope, '$broadcast');
 
         authService.logout();
         $httpBackend.flush();
 
         expect(session.removeToken).toHaveBeenCalled();
+        expect($rootScope.$broadcast).toHaveBeenCalledWith('auth-currentUserUpdated', null);
         expect(authService.currentUser).toBe(null);
     });
 

@@ -48,7 +48,7 @@ angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
  * @requires $rootScope
  * @requires $state
  * @requires $stateParams
- * @requiers API_CONFIG
+ * @requires API_CONFIG
  *
  * @description
  *  Set common items on the $rootScope such as $state related information.
