@@ -13,7 +13,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <div data-timer ng-if="game.$resolved" end-time="game.registrationEnd" data-i18n>
+        <div data-timer ng-if="game.$resolved && game.isRegistration()" end-time="game.registrationEnd" data-i18n>
           <div class="alert alert-warning" ng-show="days === 0">
             Only {{ hours }} hours, {{ minutes }} minutes, and {{ seconds }} seconds until registration ends.
           </div>
