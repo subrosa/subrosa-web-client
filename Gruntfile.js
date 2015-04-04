@@ -95,11 +95,13 @@ module.exports = function (grunt) {
         },
 
         // Linting
-        csslint: {
+        lesslint: {
             options: {
-                csslintrc: '.csslintrc'
+                csslint: {
+                    csslintrc: '.csslintrc'
+                }
             },
-            src: '<%= subrosa.src %>/css/**/*.css'
+            src: '<%= subrosa.src %>/less/**/*.less'
         },
 
         jshint: {
@@ -359,8 +361,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('lint', [
-        'less',
-        'csslint',
+        'lesslint',
         'jshint',
         'htmlhint'
     ]);
