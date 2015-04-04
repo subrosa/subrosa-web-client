@@ -1,13 +1,17 @@
+<div data-extend-template="/app/game/views/partials/draft-game-message.html">
+  <span data-block="draft-actions">
+    <button class="btn btn-default" data-ng-click="go('game.edit')">
+      <span data-i18n>Edit Game</span>
+    </button>
+  </span>
+</div>
+
 <div class="row">
   <div class="col-xs-12">
 
     <div class="row">
       <div class="col-xs-12">
         <h1>{{ game.name }} <small>{{ game.gameType | gameType }}</small></h1>
-
-        <button class="btn btn-default" data-ng-click="go('game.edit')">
-          <span data-i18n>Edit Game</span>
-        </button>
       </div>
     </div>
 

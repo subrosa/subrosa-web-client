@@ -1,0 +1,21 @@
+<div class="jumbotron" data-ng-show="game.isDraft()">
+  <h2 data-i18n>A Work in Progress</h2>
+
+  <p data-i18n>
+    This game is in draft mode and will not be displayed in the list of games or able to be joined until it is published.
+  </p>
+
+  <p data-ng-show="confirmPublish" class="alert alert-warning" data-i18n>
+    Are you sure?  Once you click the button below your game will be displayed to the public and able to be joined.  There is no going back.
+  </p>
+
+  <div>
+    <span data-block="draft-actions"></span>
+    <button class="btn btn-primary" data-ng-hide="confirmPublish"
+            data-ng-click="confirmPublish = true"
+            data-i18n>Publish Game</button>
+    <button class="btn btn-primary" data-ng-show="confirmPublish"
+            data-ng-click="publishGame()"
+            data-i18n>Do it.</button>
+  </div>
+</div>

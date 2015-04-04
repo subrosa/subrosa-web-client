@@ -1,3 +1,13 @@
+<div data-extend-template="/app/game/views/partials/draft-game-message.html">
+  <span data-block="draft-actions">
+    <button type="button" class="btn btn-default"
+            data-ng-click="go('game')"
+            data-ng-disabled="saving">
+      <span data-i18n>Preview Game</span>
+    </button>
+  </span>
+</div>
+
 <div class="row">
   <div class="col-xs-12">
     <div class="row">
@@ -9,12 +19,6 @@
         </div>
 
         <h1>Editing {{ game.name }}</h1>
-
-        <button type="button" class="btn btn-default"
-                data-ng-click="go('game')"
-                data-ng-disabled="saving">
-          <span data-i18n>Back to Display Mode</span>
-        </button>
       </div>
     </div>
   </div>

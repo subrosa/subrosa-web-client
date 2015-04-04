@@ -28,17 +28,9 @@
         </textarea>
       </div>
 
-      <div class="form-group" data-input-feedback="gameForm.ordnance">
-        <label for="ordnance" class="control-label" data-i18n>Ordnance</label>
-        <input id="ordnance" name="ordnance" type="text" class="form-control" data-ng-model="game.ordnance"/>
-      </div>
-
-      <div class="form-group" data-input-feedback="gameForm.gameType">
-        <label for="gameType" class="control-label" data-i18n>Game Type</label>
-        <select id="gameType" type="text" class="form-control" data-ng-disabled="true">
-          <option value="game.gameType">{{ game.gameType | gameType }}</option>
-        </select>
-        <p class="help-block" data-i18n>In the future we will offer additional game types, stay tuned!</p>
+      <div class="form-group" data-input-feedback="gameOptionsForm.price">
+        <label for="price" class="control-label" data-i18n>Price (USD)</label>
+        <input id="price" name="price" type="number" min="0" class="form-control" data-ng-model="game.price"/>
       </div>
 
       <div class="form-group">

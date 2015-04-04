@@ -1,0 +1,27 @@
+<h2 class="text-center" data-i18n>Pick a Game Type</h2>
+
+<ul class="list-unstyled">
+  <li>
+    <a class="link-unstyled" href="" data-ng-click="setGameType('ASSASSIN')">
+      <div data-extend-template="/app/game/create/views/game-type-box.html">
+        <span data-block="game-type-name" data-i18n>Assassins</span>
+        <i data-block="game-type-icon" class="fa fa-bullseye"></i>
+        <p data-block="game-type-description" data-i18n>
+          Find and eliminate your target before they find you.
+        </p>
+      </div>
+    </a>
+  </li>
+
+  <li>
+    <a class="link-unstyled" href="" data-ng-click="setGameType('SCAVENGER')">
+      <div data-extend-template="/app/game/create/views/game-type-box.html">
+        <span data-block="game-type-name" data-i18n>Scavenger Hunt</span>
+        <i data-block="game-type-icon" class="fa fa-map-marker"></i>
+        <p data-block="game-type-description" data-i18n>
+          Define goals for your players and use GPS checkpoints for location-based challenges.
+        </p>
+      </div>
+    </a>
+  </li>
+</ul>

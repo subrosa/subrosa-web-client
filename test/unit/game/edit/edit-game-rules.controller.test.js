@@ -1,4 +1,4 @@
-describe('Controller: EditGameOptions', function () {
+describe('Controller: EditGameRules', function () {
     var $controller, $scope;
 
     beforeEach(module('subrosa.game', 'mocks'));
@@ -6,7 +6,7 @@ describe('Controller: EditGameOptions', function () {
     beforeEach(inject(function (_$controller_, $rootScope, MockResource) {
         $controller = _$controller_;
         $scope = $rootScope.$new();
-        $scope.EditGameOptions = {
+        $scope.EditGameRules = {
             $valid: true
         };
         $scope.game = MockResource.$new().get({id: 1});
@@ -14,7 +14,7 @@ describe('Controller: EditGameOptions', function () {
 
     describe("performs a save of the game", function () {
         beforeEach(function () {
-            $controller('EditGameOptionsController', {$scope: $scope});
+            $controller('EditGameRulesController', {$scope: $scope});
         });
 
         it("and can be successful", function () {

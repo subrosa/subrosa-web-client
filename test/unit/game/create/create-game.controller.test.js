@@ -1,4 +1,4 @@
-describe('Controller: NewGameController', function () {
+describe('Controller: CreateGameController', function () {
     var $scope, Game;
 
     beforeEach(module('subrosa.game', 'mocks'));
@@ -6,19 +6,16 @@ describe('Controller: NewGameController', function () {
     beforeEach(inject(function ($controller, $rootScope, MockResource) {
         Game = MockResource.$new();
         $scope = $rootScope.$new();
-        $scope.transitionTo = function () {
-            return {then: function (callback) {
-                callback();
-            }};
-        };
-        $controller('NewGameController', {$scope: $scope, Game: Game});
+        $scope.go = function () {};
+        $controller('CreateGameController', {$scope: $scope, Game: Game});
     }));
 
     it('sets a new Game object on the scope', function () {
         expect($scope.game).toBeDefined();
     });
 
-    it('defaults the gameType to "ASSASSIN" for now', function () {
+    it('allows the setting of game type', function () {
+        $scope.setGameType('ASSASSIN');
         expect($scope.game.gameType).toBe('ASSASSIN');
     });
 
@@ -27,10 +24,10 @@ describe('Controller: NewGameController', function () {
             spyOn($scope.game, '$save').andCallFake(function (success) {
                 success({url: 'abcd'});
             });
-            spyOn($scope, 'transitionTo');
+            spyOn($scope, 'go');
             $scope.createGame();
             expect($scope.game.$save).toHaveBeenCalled();
-            expect($scope.transitionTo).toHaveBeenCalledWith('game.edit', {gameUrl: 'abcd'});
+            expect($scope.go).toHaveBeenCalledWith('game.edit', {gameUrl: 'abcd'});
         });
 
         it("and can error", function () {
@@ -38,7 +35,7 @@ describe('Controller: NewGameController', function () {
             $scope.game.failed = true;
             $scope.createGame();
             expect($scope.game.$save).toHaveBeenCalled();
-            expect($scope.notifications.code).toBe(1000);
+            expect($scope.createGameNotifications.code).toBe(1000);
         });
     });
 });

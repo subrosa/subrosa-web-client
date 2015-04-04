@@ -1,6 +1,8 @@
+@import (reference) "../lib/bootstrap/less/bootstrap.less";
+
 /* Bootstrap 3 overrides */
 html .navbar-brand {
-    padding: 12px;
+    padding: 0;
 }
 
 html .navbar-nav.navbar-right:last-child {
@@ -46,4 +48,13 @@ ul .divider {
     margin: 9px 0;
     overflow: hidden;
     background-color: #e5e5e5;
+}
+
+.link-unstyled {
+  color: @text-color;
+}
+
+.link-unstyled:hover {
+  color: @text-color;
+  text-decoration: none;
 }
