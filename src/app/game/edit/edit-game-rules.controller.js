@@ -1,13 +1,13 @@
 /**
  * @ngdoc controller
- * @name subrosa.game.EditGameOptionsController
+ * @name subrosa.game.EditGameRulesController
  *
  * @requires $scope
  *
  * @description
  *  Handles the editing of game options.
  */
-angular.module('subrosa.game').controller('EditGameOptionsController', function ($scope) {
+angular.module('subrosa.game').controller('EditGameRulesController', function ($scope) {
     $scope.adding = false;
     $scope.saving = false;
 

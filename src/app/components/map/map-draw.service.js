@@ -13,7 +13,8 @@ angular.module('subrosa.components.map').service('mapDraw', function (leaflet, m
         draw: {
             circle: false,
             marker: false,
-            polyline: false
+            polyline: false,
+            rectangle: false
         },
         edit: {
             edit: false,

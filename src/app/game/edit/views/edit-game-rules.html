@@ -1,9 +1,11 @@
 <div class="col-md-4">
-  <h2 data-i18n>Game Options</h2>
+  <h2 data-i18n>Rules</h2>
+
+
+  <h3 data-i18n>Gameplay</h3>
+
   <form name="gameOptionsForm" role="form" novalidate data-form-feedback="gameOptionsForm"
         data-form-notifications="gameOptionNotifications" data-ng-submit="saveGame()">
-
-    <h3 data-i18n>Gameplay</h3>
 
     <div class="form-group sr-only">
       <label>
@@ -50,11 +52,6 @@
       <input id="maximumAge" name="maximumAge" type="number" min="13" class="form-control"
              data-ng-model="game.maximumAge" data-validate-integer/>
       <p class="help-block" data-i18n>The maximum age for players.</p>
-    </div>
-
-    <div class="form-group" data-input-feedback="gameOptionsForm.price">
-      <label for="price" class="control-label" data-i18n>Price (USD)</label>
-      <input id="price" name="price" type="number" min="0" class="form-control" data-ng-model="game.price"/>
     </div>
 
     <div class="form-group">

@@ -1,0 +1,21 @@
+<h2 data-i18n>Name your Game of {{ game.gameType | gameType }}</h2>
+
+<form name="createGameForm" role="form" novalidate
+      data-form-feedback="createGameForm" data-form-notifications="notifications"
+      data-ng-submit="createGame()">
+
+  <div class="form-group">
+    <label for="gameName" data-i18n>Enter the name of your Game</label>
+    <input id="gameName" name="name" type="text" class="form-control" data-ng-model="game.name" required autofocus/>
+    <p class="help-block" data-i18n>Stumped?  Don't worry you can change this later.</p>
+  </div>
+
+  <div class="form-group">
+    <buttn type="button" class="btn btn-default" data-ng-click="setGameType(null)">
+      <span data-i18n>Switch Game Type</span>
+    </buttn>
+    <button type="submit" class="btn btn-primary" data-ng-disabled="!createGameForm.$valid">
+      <span data-i18n>Create Game</span>
+    </button>
+  </div>
+</form>

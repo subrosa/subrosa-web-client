@@ -37,10 +37,10 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         templateUrl: '/app/game/views/game-list.html'
     });
 
-    $stateProvider.state('new-game', {
+    $stateProvider.state('create-game', {
         url: '/new-game',
-        controller: 'NewGameController',
-        templateUrl: '/app/game/views/new-game.html'
+        controller: 'CreateGameController',
+        templateUrl: '/app/game/create/views/create-game.html'
     });
 
     $stateProvider.state('game', {
@@ -126,12 +126,12 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         }
     });
 
-    $stateProvider.state('game.edit.options', {
-        url: '/options',
+    $stateProvider.state('game.edit.rules', {
+        url: '/rules',
         views: {
             'content@game': {
-                controller: 'EditGameOptionsController',
-                templateUrl: '/app/game/edit/views/edit-game-options.html'
+                controller: 'EditGameRulesController',
+                templateUrl: '/app/game/edit/views/edit-game-rules.html'
             }
         }
     });
