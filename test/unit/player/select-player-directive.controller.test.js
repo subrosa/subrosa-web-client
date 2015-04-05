@@ -51,7 +51,7 @@ describe('Controller: SelectPlayerDirectiveController', function () {
 
             $scope.savePlayer(player);
 
-            expect($scope.editPlayerNotifications.code).toBe(1000);
+            expect($scope.editPlayerNotifications.length).toBe(1);
             expect($scope.setPlayer).not.toHaveBeenCalled();
         });
     });

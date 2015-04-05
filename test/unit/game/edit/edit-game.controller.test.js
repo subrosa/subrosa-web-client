@@ -40,7 +40,7 @@ describe('Controller: EditGame', function () {
             $scope.game.failed = true;
             $scope.saveGame();
             expect($scope.game.$update).toHaveBeenCalled();
-            expect($scope.notifications.code).toBe(1000);
+            expect($scope.notifications.length).toBe(1);
         });
 
         it("change state to the game events page and scroll to events.", function () {

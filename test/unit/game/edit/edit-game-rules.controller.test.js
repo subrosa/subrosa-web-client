@@ -28,7 +28,7 @@ describe('Controller: EditGameRules', function () {
             $scope.game.failed = true;
             $scope.saveGame();
             expect($scope.game.$update).toHaveBeenCalled();
-            expect($scope.gameOptionNotifications.code).toBe(1000);
+            expect($scope.gameOptionNotifications.length).toBe(1);
         });
     });
 });

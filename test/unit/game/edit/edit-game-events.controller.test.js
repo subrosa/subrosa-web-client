@@ -88,7 +88,7 @@ describe('Controller: EditGameEventsController', function () {
             it("and error", function () {
                 event.failed = true;
                 $scope.saveEvent(event);
-                expect($scope.saveEventNotifications.code).toBe(1000);
+                expect($scope.saveEventNotifications.length).toBe(1);
             });
         });
 
@@ -111,7 +111,7 @@ describe('Controller: EditGameEventsController', function () {
             it("and error", function () {
                 event.failed = true;
                 $scope.removeEvent(event);
-                expect($scope.eventNotifications.code).toBe(1000);
+                expect($scope.eventNotifications.length).toBe(1);
             });
         });
     });
