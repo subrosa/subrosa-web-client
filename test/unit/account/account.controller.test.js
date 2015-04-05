@@ -1,5 +1,5 @@
 describe('Controller: AccountController', function () {
-    var $controller, dependencies, $scope, Player, account;
+    var $controller, dependencies, $scope, account;
 
     beforeEach(module('subrosa.account', 'mocks'));
 
@@ -8,12 +8,11 @@ describe('Controller: AccountController', function () {
 
         $scope = $rootScope.$new();
 
-        Player = $resource;
         account = $resource.get({id: 1});
         $scope.currentUser = account;
 
         $controller = _$controller_;
-        dependencies = {$scope: $scope, Player: Player};
+        dependencies = {$scope: $scope};
     }));
 
     it("sets the account as the current user on the $scope", function () {
@@ -39,26 +38,5 @@ describe('Controller: AccountController', function () {
             expect($scope.account.$update).toHaveBeenCalled();
             expect($scope.notifications.length).toBe(1);
         });
-    });
-
-    it("allows setting the current player", function () {
-        var player = {id: 1, name: 'walden'};
-        $controller('AccountController', dependencies);
-        spyOn($scope, 'updateAccount');
-
-        $scope.setPlayer(player);
-
-        expect($scope.updateAccount).toHaveBeenCalled();
-    });
-
-    it("sets the current user's players on the $scope", function () {
-        var players = [1, 2, 3];
-        Player.setSuccessResponse({results: players});
-        spyOn(Player, 'query').andCallThrough();
-
-        $controller('AccountController', dependencies);
-
-        expect(Player.query).toHaveBeenCalled();
-        expect($scope.players).toBe(players);
     });
 });
