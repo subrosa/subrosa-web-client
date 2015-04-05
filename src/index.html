@@ -55,12 +55,12 @@
           <img class="img-responsive" src="/img/logo/subrosa-rose-50x50.png" alt="Subrosa Logo" data-i18n-attrs="alt"/>
         </a>
         
-        <button class="navbar-toggle" type="button" data-ng-if="!isAuthenticated()" data-ng-click="openLoginModal()">
+        <button class="navbar-toggle" type="button" data-ng-if="!currentUser" data-ng-click="openLoginModal()">
           <span data-i18n>Login</span>
         </button>
 
         <button class="navbar-toggle" type="button"
-                data-ng-if="isAuthenticated()"
+                data-ng-if="currentUser"
                 data-ng-click="collapsed.account = !collapsed.account">
           <span class="sr-only" data-i18n>Toggle account navigation</span>
           <div data-avatar="user" data-size="xs"></div>
@@ -83,40 +83,40 @@
         <li role="presentation" data-ui-sref-active="active">
           <a role="menuitem" data-ui-sref="games" data-i18n>Find Games</a>
         </li>
+
+        <li role="presentation" data-ng-show="currentUser" data-ui-sref-active="active">
+          <a role="menuitem" data-ui-sref="account.games" data-i18n>My Games</a>
+        </li>
       </ul>
 
       <ul role="menu" class="nav navbar-nav navbar-right navbar-collapse" data-collapse="collapsed.account"
           data-ng-click="collapsed.account = true">
 
-        <li role="presentation" data-ng-show="!isAuthenticated()">
+        <li role="presentation" data-ng-show="!currentUser">
           <a role="menuitem" href="" data-ng-click="openLoginModal()" data-i18n>Login</a>
         </li>
 
-        <li role="presentation" data-ng-show="!isAuthenticated()">
-          <a role="menuitem" href="" data-ng-click="loginWithFb()" data-i18n>Login with Facebook</a>
-        </li>
-
-        <li role="presentation" class="visible-xs" data-ng-show="isAuthenticated()">
+        <li role="presentation" class="visible-xs" data-ng-show="currentUser">
           <a role="menuitem" data-ui-sref="account" data-i18n>Account</a>
         </li>
 
-        <li role="presentation" class="visible-xs" data-ng-show="isAuthenticated()">
+        <li role="presentation" class="visible-xs" data-ng-show="currentUser">
           <a role="menuitem" data-ng-click="logout()" data-i18n>Logout</a>
         </li>
 
-        <li role="presentation" class="hidden-xs" data-ng-show="isAuthenticated()">
-          <div role="menu" class="dropdown-toggle" data-avatar="user" data-size="sm"></div>
+        <li role="presentation" class="hidden-xs" data-ng-show="currentUser">
+          <div role="menu" class="dropdown-toggle" data-avatar="currentUser" data-size="sm"></div>
           <ul class="dropdown-menu" role="menu">
             <li class="user-menu">
               <div>
                 <a data-ui-sref="account">
-                  <span data-avatar="user" data-size="md" data-editable="true"></span>
+                  <span data-avatar="currentUser" data-size="md" data-editable="true"></span>
                 </a>
               </div>
 
               <div>
-                <h4>{{ user.username }}</h4>
-                <span>{{ user.email }}</span>
+                <h4>{{ currentUser.username }}</h4>
+                <span>{{ currentUser.email }}</span>
                 <div>
                   <a data-ui-sref="account" data-i18n>Account</a>
                   -
@@ -183,14 +183,14 @@
 <script type="text/javascript" src="/app/account/account.factory.js"></script>
 <script type="text/javascript" src="/app/account/account.controller.js"></script>
 <script type="text/javascript" src="/app/account/account-display-name.filter.js"></script>
-<script type="text/javascript" src="/app/account/login-modal.controller.js"></script>
-<script type="text/javascript" src="/app/account/login-modal.directive.js"></script>
 <script type="text/javascript" src="/app/account/register-form.controller.js"></script>
 
 <script type="text/javascript" src="/app/auth/auth.module.js"></script>
 <script type="text/javascript" src="/app/auth/auth-interceptor.service.js"></script>
 <script type="text/javascript" src="/app/auth/auth-service.service.js"></script>
 <script type="text/javascript" src="/app/auth/auth-retry-queue.service.js"></script>
+<script type="text/javascript" src="/app/auth/login-modal.controller.js"></script>
+<script type="text/javascript" src="/app/auth/login-modal.directive.js"></script>
 <script type="text/javascript" src="/app/auth/session.service.js"></script>
 <script type="text/javascript" src="/app/auth/user.factory.js"></script>
 

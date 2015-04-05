@@ -1,5 +1,5 @@
 describe('Controller: AccountController', function () {
-    var $controller, dependencies, $scope, authService, Player, account;
+    var $controller, dependencies, $scope, Player, account;
 
     beforeEach(module('subrosa.account', 'mocks'));
 
@@ -10,17 +10,16 @@ describe('Controller: AccountController', function () {
 
         Player = $resource;
         account = $resource.get({id: 1});
-
-        authService = {
-            getCurrentUser: function (callback) {
-                callback();
-                return account;
-            }
-        };
+        $scope.currentUser = account;
 
         $controller = _$controller_;
-        dependencies = {$scope: $scope, authService: authService, Player: Player};
+        dependencies = {$scope: $scope, Player: Player};
     }));
+
+    it("sets the account as the current user on the $scope", function () {
+        $controller('AccountController', dependencies);
+        expect($scope.account).toBe(account);
+    });
 
     describe("performs a save of the account", function () {
         beforeEach(function () {
@@ -50,15 +49,6 @@ describe('Controller: AccountController', function () {
         $scope.setPlayer(player);
 
         expect($scope.updateAccount).toHaveBeenCalled();
-    });
-
-    it("gets the current user from the auth service and puts it on the scope", function () {
-        spyOn(authService, 'getCurrentUser').andCallThrough();
-
-        $controller('AccountController', dependencies);
-
-        expect(authService.getCurrentUser).toHaveBeenCalled();
-        expect($scope.account).toBe(account);
     });
 
     it("sets the current user's players on the $scope", function () {

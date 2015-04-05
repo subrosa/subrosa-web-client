@@ -9,7 +9,8 @@
  *  Provides a $resource for user(s).
  */
 angular.module('subrosa.auth').factory('User', function ($resource, API_CONFIG) {
-    return $resource(API_CONFIG.URL + '/user/', {}, {
-        update: {method: 'PUT'}
+    return $resource(API_CONFIG.URL + '/user/:action', {}, {
+        update: {method: 'PUT'},
+        games: {method: 'GET', params: {action: 'game'}, isArray: true}
     });
 });

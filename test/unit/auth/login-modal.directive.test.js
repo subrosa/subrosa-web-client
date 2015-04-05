@@ -1,7 +1,7 @@
 describe('Directive: loginModal', function () {
     var $q, $scope, $compile, $modal, element, elementScope;
 
-    beforeEach(module('subrosa.account'));
+    beforeEach(module('subrosa.auth'));
 
     beforeEach(module(function ($provide) {
         $modal = {
@@ -53,7 +53,7 @@ describe('Directive: loginModal', function () {
     describe("sets the login modal options", function () {
         var user = {name: 'walden'}, options = {};
 
-        it("of when the user has an account, attempted to register, and failed", function () {
+        it("of when the user has an auth, attempted to register, and failed", function () {
             var expectedUser = user;
             spyOn(elementScope, 'openModal');
             options.loginViaRegisterFailed = true;

@@ -5,7 +5,6 @@
  * @requires $scope
  * @requires $state
  * @requires _
- * @requires authService
  * @requires Account
  * @requires Player
  * @requires GamePlayer
@@ -14,7 +13,9 @@
  *  Controller for enrolling users into a game.
  */
 angular.module('subrosa.game').controller('GameEnrollmentController',
-function ($scope, $state, _, authService, Account, Player, GamePlayer) {
+function ($scope, $state, _, Account, Player, GamePlayer) {
+    $scope.account = $scope.currentUser;
+
     $scope.setPlayer = function (player) {
         $scope.player = player;
         $state.go('game.enroll.join');
@@ -44,9 +45,7 @@ function ($scope, $state, _, authService, Account, Player, GamePlayer) {
         GamePlayer.save({url: $scope.game.url}, $scope.player, success, error);
     };
 
-    $scope.account = authService.getCurrentUser(function () {
-        Player.query(function (response) {
-            $scope.players = response.results;
-        });
+    Player.query(function (response) {
+        $scope.players = response.results;
     });
 });

@@ -1,13 +1,13 @@
 /**
  * @ngdoc directive
- * @name subrosa.account:loginModal
+ * @name subrosa.auth:loginModal
  *
  * @requires $modal
  *
  * @description
  *   Provides a login modal window.
  */
-angular.module('subrosa.account').directive('loginModal', function ($modal) {
+angular.module('subrosa.auth').directive('loginModal', function ($modal) {
     return {
         restrict: 'AE',
         scope: true,
@@ -15,7 +15,7 @@ angular.module('subrosa.account').directive('loginModal', function ($modal) {
             scope.openModal = function (user) {
                 return $modal.open({
                     controller: 'LoginModalController',
-                    templateUrl: '/app/account/views/login-modal.html',
+                    templateUrl: '/app/auth/views/login-modal.html',
                     resolve: {
                         user: function () {
                             return user;

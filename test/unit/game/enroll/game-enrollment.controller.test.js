@@ -1,5 +1,5 @@
 describe('Controller: GameEnrollmentController', function () {
-    var $controller, dependencies, $scope, $state, authService, Account,
+    var $controller, dependencies, $scope, $state, Account,
         GamePlayer, Player, player, account;
 
     beforeEach(module('subrosa.game', 'mocks'));
@@ -17,18 +17,17 @@ describe('Controller: GameEnrollmentController', function () {
 
         Account = MockResource.$new();
         account = Account.get({id: 1});
+        $scope.currentUser = account;
 
         Player = MockResource.$new();
 
-        authService = {
-            getCurrentUser: function (callback) {
-                callback();
-                return account;
-            }
+        dependencies = {
+            $scope: $scope,
+            $state: $state,
+            Account: Account,
+            Player: Player,
+            GamePlayer: GamePlayer
         };
-
-        dependencies = {$scope: $scope, $state: $state, authService: authService,
-            Account: Account, Player: Player, GamePlayer: GamePlayer};
         $controller('GameEnrollmentController', dependencies);
 
     }));
@@ -57,12 +56,8 @@ describe('Controller: GameEnrollmentController', function () {
         });
     });
 
-    it("gets the current user and sets the account on the $scope", function () {
-        spyOn(authService, 'getCurrentUser').andCallThrough();
-
-        $controller('GameEnrollmentController', dependencies);
-
-        expect(authService.getCurrentUser).toHaveBeenCalledWith(jasmine.any(Function));
+    it("sets the account as the current user on the $scope", function () {
+        $controller('AccountController', dependencies);
         expect($scope.account).toBe(account);
     });
 

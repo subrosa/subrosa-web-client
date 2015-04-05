@@ -7,12 +7,7 @@ describe('Controller: MainMenu', function () {
         user = {id: 1};
 
         authService = {
-            getCurrentUser: function () {
-                return user;
-            },
-            isAuthenticated: function () {
-                return user.authenticated;
-            }
+            logout: function () {}
         };
 
         $scope = $rootScope.$new();
@@ -24,13 +19,7 @@ describe('Controller: MainMenu', function () {
         expect($scope.collapsed.account).toBe(true);
     });
 
-    it("gets the current user from the auth service and puts it on the scope", function () {
-        spyOn(authService, 'getCurrentUser').andCallThrough();
-        user.authenticated = true;
-
-        $scope.$digest();
-
-        expect(authService.getCurrentUser).toHaveBeenCalled();
-        expect($scope.user).toBe(user);
+    it("sets some authService.logout on the $scope", function () {
+        expect($scope.logout).toBe(authService.logout);
     });
 });
