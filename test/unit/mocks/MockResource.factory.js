@@ -66,8 +66,9 @@ angular.module('mocks').factory('MockResource', function () {
                 then: function (success, error) {
                     if (mockResource.failed) {
                         error(errorResponse);
-                    } else
+                    } else {
                         success(mockResource);
+                    }
                 }
             }
         };
@@ -111,8 +112,9 @@ angular.module('mocks').factory('MockResource', function () {
                 then: function (success, error) {
                     if (self.failed) {
                         error(errorResponse);
-                    } else
+                    } else {
                         success(response);
+                    }
                 }
             };
             return response;
