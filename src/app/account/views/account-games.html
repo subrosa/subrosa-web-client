@@ -1,0 +1,13 @@
+<div class="row">
+  <p class="alert alert-info" data-ng-show="games.$resolved && games.length === 0" data-i18n>
+    You have not participated in any games yet, create or join a game using the menu above.
+  </p>
+
+  <div class="col-sm-12">
+    <ul class="media-list">
+      <li class="media" data-ng-repeat="game in games"
+          data-ng-include="'/app/game/views/partials/game-media-object.html'">
+      </li>
+    </ul>
+  </div>
+</div>

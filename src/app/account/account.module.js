@@ -55,6 +55,12 @@ angular.module('subrosa.account').config(function ($stateProvider) {
         templateUrl: '/app/account/views/edit-account-security.html'
     });
 
+    $stateProvider.state('account-games', {
+        url: '/account/games',
+        controller: 'AccountGamesController',
+        templateUrl: '/app/account/views/account-games.html'
+    });
+
     $stateProvider.state('register', {
         url: '/register',
         controller: 'RegisterFormController',
