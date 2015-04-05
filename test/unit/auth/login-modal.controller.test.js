@@ -1,7 +1,7 @@
 describe("Controller: LoginModalController", function () {
     var $q, $controller, $rootScope, $scope, $state, $modalInstance, authService, user;
 
-    beforeEach(module('subrosa.account'));
+    beforeEach(module('subrosa.auth'));
 
     beforeEach(function () {
         $state = {

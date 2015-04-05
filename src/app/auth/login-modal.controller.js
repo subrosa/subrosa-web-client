@@ -1,6 +1,6 @@
 /**
  * @ngdoc controller
- * @name subrosa.account.LoginModalController
+ * @name subrosa.auth.LoginModalController
  *
  * @requires $rootScope
  * @requires $scope
@@ -12,7 +12,7 @@
  * @description
  *  Handle submission of the login form.
  */
-angular.module('subrosa.account').controller('LoginModalController',
+angular.module('subrosa.auth').controller('LoginModalController',
     function ($rootScope, $scope, $state, $modalInstance, authService, user) {
         var success, error;
 
@@ -34,6 +34,8 @@ angular.module('subrosa.account').controller('LoginModalController',
                 $scope.errors.unknownError = true;
             }
         };
+
+        $scope.loginWithFb = authService.loginWithFb;
 
         $scope.login = function () {
             authService.login($scope.user).then(success, error);

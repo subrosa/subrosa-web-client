@@ -48,11 +48,11 @@ angular.module('subrosa.account').config(function ($stateProvider) {
         }
     });
 
-    $stateProvider.state('account.edit-auth', {
-        url: '/edit/auth',
+    $stateProvider.state('account.edit-security', {
+        url: '/edit/security',
         views: {
             'security@account': {
-                templateUrl: '/app/account/edit/views/edit-account-auth.html'
+                templateUrl: '/app/account/edit/views/edit-account-security.html'
             }
         }
     });
