@@ -35,7 +35,7 @@ describe('Controller: CreateGameController', function () {
             $scope.game.failed = true;
             $scope.createGame();
             expect($scope.game.$save).toHaveBeenCalled();
-            expect($scope.createGameNotifications.code).toBe(1000);
+            expect($scope.createGameNotifications.length).toBe(1);
         });
     });
 });

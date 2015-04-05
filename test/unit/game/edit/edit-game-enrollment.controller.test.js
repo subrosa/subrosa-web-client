@@ -69,7 +69,7 @@ describe('Controller: EditGameEnrollment', function () {
 
             $scope.dragControlListeners.orderChanged(event);
 
-            expect($scope.fieldNotifications.code).toBe(1000);
+            expect($scope.fieldNotifications.length).toBe(1);
             expect(event.dest.sortableScope.removeItem).toHaveBeenCalledWith(event.dest.index);
             expect(event.source.itemScope.sortableScope.insertItem).toHaveBeenCalledWith(event.source.index,
                 event.source.itemScope.task);
@@ -118,7 +118,7 @@ describe('Controller: EditGameEnrollment', function () {
             it("and error", function () {
                 $scope.game.failed = true;
                 $scope.saveField();
-                expect($scope.saveFieldNotifications.code).toBe(1000);
+                expect($scope.saveFieldNotifications.length).toBe(1);
             });
         });
 
@@ -141,7 +141,7 @@ describe('Controller: EditGameEnrollment', function () {
             it("and error", function () {
                 $scope.game.failed = true;
                 $scope.removeField();
-                expect($scope.fieldNotifications.code).toBe(1000);
+                expect($scope.fieldNotifications.length).toBe(1);
             });
         });
     });

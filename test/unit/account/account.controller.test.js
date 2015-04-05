@@ -38,7 +38,7 @@ describe('Controller: AccountController', function () {
             $scope.account.failed = true;
             $scope.updateAccount();
             expect($scope.account.$update).toHaveBeenCalled();
-            expect($scope.notifications.code).toBe(1000);
+            expect($scope.notifications.length).toBe(1);
         });
     });
 

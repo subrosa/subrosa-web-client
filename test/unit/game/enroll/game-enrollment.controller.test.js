@@ -53,7 +53,7 @@ describe('Controller: GameEnrollmentController', function () {
         it("and failing", function () {
             GamePlayer.failed = true;
             $scope.joinGame();
-            expect($scope.joinGameNotifications.code).toBe(1000);
+            expect($scope.joinGameNotifications.length).toBe(1);
         });
     });
 

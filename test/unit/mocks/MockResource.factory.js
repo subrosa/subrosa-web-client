@@ -20,15 +20,16 @@ angular.module('mocks').factory('MockResource', function () {
 
         errorResponse = {
             data: {
-                notifications: {
+                notifications: [{
                     code: 1000,
                     name: 'Invalid name'
-                }
+                }]
             }
         };
 
         mockResource = {
             id: 1,
+            failed: false,
             $delete: function (success, error) {
                 if (this.failed) {
                     error(errorResponse);
@@ -61,9 +62,14 @@ angular.module('mocks').factory('MockResource', function () {
                     success(this);
                 }
             },
-            $promise: {then: function (callback) {
-                callback(mockResource);
-            }}
+            $promise: {
+                then: function (success, error) {
+                    if (mockResource.failed) {
+                        error(errorResponse);
+                    } else
+                        success(mockResource);
+                }
+            }
         };
 
         mockResources = {
@@ -94,15 +100,21 @@ angular.module('mocks').factory('MockResource', function () {
         };
 
         Resource.query = function (params, callback) {
-            var response = successResponse || mockResources;
+            var response = successResponse || mockResources,
+                self = this;
             if (typeof(params) === "function") {
                 params.call(this, response);
             } else if (callback) {
                 callback.call(this, response);
             }
-            response.$promise = {then: function (callback) {
-                callback(response);
-            }};
+            response.$promise = {
+                then: function (success, error) {
+                    if (self.failed) {
+                        error(errorResponse);
+                    } else
+                        success(response);
+                }
+            };
             return response;
         };
 
@@ -158,6 +170,7 @@ angular.module('mocks').factory('MockResource', function () {
         };
 
         Resource.setErrorResponse = function (response) {
+            mockResource.failed = true;
             errorResponse = response;
         };
 
