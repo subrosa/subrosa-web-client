@@ -33,37 +33,26 @@ angular.module('subrosa.account').config(function ($stateProvider) {
                 controller: 'AccountController',
                 templateUrl: '/app/account/views/account.html'
             },
-            'profile@account': {
-                templateUrl: '/app/account/views/account-profile.html'
+            '@account': {
+                templateUrl: '/app/account/views/edit-account-information.html'
             }
         }
+    });
+
+    $stateProvider.state('account.players', {
+        url: '/players',
+        controller: 'AccountPlayersController',
+        templateUrl: '/app/account/views/edit-account-players.html'
     });
 
     $stateProvider.state('account.edit-information', {
         url: '/edit',
-        views: {
-            'profile@account': {
-                templateUrl: '/app/account/edit/views/edit-account-information.html'
-            }
-        }
+        templateUrl: '/app/account/views/edit-account-information.html'
     });
 
     $stateProvider.state('account.edit-security', {
         url: '/edit/security',
-        views: {
-            'security@account': {
-                templateUrl: '/app/account/edit/views/edit-account-security.html'
-            }
-        }
-    });
-
-    $stateProvider.state('account.edit-preferences', {
-        url: '/edit/preferences',
-        views: {
-            'preferences@account': {
-                templateUrl: '/app/account/edit/views/account-preferences.html'
-            }
-        }
+        templateUrl: '/app/account/views/edit-account-security.html'
     });
 
     $stateProvider.state('register', {
