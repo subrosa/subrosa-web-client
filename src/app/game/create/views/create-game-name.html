@@ -1,21 +1,25 @@
-<h2 data-i18n>Name your Game of {{ game.gameType | gameType }}</h2>
-
 <form name="createGameForm" role="form" novalidate
-      data-form-feedback="createGameForm" data-form-notifications="notifications"
-      data-ng-submit="createGame()">
+        data-form-feedback="createGameForm" data-form-notifications="notifications"
+        data-ng-submit="createGame()">
 
-  <div class="form-group">
-    <label for="gameName" data-i18n>Enter the name of your Game</label>
-    <input id="gameName" name="name" type="text" class="form-control" data-ng-model="game.name" required autofocus/>
-    <p class="help-block" data-i18n>Stumped?  Don't worry you can change this later.</p>
-  </div>
+  <div data-extend-template="/app/game/views/game-box.html">
+    <span data-block="game-name">
+      <div class="form-group">
+        <label for="gameName" data-i18n>Name your Game</label>
+        <input id="gameName" name="name" type="text" class="form-control" data-ng-model="game.name" required autofocus/>
+        <p class="help-block" data-i18n>Stumped?  Don't worry you can change this later.</p>
+      </div>
+    </span>
 
-  <div class="form-group">
-    <buttn type="button" class="btn btn-default" data-ng-click="setGameType(null)">
-      <span data-i18n>Switch Game Type</span>
-    </buttn>
-    <button type="submit" class="btn btn-primary" data-ng-disabled="!createGameForm.$valid">
-      <span data-i18n>Create Game</span>
-    </button>
+    <div class="form-group pull-left" data-block="game-description">
+      <button type="button" class="btn btn-default" data-ng-click="setGameType(null)">
+        <span data-i18n>Switch Game</span>
+      </button>
+      <button type="submit" class="btn btn-primary" data-ng-disabled="!createGameForm.$valid">
+        <span data-i18n>Create Game</span>
+      </button>
+    </div>
+
+    <i data-block="game-icon" data-game-type-icon="game.gameType"></i>
   </div>
 </form>

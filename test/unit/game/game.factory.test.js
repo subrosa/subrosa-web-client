@@ -30,6 +30,18 @@ describe('Factory: game', function () {
             $httpBackend.flush();
         });
 
+        it('to update a game.', function () {
+            $httpBackend.expectPUT(API_CONFIG.URL + '/game/raleigh-wars').respond();
+            gameFactory.update({url: 'raleigh-wars'});
+            $httpBackend.flush();
+        });
+
+        it('to delete a game type.', function () {
+            $httpBackend.expectDELETE(API_CONFIG.URL + '/game/raleigh-wars').respond();
+            gameFactory.delete({url: 'raleigh-wars'});
+            $httpBackend.flush();
+        });
+
         describe('to query the game points from the API by transforming the response', function () {
             var promise, response;
 
@@ -64,12 +76,6 @@ describe('Factory: game', function () {
 
                 expect(promise.raleighwars).toBe(undefined);
             });
-        });
-
-        it('to update a game.', function () {
-            $httpBackend.expectPUT(API_CONFIG.URL + '/game/raleigh-wars').respond();
-            gameFactory.update({url: 'raleigh-wars'});
-            $httpBackend.flush();
         });
     });
 

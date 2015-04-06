@@ -12,23 +12,17 @@
   animation-delay: @delay;
 }
 
-.notification.ng-leave {
-  .animation(fadeOut 0.5s);
-}
-
-.notification.ng-enter {
-  .animation(fadeIn 0.5s);
-}
-
-.slider.ng-hide-add {
-  .animation(slideOutLeft 0.75s);
-
+.show-ng-hide {
   // The use of !important is necessary here because ng-hide uses !important
   /*csslint important:false */
   display: block !important;
   /*csslint important:true */
 }
 
-.slider.ng-hide-remove {
-  .animation(slideInRight 0.75s);
+.notification.ng-leave {
+  .animation(fadeOut 0.5s);
+}
+
+.notification.ng-enter {
+  .animation(fadeIn 0.5s);
 }
