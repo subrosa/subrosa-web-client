@@ -8,7 +8,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <div class="slider" data-ng-show="game.gameType" data-ng-include="'/app/game/create/views/create-game-name.html'"></div>
-    <div class="slider" data-ng-hide="game.gameType" data-ng-include="'/app/game/create/views/create-game-select-type.html'"></div>
+    <div class="game-type-box" data-ng-hide="game.gameType" data-ng-include="'/app/game/create/views/create-game-select-type.html'"></div>
+    <div class="create-game-form" data-ng-show="game.gameType" data-ng-include="'/app/game/create/views/create-game-name.html'"></div>
   </div>
 </div>

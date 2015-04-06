@@ -12,7 +12,7 @@ angular.module('subrosa.utils').filter('capitalize', function () {
     return function (input) {
         var capitalized = input;
         if (angular.isString(input)) {
-            capitalized = input.substring(0, 1).toUpperCase() + input.substring(1);
+            capitalized = input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
         }
         return capitalized;
     };
