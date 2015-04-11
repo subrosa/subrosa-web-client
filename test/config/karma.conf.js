@@ -19,7 +19,7 @@ module.exports = function (config) {
             'lib/angular-sanitize/angular-sanitize.js',
             'lib/angular-ui-router/release/angular-ui-router.js',
 
-            '../test/unit/mocks/third-party-modules.js',
+            '../test/unit/mocks/third-party-mocks.js',
             '../test/unit/mocks/mocks.module.js',
             '../test/unit/mocks/*',
 
