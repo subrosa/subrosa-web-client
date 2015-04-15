@@ -3,19 +3,19 @@
 <form name="passwordForm" role="form" novalidate data-ng-submit="updateAccount()"
       data-form-feedback="passwordForm" data-form-notifications="notifications">
 
-  <div class="form-group" data-input-feedback="passwordForm.oldPassword">
+  <div class="form-group" data-form-group-feedback>
     <label for="password" class="control-label" data-i18n>Old Password</label>
     <input id="password" name="oldPassword" type="password" class="form-control"
            data-ng-model="oldPassword" required/>
   </div>
 
-  <div class="form-group" data-input-feedback="passwordForm.newPassword">
+  <div class="form-group" data-form-group-feedback>
     <label for="newPassword" class="control-label" data-i18n>New Password</label>
     <input id="newPassword" name="newPassword" type="password" class="form-control"
            data-ng-model="account.password" required/>
   </div>
 
-  <div class="form-group" data-input-feedback="passwordForm.newPasswordConfirm" data-warn="passwordForm.newPasswordConfirm.$error.fieldsMatch">
+  <div class="form-group" data-form-group-feedback data-warn="passwordForm.newPasswordConfirm.$error.fieldsMatch">
     <label for="newPasswordConfirm" class="control-label" data-i18n>Confirm New Password</label>
     <input id="newPasswordConfirm" name="newPasswordConfirm" type="password" class="form-control"
            data-ng-model="newPasswordConfirm" data-fields-match="account.password" required/>

@@ -17,7 +17,7 @@ angular.module('subrosa', [
     'subrosa.notifications',
     'ui.router',
     'ui.bootstrap.collapse',
-    'ui.bootstrap.dropdownToggle',
+    'ui.bootstrap.dropdown',
     'ui.bootstrap.tpls'
 ]);
 

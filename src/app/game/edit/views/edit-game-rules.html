@@ -29,25 +29,25 @@
       </div>
     </div>
 
-    <div class="form-group" data-ng-show="game.teamGame ===true" data-input-feedback="gameOptionsForm.maximumTeamSize">
+    <div class="form-group" data-ng-show="game.teamGame === true" data-form-group-feedback>
       <label for="maximumTeamSize" class="control-label" data-i18n>Maximum Team Size</label>
       <input id="maximumTeamSize" name="maximumTeamSize" type="number" class="form-control"
              min="2" data-ng-model="game.maximumTeamSize" data-ng-required="game.teamGame"/>
     </div>
 
-    <div class="form-group" data-input-feedback="gameOptionsForm.password">
+    <div class="form-group" data-form-group-feedback>
       <label for="gamePassword" class="control-label" data-i18n>Password to Join</label>
       <input id="gamePassword" name="password" type="password" class="form-control" data-ng-model="game.password"/>
     </div>
 
-    <div class="form-group" data-input-feedback="gameOptionsForm.minimumAge">
+    <div class="form-group" data-form-group-feedback>
       <label for="minimumAge" class="control-label" data-i18n>Minimum Age</label>
       <input id="minimumAge" name="minimumAge" type="number" min="13" class="form-control"
              data-ng-model="game.minimumAge" data-validate-integer/>
       <p class="help-block" data-i18n>The minimum age for players.</p>
     </div>
 
-    <div class="form-group" data-input-feedback="gameOptionsForm.maximumAge">
+    <div class="form-group" data-form-group-feedback>
       <label for="maximumAge" class="control-label" data-i18n>Maximum Age</label>
       <input id="maximumAge" name="maximumAge" type="number" min="13" class="form-control"
              data-ng-model="game.maximumAge" data-validate-integer/>

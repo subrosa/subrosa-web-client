@@ -37,7 +37,7 @@ describe('Directive: formFeedback', function () {
 
         beforeEach(function () {
             spyOn(elementScope.form.myField, '$setValidity');
-            notification = {details: {field: 'myField', message: 'yo', constraint: 'required'}};
+            notification = {details: {field: 'myField', constraint: 'required'}};
             constraint = notification.details.constraint;
             $scope.notifications = [notification];
         });
@@ -46,7 +46,6 @@ describe('Directive: formFeedback', function () {
             $scope.$digest();
 
             expect(elementScope.form.myField.$setValidity).toHaveBeenCalledWith(constraint, false);
-            expect(elementScope.form.myField.$error.message).toBe(notification.details.message);
         });
 
         it("and does nothing if the relevant form field is not found", function () {
@@ -55,7 +54,6 @@ describe('Directive: formFeedback', function () {
             $scope.$digest();
 
             expect(elementScope.form.myField.$setValidity).not.toHaveBeenCalledWith(constraint, false);
-            expect(elementScope.form.myField.$error.message).toBe(undefined);
         });
 
         it("and does nothing if the notification does not contain the details object", function () {
@@ -64,7 +62,6 @@ describe('Directive: formFeedback', function () {
             $scope.$digest();
 
             expect(elementScope.form.myField.$setValidity).not.toHaveBeenCalledWith(constraint, false);
-            expect(elementScope.form.myField.$error.message).toBe(undefined);
         });
 
         it("and does nothing if the notification details does not contain the field object", function () {
@@ -73,7 +70,6 @@ describe('Directive: formFeedback', function () {
             $scope.$digest();
 
             expect(elementScope.form.myField.$setValidity).not.toHaveBeenCalledWith(constraint, false);
-            expect(elementScope.form.myField.$error.message).toBe(undefined);
         });
     });
 });

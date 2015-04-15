@@ -79,6 +79,7 @@ angular.module('mocks').factory('MockResource', function () {
 
         Resource = function (parameters) {
             var copy = angular.copy(mockResource);
+            copy.failed = this.failed;
             if (parameters) {
                 angular.extend(copy, parameters);
             }
@@ -174,6 +175,11 @@ angular.module('mocks').factory('MockResource', function () {
         Resource.setErrorResponse = function (response) {
             mockResource.failed = true;
             errorResponse = response;
+        };
+
+        Resource.setFailed = function () {
+            Resource.failed = true;
+            mockResource.failed = true;
         };
 
         return Resource;

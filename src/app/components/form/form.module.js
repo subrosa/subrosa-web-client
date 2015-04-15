@@ -3,10 +3,12 @@
  * @name subrosa.components.form
  *
  * @description
- *  Module for reusable UI components.
+ *  Module for reusable form components.
  */
 angular.module('subrosa.components.form', [
     'ngMessages',
+    'subrosa.account',
+    'subrosa.components.geocode',
     'subrosa.utils',
     'toggle-switch',
     'ui.bootstrap.alert',

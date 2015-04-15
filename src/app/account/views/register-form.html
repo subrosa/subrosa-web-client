@@ -1,63 +1,52 @@
-<div class="row">
-  <div class="col-md-5 col-md-offset-1">
-    <div class="jumbotron">
-      <h1 data-i18n>We Play AFK</h1>
-      <p data-i18n>It’s a big, beautiful world out there, Subrosa takes the fun outside.  Create an account and join thousands of other real life gamers.</p>
+<div data-ng-controller="RegisterFormController">
+  <form name="registerForm" role="form" novalidate
+        data-form-feedback="registerForm" data-form-notifications="notifications"
+        data-ng-submit="register()">
+    <p class="alert alert-info" data-i18n>
+      Do you have what it takes?  Let's find out.
+    </p>
+
+    <div class="form-group" data-form-group-feedback>
+      <label for="email" data-i18n>E-mail</label>
+      <input id="email" name="email" type="email" class="form-control"
+             data-ng-model="user.email" data-ng-model-options="{debounce: {default: 2000, blur: 0}}"
+             placeholder="Email" data-i18n-attrs="placeholder" required autofocus/>
+      <p class="help-block" data-i18n>No spam.  You will only receive emails that you actually opt-in to rather than the other way around.</p>
     </div>
-  </div>
-  <div class="col-md-5">
-    <h3>
-      <span data-i18n>Join the Fun</span>
-      <i class="fa fa-lock"></i>
-    </h3>
 
+    <div class="form-group" data-form-group-feedback>
+      <label for="registerPassword" data-i18n>Password</label>
+      <input id="registerPassword" name="password" type="password" class="form-control"
+             data-ng-model="user.password" data-ng-model-options="{debounce: {default: 500, blur: 0}}"
+             data-password-validator placeholder="Password" data-i18n-attrs="placeholder" required/>
+      <p class="help-block" data-i18n>Pro Tip: use at least one number and at least seven characters.</p>
+    </div>
 
-    <form name="registerForm" class="form-horizontal" role="form" novalidate
-          data-form-feedback="registerForm" data-form-notifications="notifications"
-          data-ng-submit="register()">
-      <p class="alert alert-info" data-i18n>
-        Do you have what it takes?  Let's find out.
+    <div class="form-group" data-form-group-feedback>
+      <label for="dateofBirth" data-i18n>Date of Birth</label>
+      <p class="input-group">
+        <input id="dateOfBirth" name="dateOfBirth" type="text" class="form-control" required
+               data-ng-model="user.dateOfBirth"
+               data-datepicker-popup="{{ dateFormat }}" data-is-open="dobOpen"
+               data-show-button-bar="false"/>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" data-ng-click="openDob($event)">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
       </p>
+    </div>
 
-      <div class="form-group" data-input-feedback="registerForm.email">
-        <label for="email" class="col-sm-2 control-label" data-i18n>E-mail</label>
-        <div class="col-sm-10">
-          <input id="email" name="email" type="email" class="form-control"
-                 data-ng-model="user.email" data-ng-model-options="{debounce: {default: 2000, blur: 0}}"
-                 placeholder="Email" data-i18n-attrs="placeholder" required autofocus/>
-          <p class="help-block" data-i18n>No spam.  You will only receive emails that you actually opt-in to rather than the other way around.</p>
-        </div>
+    <div class="form-group">
+      <div class="checkbox">
+        <label for="registerTerms">
+          <input id="registerTerms" type="checkbox" data-ng-model="user.acceptedTerms" required/>
+          I agree to the <a data-ui-sref="terms">terms and conditions</a>.
+        </label>
       </div>
+    </div>
 
-      <div class="form-group" data-input-feedback="registerForm.password">
-        <label for="registerPassword" class="col-sm-2 control-label" data-i18n>Password</label>
-        <div class="col-sm-10">
-          <input id="registerPassword" name="password" type="password" class="form-control"
-                 data-ng-model="user.password" data-ng-model-options="{debounce: {default: 500, blur: 0}}"
-                 data-password-validator placeholder="Password" data-i18n-attrs="placeholder" required/>
-          <p class="help-block" data-i18n>Tip: use at least one number and at least seven characters.</p>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <div class="checkbox">
-            <label for="registerTerms">
-              <input id="registerTerms" type="checkbox" data-ng-model="user.acceptedTerms" required/>
-                I agree to the <a data-ui-sref="terms">terms and conditions</a>.
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary"
-                  data-ng-disabled="!registerForm.$valid"
-                  data-i18n>Register</button>
-        </div>
-      </div>
-      <a href="" class="pull-right" data-ng-click="goToLogin()" data-i18n>I already have an account</a>
-    </form>
-  </div>
+    <button type="submit" class="btn btn-primary" data-ng-disabled="registerForm.$invalid" data-i18n>Register</button>
+    <a href="" class="pull-right" data-ng-click="goToLogin()" data-i18n>I already have an account</a>
+  </form>
 </div>

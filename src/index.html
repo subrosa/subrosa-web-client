@@ -63,7 +63,7 @@
                 data-ng-if="currentUser"
                 data-ng-click="collapsed.account = !collapsed.account">
           <span class="sr-only" data-i18n>Toggle account navigation</span>
-          <div data-avatar="user" data-size="xs"></div>
+          <span data-avatar="user" data-size="xs"></span>
         </button>
 
         <button class="navbar-toggle" type="button" data-ng-click="collapsed.main = !collapsed.main">
@@ -104,8 +104,9 @@
           <a role="menuitem" data-ng-click="logout()" data-i18n>Logout</a>
         </li>
 
-        <li role="presentation" class="hidden-xs" data-ng-show="currentUser">
-          <div role="menu" class="dropdown-toggle" data-avatar="currentUser" data-size="sm"></div>
+        <li role="presentation" class="hidden-xs" data-dropdown data-ng-show="currentUser">
+          <a href="" role="menu" class="dropdown-toggle" data-dropdown-toggle
+             data-avatar="currentUser" data-size="sm"></a>
           <ul class="dropdown-menu" role="menu">
             <li class="user-menu">
               <div>
@@ -185,6 +186,10 @@
 <script type="text/javascript" src="/app/account/account-games.controller.js"></script>
 <script type="text/javascript" src="/app/account/account-players.controller.js"></script>
 <script type="text/javascript" src="/app/account/account-display-name.filter.js"></script>
+<script type="text/javascript" src="/app/account/address/address.factory.js"></script>
+<script type="text/javascript" src="/app/account/address/address-chooser.directive.js"></script>
+<script type="text/javascript" src="/app/account/image/image.factory.js"></script>
+<script type="text/javascript" src="/app/account/image/image-chooser.directive.js"></script>
 <script type="text/javascript" src="/app/account/register-form.controller.js"></script>
 
 <script type="text/javascript" src="/app/auth/auth.module.js"></script>
@@ -197,20 +202,23 @@
 <script type="text/javascript" src="/app/auth/user.factory.js"></script>
 
 <script type="text/javascript" src="/app/components/components.module.js"></script>
+<script type="text/javascript" src="/app/components/chooser/chooser.module.js"></script>
+<script type="text/javascript" src="/app/components/chooser/chooser-directive.controller.js"></script>
 <script type="text/javascript" src="/app/components/flash/flash.module.js"></script>
 <script type="text/javascript" src="/app/components/flash/flash.service.js"></script>
 <script type="text/javascript" src="/app/components/flash/flash-messages.directive.js"></script>
 <script type="text/javascript" src="/app/components/form/form.module.js"></script>
 <script type="text/javascript" src="/app/components/form/fields-match.directive.js"></script>
 <script type="text/javascript" src="/app/components/form/form-feedback.directive.js"></script>
-<script type="text/javascript" src="/app/components/form/input-feedback.directive.js"></script>
+<script type="text/javascript" src="/app/components/form/form-group-feedback.directive.js"></script>
 <script type="text/javascript" src="/app/components/form/input-messages.directive.js"></script>
-<script type="text/javascript" src="/app/components/form/fields/form-group.directive.js"></script>
+<script type="text/javascript" src="/app/components/form/validators/validate-address.directive.js"></script>
 <script type="text/javascript" src="/app/components/form/validators/validate-integer.directive.js"></script>
+<script type="text/javascript" src="/app/components/geocode/geocoder.module.js"></script>
+<script type="text/javascript" src="/app/components/geocode/geocoder.service.js"></script>
 <script type="text/javascript" src="/app/components/image/image.module.js"></script>
 <script type="text/javascript" src="/app/components/image/upload-single-image.directive.js"></script>
 <script type="text/javascript" src="/app/components/map/map.module.js"></script>
-<script type="text/javascript" src="/app/components/map/geocoder.service.js"></script>
 <script type="text/javascript" src="/app/components/map/map.directive.js"></script>
 <script type="text/javascript" src="/app/components/map/map-directive.controller.js"></script>
 <script type="text/javascript" src="/app/components/map/map-draw.service.js"></script>
@@ -230,10 +238,6 @@
 <script type="text/javascript" src="/app/game/game.controller.js"></script>
 <script type="text/javascript" src="/app/game/game-type-box.directive.js"></script>
 <script type="text/javascript" src="/app/game/game-type-icon.directive.js"></script>
-<script type="text/javascript" src="/app/game/event/game-event-type.filter.js"></script>
-<script type="text/javascript" src="/app/game/event/game-event-type-icon.directive.js"></script>
-<script type="text/javascript" src="/app/game/event/game-event.factory.js"></script>
-<script type="text/javascript" src="/app/game/event/game-event-timeline.directive.js"></script>
 <script type="text/javascript" src="/app/game/game-feed.controller.js"></script>
 <script type="text/javascript" src="/app/game/game-field.filter.js"></script>
 <script type="text/javascript" src="/app/game/game-stats.controller.js"></script>
@@ -244,11 +248,18 @@
 <script type="text/javascript" src="/app/game/post.factory.js"></script>
 <script type="text/javascript" src="/app/game/create/create-game.controller.js"></script>
 <script type="text/javascript" src="/app/game/edit/edit-game.controller.js"></script>
-<script type="text/javascript" src="/app/game/edit/edit-game-enrollment.controller.js"></script>
 <script type="text/javascript" src="/app/game/edit/edit-game-events.controller.js"></script>
 <script type="text/javascript" src="/app/game/edit/edit-game-rules.controller.js"></script>
 <script type="text/javascript" src="/app/game/edit/edit-game-zone.controller.js"></script>
-<script type="text/javascript" src="/app/game/enroll/game-enrollment.controller.js"></script>
+<script type="text/javascript" src="/app/game/edit/edit-join-game-form.controller.js"></script>
+<script type="text/javascript" src="/app/game/event/game-event-type.filter.js"></script>
+<script type="text/javascript" src="/app/game/event/game-event-type-icon.directive.js"></script>
+<script type="text/javascript" src="/app/game/event/game-event.factory.js"></script>
+<script type="text/javascript" src="/app/game/event/game-event-timeline.directive.js"></script>
+<script type="text/javascript" src="/app/game/join/join-game.controller.js"></script>
+<script type="text/javascript" src="/app/game/join/join-game-select-player.controller.js"></script>
+<script type="text/javascript" src="/app/game/join/join-game-player-info.controller.js"></script>
+
 
 <script type="text/javascript" src="/app/i18n/i18n.module.js"></script>
 <script type="text/javascript" src="/app/i18n/i18n.service.js"></script>
@@ -262,8 +273,7 @@
 <script type="text/javascript" src="/app/player/player.module.js"></script>
 <script type="text/javascript" src="/app/player/avatar.directive.js"></script>
 <script type="text/javascript" src="/app/player/player.factory.js"></script>
-<script type="text/javascript" src="/app/player/select-player.directive.js"></script>
-<script type="text/javascript" src="/app/player/select-player-directive.controller.js"></script>
+<script type="text/javascript" src="/app/player/player-chooser.directive.js"></script>
 
 <script type="text/javascript" src="/app/utils/utils.module.js"></script>
 <script type="text/javascript" src="/app/utils/block.directive.js"></script>
@@ -277,5 +287,6 @@
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
+
 </body>
 </html>

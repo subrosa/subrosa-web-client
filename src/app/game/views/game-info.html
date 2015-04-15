@@ -11,24 +11,25 @@
 
 <section>
   <h2 data-i18n>Rules</h2>
+  <section>
+    <div data-ng-show="game.rules.GAME_SPECIFIC">
+      <h3 data-i18n>Game Specific Rules</h3>
+      <ul>
+        <li data-ng-repeat="rule in game.rules.GAME_SPECIFIC">
+          {{ rule }}
+        </li>
+      </ul>
+    </div>
 
-  <div data-ng-show="game.rules.GAME_SPECIFIC">
-    <h3 data-i18n>Game Specific Rules</h3>
-    <ul>
-      <li data-ng-repeat="rule in game.rules.GAME_SPECIFIC">
-        {{ rule }}
-      </li>
-    </ul>
-  </div>
-
-  <div>
-    <h3 data-i18n>Rules for all Games</h3>
-    <ul>
-      <li data-ng-repeat="rule in game.rules.ALL_GAMES">
-        {{ rule }}
-      </li>
-    </ul>
-  </div>
+    <div>
+      <h3 data-i18n>Rules for all Games</h3>
+      <ul>
+        <li data-ng-repeat="rule in game.rules.ALL_GAMES">
+          {{ rule }}
+        </li>
+      </ul>
+    </div>
+  </section>
 </section>
 
 <section>

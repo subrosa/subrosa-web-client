@@ -50,16 +50,6 @@ describe('Service: errorInterceptor', function () {
         expect($q.reject).toHaveBeenCalledWith(badRequest);
     });
 
-    it("adds errorDictionary.unknownError to response errors without notifications", function () {
-        var expected = badRequest;
-        expected.data.notifications = errorDictionary.unknownError;
-        spyOn($q, 'reject');
-
-        errorInterceptor.responseError(badRequest);
-
-        expect($q.reject).toHaveBeenCalledWith(expected);
-    });
-
     it("does not alter 401 responses", function () {
         var unauthorized = {
             status: 401,

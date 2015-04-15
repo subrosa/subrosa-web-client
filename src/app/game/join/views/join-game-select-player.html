@@ -1,0 +1,32 @@
+<div data-ng-show="players.length === 0">
+  <form name="createPlayerForm" role="form" novalidate
+        data-ng-model-options="{debounce: {default: 500, blur: 0}}"
+        data-form-feedback="playerForm"
+        data-form-notifications="selectPlayerNotifications"
+        data-ng-submit="createPlayer()">
+
+    <div class="form-group" data-form-group-feedback>
+      <label for="playerName" data-i18n>Username</label>
+      <input id="playerName" type="text" name="username" class="form-control" required data-ng-model="player.name" />
+      <p class="help-block" data-i18n>How you are known to other players.</p>
+    </div>
+
+    <div class="form-group" data-form-group-feedback>
+      <label data-i18n>Avatar</label>
+      <input name="image" type="hidden" data-ng-model="player.imageId" required/>
+      <div data-upload-single-image data-after-upload="setPlayerImage">
+        <p class="help-block" data-i18n>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
+      </div>
+    </div>
+
+      <button type="submit" class="btn btn-default btn-primary" data-ng-disabled="createPlayerForm.$invalid">
+      <span data-ng-hide="joining" data-i18n>Next</span>
+    </button>
+  </form>
+</div>
+
+<div data-ng-show="players.length > 0">
+  <div data-notification-display="selectPlayerNotifications"></div>
+  <div data-player-chooser="players" data-on-select="selectPlayer(item)"></div>
+</div>
+

@@ -1,0 +1,32 @@
+<div data-extend-template="/app/components/chooser/views/chooser.html">
+  <div data-block="chooser-header">
+    {{ item.name }}
+  </div>
+
+  <div data-block="chooser-body">
+    <a href="#" class="text-center" data-avatar="item" data-size="md"></a>
+  </div>
+
+  <div data-block="chooser-edit-header">
+      <div class="form-group" data-form-group-feedback>
+        <label for="playerUsername{{$index}}" data-i18n>Username</label>
+        <input id="playerUsername{{$index}}" type="text" name="name" class="form-control" required
+               data-ng-model="item.name"/>
+        <p class="help-block" data-i18n>How you are known to other players</p>
+      </div>
+  </div>
+
+  <div data-block="chooser-edit-body">
+      <div class="form-group" data-form-group-feedback>
+        <label for="playerImage{{$index}}" data-i18n>Avatar</label>
+        <input id="playerImage{{$index}}" name="image" type="hidden" data-ng-model="item.imageId" required/>
+        <div data-upload-single-image data-after-upload="setPlayerImage">
+          <p class="help-block" data-i18n>Your Avatar appears next to your Game Feed posts and other items throughout the site.</p>
+        </div>
+      </div>
+  </div>
+
+  <div data-block="chooser-new-item">
+    <span data-i18n>New Player</span>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div data-ng-if="field.type === 'address'">
+  <div class="form-group" data-ng-if="addresses.length === 0" data-form-group-feedback>
+    <label data-i18n>{{ field.name }}</label>
+    <textarea name="{{ field.fieldId }}" class="form-control"
+              validate-address data-ng-model="attributes[field.fieldId]" data-ng-required="field.required">
+    </textarea>
+    <p class="help-block">{{ field.description }}</p>
+  </div>
+
+  <div class="form-group" data-ng-if="addresses.length > 0" data-form-group-feedback>
+    <label data-i18n>Choose your {{ field.name }}</label>
+    <input type="hidden" name="{{ field.fieldId }}" data-ng-model="attributes[field.fieldId]" data-ng-required="field.required"/>
+    <div data-address-chooser="addresses" data-on-save="selectValue(field, item)" data-on-select="selectValue(field, item)"></div>
+    <p class="help-block">{{ field.description }}</p>
+  </div>
+</div>
+
+<div data-ng-if="field.type === 'image'">
+  <div class="form-group" data-ng-if="images.length === 0" data-form-group-feedback>
+    <label data-i18n>{{ field.name }}</label>
+    <input type="hidden" name="{{ field.fieldId }}" data-ng-model="attributes[field.fieldId]" data-ng-required="field.required"/>
+    <div data-upload-single-image data-after-upload="setImage"></div>
+    <p class="help-block">{{ field.description }}</p>
+  </div>
+
+  <div class="form-group" data-ng-if="images.length > 0" data-form-group-feedback>
+    <label data-i18n>Choose your {{ field.name }}</label>
+    <input type="hidden" name="{{ field.fieldId }}" data-ng-model="attributes[field.fieldId]" data-ng-required="field.required"/>
+    <div data-image-chooser="images" data-on-save="selectValue(field, item)" data-on-save-error="fieldError(field, error)"
+         data-on-select="selectValue(field, item)"></div>
+    <p class="help-block">{{ field.description }}</p>
+  </div>
+</div>
+
+<div class="form-group" data-ng-if="field.type === 'text'" data-form-group-feedback>
+  <label data-i18n>{{ field.name }}</label>
+  <!--<input type="text" name="{{ field.fieldId }}" class="form-control" data-ng-required="field.required" data-ng-model="attributes[field.fieldId]" />-->
+  <input type="text" name="{{ field.fieldId }}" class="form-control" data-ng-required="true" data-ng-model="attributes[field.fieldId]" />
+  <p class="help-block">{{ field.description }}</p>
+</div>
+

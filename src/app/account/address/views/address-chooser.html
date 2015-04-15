@@ -1,0 +1,33 @@
+<div data-extend-template="/app/components/chooser/views/chooser.html">
+  <div data-block="chooser-header">
+    {{ item.label }}
+  </div>
+
+  <div data-block="chooser-body">
+    <address class="text-center">
+      {{ item.fullAddress }}
+    </address>
+  </div>
+
+  <div data-block="chooser-edit-header">
+    <div class="form-group" data-form-group-feedback>
+      <label for="addressLabel{{$index}}" data-i18n>Address Name</label>
+      <input id="addressLabel{{$index}}" type="text" name="addressLabel{{$index}}" class="form-control" data-ng-model="item.label"/>
+      <p class="help-block" data-i18n>A name you can remember this address by.</p>
+    </div>
+  </div>
+
+  <div data-block="chooser-edit-body">
+    <div class="form-group">
+      <label for="address{{$index}}" data-i18n>Address</label>
+      <textarea id="address{{$index}}" name="address{{$index}}" class="form-control" data-ng-required="{{ required }}"
+                data-validate-address data-ng-model="item.fullAddress">
+      </textarea>
+      <p class="help-block" data-i18n>Enter the full address.</p>
+    </div>
+  </div>
+
+  <div data-block="chooser-new-item">
+    <span data-i18n>New Address</span>
+  </div>
+</div>
