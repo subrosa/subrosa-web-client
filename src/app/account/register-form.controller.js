@@ -51,6 +51,13 @@ angular.module('subrosa.account').controller('RegisterFormController', function 
         }
     };
 
+    $scope.openDob = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.dobOpen = true;
+    };
+
     $scope.register = function () {
         var data = {
             account: {email: $scope.user.email},

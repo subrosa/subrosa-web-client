@@ -8,13 +8,13 @@
 angular.module('subrosa.account', [
     'ngResource',
     'subrosa.auth',
+    'subrosa.components.chooser',
     'subrosa.components.form',
     'subrosa.components.image',
     'subrosa.player',
     'ui.bootstrap.modal',
     'ui.router'
 ]);
-
 
 /**
  * @ngdoc object
@@ -63,8 +63,7 @@ angular.module('subrosa.account').config(function ($stateProvider) {
 
     $stateProvider.state('register', {
         url: '/register',
-        controller: 'RegisterFormController',
-        templateUrl: '/app/account/views/register-form.html'
+        templateUrl: '/app/account/views/register.html'
     });
 
     $stateProvider.state('login', {

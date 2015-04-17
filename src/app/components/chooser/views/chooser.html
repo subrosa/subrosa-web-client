@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12">
+    <a href="#" data-ng-click="newItem()">
+      <span data-block="chooser-new-item"></span>
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div data-ng-class="{'col-sm-5': item.edit, 'col-sm-3': !item.edit}"
+       data-ng-repeat="item in items">
+
+    <div data-ng-if="!item.edit">
+      <div class="chooser-panel panel panel-default" data-ng-class="{selected: item === selectedItem}">
+        <div class="panel-heading" data-ng-click="selectItem(item)" title="Use this one" data-i18n-attrs="title">
+          <div data-block="chooser-header"></div>
+        </div>
+
+        <div class="panel-body" data-ng-click="selectItem(item)" title="Use this one" data-i18n-attrs="title">
+          <div data-block="chooser-body"></div>
+        </div>
+
+        <div class="panel-footer">
+          <span data-ng-hide="disableEdit">
+            <a href="#" title="Edit" data-i18n-attrs="title" data-ng-click="editItem(item)" data-i18n>Edit</a>
+            |
+          </span>
+          <a href="#" title="Delete" data-i18n-attrs="title" data-ng-click="deleteItem(item)" data-i18n>Delete</a>
+        </div>
+      </div>
+    </div>
+
+    <div data-ng-if="item.edit">
+      <div class="chooser-panel panel panel-default" data-ng-class="{selected: item.selected}">
+        <div data-ng-form data-name="chooserForm" role="form" novalidate
+             data-form-feedback="chooserForm"
+             data-form-notifications="chooserFormNotifications">
+          <div class="panel-heading">
+            <div data-block="chooser-edit-header"></div>
+          </div>
+
+          <div class="panel-body">
+            <div data-block="chooser-edit-body"></div>
+          </div>
+
+          <div class="panel-footer">
+            <button type="button" class="btn btn-primary btn-xs"
+                    data-ng-click="saveItem(item)"
+                    data-ng-disabled="chooserForm.$invalid || saving">
+              <span data-ng-hide="saving" data-i18n>Save</span>
+              <span data-ng-show="saving" data-i18n>Saving</span>
+            </button>
+
+            <button type="button" class="btn btn-default btn-xs" data-ng-click="cancelEditItem(item)">
+              <span data-i18n>Cancel</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -8,5 +8,6 @@
 angular.module('subrosa.player', [
     'ngResource',
     'subrosa.account',
-    'ui.router'
+    'subrosa.components.chooser',
+    'ui.router',
 ]);

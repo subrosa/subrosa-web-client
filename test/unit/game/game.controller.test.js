@@ -41,13 +41,13 @@ describe('Controller: GameController', function () {
             spyOn($state, 'go');
             $scope.game.requiresPassword = true;
             $scope.joinGame();
-            expect($state.go).toHaveBeenCalledWith('game.enroll.enter-password');
+            expect($state.go).toHaveBeenCalledWith('game.join.enter-password');
         });
 
         it("if the game does not require a password", function () {
             spyOn($state, 'go');
             $scope.joinGame();
-            expect($state.go).toHaveBeenCalledWith('game.enroll');
+            expect($state.go).toHaveBeenCalledWith('game.join');
         });
     });
 

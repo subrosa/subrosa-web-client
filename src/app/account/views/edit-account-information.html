@@ -4,17 +4,17 @@
       data-form-feedback="accountForm" data-form-notifications="notifications"
       data-ng-submit="updateAccount()">
 
-  <div class="form-group" data-input-feedback="accountForm.name">
+  <div class="form-group" data-form-group-feedback>
     <label for="name" class="control-label" data-i18n>Real Name</label>
     <input id="name" name="name" type="text" class="form-control" data-ng-model="account.name"/>
   </div>
 
-  <div class="form-group" data-input-feedback="accountForm.email">
+  <div class="form-group" data-form-group-feedback>
     <label for="email" class="control-label" data-i18n>Email</label>
     <input id="email" name="email" type="email" class="form-control" data-ng-model="account.email"/>
   </div>
 
-  <div class="form-group" data-input-feedback="accountForm.dateOfBirth">
+  <div class="form-group" data-form-group-feedback>
     <label for="dateOfBirth" class="control-label" data-i18n>Date of Birth</label>
     <input id="dateOfBirth" name="dateOfBirth" type="text" class="form-control"
            data-datepicker-popup="shortDate" data-ng-model="account.dateOfBirth"

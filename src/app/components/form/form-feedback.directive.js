@@ -30,7 +30,6 @@ angular.module('subrosa.components.form').directive('formFeedback', function (_)
                         if (scope.form.hasOwnProperty(field)) {
                             scope.form[field].$setValidity(notification.details.constraint, false);
                             scope.form[field].$dirty = true;
-                            scope.form[field].$error.message = notification.details.message;
                         }
                     }
                 });

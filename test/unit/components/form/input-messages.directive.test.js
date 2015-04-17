@@ -30,6 +30,6 @@ describe('Directive: inputMessages', function () {
         expect(element.html()).toContain('ngMessage: number');
         expect(element.html()).toContain('ngMessage: integer');
         expect(element.html()).toContain('ngMessage: email');
-        expect(element.html()).toContain('ngMessage: server');
+        expect(element.html()).toContain('ngMessage: address');
     });
 });

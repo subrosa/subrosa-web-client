@@ -1,0 +1,30 @@
+<p class="alert alert-info" data-i18n>
+  Read over <a href="" data-ui-sref="game.info">the rules</a> before joining, breaking the rules could lead to being removed from the game.
+</p>
+
+<form name="joinGameForm" role="form" novalidate
+      data-ng-model-options="{debounce: {default: 500, blur: 0}}"
+      data-form-feedback="joinGameForm"
+      data-form-notifications="joinGameNotifications"
+      data-ng-submit="joinGame()">
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label data-i18n>Selected Player</label>
+      <a href="#" class="thumbnail" title="Click to change player" data-i18n-attrs="title"
+         data-ui-sref="game.join.select-player">
+        <div href="#" class="text-center" data-avatar="player" data-size="md" data-show-name="true"></div>
+      </a>
+    </div>
+  </div>
+
+  <div data-ng-repeat="field in game.playerInfo">
+    <div data-ng-include="'/app/game/join/views/game-player-info-field.html'"></div>
+  </div>
+
+  <button type="submit" class="btn btn-default btn-primary">
+  <!--<button type="submit" class="btn btn-default btn-primary" data-ng-disabled="joinGameForm.$invalid || joining">-->
+    <span data-ng-hide="joining" data-i18n>Join Game</span>
+    <span data-ng-show="joining" data-i18n>Joining</span>
+  </button>
+</form>

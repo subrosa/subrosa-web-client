@@ -29,9 +29,9 @@ angular.module('subrosa.game').controller('GameController', function ($scope, $s
     $scope.joinGame = function () {
         if ($scope.game.requiresPassword) {
             // @TODO
-            $state.go('game.enroll.enter-password');
+            $state.go('game.join.enter-password');
         }
-        $state.go('game.enroll');
+        $state.go('game.join');
     };
 
     $scope.publishGame = function () {

@@ -15,7 +15,22 @@ describe('Directive: map', function () {
 
         mapElement = {
             addLayer: function () {},
-            addControl: function () {}
+            addControl: function () {},
+            dragging: {
+                disable: function () {}
+            },
+            touchZoom: {
+                disable: function () {}
+            },
+            doubleClickZoom: {
+                disable: function () {}
+            },
+            scrollWheelZoom: {
+                disable: function () {}
+            },
+            tap: {
+                disable: function () {}
+            }
         };
 
         leafletData = {
@@ -41,7 +56,7 @@ describe('Directive: map', function () {
     }));
 
     beforeEach(function () {
-        element = angular.element('<div map="mapName"></div>');
+        element = angular.element('<div map="mapName" disable-zoom="disableZoom"></div>');
     });
 
     describe("display a map", function () {
@@ -73,4 +88,27 @@ describe('Directive: map', function () {
         });
         expect(i18n).toHaveBeenCalled();
     });
+
+    it("can disable zooming", function () {
+        spyOn(leaflet.control, 'zoom');
+        spyOn(mapElement, 'addControl');
+        spyOn(mapElement.dragging, 'disable');
+        spyOn(mapElement.touchZoom, 'disable');
+        spyOn(mapElement.doubleClickZoom, 'disable');
+        spyOn(mapElement.scrollWheelZoom, 'disable');
+        spyOn(mapElement.tap, 'disable');
+
+        $scope.disableZoom = true;
+
+        $compile(element)($scope);
+        $scope.$digest();
+
+        expect(mapElement.dragging.disable).toHaveBeenCalled();
+        expect(mapElement.touchZoom.disable).toHaveBeenCalled();
+        expect(mapElement.doubleClickZoom.disable).toHaveBeenCalled();
+        expect(mapElement.scrollWheelZoom.disable).toHaveBeenCalled();
+        expect(mapElement.tap.disable).toHaveBeenCalled();
+        expect(leaflet.control.zoom).not.toHaveBeenCalled();
+    });
+
 });

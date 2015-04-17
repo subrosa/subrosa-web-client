@@ -1,6 +1,6 @@
 /**
  * @ngdoc directive
- * @name subrosa.components.form:integerValidator
+ * @name subrosa.components.form:validateInteger
  *
  * @description
  *   Ensures that the field contains a valid integer.

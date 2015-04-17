@@ -1,0 +1,30 @@
+<div data-extend-template="/app/components/chooser/views/chooser.html">
+  <div data-block="chooser-header">
+    {{ item.name }}
+  </div>
+
+  <div data-block="chooser-body">
+    <a href="#" class="text-center" data-avatar="item" data-size="md">
+    </a>
+  </div>
+
+  <div data-block="chooser-edit-header">
+    <div class="form-group">
+      <label for="imageLabel{{$index}}" data-i18n>Image Name</label>
+      <input id="imageLabel{{$index}}" type="text" name="imageLabel{{$index}}" class="form-control" data-ng-model="item.label"/>
+      <p class="help-block" data-i18n>A name to remember this image by.</p>
+    </div>
+  </div>
+
+  <div data-block="chooser-edit-body">
+    <div class="form-group">
+      <label for="imageFile{{$index}}" data-i18n>Upload Image</label>
+      <input name="imageFile{{$index}}" type="hidden" data-ng-model="image.id" required/>
+      <div data-upload-single-image data-after-upload="setImage"></div>
+    </div>
+  </div>
+
+  <div data-block="chooser-new-item">
+    <span data-i18n>New Image</span>
+  </div>
+</div>

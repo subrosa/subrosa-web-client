@@ -17,6 +17,7 @@ angular.module('subrosa.components.map').directive('map', function (leaflet, lea
         templateUrl: '/app/components/map/views/map.html',
         scope: {
             id: '@map',
+            disableZoom: '=',
             allowCurrentLocation: '=allowCurrentLocation',
             center: '=?center',
             onLocationSuccess: '=onLocationSuccess',
@@ -24,11 +25,26 @@ angular.module('subrosa.components.map').directive('map', function (leaflet, lea
         },
         link: function (scope) {
             leafletData.getMap(scope.id).then(function (mapElement) {
-                var zoomControl = leaflet.control.zoom({
-                    zoomInTitle: i18n('Zoom in'),
-                    zoomOutTitle: i18n('Zoom out')
-                });
-                mapElement.addControl(zoomControl);
+                var zoomControl;
+                
+                if (scope.disableZoom) {
+                    // Disable drag and zoom handlers.
+                    mapElement.dragging.disable();
+                    mapElement.touchZoom.disable();
+                    mapElement.doubleClickZoom.disable();
+                    mapElement.scrollWheelZoom.disable();
+
+                    // Disable tap handler, if present.
+                    if (mapElement.tap) {
+                        mapElement.tap.disable();
+                    }
+                } else {
+                    zoomControl = leaflet.control.zoom({
+                        zoomInTitle: i18n('Zoom in'),
+                        zoomOutTitle: i18n('Zoom out')
+                    });
+                    mapElement.addControl(zoomControl);
+                }
             });
         }
     };

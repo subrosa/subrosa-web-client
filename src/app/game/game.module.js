@@ -9,6 +9,7 @@ angular.module('subrosa.game', [
     'geolocation',
     'i18n',
     'ngResource',
+    'subrosa.components.flash',
     'subrosa.components.form',
     'subrosa.components.map',
     'subrosa.components.modal',
@@ -92,22 +93,32 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         }
     });
 
-    $stateProvider.state('game.enroll', {
+    $stateProvider.state('game.join', {
         url: '/join',
         views: {
             'content@game': {
-                controller: 'GameEnrollmentController',
-                templateUrl: '/app/game/enroll/views/game-enrollment.html'
-            },
-            'right@game.enroll': {
-                templateUrl: '/app/game/views/game-info.html'
+                controller: 'JoinGameController',
+                templateUrl: '/app/game/join/views/join-game.html'
             }
         }
     });
 
-    $stateProvider.state('game.enroll.join', {
-        controller: 'GameEnrollmentController',
-        templateUrl: '/app/game/enroll/views/join-game-form.html'
+    $stateProvider.state('game.join.register', {
+        url: '/register',
+        controller: 'RegisterFormController',
+        templateUrl: '/app/account/views/register-form.html'
+    });
+
+    $stateProvider.state('game.join.select-player', {
+        url: '/select-player',
+        controller: 'JoinGameSelectPlayerController',
+        templateUrl: '/app/game/join/views/join-game-select-player.html'
+    });
+
+    $stateProvider.state('game.join.player-info', {
+        url: '/player-info',
+        controller: 'JoinGamePlayerInfoController',
+        templateUrl: '/app/game/join/views/join-game-player-info.html'
     });
 
     $stateProvider.state('game.edit', {
@@ -137,11 +148,11 @@ angular.module('subrosa.game').config(function ($stateProvider) {
     });
 
     $stateProvider.state('game.edit.enrollment', {
-        url: '/enrollment',
+        url: '/join-game-form',
         views: {
             'content@game': {
-                controller: 'EditGameEnrollmentController',
-                templateUrl: '/app/game/edit/views/edit-game-enrollment.html'
+                controller: 'EditJoinGameFormController',
+                templateUrl: '/app/game/edit/views/edit-join-game-form.html'
             }
         }
     });
