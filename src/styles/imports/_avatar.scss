@@ -1,0 +1,69 @@
+.drop {
+  border: 2px dashed $color-drop-border;
+  border-radius: 5px;
+  height: 200px;
+  margin: 10px;
+
+  // Ensure FlowJS hidden file input does not have width
+  [type="file"] {
+    width: 0;
+  }
+
+  // A ghost element, nudged to maintain perfect centering
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    margin-right: -.25em;
+    vertical-align: middle;
+  }
+
+  div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+form .drop {
+  margin: 0;
+}
+
+.drag-over {
+  background-color: $color-drag-over-bg;
+}
+
+.avatar-container {
+  margin: 0 auto;
+  position: relative;
+}
+
+.avatar-lg {
+  width: 150px;
+}
+
+.avatar-md {
+  width: 100px;
+}
+
+.avatar-sm {
+  width: 50px;
+}
+
+.avatar-xs {
+  height: 22px;
+  width: 22px;
+}
+
+.avatar-overlay {
+  background-color: $color-avatar-overlay-bg;
+  bottom: 0;
+  color: $color-avatar-overlay-text;
+  padding: 7px 0;
+  position: absolute;
+  text-align: center;
+}
+
+.thumbnail button {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}

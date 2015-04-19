@@ -1,0 +1,28 @@
+body {
+  padding-top: 70px;
+}
+
+// Centered columns styles
+.row-centered {
+  text-align: center;
+}
+
+.col-centered {
+  display: inline-block;
+  float: none;
+  margin-right: -4px;
+  text-align: left;
+}
+
+.user-menu {
+  margin: 10px;
+  text-align: center;
+
+  .avatar-container {
+    margin: 0 15px;
+  }
+}
+
+footer {
+  margin-top: 25px;
+}
