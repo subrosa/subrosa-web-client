@@ -135,5 +135,17 @@ describe('Factory: game', function () {
             ensureStatusesAreFalse(statuses);
         });
     });
+
+    it("can ", function () {
+        var game;
+
+        beforeEach(function () {
+            game = gameFactory.get({id: 1});
+        });
+
+        it('', function () {
+
+        });
+    });
 });
 

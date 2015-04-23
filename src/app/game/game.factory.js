@@ -59,5 +59,9 @@ angular.module('subrosa.game').factory('Game', function ($resource, API_CONFIG) 
         return this.status === 'ARCHIVED';
     };
 
+    game.prototype.isTeamGame = function () {
+        return this.maximumTeamSize > 1;
+    };
+
     return game;
 });

@@ -34,8 +34,7 @@
 
 <div class="form-group" data-ng-if="field.type === 'text'" data-form-group-feedback>
   <label data-i18n>{{ field.name }}</label>
-  <!--<input type="text" name="{{ field.fieldId }}" class="form-control" data-ng-required="field.required" data-ng-model="attributes[field.fieldId]" />-->
-  <input type="text" name="{{ field.fieldId }}" class="form-control" data-ng-required="true" data-ng-model="attributes[field.fieldId]" />
+  <input type="text" name="{{ field.fieldId }}" class="form-control" data-ng-required="field.required" data-ng-model="attributes[field.fieldId]" />
   <p class="help-block">{{ field.description }}</p>
 </div>
 

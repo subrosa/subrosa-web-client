@@ -14,6 +14,7 @@ angular.module('subrosa.game', [
     'subrosa.components.map',
     'subrosa.components.modal',
     'subrosa.player',
+    'subrosa.team',
     'subrosa.utils',
     'timer',
     'ui.router',
@@ -62,6 +63,16 @@ angular.module('subrosa.game').config(function ($stateProvider) {
             },
             'menu@game': {
                 templateUrl: '/app/game/views/game-menu.html'
+            }
+        }
+    });
+
+    $stateProvider.state('game.teams', {
+        url: '/teams',
+        views: {
+            'content@game': {
+                controller: 'TeamListController',
+                templateUrl: '/app/team/views/team-list.html'
             }
         }
     });
