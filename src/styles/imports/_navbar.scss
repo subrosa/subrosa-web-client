@@ -1,0 +1,17 @@
+.navbar {
+  padding-right: 10px;
+
+  img {
+    height: 36px;
+    position: relative;
+    top: -8px;
+  }
+
+  .nav > li {
+    border-right: 1px solid $color-nav-border;
+
+    &:first-child {
+      border-left: 1px solid $color-nav-border;
+    }
+  }
+}

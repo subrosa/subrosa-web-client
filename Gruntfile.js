@@ -85,23 +85,26 @@ module.exports = function (grunt) {
                     '<%= subrosa.src %>/img/**/*.{png,jpg,jpeg,gif,webp}'
                 ]
             },
-            styles: {
-                files: ['<%= subrosa.src %>/less/**/*.less'],
-                tasks: ['less'],
+            sass: {
                 options: {
-                    nospawn: true
-                }
+                    livereload: true,
+                    spawn: false
+                },
+                files: '<%= subrosa.src %>/styles/{,*/}*.{scss,sass}',
+                tasks: ['sass']
             }
         },
 
         // Linting
-        lesslint: {
+        scsslint: {
+            allFiles: [
+                '<%= subrosa.src %>/styles/**/*.scss'
+            ],
             options: {
-                csslint: {
-                    csslintrc: '.csslintrc'
-                }
-            },
-            src: '<%= subrosa.src %>/less/**/*.less'
+                config: '.scss-lint.yml',
+                reporterOutput: 'scss-lint-report.xml',
+                colorizeOutput: true
+            }
         },
 
         jshint: {
@@ -134,15 +137,14 @@ module.exports = function (grunt) {
         },
 
         // Preprocessors
-        less: {
+        sass: {
             development: {
                 options: {
-                    compress: true,
-                    yuicompress: true,
-                    optimization: 2
+                    style: 'expanded',
+                    compass: false
                 },
                 files: {
-                    '<%= subrosa.src %>/css/subrosa.css': '<%= subrosa.src %>/less/subrosa.less'
+                    '<%= subrosa.src %>/css/subrosa.css': '<%= subrosa.src %>/styles/subrosa.scss'
                 }
             }
         },
@@ -353,7 +355,7 @@ module.exports = function (grunt) {
     grunt.registerTask('server', [
         'clean:tmp',
         'ngconstant:development',
-        'less',
+        'sass',
         'configureProxies',
         'connect:livereload',
         'open',
@@ -361,7 +363,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('lint', [
-        'lesslint',
+        'scsslint',
         'jshint',
         'htmlhint'
     ]);
