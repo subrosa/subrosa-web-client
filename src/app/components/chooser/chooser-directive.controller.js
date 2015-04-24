@@ -9,15 +9,16 @@
  *  The controller for chooser directives.
  */
 angular.module('subrosa.components.chooser').controller('ChooserDirectiveController', function (_, $scope) {
-    var beforeEdit = {}, autoSelectDefault = true,
-        removeItem = function (itemToRemove) {
-            $scope.items = _.reject($scope.items, function (item) {
-                return item.id === itemToRemove.id;
-            });
-        };
+    var beforeEdit = {}, autoSelectDefault = true, removeItem;
 
     this.setAutoSelectDefault = function (autoselect) {
         autoSelectDefault = autoselect;
+    };
+
+    removeItem = function (itemToRemove) {
+        $scope.items = _.reject($scope.items, function (item) {
+            return item.id === itemToRemove.id;
+        });
     };
 
     $scope.saving = false;
@@ -30,15 +31,13 @@ angular.module('subrosa.components.chooser').controller('ChooserDirectiveControl
     $scope.newItem = function () {
         var newItem = {};
         $scope.selectedItem = newItem;
-
+        $scope.editedItem = newItem;
         $scope.items.unshift(newItem);
-        $scope.editItem(newItem);
     };
 
     $scope.editItem = function (item) {
         beforeEdit[item.id] = angular.copy(item);
-
-        item.edit = true;
+        $scope.editedItem = item;
         $scope.onEdit({item: item});
     };
 
@@ -70,7 +69,7 @@ angular.module('subrosa.components.chooser').controller('ChooserDirectiveControl
             $scope.onSaveError({item: item});
         };
 
-        item.edit = true;
+        $scope.editedItem = item;
         $scope.saving = true;
 
         if ($scope.hasOwnProperty('saveResource')) {
@@ -92,7 +91,6 @@ angular.module('subrosa.components.chooser').controller('ChooserDirectiveControl
             $scope.onDeleteError({item: item});
         };
 
-        item.edit = false;
         item.saving = false;
 
         if ($scope.hasOwnProperty('deleteResource')) {

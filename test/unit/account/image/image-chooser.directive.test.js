@@ -23,7 +23,7 @@ describe('Directive: imageChooser', function () {
 
         Image = {
             failed: false,
-            save: handler,
+            update: handler,
             delete: handler
         };
 
@@ -53,15 +53,15 @@ describe('Directive: imageChooser', function () {
         expect(elementScope.chooserFormNotifications).toEqual([]);
     });
 
-    describe("can save the image resource", function () {
+    describe("can update the image resource", function () {
         beforeEach(function () {
-            spyOn(Image, 'save').andCallThrough();
+            spyOn(Image, 'update').andCallThrough();
         });
 
         it("and succeed.", function () {
             elementScope.saveResource(image);
 
-            expect(Image.save).toHaveBeenCalledWith(image, jasmine.any(Function), jasmine.any(Function));
+            expect(Image.update).toHaveBeenCalledWith(image, jasmine.any(Function), jasmine.any(Function));
             expect(elementScope.chooserFormNotifications.length).toBe(1);
             expect(elementScope.chooserFormNotifications[0].type).toBe('success');
         });
@@ -71,7 +71,7 @@ describe('Directive: imageChooser', function () {
 
             elementScope.saveResource(image);
 
-            expect(Image.save).toHaveBeenCalledWith(image, jasmine.any(Function), jasmine.any(Function));
+            expect(Image.update).toHaveBeenCalledWith(image, jasmine.any(Function), jasmine.any(Function));
             expect(elementScope.chooserFormNotifications.length).toBe(1);
         });
     });
