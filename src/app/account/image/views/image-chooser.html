@@ -19,7 +19,7 @@
   <div data-block="chooser-edit-body">
     <div class="form-group">
       <label for="imageFile{{$index}}" data-i18n>Upload Image</label>
-      <input name="imageFile{{$index}}" type="hidden" data-ng-model="image.id" required/>
+      <input id="imageFile{{$index}}" name="imageFile{{$index}}" type="hidden" data-ng-model="item.id" required/>
       <div data-upload-single-image data-after-upload="setImage"></div>
     </div>
   </div>

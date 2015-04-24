@@ -42,7 +42,7 @@ angular.module('subrosa.account').directive('imageChooser', function (i18n, Imag
                     scope.chooserFormNotifications = response.data.notifications;
                 };
 
-                return Image.save(image, success, error);
+                return Image.update(image, success, error);
             };
 
             scope.deleteResource = function (image) {
@@ -58,6 +58,10 @@ angular.module('subrosa.account').directive('imageChooser', function (i18n, Imag
                 };
 
                 return Image.delete({id: image.id}, success, error);
+            };
+
+            scope.setImage = function (response) {
+                scope.selectedItem.id = response.id;
             };
         }
     };
