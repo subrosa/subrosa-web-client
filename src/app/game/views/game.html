@@ -1,23 +1,13 @@
 <header data-ui-view="header"></header>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-xs-12">
     <nav data-ui-view="menu"></nav>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-12">
-    <div data-ng-show="game.isTeamGame() && !stateIncludes('game.teams')" class="jumbotron">
-      <h2 data-i18n>You are not on a team.</h2>
-      <button class="btn btn-default" data-ui-sref="game.teams">
-        <span data-i18n>Create Team</span>
-      </button>
-      <button class="btn btn-default" data-ui-sref="game.teams">
-        <span data-i18n>Join Team</span>
-      </button>
-    </div>
-
+  <div class="col-xs-12">
     <div data-ui-view="content"></div>
   </div>
 </div>

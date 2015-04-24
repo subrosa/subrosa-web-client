@@ -4,7 +4,7 @@
 
   <div data-extend-template="/app/game/views/game-box.html">
     <span data-block="game-name">
-      <div class="form-group">
+      <div class="form-group" data-form-group-feedback>
         <label for="gameName" data-i18n>Name your Game</label>
         <input id="gameName" name="name" type="text" class="form-control" data-ng-model="game.name" required autofocus/>
         <p class="help-block" data-i18n>Stumped?  Don't worry you can change this later.</p>

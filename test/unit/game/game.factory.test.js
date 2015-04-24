@@ -104,6 +104,7 @@ describe('Factory: game', function () {
             var statuses = ['Draft', 'Registration', 'PostRegistration', 'Running', 'Archived'];
             game.status = 'PREREGISTRATION';
 
+            expect(game.isPreregistration()).toBe(true);
             ensureStatusesAreFalse(statuses);
         });
 
@@ -111,6 +112,7 @@ describe('Factory: game', function () {
             var statuses = ['Draft', 'Preregistration', 'PostRegistration', 'Running', 'Archived'];
             game.status = 'REGISTRATION';
 
+            expect(game.isRegistration()).toBe(true);
             ensureStatusesAreFalse(statuses);
         });
 
@@ -118,6 +120,7 @@ describe('Factory: game', function () {
             var statuses = ['Draft', 'Preregistration', 'Registration', 'Running', 'Archived'];
             game.status = 'POSTREGISTRATION';
 
+            expect(game.isPostRegistration()).toBe(true);
             ensureStatusesAreFalse(statuses);
         });
 
@@ -125,6 +128,7 @@ describe('Factory: game', function () {
             var statuses = ['Draft', 'Preregistration', 'Registration', 'PostRegistration', 'Archived'];
             game.status = 'RUNNING';
 
+            expect(game.isRunning()).toBe(true);
             ensureStatusesAreFalse(statuses);
         });
 
@@ -132,19 +136,26 @@ describe('Factory: game', function () {
             var statuses = ['Draft', 'Preregistration', 'Registration', 'PostRegistration', 'Running'];
             game.status = 'ARCHIVED';
 
+            expect(game.isArchived()).toBe(true);
             ensureStatusesAreFalse(statuses);
         });
     });
 
-    it("can ", function () {
+    describe("can determine if the game is a team game", function () {
         var game;
 
         beforeEach(function () {
             game = gameFactory.get({id: 1});
         });
 
-        it('', function () {
+        it('and be true', function () {
+            game.maximumTeamSize = 2;
+            expect(game.isTeamGame()).toBe(true);
+        });
 
+        it('and be false', function () {
+            game.maximumTeamSize = 1;
+            expect(game.isTeamGame()).toBe(false);
         });
     });
 });

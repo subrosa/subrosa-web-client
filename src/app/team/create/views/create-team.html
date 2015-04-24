@@ -1,0 +1,34 @@
+<form name="createTeamForm" role="form" novalidate
+      data-form-feedback="createTeamForm" data-form-notifications="notifications"
+      data-ng-submit="createTeam()">
+
+  <div class="form-group" data-form-group-feedback>
+    <label for="teamName" data-i18n>Name your Team</label>
+    <input id="teamName" name="name" type="text" class="form-control" data-ng-model="team.name" required autofocus/>
+    <p class="help-block" data-i18n>How others will know your team</p>
+  </div>
+
+  <div class="form-group">
+    <label for="requirePassword" data-i18n>Require Password</label>
+    <div id="requirePassword"
+         data-toggle-switch ng-model="team.requiresPassword"
+         data-on-label="On" data-off-label="Off"
+         data-i18n-attrs="data-on-label,data-off-label,knob-label">
+    </div>
+  </div>
+
+  <div class="form-group" data-ng-show="team.requiresPassword === true" data-form-group-feedback>
+    <label for="teamPassword" class="control-label" data-i18n>Password to Join</label>
+    <input id="teamPassword" name="teamPassword" type="password" class="form-control"
+           min="2" data-ng-model="team.password" data-ng-required="team.requiresPassword"/>
+  </div>
+
+  <div class="form-group pull-left">
+    <button type="button" class="btn btn-default" data-ui-sref="game.teams">
+      <span data-i18n>Cancel</span>
+    </button>
+    <button type="submit" class="btn btn-primary" data-ng-disabled="!createTeamForm.$valid">
+      <span data-i18n>Create Team</span>
+    </button>
+  </div>
+</form>

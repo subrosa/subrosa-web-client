@@ -1,0 +1,45 @@
+<h2 data-i18n>Team List</h2>
+
+<div class="col-xs-12">
+  <button class="btn btn-default" data-ui-sref="game.create-team">
+    <span data-i18n>Create Team</span>
+  </button>
+</div>
+
+<ul class="media-list">
+  <li class="media" data-ng-show="teams.length > 0" data-ng-repeat="team in teams">
+    <div class="pull-left">
+      <div class="media-object">
+        <i class="fa fa-group img-responsive" data-ng-hide="team.image.url"></i>
+        <img data-ng-show="team.image.url" data-ng-src="{{ team.image.url }}"
+             alt="Image for {{ team.name }}" data-i18n-attrs="alt"/>
+      </div>
+    </div>
+
+    <div class="media-body">
+      <h3><a data-ui-sref="game.team({teamName: team.name})">{{ team.name }}</a></h3>
+
+      <button class="btn btn-default btn-sm" data-ng-click="joinTeam(team)">
+        <span data-i18n>Join</span>
+        <i class="fa fa-lock" data-ng-show="team.requiresPassword"></i>
+      </button>
+
+      <h4 data-i18n>Players</h4>
+
+      <ul class="list-inline">
+        <li data-ng-repeat="player in team.players | limitTo:playerLimit">
+          <image data-ng-src="{{ player.image.url }}" alt="Image for {{ player.name }}" data-i18n-attrs="alt"/>
+        </li>
+      </ul>
+
+      <a data-ng-show="team.players.length - playerLimit > 1" data-ui-sref="game.team({teamName: team.name})"
+         data-i18n data-i18n-n="team.players.length - playerLimit" data-i18n-plural="{{ $count }} more players">
+        And {{ team.players.length - playerLimit }} more players.
+      </a>
+    </div>
+  </li>
+</ul>
+
+<div data-ng-show="teams.length === 0">
+  <p class="alert alert-info" data-i18n>There are no teams in this game yet.</p>
+</div>

@@ -77,6 +77,36 @@ angular.module('subrosa.game').config(function ($stateProvider) {
         }
     });
 
+    $stateProvider.state('game.create-team', {
+        url: '/create-team',
+        views: {
+            'content@game': {
+                controller: 'CreateTeamController',
+                templateUrl: '/app/team/create/views/create-team.html'
+            }
+        }
+    });
+
+    $stateProvider.state('game.team', {
+        url: '/team/{teamName}',
+        views: {
+            'content@game': {
+                controller: 'TeamController',
+                templateUrl: '/app/team/views/team.html'
+            }
+        }
+    });
+
+    $stateProvider.state('game.team.edit', {
+        url: '/edit',
+        views: {
+            'content@game': {
+                controller: 'EditTeamController',
+                templateUrl: '/app/team/edit/views/edit-team.html'
+            }
+        }
+    });
+
     $stateProvider.state('game.info', {
         url: '/info',
         views: {

@@ -1,0 +1,19 @@
+<h2 data-i18n>{{ team.name }}</h2>
+
+<button class="btn btn-primary" data-ng-click="joinTeam(team)">
+  <span data-i18n>Join</span>
+  <i class="fa fa-lock" data-ng-show="team.requiresPassword"></i>
+</button>
+
+<i class="fa fa-group" data-ng-hide="team.image.url"></i>
+<img data-ng-show="team.image.url" data-ng-src="{{ team.image.url }}"
+     alt="Image for {{ team.name }}" data-i18n-attrs="alt"/>
+
+<h4 data-i18n>Players</h4>
+
+<ul class="list-unstyled">
+  <li data-ng-repeat="player in team.players">
+    <image data-ng-src="{{ player.image.url }}" alt="Image for {{ player.name }}" data-i18n-attrs="alt"/>
+    {{ player.name }}
+  </li>
+</ul>

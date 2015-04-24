@@ -2,6 +2,9 @@
   <li data-ui-sref-active="active">
     <a data-ui-sref="game" data-i18n>Updates</a>
   </li>
+  <li data-ui-sref-active="active" data-ng-show="game.isRegistration() && game.isTeamGame()">
+    <a data-ui-sref="game.teams" data-i18n>Teams</a>
+  </li>
   <li data-ui-sref-active="active">
     <a data-ui-sref="game.info" data-i18n>About</a>
   </li>
