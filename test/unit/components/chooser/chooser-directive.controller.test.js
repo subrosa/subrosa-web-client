@@ -31,16 +31,17 @@ describe('Controller: ChooserDirectiveController', function () {
     });
 
     it("allows the creation of a new item", function () {
-        spyOn($scope, 'editItem');
         $scope.newItem();
-        expect($scope.editItem).toHaveBeenCalledWith({});
+        expect($scope.selectedItem).toEqual({});
+        expect($scope.editedItem).toEqual({});
+        expect($scope.items).toContain({});
     });
 
     it("allows the editing of an item", function () {
         spyOn($scope, 'onEdit');
 
         $scope.editItem(item);
-        expect(item.edit).toBe(true);
+        expect($scope.editedItem).toBe(item);
         expect($scope.onEdit).toHaveBeenCalledWith({item: item});
     });
     
@@ -71,7 +72,7 @@ describe('Controller: ChooserDirectiveController', function () {
         });
 
         afterEach(function () {
-            expect(item.edit).toBe(true);
+            expect($scope.editedItem).toBe(item);
             expect($scope.saving).toBe(false);
         });
 
@@ -110,7 +111,6 @@ describe('Controller: ChooserDirectiveController', function () {
         });
 
         afterEach(function () {
-            expect(item.edit).toBe(false);
             expect($scope.saving).toBe(false);
         });
 
@@ -140,7 +140,6 @@ describe('Controller: ChooserDirectiveController', function () {
         it("without a resource", function () {
             $scope.deleteItem(item);
             expect($scope.onDelete).toHaveBeenCalledWith({item: item});
-            expect(item.edit).toBe(false);
         });
     });
 });

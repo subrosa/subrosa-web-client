@@ -7,10 +7,10 @@
 </div>
 
 <div class="row">
-  <div data-ng-class="{'col-sm-5': item.edit, 'col-sm-3': !item.edit}"
+  <div data-ng-class="{'col-sm-5': item === editedItem, 'col-sm-3': item !== editedItem}"
        data-ng-repeat="item in items">
 
-    <div data-ng-if="!item.edit">
+    <div data-ng-if="item !== editedItem">
       <div class="chooser-panel panel panel-default" data-ng-class="{selected: item === selectedItem}">
         <div class="panel-heading" data-ng-click="selectItem(item)" title="Use this one" data-i18n-attrs="title">
           <div data-block="chooser-header"></div>
@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <div data-ng-if="item.edit">
-      <div class="chooser-panel panel panel-default" data-ng-class="{selected: item.selected}">
+    <div data-ng-if="item === editedItem">
+      <div class="chooser-panel panel panel-default" data-ng-class="{selected: item === selectedItem}">
         <div data-ng-form data-name="chooserForm" role="form" novalidate
              data-form-feedback="chooserForm"
              data-form-notifications="chooserFormNotifications">
