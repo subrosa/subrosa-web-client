@@ -63,7 +63,7 @@ describe('Directive: playerChooser', function () {
 
     describe("can save the player resource", function () {
         beforeEach(function () {
-            spyOn(Player, 'save').andCallThrough();
+            spyOn(Player, 'save').and.callThrough();
         });
 
         it("and succeed.", function () {
@@ -98,7 +98,7 @@ describe('Directive: playerChooser', function () {
     describe("can delete the player resource", function () {
         var expectedDelete = {id: 1};
         beforeEach(function () {
-            spyOn(Player, 'delete').andCallThrough();
+            spyOn(Player, 'delete').and.callThrough();
             player.id = 1;
         });
 

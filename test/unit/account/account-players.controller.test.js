@@ -18,7 +18,7 @@ describe('Controller: AccountGamesController', function () {
     it("sets the current user's games on the $scope", function () {
         var games = [1, 2, 3];
         User.setSuccessResponse(games);
-        spyOn(User, 'games').andCallThrough();
+        spyOn(User, 'games').and.callThrough();
 
         $controller('AccountGamesController', dependencies);
 

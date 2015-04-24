@@ -53,7 +53,7 @@ describe('Service: authService', function () {
 
     it('can check for authentication via session', function () {
         expect(authService.isAuthenticated()).toBe(false);
-        spyOn(session, 'getToken').andReturn("lalala");
+        spyOn(session, 'getToken').and.returnValue("lalala");
         expect(authService.isAuthenticated()).toBe(true);
         expect(session.getToken).toHaveBeenCalled();
     });
@@ -76,7 +76,7 @@ describe('Service: authService', function () {
 
     describe('can refresh the current user', function () {
         it('and sets the current user on success', function () {
-            spyOn(User, 'get').andCallThrough();
+            spyOn(User, 'get').and.callThrough();
 
             authService.refreshCurrentUser();
 
@@ -85,7 +85,7 @@ describe('Service: authService', function () {
         });
 
         it('and call session.removeToken on failure', function () {
-            spyOn(User, 'get').andCallThrough();
+            spyOn(User, 'get').and.callThrough();
             spyOn(session, 'removeToken');
 
             User.failed = true;

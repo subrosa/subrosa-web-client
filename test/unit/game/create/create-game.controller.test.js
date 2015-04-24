@@ -24,7 +24,7 @@ describe('Controller: CreateGameController', function () {
     // TODO: enable me once API is available
     xit('sets the game types on the $scope', function () {
         var expectedGameTypes = [1];
-        spyOn(GameType, 'query').andReturn(expectedGameTypes);
+        spyOn(GameType, 'query').and.returnValue(expectedGameTypes);
 
         $controller('CreateGameController', dependencies);
 
@@ -43,7 +43,7 @@ describe('Controller: CreateGameController', function () {
         });
 
         it('and can be successful', function () {
-            spyOn($scope.game, '$save').andCallFake(function (success) {
+            spyOn($scope.game, '$save').and.callFake(function (success) {
                 success({url: 'abcd'});
             });
             spyOn($scope, 'go');
@@ -53,7 +53,7 @@ describe('Controller: CreateGameController', function () {
         });
 
         it("and can error", function () {
-            spyOn($scope.game, '$save').andCallThrough();
+            spyOn($scope.game, '$save').and.callThrough();
             $scope.game.failed = true;
             $scope.createGame();
             expect($scope.game.$save).toHaveBeenCalled();

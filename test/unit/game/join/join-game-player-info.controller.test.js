@@ -54,12 +54,12 @@ describe('Controller: JoinGamePlayerInfoController', function () {
         beforeEach(function () {
             $scope.players = [{id: 1}, {id: 2}];
             $scope.player = $scope.players[0];
-            spyOn(GamePlayer, 'save').andCallThrough();
+            spyOn(GamePlayer, 'save').and.callThrough();
         });
 
         describe("by ensuring attributes are object IDs", function () {
             beforeEach(function () {
-                spyOn(Address, 'save').andCallThrough();
+                spyOn(Address, 'save').and.callThrough();
                 $scope.game.playerInfo = [{type: 'address', fieldId: 'abc'}];
             });
 

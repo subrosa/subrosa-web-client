@@ -54,7 +54,7 @@ describe("Controller: LoginModalController", function () {
 
     describe("handles login functionality", function () {
         it("by logging in with the correct credentials", function () {
-            spyOn(authService, 'login').andCallThrough();
+            spyOn(authService, 'login').and.callThrough();
             $scope.login();
             expect(authService.login).toHaveBeenCalledWith($scope.user);
         });
@@ -72,7 +72,7 @@ describe("Controller: LoginModalController", function () {
         describe("by dealing with login failures", function () {
             it("by setting $scope.authError on 401", function () {
                 authService.status = 401;
-                spyOn(authService, 'login').andCallThrough();
+                spyOn(authService, 'login').and.callThrough();
 
                 $scope.login();
                 $scope.$digest();
@@ -84,7 +84,7 @@ describe("Controller: LoginModalController", function () {
 
             it("by setting $scope.unknownError on other errors", function () {
                 authService.status = 500;
-                spyOn(authService, 'login').andCallThrough();
+                spyOn(authService, 'login').and.callThrough();
 
                 $scope.login();
                 $scope.$digest();
@@ -97,7 +97,7 @@ describe("Controller: LoginModalController", function () {
     });
 
     it("can close the modal dialog by clicking cancel", function () {
-        spyOn($modalInstance, 'dismiss').andCallThrough();
+        spyOn($modalInstance, 'dismiss').and.callThrough();
         $scope.cancel();
         expect($modalInstance.dismiss).toHaveBeenCalledWith('cancel');
     });
@@ -116,7 +116,7 @@ describe("Controller: LoginModalController", function () {
 
     it("can transition to the register page", function () {
         spyOn($modalInstance, 'dismiss');
-        spyOn($state, 'transitionTo').andCallThrough();
+        spyOn($state, 'transitionTo').and.callThrough();
         spyOn($rootScope, '$broadcast');
 
         $scope.user = {email: 'why@hello.com'};

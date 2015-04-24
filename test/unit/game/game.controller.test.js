@@ -19,7 +19,7 @@ describe('Controller: GameController', function () {
                 };
             }
         };
-        spyOn(MockGameFactory, "get").andCallThrough();
+        spyOn(MockGameFactory, "get").and.callThrough();
         $provide.value('Game', MockGameFactory);
     }));
 
@@ -53,7 +53,7 @@ describe('Controller: GameController', function () {
 
     describe('allows the publishing of a game.', function () {
         beforeEach(function () {
-            spyOn($scope.game, '$publish').andCallThrough();
+            spyOn($scope.game, '$publish').and.callThrough();
         });
 
         afterEach(function () {

@@ -8,7 +8,7 @@ describe('Controller: GameFeedController', function () {
         $scope.$stateParams = {gameUrl: 'raleigh-wars'};
         MockPostFactory = MockResource.$new();
 
-        spyOn(MockPostFactory, "query").andCallThrough();
+        spyOn(MockPostFactory, "query").and.callThrough();
         $controller('GameFeedController', {$scope: $scope, Post: MockPostFactory});
     }));
 

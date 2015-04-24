@@ -26,13 +26,13 @@ describe('Controller: AccountController', function () {
         });
 
         it("and can be successful", function () {
-            spyOn($scope.account, '$update').andCallThrough();
+            spyOn($scope.account, '$update').and.callThrough();
             $scope.updateAccount();
             expect($scope.account.$update).toHaveBeenCalled();
         });
 
         it("and can error", function () {
-            spyOn($scope.account, '$update').andCallThrough();
+            spyOn($scope.account, '$update').and.callThrough();
             $scope.account.failed = true;
             $scope.updateAccount();
             expect($scope.account.$update).toHaveBeenCalled();

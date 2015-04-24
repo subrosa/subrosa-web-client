@@ -24,7 +24,7 @@ describe('Directive: modal', function () {
     });
 
     it("registers the modal dialog with the modal service", function () {
-        spyOn(modalCache, 'put').andCallThrough();
+        spyOn(modalCache, 'put').and.callThrough();
 
         $compile(element)($scope);
         $scope.$digest();

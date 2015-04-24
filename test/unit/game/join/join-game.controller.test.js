@@ -43,9 +43,9 @@ describe('Controller: JoinGameController', function () {
 
         it("to the response of relevant services if authenticated.", function () {
             var expected = [1, 2, 3];
-            spyOn(Player, 'query').andCallThrough();
-            spyOn(Address, 'query').andCallThrough();
-            spyOn(Image, 'query').andCallThrough();
+            spyOn(Player, 'query').and.callThrough();
+            spyOn(Address, 'query').and.callThrough();
+            spyOn(Image, 'query').and.callThrough();
             Player.setSuccessResponse({results: expected});
             Address.setSuccessResponse({results: expected});
             Image.setSuccessResponse({results: expected});
