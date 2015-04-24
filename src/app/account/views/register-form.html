@@ -17,7 +17,7 @@
     <div class="form-group" data-form-group-feedback>
       <label for="registerPassword" data-i18n>Password</label>
       <input id="registerPassword" name="password" type="password" class="form-control"
-             data-ng-model="user.password" data-ng-model-options="{debounce: {default: 500, blur: 0}}"
+             data-ng-model="user.password" data-ng-model-options="{debounce: {default: false, blur: 0}}"
              data-password-validator placeholder="Password" data-i18n-attrs="placeholder" required/>
       <p class="help-block" data-i18n>Pro Tip: use at least one number and at least seven characters.</p>
     </div>
@@ -26,14 +26,17 @@
       <label for="dateofBirth" data-i18n>Date of Birth</label>
       <p class="input-group">
         <input id="dateOfBirth" name="dateOfBirth" type="text" class="form-control" required
-               data-ng-model="user.dateOfBirth"
+               data-ng-model="user.dateOfBirth" data-ng-model-options="{updateOn: 'blur'}"
                data-datepicker-popup="{{ dateFormat }}" data-is-open="dobOpen"
-               data-show-button-bar="false"/>
+               data-min-date="thirteenYearsAgo" data-show-button-bar="false"/>
         <span class="input-group-btn">
           <button type="button" class="btn btn-default" data-ng-click="openDob($event)">
             <i class="fa fa-calendar"></i>
           </button>
         </span>
+      </p>
+      <p class="help-block" data-i18n>
+        You must be at least 13 years old to use Subrosa.
       </p>
     </div>
 
@@ -46,7 +49,13 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" data-ng-disabled="registerForm.$invalid" data-i18n>Register</button>
+    <p class="alert alert-warning" data-ng-show="underThirteen" data-i18n>
+      We're sorry but you cannot register for Subrosa because you are under 13 years of age.
+    </p>
+
+    <button type="submit" class="btn btn-primary" data-ng-disabled="registerForm.$invalid || underThirteen">
+      <span data-i18n>Register</span>
+    </button>
     <a href="" class="pull-right" data-ng-click="goToLogin()" data-i18n>I already have an account</a>
   </form>
 </div>

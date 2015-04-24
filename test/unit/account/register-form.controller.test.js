@@ -123,6 +123,16 @@ describe('Controller: RegisterFormController', function () {
             });
         });
 
+        it("checks for the user being under 13 years old when registering", function () {
+            $scope.user.dateOfBirth = new Date();
+            $scope.$digest();
+            expect($scope.underThirteen).toBe(true);
+
+            $scope.user.dateOfBirth = new Date(429912393153);
+            $scope.$digest();
+            expect($scope.underThirteen).toBe(false);
+        });
+
         describe("can transition to the login dialog", function () {
             beforeEach(function () {
                 spyOn($state, 'transitionTo');
