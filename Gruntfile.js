@@ -102,7 +102,7 @@ module.exports = function (grunt) {
             ],
             options: {
                 config: '.scss-lint.yml',
-                reporterOutput: 'scss-lint-report.xml',
+                reporterOutput: 'test/results/scss-lint-report.xml',
                 colorizeOutput: true
             }
         },
