@@ -69,7 +69,7 @@ describe('Service: authRetryQueue', function () {
             spyOn(deferred, 'reject');
             authRetryQueue.rejectAll('invalid');
             expect(deferred.reject).toHaveBeenCalledWith('invalid');
-            expect(deferred.reject.callCount).toBe(3);
+            expect(deferred.reject.calls.count()).toBe(3);
             expect(authRetryQueue.getQueue().length).toBe(0);
         });
 
@@ -87,7 +87,7 @@ describe('Service: authRetryQueue', function () {
             spyOn(deferred, 'resolve');
             authRetryQueue.retryAll(updater);
             expect(deferred.resolve).toHaveBeenCalledWith(newConfig);
-            expect(deferred.resolve.callCount).toBe(3);
+            expect(deferred.resolve.calls.count()).toBe(3);
             expect(authRetryQueue.getQueue().length).toBe(0);
         });
 
@@ -95,7 +95,7 @@ describe('Service: authRetryQueue', function () {
             spyOn(deferred, 'resolve');
             authRetryQueue.retryAll();
             expect(deferred.resolve).toHaveBeenCalledWith(config);
-            expect(deferred.resolve.callCount).toBe(3);
+            expect(deferred.resolve.calls.count()).toBe(3);
             expect(authRetryQueue.getQueue().length).toBe(0);
         });
     });
@@ -106,7 +106,7 @@ describe('Service: authRetryQueue', function () {
         spyOn(deferred, 'reject');
         authRetryQueue.retryAll();
         expect(deferred.reject).toHaveBeenCalledWith(config);
-        expect(deferred.reject.callCount).toBe(1);
+        expect(deferred.reject.calls.count()).toBe(1);
         expect(authRetryQueue.getQueue().length).toBe(0);
     });
 });

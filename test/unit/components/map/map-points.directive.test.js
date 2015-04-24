@@ -79,7 +79,7 @@ describe('Directive: mapPoints', function () {
         });
 
         it("by adding the markers to the map", function () {
-            spyOn(leaflet, 'marker').andReturn('marker');
+            spyOn(leaflet, 'marker').and.returnValue('marker');
             spyOn(mapElement, 'addLayer');
             spyOn(markerClusterGroup, 'addLayer');
 
@@ -114,7 +114,7 @@ describe('Directive: mapPoints', function () {
 
             it("by adding the markers to the map", function () {
                 var expected = angular.element(expectedHtml).html();
-                spyOn(leaflet, 'marker').andReturn(marker);
+                spyOn(leaflet, 'marker').and.returnValue(marker);
                 spyOn(marker, 'bindPopup');
 
                 $scope.points = MockResource.query();

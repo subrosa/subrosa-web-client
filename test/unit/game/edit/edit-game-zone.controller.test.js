@@ -16,7 +16,7 @@ describe('Controller: EditGameZone', function () {
     }));
 
     it("sets the existing game layer on the scope", function () {
-        spyOn(GameZone, 'query').andCallThrough();
+        spyOn(GameZone, 'query').and.callThrough();
 
         $controller('EditGameZoneController', dependencies);
 
@@ -54,7 +54,7 @@ describe('Controller: EditGameZone', function () {
                         }
                     }
                 };
-                spyOn(GameZone, 'save').andCallThrough();
+                spyOn(GameZone, 'save').and.callThrough();
             });
 
             afterEach(function () {
@@ -92,7 +92,7 @@ describe('Controller: EditGameZone', function () {
                         }
                     }
                 };
-                spyOn(GameZone, 'update').andCallThrough();
+                spyOn(GameZone, 'update').and.callThrough();
             });
 
             afterEach(function () {
@@ -131,7 +131,7 @@ describe('Controller: EditGameZone', function () {
                         }
                     }
                 };
-                spyOn(GameZone, 'remove').andCallThrough();
+                spyOn(GameZone, 'remove').and.callThrough();
             });
 
             afterEach(function () {

@@ -27,7 +27,7 @@ describe('Controller: RegisterFormController', function () {
     });
 
     beforeEach(inject(function ($controller, _$rootScope_, MockResource) {
-        var i18n = jasmine.createSpy('i18n').andReturn('translated');
+        var i18n = jasmine.createSpy('i18n').and.returnValue('translated');
 
         flash = {add: function () {}};
 
@@ -97,7 +97,7 @@ describe('Controller: RegisterFormController', function () {
 
         describe("by handling the case when an account already exists", function () {
             beforeEach(function () {
-                spyOn(authService, 'login').andCallThrough();
+                spyOn(authService, 'login').and.callThrough();
                 Account.setErrorResponse({status: 409});
                 Account.failed = true;
 

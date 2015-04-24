@@ -115,9 +115,9 @@ describe('Directive: mapPolygons', function () {
             });
 
             it("and call the create handler", function () {
-                spyOn(mapDraw, 'registerCreateHandler').andCallThrough();
+                spyOn(mapDraw, 'registerCreateHandler').and.callThrough();
                 spyOn(featureGroup, 'addLayer');
-                spyOn($scope, 'onCreate').andCallThrough();
+                spyOn($scope, 'onCreate').and.callThrough();
 
                 $compile(element)($scope);
                 $scope.$digest();
@@ -151,9 +151,9 @@ describe('Directive: mapPolygons', function () {
             });
 
             it("and call the delete handler", function () {
-                spyOn(mapDraw, 'registerDeleteHandler').andCallThrough();
+                spyOn(mapDraw, 'registerDeleteHandler').and.callThrough();
                 spyOn(featureGroup, 'removeLayer');
-                spyOn($scope, 'onDelete').andCallThrough();
+                spyOn($scope, 'onDelete').and.callThrough();
 
                 $compile(element)($scope);
                 $scope.$digest();
@@ -187,8 +187,8 @@ describe('Directive: mapPolygons', function () {
             });
 
             it("and call the edit handler", function () {
-                spyOn(mapDraw, 'registerEditHandler').andCallThrough();
-                spyOn($scope, 'onEdit').andCallThrough();
+                spyOn(mapDraw, 'registerEditHandler').and.callThrough();
+                spyOn($scope, 'onEdit').and.callThrough();
 
                 $compile(element)($scope);
                 $scope.$digest();
@@ -251,10 +251,10 @@ describe('Directive: mapPolygons', function () {
                     latLngs: []
                 };
 
-                spyOn(leaflet, 'latLng').andReturn('blah');
-                spyOn(leaflet, 'polygon').andReturn(polygon);
+                spyOn(leaflet, 'latLng').and.returnValue('blah');
+                spyOn(leaflet, 'polygon').and.returnValue(polygon);
                 spyOn(featureGroup, 'addLayer');
-                spyOn(featureGroup, 'getBounds').andReturn('bounds');
+                spyOn(featureGroup, 'getBounds').and.returnValue('bounds');
                 spyOn(mapElement, 'fitBounds');
             });
 
@@ -265,7 +265,7 @@ describe('Directive: mapPolygons', function () {
             });
 
             it("if any layers exist", function () {
-                spyOn(featureGroup, 'getLayers').andReturn(['layer']);
+                spyOn(featureGroup, 'getLayers').and.returnValue(['layer']);
 
                 $scope.polygons = MockResource.query();
                 $compile(element)($scope);
@@ -276,7 +276,7 @@ describe('Directive: mapPolygons', function () {
             });
 
             it("but not if no layers exist", function () {
-                spyOn(featureGroup, 'getLayers').andReturn([]);
+                spyOn(featureGroup, 'getLayers').and.returnValue([]);
 
                 $scope.polygons = MockResource.query();
                 $compile(element)($scope);

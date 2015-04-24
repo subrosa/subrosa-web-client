@@ -54,7 +54,7 @@ describe('Directive: addressChooser', function () {
 
     describe("can save the address resource", function () {
         beforeEach(function () {
-            spyOn(Address, 'save').andCallThrough();
+            spyOn(Address, 'save').and.callThrough();
         });
 
         it("and succeed.", function () {
@@ -89,7 +89,7 @@ describe('Directive: addressChooser', function () {
     describe("can delete the address resource", function () {
         var expectedDelete = {id: 1};
         beforeEach(function () {
-            spyOn(Address, 'delete').andCallThrough();
+            spyOn(Address, 'delete').and.callThrough();
             address.id = 1;
         });
 

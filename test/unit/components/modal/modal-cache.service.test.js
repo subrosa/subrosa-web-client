@@ -34,14 +34,14 @@ describe('Service: modalCache', function () {
     });
 
     it("can return cached modals", function () {
-        spyOn(modalCache, 'get').andReturn('template.html');
+        spyOn(modalCache, 'get').and.returnValue('template.html');
 
         expect(modalCacheService.get('myModal')).toBe('template.html');
     });
 
     it("can open modals from the cache", function () {
         var scope = {blah: 'blah'};
-        spyOn(modalCache, 'get').andReturn('template.html');
+        spyOn(modalCache, 'get').and.returnValue('template.html');
         spyOn($modal, 'open');
 
         modalCacheService.openModal('myModal', scope);

@@ -26,7 +26,7 @@ describe('Controller: JoinGameSelectPlayerController', function () {
 
     describe("allows the creation of a player", function () {
         beforeEach(function () {
-            spyOn(Player, 'save').andCallThrough();
+            spyOn(Player, 'save').and.callThrough();
         });
 
         afterEach(function () {

@@ -29,7 +29,7 @@ describe("Controller: ModalController", function () {
 
     describe("can close the modal dialog", function () {
         it("by clicking okay", function () {
-            spyOn($modalInstance, 'close').andCallThrough();
+            spyOn($modalInstance, 'close').and.callThrough();
 
             $scope.ok();
 

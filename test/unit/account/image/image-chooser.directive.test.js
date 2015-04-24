@@ -55,7 +55,7 @@ describe('Directive: imageChooser', function () {
 
     describe("can update the image resource", function () {
         beforeEach(function () {
-            spyOn(Image, 'update').andCallThrough();
+            spyOn(Image, 'update').and.callThrough();
         });
 
         it("and succeed.", function () {
@@ -79,7 +79,7 @@ describe('Directive: imageChooser', function () {
     describe("can delete the image resource", function () {
         var expectedDelete = {id: 1};
         beforeEach(function () {
-            spyOn(Image, 'delete').andCallThrough();
+            spyOn(Image, 'delete').and.callThrough();
             image.id = 1;
         });
 

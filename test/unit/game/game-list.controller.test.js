@@ -42,8 +42,8 @@ describe('Controller: GameListController', function () {
         MockGameFactory = MockResource.$new();
         MockGameFactory.queryPoints = MockGameFactory.query;
 
-        spyOn(MockGameFactory, "query").andCallThrough();
-        spyOn(MockGameFactory, "queryPoints").andCallThrough();
+        spyOn(MockGameFactory, "query").and.callThrough();
+        spyOn(MockGameFactory, "queryPoints").and.callThrough();
 
         $controller('GameListController', {$scope: $scope, geolocation: geolocation,
             geocoder: geocoder, Game: MockGameFactory});
@@ -99,7 +99,7 @@ describe('Controller: GameListController', function () {
                     latitude: currentLocation.coords.latitude,
                     longitude: currentLocation.coords.longitude
                 };
-                spyOn(geolocation, 'getLocation').andCallThrough();
+                spyOn(geolocation, 'getLocation').and.callThrough();
 
                 $scope.sortByDistance();
 
@@ -122,7 +122,7 @@ describe('Controller: GameListController', function () {
                     latitude: geocoderResults[0].geometry.location.lat(),
                     longitude: geocoderResults[0].geometry.location.lng()
                 };
-                spyOn(geocoder, 'geocode').andCallThrough();
+                spyOn(geocoder, 'geocode').and.callThrough();
 
                 $scope.sortByPostalCode(postalCode);
 

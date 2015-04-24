@@ -41,7 +41,7 @@ describe('Directive: map', function () {
             }
         };
 
-        i18n = jasmine.createSpy('i18n').andReturn('translated');
+        i18n = jasmine.createSpy('i18n').and.returnValue('translated');
 
         $provide.constant('leaflet', leaflet);
         $provide.value('leafletData', leafletData);

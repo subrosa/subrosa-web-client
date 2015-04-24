@@ -67,7 +67,7 @@ describe('Directive: notificationDisplay', function () {
     it("fades the notification out if success", function () {
         var elementScope = element.isolateScope();
         $scope.notifications = [{type: 'success', message: 'yay!'}];
-        spyOn(elementScope, 'closeNotification').andCallThrough();
+        spyOn(elementScope, 'closeNotification').and.callThrough();
 
         $scope.$digest();
         expect(elementScope.notifications.length).toBe(0);

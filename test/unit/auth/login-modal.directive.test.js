@@ -39,7 +39,7 @@ describe('Directive: loginModal', function () {
     });
 
     it("can open a modal dialog", function () {
-        spyOn($modal, 'open').andCallThrough();
+        spyOn($modal, 'open').and.callThrough();
         elementScope.openModal();
         expect($modal.open).toHaveBeenCalled();
     });

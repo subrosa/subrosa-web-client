@@ -25,7 +25,7 @@ describe('Controller: EditGameEventsController', function () {
 
 
     it('queries the GameEvent service to populate existing events', function () {
-        spyOn(GameEvent, 'query').andCallThrough();
+        spyOn(GameEvent, 'query').and.callThrough();
 
         $controller('EditGameEventsController', dependencies);
 
@@ -49,7 +49,7 @@ describe('Controller: EditGameEventsController', function () {
         var expectedEvent;
 
         beforeEach(function () {
-            spyOn(GameEvent, 'query').andReturn([]);
+            spyOn(GameEvent, 'query').and.returnValue([]);
             expectedEvent = {name: 'event', gameUrl: 'raleigh-wars'};
 
             $controller('EditGameEventsController', dependencies);
@@ -68,7 +68,7 @@ describe('Controller: EditGameEventsController', function () {
 
         describe("by saving a event", function () {
             beforeEach(function () {
-                spyOn(event, '$save').andCallThrough();
+                spyOn(event, '$save').and.callThrough();
             });
 
             afterEach(function () {
@@ -94,7 +94,7 @@ describe('Controller: EditGameEventsController', function () {
 
         describe("by removing a event", function () {
             beforeEach(function () {
-                spyOn(event, '$delete').andCallThrough();
+                spyOn(event, '$delete').and.callThrough();
             });
 
             afterEach(function () {

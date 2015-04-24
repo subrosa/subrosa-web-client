@@ -18,13 +18,13 @@ describe('Controller: EditGameRules', function () {
         });
 
         it("and can be successful", function () {
-            spyOn($scope.game, '$update').andCallThrough();
+            spyOn($scope.game, '$update').and.callThrough();
             $scope.saveGame();
             expect($scope.game.$update).toHaveBeenCalled();
         });
 
         it("and can error", function () {
-            spyOn($scope.game, '$update').andCallThrough();
+            spyOn($scope.game, '$update').and.callThrough();
             $scope.game.failed = true;
             $scope.saveGame();
             expect($scope.game.$update).toHaveBeenCalled();

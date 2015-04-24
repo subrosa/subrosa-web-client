@@ -42,7 +42,7 @@ describe('Controller: EditJoinGameFormController', function () {
 
     describe("updates the game on the order changed ng-sortable event", function () {
         beforeEach(function () {
-            spyOn($scope.game, '$update').andCallThrough();
+            spyOn($scope.game, '$update').and.callThrough();
         });
 
         afterEach(function () {
@@ -108,7 +108,7 @@ describe('Controller: EditJoinGameFormController', function () {
         describe("by saving a field", function () {
 
             beforeEach(function () {
-                spyOn($scope.game, '$update').andCallThrough();
+                spyOn($scope.game, '$update').and.callThrough();
             });
 
             afterEach(function () {
@@ -134,7 +134,7 @@ describe('Controller: EditJoinGameFormController', function () {
 
         describe("by removing a field", function () {
             beforeEach(function () {
-                spyOn($scope.game, '$update').andCallThrough();
+                spyOn($scope.game, '$update').and.callThrough();
             });
 
             afterEach(function () {
@@ -159,7 +159,7 @@ describe('Controller: EditJoinGameFormController', function () {
     it("sets the current user's addresses on the $scope", function () {
         var addresss = [1, 2, 3];
         Address.setSuccessResponse({results: addresss});
-        spyOn(Address, 'query').andCallThrough();
+        spyOn(Address, 'query').and.callThrough();
 
         $controller('EditJoinGameFormController', dependencies);
 
@@ -170,7 +170,7 @@ describe('Controller: EditJoinGameFormController', function () {
     it("sets the current user's images on the $scope", function () {
         var images = [1, 2, 3];
         Image.setSuccessResponse({results: images});
-        spyOn(Image, 'query').andCallThrough();
+        spyOn(Image, 'query').and.callThrough();
 
         $controller('EditJoinGameFormController', dependencies);
 

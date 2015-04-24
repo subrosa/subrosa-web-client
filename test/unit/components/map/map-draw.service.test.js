@@ -19,7 +19,9 @@ describe('Service: mapDraw', function () {
 
         leaflet = {
             Control: {
-                Draw: function () {}
+                Draw: function () {
+                    return expectedOptions;
+                }
             },
             Icon: {Default: {imagePath: ''}}
         };
@@ -46,14 +48,14 @@ describe('Service: mapDraw', function () {
     });
 
     it("allows adding the draw control to the map", function () {
-        spyOn(leaflet.Control, 'Draw');
+        spyOn(leaflet.Control, 'Draw').and.callThrough();
         spyOn(map, 'addControl');
 
         expectedOptions.edit.featureGroup = [];
         mapDraw.addControls(map, []);
 
         expect(leaflet.Control.Draw).toHaveBeenCalledWith(expectedOptions);
-        expect(map.addControl).toHaveBeenCalledWith({});
+        expect(map.addControl).toHaveBeenCalledWith(expectedOptions);
     });
 
     describe("allows registering event handlers", function () {

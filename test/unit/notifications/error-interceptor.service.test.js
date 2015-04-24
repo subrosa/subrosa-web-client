@@ -40,11 +40,11 @@ describe('Service: errorInterceptor', function () {
         badRequest.data.notifications = notifications;
 
         spyOn($q, 'reject');
-        spyOn(errorDictionary, 'translate').andCallThrough();
+        spyOn(errorDictionary, 'translate').and.callThrough();
 
         errorInterceptor.responseError(badRequest);
 
-        expect(errorDictionary.translate.callCount).toBe(2);
+        expect(errorDictionary.translate.calls.count()).toBe(2);
         expect(errorDictionary.translate).toHaveBeenCalledWith(notifications[0]);
         expect(errorDictionary.translate).toHaveBeenCalledWith(notifications[1]);
         expect($q.reject).toHaveBeenCalledWith(badRequest);

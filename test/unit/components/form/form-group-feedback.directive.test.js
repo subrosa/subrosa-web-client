@@ -65,19 +65,19 @@ describe('Directive: formGroupFeedback', function () {
 
     describe("displays input feedback", function () {
         it("for success", function () {
-            spyOn(elementScope, 'hasSuccess').andReturn(true);
+            spyOn(elementScope, 'hasSuccess').and.returnValue(true);
             $scope.$digest();
             expect(formGroup.hasClass('has-success')).toBe(true);
         });
 
         it("for warning", function () {
-            spyOn(elementScope, 'hasWarning').andReturn(true);
+            spyOn(elementScope, 'hasWarning').and.returnValue(true);
             $scope.$digest();
             expect(formGroup.hasClass('has-warning')).toBe(true);
         });
 
         it("for error", function () {
-            spyOn(elementScope, 'hasError').andReturn(true);
+            spyOn(elementScope, 'hasError').and.returnValue(true);
             $scope.$digest();
             expect(formGroup.hasClass('alert alert-danger')).toBe(true);
         });
