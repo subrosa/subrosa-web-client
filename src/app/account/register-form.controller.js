@@ -71,6 +71,13 @@ angular.module('subrosa.account').controller('RegisterFormController', function 
         $scope.openLoginModal($scope.user, options);
     };
 
+    $scope.thirteenYearsAgo = new Date();
+    $scope.thirteenYearsAgo.setFullYear($scope.thirteenYearsAgo.getFullYear() - 13);
+
+    $scope.$watch('user.dateOfBirth', function (dateOfBirth) {
+        $scope.underThirteen = dateOfBirth && dateOfBirth.getTime() > $scope.thirteenYearsAgo.getTime();
+    });
+
     $rootScope.$on('toRegisterFromLogin', function (event, user) {
         $scope.user = user;
     });
