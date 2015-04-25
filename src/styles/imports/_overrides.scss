@@ -1,0 +1,15 @@
+// Have to disable this scss-lint check here since we have no control over the source
+
+// scss-lint:disable PlaceholderInExtend
+.glyphicon {
+
+  @extend .fa;
+
+  &.glyphicon-chevron-left {
+    @extend .fa-chevron-left;
+  }
+
+  &.glyphicon-chevron-right {
+    @extend .fa-chevron-right;
+  }
+}
