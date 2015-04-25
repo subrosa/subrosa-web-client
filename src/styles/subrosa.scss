@@ -1,8 +1,13 @@
+$fa-font-path: '../lib/font-awesome/fonts/';
+
 @import '../lib/bootstrap-sass/assets/stylesheets/bootstrap';
+@import '../lib/font-awesome/scss/font-awesome';
+
 @import 'imports/vars';
 @import 'imports/avatar';
 @import 'imports/game';
 @import 'imports/layout';
 @import 'imports/map';
 @import 'imports/navbar';
+@import 'imports/overrides';
 @import 'imports/timeline';
