@@ -1,4 +1,6 @@
 describe('Directive: flash', function () {
+    'use strict';
+
     var $scope, $compile, element;
 
     beforeEach(module('subrosa.components.flash', '/app/components/flash/views/flash-messages.html'));

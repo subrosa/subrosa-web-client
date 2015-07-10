@@ -10,6 +10,8 @@
  *  A wrapper around leaflet-directive.
  */
 angular.module('subrosa.components.map').directive('map', function (leaflet, leafletData, i18n) {
+    'use strict';
+
     return {
         restrict: 'AE',
         transclude: true,
@@ -26,7 +28,7 @@ angular.module('subrosa.components.map').directive('map', function (leaflet, lea
         link: function (scope) {
             leafletData.getMap(scope.id).then(function (mapElement) {
                 var zoomControl;
-                
+
                 if (scope.disableZoom) {
                     // Disable drag and zoom handlers.
                     mapElement.dragging.disable();

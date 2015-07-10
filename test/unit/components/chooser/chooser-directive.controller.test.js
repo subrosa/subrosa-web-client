@@ -1,4 +1,6 @@
 describe('Controller: ChooserDirectiveController', function () {
+    'use strict';
+
     var $scope, item, resource;
 
     beforeEach(module('subrosa.components.chooser', 'mocks'));
@@ -44,7 +46,7 @@ describe('Controller: ChooserDirectiveController', function () {
         expect($scope.editedItem).toBe(item);
         expect($scope.onEdit).toHaveBeenCalledWith({item: item});
     });
-    
+
     describe("allows the cancelling of editing an item", function () {
         it("and restores the previous value existing items", function () {
             $scope.editItem(item);

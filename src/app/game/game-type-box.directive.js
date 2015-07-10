@@ -6,6 +6,8 @@
  *  Display a game box for the given game type.
  */
 angular.module('subrosa.game').directive('gameTypeBox', function () {
+    'use strict';
+
     return {
         restrict: 'AE',
         transclude: true,

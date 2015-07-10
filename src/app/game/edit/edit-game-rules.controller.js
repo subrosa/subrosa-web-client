@@ -8,6 +8,8 @@
  *  Handles the editing of game options.
  */
 angular.module('subrosa.game').controller('EditGameRulesController', function ($scope) {
+    'use strict';
+
     $scope.adding = false;
     $scope.saving = false;
 

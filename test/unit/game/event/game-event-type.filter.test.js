@@ -1,4 +1,6 @@
 describe('Filter:gameEventType', function () {
+    'use strict';
+
     var gameEventTypeFilter;
 
     beforeEach(module('subrosa.game'));

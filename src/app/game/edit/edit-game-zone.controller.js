@@ -9,6 +9,8 @@
  *  Handles the editing of game zones.
  */
 angular.module('subrosa.game').controller('EditGameZoneController', function ($scope, GameZone) {
+    'use strict';
+
     var getLayerData, success, error;
 
     getLayerData = function (layer) {

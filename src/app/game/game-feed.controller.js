@@ -9,6 +9,8 @@
  *  Controller for game feed related functionality.
  */
 angular.module('subrosa.game').controller('GameFeedController', function ($scope, Post) {
+    'use strict';
+
     var success, error;
 
     $scope.errors = null;

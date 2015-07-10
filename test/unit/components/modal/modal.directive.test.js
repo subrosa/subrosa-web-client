@@ -1,4 +1,6 @@
 describe('Directive: modal', function () {
+    'use strict';
+
     var $scope, $compile, modalCache, element;
 
     beforeEach(module('subrosa.components.modal'));

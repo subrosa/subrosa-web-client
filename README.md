@@ -40,7 +40,7 @@ You'll also want to run these commands regularly (any time `package.json` or `bo
 All you should have to do is type:
 
 ```
-grunt server
+grunt serve
 ```
 
 and the Subrosa Web Client should be displayed in your default browser.  The page will automatically reload when files are changed.

@@ -1,4 +1,6 @@
 describe('Filter:capitalize', function () {
+    'use strict';
+
     var capitalizeFilter;
 
     beforeEach(module('subrosa.utils'));

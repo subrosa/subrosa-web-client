@@ -1,4 +1,6 @@
 describe('Controller: EditJoinGameFormController', function () {
+    'use strict';
+
     var $controller, dependencies, $scope, Address, Image;
 
     beforeEach(module('subrosa.game', 'mocks'));
@@ -155,7 +157,7 @@ describe('Controller: EditJoinGameFormController', function () {
             });
         });
     });
-    
+
     it("sets the current user's addresses on the $scope", function () {
         var addresss = [1, 2, 3];
         Address.setSuccessResponse({results: addresss});

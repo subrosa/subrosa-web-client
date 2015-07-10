@@ -26,7 +26,9 @@
  *     and then broadcasts auth-loginRequired event
  */
 angular.module('subrosa.auth').service('authInterceptor', function ($rootScope, $q, $window, API_CONFIG, authRetryQueue) {
-    const ALLOWED_401_URLS = [
+    'use strict';
+
+    var ALLOWED_401_URLS = [
         API_CONFIG.URL + '/session',
         API_CONFIG.URL + '/user'
     ];

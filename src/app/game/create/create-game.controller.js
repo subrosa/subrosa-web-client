@@ -10,6 +10,8 @@
  *  Controller for creating a new game.
  */
 angular.module('subrosa.game').controller('CreateGameController', function ($scope, Game, GameType) {
+    'use strict';
+
     $scope.createGameNotifications = [];
     $scope.game = new Game();
     $scope.gameTypes = GameType.query();

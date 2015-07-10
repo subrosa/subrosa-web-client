@@ -15,6 +15,8 @@
  *   </div>
  */
 angular.module('subrosa.components.form').directive('formGroupFeedback', function ($interpolate, $timeout) {
+    'use strict';
+
     function getInput(element) {
         var input = element.find('input');
 

@@ -9,6 +9,8 @@
  *  Handle modal submission/dismissal
  */
 angular.module('subrosa.components.modal').controller('ModalController', function ($scope, $modalInstance) {
+    'use strict';
+
     $scope.ok = function () {
         $modalInstance.close();
     };

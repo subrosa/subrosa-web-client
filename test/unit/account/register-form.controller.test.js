@@ -1,4 +1,6 @@
 describe('Controller: RegisterFormController', function () {
+    'use strict';
+
     var $rootScope, $scope, $state, Account, authService, postData, flash;
 
     beforeEach(module('subrosa.account', 'mocks'));

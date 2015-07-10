@@ -12,6 +12,8 @@
  *  Base controller for join game flow.
  */
 angular.module('subrosa.game').controller('JoinGameController', function ($scope, $state, Player, Address, Image) {
+    'use strict';
+
     var setDefaults = function () {
         $scope.user = $scope.currentUser || {};
         $scope.player = {};

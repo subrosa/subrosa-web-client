@@ -39,6 +39,8 @@
  *   Allow the extension of templates by replacing template blocks.
  */
 angular.module('subrosa.utils').directive('extendTemplate', function ($templateCache, $compile, $http, $q, $log) {
+    'use strict';
+
     function warnMissingBlock(name, src) {
         $log.warn('The block ' + name + ' was not found in ' + src);
     }

@@ -1,4 +1,6 @@
 describe('Service: errorDictionary', function () {
+    'use strict';
+
     var gettext, errorDictionary;
 
     beforeEach(module('subrosa.notifications'));

@@ -1,4 +1,6 @@
 describe('Controller: EditGame', function () {
+    'use strict';
+
     var $controller, $scope, $state, $location, $anchorScroll;
 
     beforeEach(module('subrosa.game', 'mocks'));

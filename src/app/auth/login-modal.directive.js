@@ -8,6 +8,8 @@
  *   Provides a login modal window.
  */
 angular.module('subrosa.auth').directive('loginModal', function ($modal) {
+    'use strict';
+
     return {
         restrict: 'AE',
         scope: true,

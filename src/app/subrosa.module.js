@@ -32,6 +32,8 @@ angular.module('subrosa', [
  *  Used for establishing application wide configuration.
  */
 angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
+    'use strict';
+
     $stateProvider.state('home', {
         url: '/'
     });
@@ -54,6 +56,8 @@ angular.module('subrosa').config(function ($stateProvider, $locationProvider) {
  *  Set common items on the $rootScope such as $state related information.
  */
 angular.module('subrosa').run(function ($rootScope, $state, $stateParams, API_CONFIG) {
+    'use strict';
+
     $rootScope.$state = $state;
     $rootScope.go = $state.go;
     $rootScope.href = $state.href;

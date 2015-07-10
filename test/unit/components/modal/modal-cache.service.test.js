@@ -1,4 +1,6 @@
 describe('Service: modalCache', function () {
+    'use strict';
+
     var $modal, $cacheFactory, modalCache, modalCacheService;
 
     beforeEach(module('subrosa.components.modal'));

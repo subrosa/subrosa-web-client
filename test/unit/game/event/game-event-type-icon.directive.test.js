@@ -1,4 +1,6 @@
 describe('Directive: gameEventTypeIcon', function () {
+    'use strict';
+
     var $compile, $scope, element, elementScope, icon;
 
     function compileDirective() {

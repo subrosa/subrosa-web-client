@@ -1,4 +1,6 @@
 describe('Filter:accountDisplayName', function () {
+    'use strict';
+
     var accountDisplayNameFilter;
 
     beforeEach(module('subrosa.account'));

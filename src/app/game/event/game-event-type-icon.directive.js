@@ -6,7 +6,9 @@
  *   Provides an icon based on event type.
  */
 angular.module('subrosa.game').directive('gameEventTypeIcon', function () {
-    const EVENT_TYPE = {
+   'use strict';
+
+    var EVENT_TYPE = {
         gameStart: 'fa-rocket',
         registrationStart: 'fa-cc-visa',
         registrationEnd: 'fa-lock',

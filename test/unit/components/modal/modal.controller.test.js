@@ -1,4 +1,6 @@
 describe("Controller: ModalController", function () {
+    'use strict';
+
     var $q, $scope, $modalInstance;
 
     beforeEach(module('subrosa.components.modal'));

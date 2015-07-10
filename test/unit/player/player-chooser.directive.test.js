@@ -1,4 +1,6 @@
 describe('Directive: playerChooser', function () {
+    'use strict';
+
     var $scope, $compile, element, elementScope, Player, player;
 
     beforeEach(module(

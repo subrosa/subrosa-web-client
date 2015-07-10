@@ -1,0 +1,14 @@
+$icon-font-path: '../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/';
+
+// scss-lint:disable ImportPath StringQuotes
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+@import 'imports/vars';
+@import 'imports/avatar';
+@import 'imports/game';
+@import 'imports/layout';
+@import 'imports/map';
+@import 'imports/navbar';
+@import 'imports/timeline';

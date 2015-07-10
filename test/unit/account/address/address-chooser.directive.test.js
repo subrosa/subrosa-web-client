@@ -1,4 +1,6 @@
 describe('Directive: addressChooser', function () {
+    'use strict';
+
     var $scope, $compile, element, elementScope, Address, address;
 
     beforeEach(module(

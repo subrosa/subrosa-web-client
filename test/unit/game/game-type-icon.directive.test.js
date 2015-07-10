@@ -1,4 +1,6 @@
 describe('Directive: gameTypeIcon', function () {
+    'use strict';
+
     var element;
 
     beforeEach(module('subrosa.game', '/app/game/views/game-type-icon.html'));

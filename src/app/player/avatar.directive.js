@@ -9,6 +9,8 @@
  *   <div avatar="account"></div>
  */
 angular.module('subrosa.player').directive('avatar', function () {
+    'use strict';
+
     return {
         restrict: 'AE',
         transclude: true,

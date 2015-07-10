@@ -22,6 +22,8 @@ angular.module('subrosa.components.image', [
  *  Set ng-flow configuration.
  */
 angular.module('subrosa.components.image').config(function (flowFactoryProvider, API_CONFIG) {
+    'use strict';
+
     flowFactoryProvider.defaults = {
         target: API_CONFIG.URL + '/user/image',
         singleFile: true,

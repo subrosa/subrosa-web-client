@@ -1,4 +1,6 @@
 describe('Directive: map', function () {
+    'use strict';
+
     var $compile, $scope, $q, leaflet, leafletData, i18n, mapElement, element;
 
     beforeEach(module('subrosa.components.map', 'mocks', '/app/components/map/views/map.html'));

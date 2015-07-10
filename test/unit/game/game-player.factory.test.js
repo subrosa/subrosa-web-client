@@ -1,4 +1,6 @@
 describe('Factory: GamePlayer', function () {
+    'use strict';
+
     var gamePlayerFactory, $httpBackend, player, API_CONFIG;
 
     beforeEach(module('subrosa.game'));

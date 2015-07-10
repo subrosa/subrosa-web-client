@@ -1,4 +1,6 @@
 describe('Directive: mapPoints', function () {
+    'use strict';
+
     var $q, $timeout, $httpBackend, $compile, $scope, MockResource, leaflet, leafletData,
         mapElement, element, markerClusterGroup;
 

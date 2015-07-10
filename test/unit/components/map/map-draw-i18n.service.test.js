@@ -1,4 +1,6 @@
 describe('Service: mapDrawI18n', function () {
+    'use strict';
+
     var leaflet, i18n, mapDrawI18n;
 
     beforeEach(module('subrosa.components.map'));

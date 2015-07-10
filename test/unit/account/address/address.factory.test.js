@@ -1,4 +1,6 @@
 describe('Factory: Address', function () {
+    'use strict';
+
     var $httpBackend, Address, account;
 
     beforeEach(module('subrosa.account'));

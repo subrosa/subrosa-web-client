@@ -9,5 +9,7 @@
  *   Display games a user is participating in.
  */
 angular.module('subrosa.account').controller('AccountGamesController', function ($scope, User) {
+    'use strict';
+
     $scope.games = User.games();
 });

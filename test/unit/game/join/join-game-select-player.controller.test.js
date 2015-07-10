@@ -1,4 +1,6 @@
 describe('Controller: JoinGameSelectPlayerController', function () {
+    'use strict';
+
     var $controller, dependencies, $scope, $state, Player;
 
     beforeEach(module('subrosa.game', 'mocks'));

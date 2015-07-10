@@ -12,6 +12,8 @@
  *  Loads the game and sets up common game related functionality.
  */
 angular.module('subrosa.game').controller('GameController', function ($scope, $state, Game, GameZone) {
+    'use strict';
+
     var publishSuccess, publishError;
 
     publishSuccess = function () {

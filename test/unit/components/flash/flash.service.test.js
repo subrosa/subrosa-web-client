@@ -1,4 +1,6 @@
 describe('Service: flash', function () {
+    'use strict';
+
     var $rootScope, flashService;
 
     beforeEach(module('subrosa.components.flash'));

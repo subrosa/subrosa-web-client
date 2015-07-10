@@ -9,6 +9,8 @@
  *   A directive to allow choosing an player.
  */
 angular.module('subrosa.player').directive('playerChooser', function (i18n, Player) {
+    'use strict';
+
     return {
         restrict: 'AE',
         controller: 'ChooserDirectiveController',

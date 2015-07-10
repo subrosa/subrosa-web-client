@@ -9,6 +9,8 @@
  *  A service to handle map drawing.
  */
 angular.module('subrosa.components.map').service('mapDraw', function (leaflet, mapDrawI18n) {
+    'use strict';
+
     var drawOptions = {
         draw: {
             circle: false,
@@ -36,7 +38,7 @@ angular.module('subrosa.components.map').service('mapDraw', function (leaflet, m
     this.registerCreateHandler = function (map, handler) {
         map.on('draw:created', handler);
     };
-    
+
     this.registerDeleteHandler = function (map, handler) {
         drawOptions.edit.remove = true;
         map.on('draw:deleted', handler);

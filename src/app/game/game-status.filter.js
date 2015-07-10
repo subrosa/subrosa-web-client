@@ -11,6 +11,8 @@
  *   {{ 'DRAFT' | gameStatus }} will produce the translated string "Draft".
  */
 angular.module('subrosa.game').filter('gameStatus', function (i18n) {
+    'use strict';
+
     var GAME_STATUS = {
         DRAFT: i18n('Draft'),
         PREREGISTRATION: i18n('Registration beginning soon'),

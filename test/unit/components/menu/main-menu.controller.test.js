@@ -1,4 +1,6 @@
 describe('Controller: MainMenu', function () {
+    'use strict';
+
     var $scope, authService, user;
 
     beforeEach(module('subrosa.components.menu'));

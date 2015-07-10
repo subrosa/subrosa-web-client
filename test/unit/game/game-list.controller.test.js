@@ -1,4 +1,6 @@
 describe('Controller: GameListController', function () {
+    'use strict';
+
     var $controller, $scope, successfulCall, geolocation, geocoder,
         currentLocation, geocoderResults, MockGameFactory;
 

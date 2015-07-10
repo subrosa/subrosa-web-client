@@ -1,4 +1,6 @@
 describe('Directive: formGroupFeedback', function () {
+    'use strict';
+
     var $scope, $compile, formGroup, elementScope;
 
     beforeEach(module(

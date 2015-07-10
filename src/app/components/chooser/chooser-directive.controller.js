@@ -9,6 +9,8 @@
  *  The controller for chooser directives.
  */
 angular.module('subrosa.components.chooser').controller('ChooserDirectiveController', function (_, $scope) {
+    'use strict';
+
     var beforeEdit = {}, autoSelectDefault = true, removeItem;
 
     this.setAutoSelectDefault = function (autoselect) {

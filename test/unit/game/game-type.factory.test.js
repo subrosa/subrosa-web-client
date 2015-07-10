@@ -1,4 +1,6 @@
 describe('Factory: GameType', function () {
+    'use strict';
+
     var gameTypeFactory, $httpBackend, API_CONFIG;
 
     beforeEach(module('subrosa.game'));

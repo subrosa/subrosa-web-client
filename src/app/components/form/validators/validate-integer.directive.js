@@ -6,6 +6,8 @@
  *   Ensures that the field contains a valid integer.
  */
 angular.module('subrosa.components.form').directive('validateInteger', function () {
+    'use strict';
+
     var INTEGER_REGEXP = /^\-?\d+$/;
 
     return {

@@ -1,4 +1,6 @@
 describe('Directive: fieldsMatch', function () {
+    'use strict';
+
     var $scope, $compile, element, elementScope;
 
     beforeEach(module('subrosa.components.form'));

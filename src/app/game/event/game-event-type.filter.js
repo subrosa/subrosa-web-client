@@ -10,7 +10,9 @@
  *   the translated string "Registration Period".
  */
 angular.module('subrosa.game').filter('gameEventType', function (i18n) {
-    const EVENT_TYPE = {
+    'use strict';
+
+    var EVENT_TYPE = {
         gameStart: i18n('Game Begins'),
         registrationStart: i18n('Registration Open'),
         registrationEnd: i18n('Registration Closed'),

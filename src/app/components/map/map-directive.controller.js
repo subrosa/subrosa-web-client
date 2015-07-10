@@ -11,6 +11,8 @@
  *  The controller for the map directive.  Provides common functionality to maps and sets defaults.
  */
 angular.module('subrosa.components.map').controller('MapDirectiveController', function ($scope, leaflet, i18n, units) {
+    'use strict';
+
     this.mapId = $scope.id;
     this.controls = {};  // Default to empty object, otherwise angular-leaflet errors
     this.shapes = new leaflet.FeatureGroup();

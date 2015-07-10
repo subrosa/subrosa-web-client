@@ -9,6 +9,8 @@
  *  Provides functionality to the Main Menu.
  */
 angular.module('subrosa.components.menu').controller("MainMenuController", function ($scope, authService) {
+    'use strict';
+
     $scope.collapsed = {
         account: true,
         main: true

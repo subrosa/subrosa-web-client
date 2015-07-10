@@ -13,51 +13,52 @@
  *  Handle submission of the login form.
  */
 angular.module('subrosa.auth').controller('LoginModalController',
-    function ($rootScope, $scope, $state, $modalInstance, authService, user) {
-        var success, error;
+function ($rootScope, $scope, $state, $modalInstance, authService, user) {
+    'use strict';
 
-        $scope.user = user || {};
+    var success, error;
 
-        $scope.errors = {
-            authError: false,
-            unknownError: false
-        };
+    $scope.user = user || {};
 
-        success = function () {
-            $modalInstance.close();
-        };
+    $scope.errors = {
+        authError: false,
+        unknownError: false
+    };
 
-        error = function (data) {
-            if (data.status === 401) {
-                $scope.errors.authError = true;
-            } else {
-                $scope.errors.unknownError = true;
-            }
-        };
+    success = function () {
+        $modalInstance.close();
+    };
 
-        $scope.loginWithFb = authService.loginWithFb;
+    error = function (data) {
+        if (data.status === 401) {
+            $scope.errors.authError = true;
+        } else {
+            $scope.errors.unknownError = true;
+        }
+    };
 
-        $scope.login = function () {
-            authService.login($scope.user).then(success, error);
-        };
+    $scope.loginWithFb = authService.loginWithFb;
 
-        $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-        };
+    $scope.login = function () {
+        authService.login($scope.user).then(success, error);
+    };
 
-        $scope.showForgotPassword = function (show) {
-            $scope.forgotPassword = show;
-        };
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
 
-        $scope.submitForgotPassword = function () {
-            // TODO call an API once it's defined.
-        };
+    $scope.showForgotPassword = function (show) {
+        $scope.forgotPassword = show;
+    };
 
-        $scope.goToRegister = function () {
-            $modalInstance.dismiss('cancel');
-            $state.transitionTo('register').then(function () {
-                $rootScope.$broadcast('toRegisterFromLogin', $scope.user);
-            });
-        };
-    }
-);
+    $scope.submitForgotPassword = function () {
+        // TODO call an API once it's defined.
+    };
+
+    $scope.goToRegister = function () {
+        $modalInstance.dismiss('cancel');
+        $state.transitionTo('register').then(function () {
+            $rootScope.$broadcast('toRegisterFromLogin', $scope.user);
+        });
+    };
+});

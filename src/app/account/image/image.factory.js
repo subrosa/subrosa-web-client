@@ -8,6 +8,8 @@
  *  Provides a $resource for image(s).
  */
 angular.module('subrosa.account').factory('Image', function ($resource) {
+    'use strict';
+
     return $resource('/subrosa/v1/user/image/:id', {id: '@id'}, {
         query: {method: 'GET', isArray: false},
         update: {method: 'PUT'}

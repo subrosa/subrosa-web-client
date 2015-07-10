@@ -11,6 +11,8 @@
  *  Handles the editing of game events.
  */
 angular.module('subrosa.game').controller('EditGameEventsController', function ($scope, _, i18n, GameEvent) {
+    'use strict';
+
     $scope.events = [];
     $scope.notifications = [];
 

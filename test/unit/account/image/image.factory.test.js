@@ -1,4 +1,6 @@
 describe('Factory: Image', function () {
+    'use strict';
+
     var $httpBackend, Image, account;
 
     beforeEach(module('subrosa.account'));

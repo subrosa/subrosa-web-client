@@ -8,6 +8,8 @@
  *   Provides form feedback notifications.
  */
 angular.module('subrosa.components.form').directive('formFeedback', function (_) {
+    'use strict';
+
     return {
         restrict: 'AE',
         transclude: true,

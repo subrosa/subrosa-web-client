@@ -10,6 +10,7 @@
  *  Provides a geocode pass-through to google.
  */
 angular.module('subrosa.components.geocode').service('geocoder', function ($q, googleMaps, i18n) {
+    'use strict';
 
     this.geocode = function (options) {
         var deferred = $q.defer(),

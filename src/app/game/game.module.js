@@ -15,7 +15,6 @@ angular.module('subrosa.game', [
     'subrosa.components.modal',
     'subrosa.player',
     'subrosa.utils',
-    'timer',
     'ui.router',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.timepicker'
@@ -31,6 +30,7 @@ angular.module('subrosa.game', [
  *  Set up the game state machine.
  */
 angular.module('subrosa.game').config(function ($stateProvider) {
+    'use strict';
 
     $stateProvider.state('games', {
         url: '/games',

@@ -1,4 +1,6 @@
 describe('Controller: GameController', function () {
+    'use strict';
+
     var $scope, $state, MockGameFactory;
 
     beforeEach(module('subrosa.game'));

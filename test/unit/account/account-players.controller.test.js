@@ -1,4 +1,6 @@
-describe('Controller: AccountGamesController', function () {
+describe('Controller: AccountPlayersController', function () {
+    'use strict';
+
     var $controller, dependencies, $scope, User;
 
     beforeEach(module('subrosa.account', 'mocks'));

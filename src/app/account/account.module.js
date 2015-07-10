@@ -17,7 +17,7 @@ angular.module('subrosa.account', [
 ]);
 
 /**
- * @ngdoc object
+ * @ngdoc config
  * @name subrosa.account.config
  *
  * @requires $stateProvider
@@ -26,6 +26,8 @@ angular.module('subrosa.account', [
  *  Set up the account state machine.
  */
 angular.module('subrosa.account').config(function ($stateProvider) {
+    'use strict';
+
     $stateProvider.state('account', {
         url: '/account',
         views: {
@@ -83,6 +85,8 @@ angular.module('subrosa.account').config(function ($stateProvider) {
  *  Allow the opening of the login dialog.
  */
 angular.module('subrosa.account').run(function ($rootScope) {
+    'use strict';
+
     $rootScope.openLoginModal = function (user, options) {
         $rootScope.$broadcast('auth-loginRequired', user, options);
     };

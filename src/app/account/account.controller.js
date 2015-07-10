@@ -8,6 +8,8 @@
  *  Parent controller for account related functionality.
  */
 angular.module('subrosa.account').controller('AccountController', function ($scope) {
+    'use strict';
+
     $scope.account = $scope.currentUser;
 
     $scope.updateAccount = function () {
