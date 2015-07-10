@@ -16,6 +16,8 @@
  *  Controller for the join game form (game admin supplied player info).
  */
 angular.module('subrosa.game').controller('JoinGamePlayerInfoController', function ($scope, _, $state, $q, flash, i18n, Address, GamePlayer) {
+    'use strict';
+
     var joinGameError, createAddresses, createGamePlayer;
 
     joinGameError = function (response) {

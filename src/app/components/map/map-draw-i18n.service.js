@@ -9,6 +9,8 @@
  *  A service to encapsulate setting the large amount of leaflet.draw strings.
  */
 angular.module('subrosa.components.map').service('mapDrawI18n', function (leaflet, i18n) {
+    'use strict';
+
     this.setStrings = function () {
         leaflet.drawLocal.draw.toolbar.actions = {
             title: i18n('Cancel drawing'),

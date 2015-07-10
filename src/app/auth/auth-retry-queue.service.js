@@ -20,6 +20,8 @@
  *  retried in the future.
  */
 angular.module('subrosa.auth').service('authRetryQueue', function ($injector) {
+    'use strict';
+
     // TODO $http service initialized later because of circular dependency problem.
     var $http, retryQueue = [];
 

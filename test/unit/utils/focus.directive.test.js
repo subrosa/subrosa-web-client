@@ -1,4 +1,6 @@
 describe('Directive: focus', function () {
+    'use strict';
+
     var element;
 
     beforeEach(module('subrosa.utils'));

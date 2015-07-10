@@ -8,6 +8,8 @@
  *  Service for creating and retrieving flash messages.
  */
 angular.module('subrosa.components.flash').service('flash', function ($rootScope) {
+    'use strict';
+
     $rootScope.flashMessages = [];
 
     /**

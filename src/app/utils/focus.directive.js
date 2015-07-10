@@ -6,6 +6,8 @@
  *   Focus an input when used in ngShow, for example
  */
 angular.module('subrosa.utils').directive('focus', function () {
+    'use strict';
+
     return {
         link: function (scope, element) {
             element[0].focus();

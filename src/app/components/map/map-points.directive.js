@@ -12,7 +12,9 @@
  */
 angular.module('subrosa.components.map').directive('mapPoints',
 function ($compile, $http, $timeout, leaflet, leafletData) {
-    const MIN_POPUP_WIDTH = 325;
+    'use strict';
+
+    var MIN_POPUP_WIDTH = 325;
 
     return {
         restrict: 'AE',

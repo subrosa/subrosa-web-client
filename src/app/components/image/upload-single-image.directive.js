@@ -9,6 +9,8 @@
  *   <div upload-single-image></div>
  */
 angular.module('subrosa.components.image').directive('uploadSingleImage', function () {
+    'use strict';
+
     return {
         restrict: 'AE',
         transclude: true,

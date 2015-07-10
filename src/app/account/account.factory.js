@@ -9,6 +9,8 @@
  *  Provides a $resource for account(s).
  */
 angular.module('subrosa.account').factory('Account', function ($resource, API_CONFIG) {
+    'use strict';
+
     return $resource(API_CONFIG.URL + '/account/:id', {id: '@id'}, {
         update: {method: 'PUT'}
     });

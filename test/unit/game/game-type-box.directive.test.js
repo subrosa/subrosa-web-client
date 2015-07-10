@@ -1,4 +1,6 @@
 describe('Directive: gameTypeBox', function () {
+    'use strict';
+
     var $scope, element;
 
     beforeEach(module(

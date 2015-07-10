@@ -1,4 +1,6 @@
 describe('Directive: imageChooser', function () {
+    'use strict';
+
     var $scope, $compile, element, elementScope, Image, image;
 
     beforeEach(module(

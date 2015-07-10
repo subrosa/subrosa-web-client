@@ -1,5 +1,7 @@
 /*global $*/
 describe('Controller: MapDirectiveController', function () {
+    'use strict';
+
     var $controller, $scope, leaflet, dependencies;
 
     beforeEach(module('subrosa.components.map'));

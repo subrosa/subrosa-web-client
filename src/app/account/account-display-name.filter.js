@@ -11,6 +11,8 @@
  *   {{ account | accountDisplayName }}
  */
 angular.module('subrosa.account').filter('accountDisplayName', function (i18n) {
+    'use strict';
+
     return function (account) {
         var displayName = i18n("Whomever you are");
         if (account) {

@@ -8,7 +8,9 @@
  *   Provides a display for error and success notifications.
  */
 angular.module('subrosa.notifications').directive('notificationDisplay', function ($timeout) {
-    const SUCCESS_FADEOUT = 5000;
+    'use strict';
+
+    var SUCCESS_FADEOUT = 5000;
 
     return {
         restrict: 'AE',

@@ -9,6 +9,8 @@
  *  Controller for managing Players within an Account.
  */
 angular.module('subrosa.account').controller('AccountPlayersController', function ($scope, Player) {
+    'use strict';
+
     var success, error;
 
     $scope.accountPlayerNotifications = [];

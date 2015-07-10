@@ -12,6 +12,8 @@
  *  Display the list of games.
  */
 angular.module('subrosa.game').controller('GameListController', function ($scope, geolocation, geocoder, i18n, Game) {
+    'use strict';
+
     $scope.postalCode = {};
     $scope.notifications = [];
 

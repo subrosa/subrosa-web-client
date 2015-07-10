@@ -1,4 +1,6 @@
 describe('Directive: gameEventTypeIcon', function () {
+    'use strict';
+
     var $scope, element;
 
     beforeEach(module(

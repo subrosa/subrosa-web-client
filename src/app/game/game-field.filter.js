@@ -11,7 +11,9 @@
  *   {{ 'HOME_ADDRESS' | gameField }} will produce the translated string "Home Address".
  */
 angular.module('subrosa.game').filter('gameField', function (i18n) {
-    const GAME_FIELDS = {
+    'use strict';
+
+    var GAME_FIELDS = {
         USERNAME: i18n('Code Name'),
         NAME: i18n('Full Name'),
         GENDER: i18n('Gender'),

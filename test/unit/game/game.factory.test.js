@@ -1,4 +1,6 @@
 describe('Factory: game', function () {
+    'use strict';
+
     var gameFactory, $httpBackend, API_CONFIG;
 
     beforeEach(module('subrosa.game'));
@@ -6,7 +8,7 @@ describe('Factory: game', function () {
     beforeEach(inject(function ($injector) {
         gameFactory = $injector.get('Game');
     }));
-    
+
     describe("makes a request", function () {
         beforeEach(inject(function ($injector) {
             $httpBackend = $injector.get('$httpBackend');

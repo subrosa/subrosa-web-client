@@ -23,6 +23,8 @@ angular.module('subrosa.auth', [
  *  Add authInterceptor to $httpProvider interceptors and configure facebook auth integration.
  */
 angular.module('subrosa.auth').config(function ($httpProvider, $facebookProvider, FB_CONFIG) {
+    'use strict';
+
     $httpProvider.interceptors.push('authInterceptor');
 
     $facebookProvider.setAppId(FB_CONFIG.APP_ID);
@@ -37,9 +39,11 @@ angular.module('subrosa.auth').config(function ($httpProvider, $facebookProvider
  * @requires authService
  *
  * @description
- *  Load the facebook SDK asynchronously.
+ *  Load the facebook SDK asynchronously and set the current user on the $rootScope.
  */
 angular.module('subrosa.auth').run(function ($rootScope, authService) {
+    'use strict';
+
     var firstScriptElement, facebookJS;
 
     // If we've already installed the SDK, we're done

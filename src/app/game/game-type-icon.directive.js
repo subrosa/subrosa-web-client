@@ -6,6 +6,8 @@
  *  Display an icon box for the given game type.
  */
 angular.module('subrosa.game').directive('gameTypeIcon', function () {
+    'use strict';
+
     return {
         restrict: 'AE',
         transclude: true,

@@ -1,4 +1,6 @@
 describe("Controller: LoginModalController", function () {
+    'use strict';
+
     var $q, $controller, $rootScope, $scope, $state, $modalInstance, authService, user;
 
     beforeEach(module('subrosa.auth'));

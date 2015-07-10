@@ -1,4 +1,6 @@
 describe('Service: session', function () {
+    'use strict';
+
     var $window, session, token = 'lalala';
 
     beforeEach(module('subrosa.auth'));

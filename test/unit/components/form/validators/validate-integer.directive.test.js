@@ -1,4 +1,6 @@
 describe('Directive: validateInteger', function () {
+    'use strict';
+
     var $scope, $compile, element, elementScope;
 
     beforeEach(module('subrosa.components.form', '/app/components/form/views/form-feedback.html'));

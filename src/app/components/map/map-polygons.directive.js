@@ -10,7 +10,9 @@
  *  Used to add polygons to an already existing map
  */
 angular.module('subrosa.components.map').directive('mapPolygons', function (leaflet, leafletData, mapDraw) {
-    const SHAPE_COLOR = '#E43E59';
+    'use strict';
+
+    var SHAPE_COLOR = '#E43E59';
 
     return {
         restrict: 'AE',

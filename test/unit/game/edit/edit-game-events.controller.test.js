@@ -1,4 +1,6 @@
 describe('Controller: EditGameEventsController', function () {
+    'use strict';
+
     var $controller, $scope, dependencies, GameEvent, event;
     beforeEach(module('subrosa.game', 'mocks'));
 

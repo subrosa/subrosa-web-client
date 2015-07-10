@@ -1,4 +1,6 @@
 describe('Service: units', function () {
+    'use strict';
+
     var $locale, units;
 
     beforeEach(module('i18n'));

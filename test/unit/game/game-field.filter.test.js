@@ -1,4 +1,6 @@
 describe('Filter:gameField', function () {
+    'use strict';
+
     var gameFieldFilter;
 
     beforeEach(module('subrosa.game'));

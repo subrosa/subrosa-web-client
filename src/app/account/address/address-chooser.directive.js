@@ -9,6 +9,8 @@
  *   A directive to allow choosing an address.
  */
 angular.module('subrosa.account').directive('addressChooser', function (i18n, Address) {
+    'use strict';
+
     return {
         restrict: 'AE',
         controller: 'ChooserDirectiveController',

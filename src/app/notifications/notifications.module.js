@@ -20,5 +20,7 @@ angular.module('subrosa.notifications', [
  *  Add errorInterceptor to $httpProvider interceptors.
  */
 angular.module('subrosa.notifications').config(function ($httpProvider) {
+    'use strict';
+
     $httpProvider.interceptors.push('errorInterceptor');
 });

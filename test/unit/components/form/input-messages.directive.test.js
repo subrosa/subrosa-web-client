@@ -1,4 +1,6 @@
 describe('Directive: inputMessages', function () {
+    'use strict';
+
     var $scope, $compile, element, elementScope;
 
     beforeEach(module('subrosa.components.form', '/app/components/form/views/input-messages.html'));

@@ -1,4 +1,6 @@
 describe('Controller: EditGameZone', function () {
+    'use strict';
+
     var $controller, $scope, dependencies, GameZone;
     beforeEach(module('subrosa.game', 'mocks'));
 

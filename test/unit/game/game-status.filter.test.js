@@ -1,4 +1,6 @@
 describe('Filter:gameStatus', function () {
+    'use strict';
+
     var gameStatusFilter;
 
     beforeEach(module('subrosa.game'));

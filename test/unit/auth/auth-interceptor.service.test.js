@@ -1,4 +1,6 @@
 describe('Service: authInterceptor', function () {
+    'use strict';
+
     var $q, $rootScope, $window, API_CONFIG, authRetryQueue, authInterceptor;
 
     beforeEach(module('subrosa.auth'));

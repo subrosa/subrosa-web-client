@@ -6,6 +6,8 @@
  *   Ensure two fields match.
  */
 angular.module('subrosa.components.form').directive('fieldsMatch', function () {
+    'use strict';
+
     return {
         restrict: 'AE',
         scope: true,

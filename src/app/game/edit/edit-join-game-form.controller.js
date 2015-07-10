@@ -12,6 +12,8 @@
  *  Handles the editing of game options.
  */
 angular.module('subrosa.game').controller('EditJoinGameFormController', function ($scope, _, i18n, Address, Image) {
+    'use strict';
+
     $scope.field = {};
     $scope.fieldTypes = [
         {type: 'address', label: i18n('Address')},

@@ -1,4 +1,6 @@
 describe('Directive: notificationDisplay', function () {
+    'use strict';
+
     var $scope, $compile, $timeout, element, elementScope;
 
     beforeEach(module('subrosa.notifications', '/app/notifications/views/notification-display.html'));
@@ -63,7 +65,7 @@ describe('Directive: notificationDisplay', function () {
         expect(elementScope.notifications.length).toBe(1);
         expect(elementScope.notifications[0].type).toBe('warning');
     });
-    
+
     it("fades the notification out if success", function () {
         var elementScope = element.isolateScope();
         $scope.notifications = [{type: 'success', message: 'yay!'}];

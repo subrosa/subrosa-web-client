@@ -1,4 +1,6 @@
 describe('Service: authService', function () {
+    'use strict';
+
     var $rootScope, $httpBackend, authService, User, user, session, authRetryQueue, $facebook, API_CONFIG;
 
     beforeEach(module('subrosa.auth'));

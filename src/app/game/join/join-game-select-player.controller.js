@@ -10,6 +10,8 @@
  *  Controller for selecting a player to play a game with.
  */
 angular.module('subrosa.game').controller('JoinGameSelectPlayerController', function ($scope, $state, Player) {
+    'use strict';
+
     $scope.player = {};
 
     $scope.selectPlayerNotifications = [];

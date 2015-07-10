@@ -8,7 +8,7 @@
  *  Controller for game statistic related functionality.
  */
 angular.module('subrosa.game').controller('GameStatsController', function ($scope) {
-    $scope.leaders = [
+    'use strict';
 
-    ];
+    $scope.leaders = [];
 });

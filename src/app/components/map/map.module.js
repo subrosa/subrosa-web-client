@@ -31,6 +31,8 @@ angular.module('subrosa.components.map').constant('leaflet', window.L);
  *  Set the default image path if it's not already set (production mode).
  */
 angular.module('subrosa.components.map').run(function (leaflet) {
+    'use strict';
+
     if (leaflet && !leaflet.Icon.Default.imagePath) {
         leaflet.Icon.Default.imagePath = '/css/images/';
     }

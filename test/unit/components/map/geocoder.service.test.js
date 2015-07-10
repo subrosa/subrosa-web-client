@@ -1,4 +1,6 @@
 describe('Service: geocode', function () {
+    'use strict';
+
     var $q, deferred, googleMaps, geocoderResult, gecoderStatus, geocoder;
 
     beforeEach(module('subrosa.components.map'));

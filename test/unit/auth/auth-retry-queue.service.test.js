@@ -1,4 +1,6 @@
 describe('Service: authRetryQueue', function () {
+    'use strict';
+
     var $http, deferred, authRetryQueue;
 
     beforeEach(module('subrosa.auth'));
@@ -12,11 +14,8 @@ describe('Service: authRetryQueue', function () {
 
     beforeEach(module(function ($provide) {
         $http = function (config) {
-            var http = this;
-            this.config = config;
-
             return {then: function (successCallback, errorCallback) {
-                if (http.config.success) {
+                if (config.success) {
                     successCallback(config);
                 } else {
                     errorCallback(config);

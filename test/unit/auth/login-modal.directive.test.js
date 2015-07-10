@@ -1,4 +1,6 @@
 describe('Directive: loginModal', function () {
+    'use strict';
+
     var $q, $scope, $compile, $modal, element, elementScope;
 
     beforeEach(module('subrosa.auth'));

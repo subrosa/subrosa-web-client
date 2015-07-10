@@ -1,4 +1,6 @@
 describe('Controller: AccountController', function () {
+    'use strict';
+
     var $controller, dependencies, $scope, account;
 
     beforeEach(module('subrosa.account', 'mocks'));

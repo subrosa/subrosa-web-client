@@ -1,293 +1,306 @@
 <!doctype html>
-<html lang="en" data-ng-app="subrosa">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="fragment" content="!" />
-  <title data-ng-bind="title" data-i18n>Subrosa &mdash; Real Life Games</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="/">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="fragment" content="!" />
+    <base href="/">
 
-  <!-- build:css /css/styles.css -->
-  <link rel="stylesheet" href="/lib/angular-toggle-switch/angular-toggle-switch.css">
-  <link rel="stylesheet" href="/lib/angular-toggle-switch/angular-toggle-switch-bootstrap.css">
-  <link rel="stylesheet" href="/lib/animate.css/animate.css">
-  <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.css">
-  <link rel="stylesheet" href="/lib/leaflet/dist/leaflet.css">
-  <link rel="stylesheet" href="/lib/leaflet.draw/dist/leaflet.draw.css">
-  <link rel="stylesheet" href="/lib/leaflet.locatecontrol/src/L.Control.Locate.css">
-  <link rel="stylesheet" href="/lib/leaflet.locatecontrol/src/css/animation.css">
-  <link rel="stylesheet" href="/lib/leaflet.locatecontrol/src/css/locate-fa-codes.css">
-  <link rel="stylesheet" href="/lib/leaflet.locatecontrol/src/css/locate-fa-embedded.css">
-  <link rel="stylesheet" href="/lib/leaflet.locatecontrol/src/css/locate-fa-ie7.css">
-  <link rel="stylesheet" href="/lib/leaflet.locatecontrol/src/css/locate-fa-ie7-codes.css">
-  <link rel="stylesheet" href="/lib/leaflet.locatecontrol/src/css/locate-fa.css">
-  <link rel="stylesheet" href="/lib/leaflet.markercluster/dist/MarkerCluster.css">
-  <link rel="stylesheet" href="/lib/leaflet.markercluster/dist/MarkerCluster.Default.css">
-  <link rel="stylesheet" href="/lib/ng-sortable/dist/ng-sortable.css">
+    <title data-i18n>Subrosa &mdash; Real Life Games</title>
 
-  <link rel="stylesheet" href="/css/subrosa.css">
-  <!-- endbuild -->
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-  <!-- build:css /css/ie.css -->
-  <!--[if lt IE 9]>
-    <link rel="stylesheet" href="/lib/leaflet.draw/dist/leaflet.draw.ie.css">
-    <link rel="stylesheet" href="/lib/leaflet.locatecontrol/src/L.Control.Locate.ie.css">
-  <![endif]-->
-  <!-- endbuild -->
-</head>
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.draw/dist/leaflet.draw.css" />
+    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.locatecontrol/dist/L.Control.Locate.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css" />
+    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.style.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
 
-<body data-ng-cloak>
-<!-- build:js /js/ie.js -->
-<!--[if lt IE 9]>
-  <script src="/lib/es5-shim/es5-shim.js"></script>
-  <script src="/lib/json3/lib/json3.min.js"></script>
-<![endif]-->
-<!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css" />
+    <!-- endbuild -->
 
-<dialog data-login-modal></dialog>
+    <!--[if lt IE 9]>
+    <!-- build:css(.) styles/ie.css -->
+    <!-- endbuild -->
+    <![endif]-->
+  </head>
 
-<div class="container-fluid">
-  <header>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="MainMenuController">
-      <div class="navbar-header">
-        <a data-ui-sref="home" class="navbar-brand">
-          <img class="img-responsive" src="/img/logo/subrosa-rose-50x50.png" alt="Subrosa Logo" data-i18n-attrs="alt"/>
-        </a>
-        
-        <button class="navbar-toggle" type="button" data-ng-if="!currentUser" data-ng-click="openLoginModal()">
-          <span data-i18n>Login</span>
-        </button>
+  <body ng-app="subrosa">
+    <!--[if lte IE 8]>
+    <p class="browsehappy" data-i18n>
+      You are using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+    </p>
+    <![endif]-->
 
-        <button class="navbar-toggle" type="button"
-                data-ng-if="currentUser"
-                data-ng-click="collapsed.account = !collapsed.account">
-          <span class="sr-only" data-i18n>Toggle account navigation</span>
-          <span data-avatar="user" data-size="xs"></span>
-        </button>
+    <!--[if lt IE 9]>
+    <!-- build:js(.) scripts/ie.js -->
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <!-- endbuild -->
+    <![endif]-->
 
-        <button class="navbar-toggle" type="button" data-ng-click="collapsed.main = !collapsed.main">
-          <span class="sr-only" data-i18n>Toggle main navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+    <dialog data-login-modal></dialog>
 
-      <ul role="menu" class="nav navbar-nav navbar-left navbar-collapse" data-collapse="collapsed.main"
-          data-ng-click="collapsed.main = true">
-        <li role="presentation" data-ui-sref-active="active">
-          <a role="menuitem" data-ui-sref="create-game" data-i18n>New Game</a>
-        </li>
+    <div class="container-fluid">
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="MainMenuController">
+          <div class="navbar-header">
+            <a data-ui-sref="home" class="navbar-brand">
+              <img class="img-responsive" src="/images/logo/subrosa-rose-50x50.png" alt="Subrosa Logo" data-i18n-attrs="alt"/>
+            </a>
 
-        <li role="presentation" data-ui-sref-active="active">
-          <a role="menuitem" data-ui-sref="games" data-i18n>Find Games</a>
-        </li>
+            <button class="navbar-toggle" type="button" data-ng-if="!currentUser" data-ng-click="openLoginModal()">
+              <span data-i18n>Login</span>
+            </button>
 
-        <li role="presentation" data-ng-show="currentUser" data-ui-sref-active="active">
-          <a role="menuitem" data-ui-sref="account-games" data-i18n>My Games</a>
-        </li>
-      </ul>
+            <button class="navbar-toggle" type="button"
+                    data-ng-if="currentUser"
+                    data-ng-click="collapsed.account = !collapsed.account">
+              <span class="sr-only" data-i18n>Toggle account navigation</span>
+              <span data-avatar="user" data-size="xs"></span>
+            </button>
 
-      <ul role="menu" class="nav navbar-nav navbar-right navbar-collapse" data-collapse="collapsed.account"
-          data-ng-click="collapsed.account = true">
+            <button class="navbar-toggle" type="button" data-ng-click="collapsed.main = !collapsed.main">
+              <span class="sr-only" data-i18n>Toggle main navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
 
-        <li role="presentation" data-ng-show="!currentUser">
-          <a role="menuitem" href="" data-ng-click="openLoginModal()" data-i18n>Login</a>
-        </li>
+          <ul role="menu" class="nav navbar-nav navbar-left navbar-collapse" data-collapse="collapsed.main"
+              data-ng-click="collapsed.main = true">
+            <li role="presentation" data-ui-sref-active="active">
+              <a role="menuitem" data-ui-sref="create-game" data-i18n>New Game</a>
+            </li>
 
-        <li role="presentation" class="visible-xs" data-ng-show="currentUser">
-          <a role="menuitem" data-ui-sref="account" data-i18n>Account</a>
-        </li>
+            <li role="presentation" data-ui-sref-active="active">
+              <a role="menuitem" data-ui-sref="games" data-i18n>Find Games</a>
+            </li>
 
-        <li role="presentation" class="visible-xs" data-ng-show="currentUser">
-          <a role="menuitem" data-ng-click="logout()" data-i18n>Logout</a>
-        </li>
-
-        <li role="presentation" class="hidden-xs" data-dropdown data-ng-show="currentUser">
-          <a href="" role="menu" class="dropdown-toggle" data-dropdown-toggle
-             data-avatar="currentUser" data-size="sm"></a>
-          <ul class="dropdown-menu" role="menu">
-            <li class="user-menu">
-              <div>
-                <a data-ui-sref="account">
-                  <span data-avatar="currentUser" data-size="md" data-editable="true"></span>
-                </a>
-              </div>
-
-              <div>
-                <h4>{{ currentUser.username }}</h4>
-                <span>{{ currentUser.email }}</span>
-                <div>
-                  <a data-ui-sref="account" data-i18n>Account</a>
-                  -
-                  <a data-ui-sref="privacy" data-i18n>Privacy</a>
-                </div>
-              </div>
-
-              <footer>
-                <button class="btn btn-default btn-xs pull-right" data-ng-click="logout()" data-i18n>Log out</button>
-              </footer>
+            <li role="presentation" data-ng-show="currentUser" data-ui-sref-active="active">
+              <a role="menuitem" data-ui-sref="account-games" data-i18n>My Games</a>
             </li>
           </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  
-  <div data-flash-messages></div>
-  <div data-ui-view></div>
 
-  <footer>
-    <p data-i18n>
-      <a href="/about/copyright">Copyright</a> &copy;2007-2015 Sub Rosa Games, Inc. All Rights Reserved.
-    </p>
-  </footer>
-</div>
+          <ul role="menu" class="nav navbar-nav navbar-right navbar-collapse" data-collapse="collapsed.account"
+              data-ng-click="collapsed.account = true">
 
-<div id="fb-root"></div>
+            <li role="presentation" data-ng-show="!currentUser">
+              <a role="menuitem" href="" data-ng-click="openLoginModal()" data-i18n>Login</a>
+            </li>
 
-<!-- Google Maps -->
-<script src="//maps.google.com/maps/api/js?sensor=false"></script>
+            <li role="presentation" class="visible-xs" data-ng-show="currentUser">
+              <a role="menuitem" data-ui-sref="account" data-i18n>Account</a>
+            </li>
 
-<!-- build:js /js/scripts.js -->
-<script type="text/javascript" src="/lib/lodash/dist/lodash.js"></script>
-<script type="text/javascript" src="/lib/angular/angular.js"></script>
-<script type="text/javascript" src="/lib/angular-animate/angular-animate.js"></script>
-<script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
-<script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script type="text/javascript" src="/lib/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
-<script type="text/javascript" src="/lib/angular-messages/angular-messages.js"></script>
-<script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
-<script type="text/javascript" src="/lib/angular-sanitize/angular-sanitize.js"></script>
-<script type="text/javascript" src="/lib/angular-timer/dist/angular-timer.js"></script>
-<script type="text/javascript" src="/lib/angular-toggle-switch/angular-toggle-switch.js"></script>
-<script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
-<script type="text/javascript" src="/lib/angularjs-geolocation/src/geolocation.js"></script>
-<script type="text/javascript" src="/lib/flow.js/dist/flow.js"></script>
-<script type="text/javascript" src="/lib/humanize-duration/humanize-duration.js"></script>
-<script type="text/javascript" src="/lib/leaflet/dist/leaflet-src.js"></script>
-<script type="text/javascript" src="/lib/leaflet.draw/dist/leaflet.draw.js"></script>
-<script type="text/javascript" src="/lib/leaflet.locatecontrol/src/L.Control.Locate.js"></script>
-<script type="text/javascript" src="/lib/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-<script type="text/javascript" src="/lib/momentjs/moment.js"></script>
-<script type="text/javascript" src="/lib/ng-facebook/ngFacebook.js"></script>
-<script type="text/javascript" src="/lib/ng-flow/dist/ng-flow.js"></script>
-<script type="text/javascript" src="/lib/ng-sortable/dist/ng-sortable.js"></script>
+            <li role="presentation" class="visible-xs" data-ng-show="currentUser">
+              <a role="menuitem" data-ng-click="logout()" data-i18n>Logout</a>
+            </li>
 
-<script type="text/javascript" src="/app/subrosa.module.js"></script>
+            <li role="presentation" class="hidden-xs" data-dropdown data-ng-show="currentUser">
+              <a href="" role="menu" class="dropdown-toggle" data-dropdown-toggle
+                 data-avatar="currentUser" data-size="sm"></a>
+              <ul class="dropdown-menu" role="menu">
+                <li class="user-menu">
+                  <div>
+                    <a data-ui-sref="account">
+                      <span data-avatar="currentUser" data-size="md" data-editable="true"></span>
+                    </a>
+                  </div>
 
-<script type="text/javascript" src="/app/config/config.module.js"></script>
-<script type="text/javascript" src="/app/config/derived.config.js"></script>
+                  <div>
+                    <h4>{{ currentUser.username }}</h4>
+                    <span>{{ currentUser.email }}</span>
+                    <div>
+                      <a data-ui-sref="account" data-i18n>Account</a>
+                      -
+                      <a data-ui-sref="privacy" data-i18n>Privacy</a>
+                    </div>
+                  </div>
 
-<script type="text/javascript" src="/app/account/account.module.js"></script>
-<script type="text/javascript" src="/app/account/account.factory.js"></script>
-<script type="text/javascript" src="/app/account/account.controller.js"></script>
-<script type="text/javascript" src="/app/account/account-games.controller.js"></script>
-<script type="text/javascript" src="/app/account/account-players.controller.js"></script>
-<script type="text/javascript" src="/app/account/account-display-name.filter.js"></script>
-<script type="text/javascript" src="/app/account/address/address.factory.js"></script>
-<script type="text/javascript" src="/app/account/address/address-chooser.directive.js"></script>
-<script type="text/javascript" src="/app/account/image/image.factory.js"></script>
-<script type="text/javascript" src="/app/account/image/image-chooser.directive.js"></script>
-<script type="text/javascript" src="/app/account/register-form.controller.js"></script>
+                  <footer>
+                    <button class="btn btn-default btn-xs pull-right" data-ng-click="logout()" data-i18n>Log out</button>
+                  </footer>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-<script type="text/javascript" src="/app/auth/auth.module.js"></script>
-<script type="text/javascript" src="/app/auth/auth-interceptor.service.js"></script>
-<script type="text/javascript" src="/app/auth/auth-service.service.js"></script>
-<script type="text/javascript" src="/app/auth/auth-retry-queue.service.js"></script>
-<script type="text/javascript" src="/app/auth/login-modal.controller.js"></script>
-<script type="text/javascript" src="/app/auth/login-modal.directive.js"></script>
-<script type="text/javascript" src="/app/auth/session.service.js"></script>
-<script type="text/javascript" src="/app/auth/user.factory.js"></script>
+      <div data-flash-messages></div>
+      <div data-ui-view></div>
 
-<script type="text/javascript" src="/app/components/components.module.js"></script>
-<script type="text/javascript" src="/app/components/chooser/chooser.module.js"></script>
-<script type="text/javascript" src="/app/components/chooser/chooser-directive.controller.js"></script>
-<script type="text/javascript" src="/app/components/flash/flash.module.js"></script>
-<script type="text/javascript" src="/app/components/flash/flash.service.js"></script>
-<script type="text/javascript" src="/app/components/flash/flash-messages.directive.js"></script>
-<script type="text/javascript" src="/app/components/form/form.module.js"></script>
-<script type="text/javascript" src="/app/components/form/fields-match.directive.js"></script>
-<script type="text/javascript" src="/app/components/form/form-feedback.directive.js"></script>
-<script type="text/javascript" src="/app/components/form/form-group-feedback.directive.js"></script>
-<script type="text/javascript" src="/app/components/form/input-messages.directive.js"></script>
-<script type="text/javascript" src="/app/components/form/validators/validate-address.directive.js"></script>
-<script type="text/javascript" src="/app/components/form/validators/validate-integer.directive.js"></script>
-<script type="text/javascript" src="/app/components/geocode/geocoder.module.js"></script>
-<script type="text/javascript" src="/app/components/geocode/geocoder.service.js"></script>
-<script type="text/javascript" src="/app/components/image/image.module.js"></script>
-<script type="text/javascript" src="/app/components/image/upload-single-image.directive.js"></script>
-<script type="text/javascript" src="/app/components/map/map.module.js"></script>
-<script type="text/javascript" src="/app/components/map/map.directive.js"></script>
-<script type="text/javascript" src="/app/components/map/map-directive.controller.js"></script>
-<script type="text/javascript" src="/app/components/map/map-draw.service.js"></script>
-<script type="text/javascript" src="/app/components/map/map-draw-i18n.service.js"></script>
-<script type="text/javascript" src="/app/components/map/map-points.directive.js"></script>
-<script type="text/javascript" src="/app/components/map/map-polygons.directive.js"></script>
-<script type="text/javascript" src="/app/components/menu/menu.module.js"></script>
-<script type="text/javascript" src="/app/components/menu/main-menu.controller.js"></script>
-<script type="text/javascript" src="/app/components/modal/modal.module.js"></script>
-<script type="text/javascript" src="/app/components/modal/modal.controller.js"></script>
-<script type="text/javascript" src="/app/components/modal/modal.directive.js"></script>
-<script type="text/javascript" src="/app/components/modal/modal-cache.service.js"></script>
+      <footer>
+        <p data-i18n>
+          <a href="/about/copyright">Copyright</a> &copy;2007-2015 Sub Rosa Games, Inc. All Rights Reserved.
+        </p>
+      </footer>
+    </div>
 
-<script type="text/javascript" src="/app/game/game.module.js"></script>
-<script type="text/javascript" src="/app/game/game-list.controller.js"></script>
-<script type="text/javascript" src="/app/game/game.factory.js"></script>
-<script type="text/javascript" src="/app/game/game.controller.js"></script>
-<script type="text/javascript" src="/app/game/game-type-box.directive.js"></script>
-<script type="text/javascript" src="/app/game/game-type-icon.directive.js"></script>
-<script type="text/javascript" src="/app/game/game-feed.controller.js"></script>
-<script type="text/javascript" src="/app/game/game-field.filter.js"></script>
-<script type="text/javascript" src="/app/game/game-stats.controller.js"></script>
-<script type="text/javascript" src="/app/game/game-status.filter.js"></script>
-<script type="text/javascript" src="/app/game/game-zone.factory.js"></script>
-<script type="text/javascript" src="/app/game/game-player.factory.js"></script>
-<script type="text/javascript" src="/app/game/game-type.factory.js"></script>
-<script type="text/javascript" src="/app/game/post.factory.js"></script>
-<script type="text/javascript" src="/app/game/create/create-game.controller.js"></script>
-<script type="text/javascript" src="/app/game/edit/edit-game.controller.js"></script>
-<script type="text/javascript" src="/app/game/edit/edit-game-events.controller.js"></script>
-<script type="text/javascript" src="/app/game/edit/edit-game-rules.controller.js"></script>
-<script type="text/javascript" src="/app/game/edit/edit-game-zone.controller.js"></script>
-<script type="text/javascript" src="/app/game/edit/edit-join-game-form.controller.js"></script>
-<script type="text/javascript" src="/app/game/event/game-event-type.filter.js"></script>
-<script type="text/javascript" src="/app/game/event/game-event-type-icon.directive.js"></script>
-<script type="text/javascript" src="/app/game/event/game-event.factory.js"></script>
-<script type="text/javascript" src="/app/game/event/game-event-timeline.directive.js"></script>
-<script type="text/javascript" src="/app/game/join/join-game.controller.js"></script>
-<script type="text/javascript" src="/app/game/join/join-game-select-player.controller.js"></script>
-<script type="text/javascript" src="/app/game/join/join-game-player-info.controller.js"></script>
+    <div id="fb-root"></div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script type="text/javascript">
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- Google Maps -->
+    <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/leaflet/dist/leaflet.js"></script>
+    <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+    <script src="bower_components/angularjs-geolocation/src/geolocation.js"></script>
+    <script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/leaflet.draw/dist/leaflet.draw.js"></script>
+    <script src="bower_components/leaflet.locatecontrol/src/L.Control.Locate.js"></script>
+    <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/flow.js/dist/flow.js"></script>
+    <script src="bower_components/ng-flow/dist/ng-flow.js"></script>
+    <script src="bower_components/ng-facebook/ngFacebook.js"></script>
+    <script src="bower_components/ng-sortable/dist/ng-sortable.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/scripts.js -->
+    <script type="text/javascript" src="/app/subrosa.module.js"></script>
+
+    <script type="text/javascript" src="/app/config/config.module.js"></script>
+    <script type="text/javascript" src="/app/config/derived.config.js"></script>
+
+    <script type="text/javascript" src="/app/account/account.module.js"></script>
+    <script type="text/javascript" src="/app/account/account.factory.js"></script>
+    <script type="text/javascript" src="/app/account/account.controller.js"></script>
+    <script type="text/javascript" src="/app/account/account-games.controller.js"></script>
+    <script type="text/javascript" src="/app/account/account-players.controller.js"></script>
+    <script type="text/javascript" src="/app/account/account-display-name.filter.js"></script>
+    <script type="text/javascript" src="/app/account/address/address.factory.js"></script>
+    <script type="text/javascript" src="/app/account/address/address-chooser.directive.js"></script>
+    <script type="text/javascript" src="/app/account/image/image.factory.js"></script>
+    <script type="text/javascript" src="/app/account/image/image-chooser.directive.js"></script>
+    <script type="text/javascript" src="/app/account/register-form.controller.js"></script>
+
+    <script type="text/javascript" src="/app/auth/auth.module.js"></script>
+    <script type="text/javascript" src="/app/auth/auth-interceptor.service.js"></script>
+    <script type="text/javascript" src="/app/auth/auth-service.service.js"></script>
+    <script type="text/javascript" src="/app/auth/auth-retry-queue.service.js"></script>
+    <script type="text/javascript" src="/app/auth/login-modal.controller.js"></script>
+    <script type="text/javascript" src="/app/auth/login-modal.directive.js"></script>
+    <script type="text/javascript" src="/app/auth/session.service.js"></script>
+    <script type="text/javascript" src="/app/auth/user.factory.js"></script>
+
+    <script type="text/javascript" src="/app/components/components.module.js"></script>
+    <script type="text/javascript" src="/app/components/chooser/chooser.module.js"></script>
+    <script type="text/javascript" src="/app/components/chooser/chooser-directive.controller.js"></script>
+    <script type="text/javascript" src="/app/components/flash/flash.module.js"></script>
+    <script type="text/javascript" src="/app/components/flash/flash.service.js"></script>
+    <script type="text/javascript" src="/app/components/flash/flash-messages.directive.js"></script>
+    <script type="text/javascript" src="/app/components/form/form.module.js"></script>
+    <script type="text/javascript" src="/app/components/form/fields-match.directive.js"></script>
+    <script type="text/javascript" src="/app/components/form/form-feedback.directive.js"></script>
+    <script type="text/javascript" src="/app/components/form/form-group-feedback.directive.js"></script>
+    <script type="text/javascript" src="/app/components/form/input-messages.directive.js"></script>
+    <script type="text/javascript" src="/app/components/form/validators/validate-address.directive.js"></script>
+    <script type="text/javascript" src="/app/components/form/validators/validate-integer.directive.js"></script>
+    <script type="text/javascript" src="/app/components/geocode/geocoder.module.js"></script>
+    <script type="text/javascript" src="/app/components/geocode/geocoder.service.js"></script>
+    <script type="text/javascript" src="/app/components/image/image.module.js"></script>
+    <script type="text/javascript" src="/app/components/image/upload-single-image.directive.js"></script>
+    <script type="text/javascript" src="/app/components/map/map.module.js"></script>
+    <script type="text/javascript" src="/app/components/map/map.directive.js"></script>
+    <script type="text/javascript" src="/app/components/map/map-directive.controller.js"></script>
+    <script type="text/javascript" src="/app/components/map/map-draw.service.js"></script>
+    <script type="text/javascript" src="/app/components/map/map-draw-i18n.service.js"></script>
+    <script type="text/javascript" src="/app/components/map/map-points.directive.js"></script>
+    <script type="text/javascript" src="/app/components/map/map-polygons.directive.js"></script>
+    <script type="text/javascript" src="/app/components/menu/menu.module.js"></script>
+    <script type="text/javascript" src="/app/components/menu/main-menu.controller.js"></script>
+    <script type="text/javascript" src="/app/components/modal/modal.module.js"></script>
+    <script type="text/javascript" src="/app/components/modal/modal.controller.js"></script>
+    <script type="text/javascript" src="/app/components/modal/modal.directive.js"></script>
+    <script type="text/javascript" src="/app/components/modal/modal-cache.service.js"></script>
+
+    <script type="text/javascript" src="/app/game/game.module.js"></script>
+    <script type="text/javascript" src="/app/game/game-list.controller.js"></script>
+    <script type="text/javascript" src="/app/game/game.factory.js"></script>
+    <script type="text/javascript" src="/app/game/game.controller.js"></script>
+    <script type="text/javascript" src="/app/game/game-type-box.directive.js"></script>
+    <script type="text/javascript" src="/app/game/game-type-icon.directive.js"></script>
+    <script type="text/javascript" src="/app/game/game-feed.controller.js"></script>
+    <script type="text/javascript" src="/app/game/game-field.filter.js"></script>
+    <script type="text/javascript" src="/app/game/game-stats.controller.js"></script>
+    <script type="text/javascript" src="/app/game/game-status.filter.js"></script>
+    <script type="text/javascript" src="/app/game/game-zone.factory.js"></script>
+    <script type="text/javascript" src="/app/game/game-player.factory.js"></script>
+    <script type="text/javascript" src="/app/game/game-type.factory.js"></script>
+    <script type="text/javascript" src="/app/game/post.factory.js"></script>
+    <script type="text/javascript" src="/app/game/create/create-game.controller.js"></script>
+    <script type="text/javascript" src="/app/game/edit/edit-game.controller.js"></script>
+    <script type="text/javascript" src="/app/game/edit/edit-game-events.controller.js"></script>
+    <script type="text/javascript" src="/app/game/edit/edit-game-rules.controller.js"></script>
+    <script type="text/javascript" src="/app/game/edit/edit-game-zone.controller.js"></script>
+    <script type="text/javascript" src="/app/game/edit/edit-join-game-form.controller.js"></script>
+    <script type="text/javascript" src="/app/game/event/game-event-type.filter.js"></script>
+    <script type="text/javascript" src="/app/game/event/game-event-type-icon.directive.js"></script>
+    <script type="text/javascript" src="/app/game/event/game-event.factory.js"></script>
+    <script type="text/javascript" src="/app/game/event/game-event-timeline.directive.js"></script>
+    <script type="text/javascript" src="/app/game/join/join-game.controller.js"></script>
+    <script type="text/javascript" src="/app/game/join/join-game-select-player.controller.js"></script>
+    <script type="text/javascript" src="/app/game/join/join-game-player-info.controller.js"></script>
 
 
-<script type="text/javascript" src="/app/i18n/i18n.module.js"></script>
-<script type="text/javascript" src="/app/i18n/i18n.service.js"></script>
-<script type="text/javascript" src="/app/i18n/units.service.js"></script>
+    <script type="text/javascript" src="/app/i18n/i18n.module.js"></script>
+    <script type="text/javascript" src="/app/i18n/i18n.service.js"></script>
+    <script type="text/javascript" src="/app/i18n/units.service.js"></script>
 
-<script type="text/javascript" src="/app/notifications/notifications.module.js"></script>
-<script type="text/javascript" src="/app/notifications/error-interceptor.service.js"></script>
-<script type="text/javascript" src="/app/notifications/error-dictionary.service.js"></script>
-<script type="text/javascript" src="/app/notifications/notification-display.directive.js"></script>
+    <script type="text/javascript" src="/app/notifications/notifications.module.js"></script>
+    <script type="text/javascript" src="/app/notifications/error-interceptor.service.js"></script>
+    <script type="text/javascript" src="/app/notifications/error-dictionary.service.js"></script>
+    <script type="text/javascript" src="/app/notifications/notification-display.directive.js"></script>
 
-<script type="text/javascript" src="/app/player/player.module.js"></script>
-<script type="text/javascript" src="/app/player/avatar.directive.js"></script>
-<script type="text/javascript" src="/app/player/player.factory.js"></script>
-<script type="text/javascript" src="/app/player/player-chooser.directive.js"></script>
+    <script type="text/javascript" src="/app/player/player.module.js"></script>
+    <script type="text/javascript" src="/app/player/avatar.directive.js"></script>
+    <script type="text/javascript" src="/app/player/player.factory.js"></script>
+    <script type="text/javascript" src="/app/player/player-chooser.directive.js"></script>
 
-<script type="text/javascript" src="/app/utils/utils.module.js"></script>
-<script type="text/javascript" src="/app/utils/block.directive.js"></script>
-<script type="text/javascript" src="/app/utils/capitalize.filter.js"></script>
-<script type="text/javascript" src="/app/utils/focus.directive.js"></script>
-<!-- endbuild -->
-
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-<script>
-  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-  (function (d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
+    <script type="text/javascript" src="/app/utils/utils.module.js"></script>
+    <script type="text/javascript" src="/app/utils/block.directive.js"></script>
+    <script type="text/javascript" src="/app/utils/capitalize.filter.js"></script>
+    <script type="text/javascript" src="/app/utils/focus.directive.js"></script>
+    <!-- endbuild -->
 
 </body>
 </html>

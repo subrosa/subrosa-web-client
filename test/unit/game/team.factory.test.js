@@ -1,4 +1,6 @@
 describe('Factory: Team', function () {
+    'use strict';
+
     var teamFactory, $httpBackend, API_CONFIG, team;
 
     beforeEach(module('subrosa.game'));

@@ -14,6 +14,8 @@
  *   Provide a controller for the Register Form.
  */
 angular.module('subrosa.account').controller('RegisterFormController', function ($rootScope, $scope, $state, Account, authService, i18n, flash) {
+    'use strict';
+
     var redirect, success, error;
     $scope.user = {};
 

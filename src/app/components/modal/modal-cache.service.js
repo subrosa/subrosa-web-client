@@ -9,6 +9,8 @@
  *  Provides a cache for modal dialogs so they can be opened later.
  */
 angular.module('subrosa.components.modal').service('modalCache', function ($modal, $cacheFactory) {
+    'use strict';
+
     var modalCache = $cacheFactory('modal');
 
     /**

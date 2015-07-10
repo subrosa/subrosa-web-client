@@ -1,4 +1,6 @@
 describe('Directive: mapPolygons', function () {
+    'use strict';
+
     var $q, $compile, $scope, MockResource, leaflet, mapDraw, featureGroup, leafletData,
         mapElement, element, event;
 

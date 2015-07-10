@@ -9,7 +9,9 @@
  *
  */
 angular.module('subrosa.notifications').service('errorDictionary', function (i18n) {
-    const NOTIFICATION_DICTIONARY = {
+    'use strict';
+
+    var NOTIFICATION_DICTIONARY = {
         unknown: i18n('Oh fiddlesticks! Something went wrong'),
         notFound: i18n("Not found"),
         forbidden: i18n("Forbidden"),

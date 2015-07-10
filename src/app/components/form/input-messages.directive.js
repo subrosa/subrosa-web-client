@@ -10,6 +10,8 @@
  *  the input someForm.someField.
  */
 angular.module('subrosa.components.form').directive('inputMessages', function () {
+    'use strict';
+
     return {
         restrict: 'AE',
         replace: true,

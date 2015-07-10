@@ -1,4 +1,6 @@
 describe('Directive: avatar', function () {
+    'use strict';
+
     var $compile, $scope, element, elementScope, image;
 
     function compileDirective() {
@@ -22,7 +24,7 @@ describe('Directive: avatar', function () {
     });
 
     it("displays an avatar is one is present", function () {
-        var expectedImg = '/img/placeholder/user.png';
+        var expectedImg = '/images/placeholder/user.png';
         $scope.player.images.AVATAR = expectedImg;
         compileDirective();
         expect(image.attr('src')).toBe(expectedImg);
@@ -30,7 +32,7 @@ describe('Directive: avatar', function () {
 
     it("displays a default avatar if the avatar is not present", function () {
         compileDirective();
-        expect(image.attr('src')).toBe('/img/placeholder/user.png');
+        expect(image.attr('src')).toBe('/images/placeholder/user.png');
     });
 
     it("allows the setting of an avatar size", function () {

@@ -8,6 +8,8 @@
  *   Used to store and retrieve values from the session storage.
  */
 angular.module('subrosa.auth').service('session', function ($window) {
+    'use strict';
+
     /**
      * Return the current session token.
      *

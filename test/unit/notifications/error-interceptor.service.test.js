@@ -1,4 +1,6 @@
 describe('Service: errorInterceptor', function () {
+    'use strict';
+
     var $q, errorDictionary, errorInterceptor, API_CONFIG, badRequest;
 
     beforeEach(module('subrosa.notifications'));

@@ -20,12 +20,12 @@
  *   <div game-event-timeline="events"></div>
  */
 angular.module('subrosa.game').directive('gameEventTimeline', function () {
-
-        return {
-            restrict: 'AE',
-            templateUrl: '/app/game/event/views/game-event-timeline.html',
-            scope: {
-                events: '=gameEventTimeline'
-            }
-        };
-    });
+    'use strict';
+    return {
+        restrict: 'AE',
+        templateUrl: '/app/game/event/views/game-event-timeline.html',
+        scope: {
+            events: '=gameEventTimeline'
+        }
+    };
+});

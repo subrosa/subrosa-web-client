@@ -27,6 +27,8 @@
  *  managing sessions via login and logout commands.
  */
 angular.module('subrosa.auth').service('authService', function ($rootScope, $log, $http, User, session, authRetryQueue, $facebook, API_CONFIG) {
+    'use strict';
+
     var service = this;
     this.currentUser = null;
 

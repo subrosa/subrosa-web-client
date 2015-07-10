@@ -1,4 +1,6 @@
 describe('Service: i18n', function () {
+    'use strict';
+
     var i18n;
 
     beforeEach(module('i18n'));

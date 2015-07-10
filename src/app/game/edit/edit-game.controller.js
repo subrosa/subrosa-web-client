@@ -11,6 +11,8 @@
  *  Handles the editing of games.
  */
 angular.module('subrosa.game').controller('EditGameController', function ($scope, $state, $location, $anchorScroll) {
+    'use strict';
+
     var success, error;
 
     $scope.saving = false;

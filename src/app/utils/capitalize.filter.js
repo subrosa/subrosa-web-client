@@ -9,6 +9,8 @@
  *   {{ 'blah' | capitalize }} will produce the string "Blah".
  */
 angular.module('subrosa.utils').filter('capitalize', function () {
+    'use strict';
+
     return function (input) {
         var capitalized = input;
         if (angular.isString(input)) {

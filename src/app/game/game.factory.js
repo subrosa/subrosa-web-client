@@ -9,6 +9,8 @@
  *  Provides a $resource for game(s).
  */
 angular.module('subrosa.game').factory('Game', function ($resource, API_CONFIG) {
+    'use strict';
+
     var game = $resource(API_CONFIG.URL + '/game/:url', {url: '@url'}, {
         query: {method: 'GET', isArray: false},
         update: {method: 'PUT'},

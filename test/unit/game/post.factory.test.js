@@ -1,4 +1,6 @@
 describe('Factory: post', function () {
+    'use strict';
+
     var postFactory, $httpBackend, API_CONFIG, posts;
 
     beforeEach(module('subrosa.game'));

@@ -1,4 +1,6 @@
 describe('Factory: Account', function () {
+    'use strict';
+
     var $httpBackend, Account, account, API_CONFIG;
 
     beforeEach(module('subrosa.account'));

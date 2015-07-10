@@ -9,6 +9,8 @@
  *   A directive to allow choosing an image.
  */
 angular.module('subrosa.account').directive('imageChooser', function (i18n, Image) {
+    'use strict';
+
     return {
         restrict: 'AE',
         controller: 'ChooserDirectiveController',

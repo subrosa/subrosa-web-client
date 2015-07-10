@@ -1,4 +1,6 @@
 describe('Directive: uploadSingleImage', function () {
+    'use strict';
+
     var $compile, $scope, element, elementScope;
 
     beforeEach(module(
@@ -25,7 +27,7 @@ describe('Directive: uploadSingleImage', function () {
     });
 
     it("displays an upload button", function () {
-        expect(element.find('[data-flow-btn=]').length).toBe(1);
+        expect(element.find('[data-flow-btn=""]').length).toBe(1);
     });
 
     it("displays a thumbnail if a file has been uploaded", function () {
